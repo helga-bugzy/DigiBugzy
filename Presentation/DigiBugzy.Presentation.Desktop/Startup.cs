@@ -1,10 +1,13 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DigiBugzy.Desktop
+namespace DigiBugzy.Presentation.Desktop
 {
     public class Startup
     {
-
         #region Properties
 
         public static IServiceCollection? services { get; set; }
@@ -82,11 +85,11 @@ namespace DigiBugzy.Desktop
         {
             if (services != null)
             {
-                services.AddScoped<Form1>();
+                services.AddScoped<MainForm>();
                 //services.AddScoped<Login>();
-               // services.AddScoped<InstallationWizard>();
+                // services.AddScoped<InstallationWizard>();
 
-               // services.AddScoped<FinanceAdmin>();
+                // services.AddScoped<FinanceAdmin>();
 
             }
         }

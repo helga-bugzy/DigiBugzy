@@ -8,24 +8,20 @@ global using System.Threading.Tasks;
 global using FluentMigrator.Runner;
 global using Microsoft.Extensions.DependencyInjection;
 
-global using DigiBugzy.Desktop.MainContainers.Forms;
+global using DigiBugzy.Presentation.Desktop;
 
-global using DigiBugzy.Application.Enumerations;
+global using DigiBugzy.ApplicationLayer.Enumerations;
+global using DigiBugzy.ApplicationLayer.Migrations;
 
-
-
-
-
-namespace DigiBugzy.Desktop
+namespace DigiBugzy.Presentation.Desktop
 {
     public static class Globals
     {
         public static ConnectionEnvironment ConnectionEnvironment = ConnectionEnvironment.Development;
-       
+
         public static string GetConnectionString(ConnectionEnvironment environment)
         {
             return System.Configuration.ConfigurationManager.ConnectionStrings[Enum.GetName(typeof(ConnectionEnvironment), environment)].ConnectionString;
         }
-
     }
 }

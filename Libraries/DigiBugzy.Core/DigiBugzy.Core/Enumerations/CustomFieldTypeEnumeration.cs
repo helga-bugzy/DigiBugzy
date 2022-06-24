@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DigiBugzy.Core.Enumerations
+namespace DigiBugzy.ApplicationLayer.Enumerations
 {
     public enum CustomFieldTypeEnumeration
     {        

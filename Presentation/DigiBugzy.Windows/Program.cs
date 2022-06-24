@@ -1,7 +1,7 @@
 
 
 
-namespace DigiBugzy.Windows
+namespace DigiBugzy.Desktop
 {
     internal static class Program
     {
@@ -14,7 +14,7 @@ namespace DigiBugzy.Windows
             ApplicationConfiguration.Initialize();
             Startup.ConfigureService();
 
-            Application.Run(Startup.GetForm<Form1>());
+            Application.Run(Startup.GetForm<MainShell>());
 
             //if (!Startup.HasAdministrations())
             //{
