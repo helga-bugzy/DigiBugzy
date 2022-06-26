@@ -29,19 +29,19 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.
 
         public class DeleteDigiAdminCommandHandler : IRequestHandler<DeleteDigiAdminCommand, DeleteDigiAdminDto>
         {
-            private readonly IDigiAdminsApi _digiAdminsApi;
+            private readonly IApiHandler _apiHandler;
             private readonly IMapper _mapper;
 
-            public DeleteDigiAdminCommandHandler(IDigiAdminsApi digiAdminsApi, IMapper mapper)
+            public DeleteDigiAdminCommandHandler(IApiHandler apiHandler, IMapper mapper)
             {
-                _digiAdminsApi = digiAdminsApi;
+                _apiHandler = apiHandler;
                 _mapper = mapper;
             }
 
             public async Task<DeleteDigiAdminDto> Handle(DeleteDigiAdminCommand request, CancellationToken cancellationToken)
             {
 
-                var response = await _digiAdminsApi.DeleteItem<DeleteDigiAdminResponse, DeleteDigiAdminRequest>(_mapper.Map<DeleteDigiAdminRequest>(request));
+                var response = await _apiHandler.DeleteItem<DeleteDigiAdminResponse, DeleteDigiAdminRequest>(_mapper.Map<DeleteDigiAdminRequest>(request));
                 return _mapper.Map<DeleteDigiAdminDto>(response);
 
             }

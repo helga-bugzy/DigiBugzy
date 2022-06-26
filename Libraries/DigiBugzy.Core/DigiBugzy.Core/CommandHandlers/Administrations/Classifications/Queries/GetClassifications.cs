@@ -1,6 +1,6 @@
 ﻿
 
-namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Queries
+namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classifications.Queries
 {
     public class GetClassificationsResponse: IResponseObject
     {

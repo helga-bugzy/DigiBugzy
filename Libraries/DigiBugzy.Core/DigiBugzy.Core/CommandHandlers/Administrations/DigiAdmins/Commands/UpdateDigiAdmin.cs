@@ -30,19 +30,19 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.
 
         public class UpdateDigiAdminCommandHandler : IRequestHandler<UpdateDigiAdminCommand, UpdateDigiAdminDto>
         {
-            private readonly IDigiAdminsApi _digiAdminsApi;
+            private readonly IApiHandler _apiHandler;
             private readonly IMapper _mapper;
 
-            public UpdateDigiAdminCommandHandler(IDigiAdminsApi digiAdminsApi, IMapper mapper)
+            public UpdateDigiAdminCommandHandler(IApiHandler apiHandler, IMapper mapper)
             {
-                _digiAdminsApi = digiAdminsApi;
+                _apiHandler = apiHandler;
                 _mapper = mapper;
             }
 
             public async Task<UpdateDigiAdminDto> Handle(UpdateDigiAdminCommand request, CancellationToken cancellationToken)
             {
 
-                var response = await _digiAdminsApi.CreateItem<UpdateDigiAdminResponse, UpdateDigiAdminRequest>(_mapper.Map<UpdateDigiAdminRequest>(request));
+                var response = await _apiHandler.CreateItem<UpdateDigiAdminResponse, UpdateDigiAdminRequest>(_mapper.Map<UpdateDigiAdminRequest>(request));
                 return _mapper.Map<UpdateDigiAdminDto>(response);
 
             }

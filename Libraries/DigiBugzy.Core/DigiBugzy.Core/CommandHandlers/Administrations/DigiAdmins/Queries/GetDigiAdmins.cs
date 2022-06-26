@@ -1,6 +1,6 @@
 ﻿
 
-namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Queries
+namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Queries
 {
     public class GetDigiAdminsResponse: IResponseObject
     {

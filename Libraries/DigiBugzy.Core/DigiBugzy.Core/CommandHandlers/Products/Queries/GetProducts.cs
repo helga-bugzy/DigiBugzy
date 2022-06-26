@@ -1,6 +1,6 @@
 ﻿
 
-namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Queries
+namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields.Queries
 {
     public class GetProductsResponse: IResponseObject
     {
