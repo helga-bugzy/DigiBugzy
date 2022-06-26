@@ -4,13 +4,12 @@ namespace DigiBugzy.ApplicationLayer.Common.xBaseObjects
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="A">Response (answer)</typeparam>
+    /// <typeparam name="T">Response (answer)</typeparam>
     /// <typeparam name="R">Request</typeparam>
     /// <typeparam name="C">Command</typeparam>
     /// <typeparam name="F">Filter</typeparam>
     public interface IBaseApiObject
     {
-
 
         /// <summary>
         /// Gets all items on hand of the filter values forwarded
@@ -18,8 +17,8 @@ namespace DigiBugzy.ApplicationLayer.Common.xBaseObjects
         /// <typeparam name="A">Response (answer)</typeparam>
         /// <typeparam name="F">Filter</typeparam>
         /// <param name="filter">Filter with specifications</param>
-        /// <returns></returns>
-        Task<IEnumerable<A>> Get<A, F>(F filter) where A : IResponseObject;
+        /// <returns></returns>        
+        Task<IEnumerable<T>> Get<T, F>(F filter) where T : IResponseObject where F : IFilterObject;
 
         /// <summary>
         /// Adds new item to the database as per response specifications

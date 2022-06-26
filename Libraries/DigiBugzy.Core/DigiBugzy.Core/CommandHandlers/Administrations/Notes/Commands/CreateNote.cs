@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Notes.Comma
 {
     public class CreateNoteRequest : IMapFrom<CreateNoteCommand>, IRequestObject
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateNoteCommand, CreateNoteRequest>();
     }
 
     public class CreateNoteDto : IMapFrom<CreateNoteResponse>
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateNoteResponse, CreateNoteDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Notes.Comma
 
     public class CreateNoteResponse : BaseResponseObject
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
     }
 
 
     public class CreateNoteCommand : IRequest<CreateNoteDto>
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
 
         public class CreateNoteCommandHandler : IRequestHandler<CreateNoteCommand, CreateNoteDto>

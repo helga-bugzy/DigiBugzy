@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Notes.Comma
 {
     public class DeleteNoteRequest : IMapFrom<DeleteNoteCommand>, IRequestObject
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteNoteCommand, DeleteNoteRequest>();
     }
 
     public class DeleteNoteDto : IMapFrom<DeleteNoteResponse>
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteNoteResponse, DeleteNoteDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Notes.Comma
 
     public class DeleteNoteResponse : BaseResponseObject
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
     }
 
 
     public class DeleteNoteCommand : IRequest<DeleteNoteDto>
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
 
         public class DeleteNoteCommandHandler : IRequestHandler<DeleteNoteCommand, DeleteNoteDto>

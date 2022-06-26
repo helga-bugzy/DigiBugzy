@@ -1,18 +1,17 @@
 ﻿
-using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Models;
-
 namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Commands
 {
     public class DeleteCategoryRequest : IMapFrom<DeleteCategoryCommand>, IRequestObject
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
+
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteCategoryCommand, DeleteCategoryRequest>();
     }
 
     public class DeleteCategoryDto : IMapFrom<DeleteCategoryResponse>
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteCategoryResponse, DeleteCategoryDto>();
     }
@@ -20,13 +19,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.
 
     public class DeleteCategoryResponse : BaseResponseObject
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
     }
 
 
     public class DeleteCategoryCommand : IRequest<DeleteCategoryDto>
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
 
 
         public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, DeleteCategoryDto>

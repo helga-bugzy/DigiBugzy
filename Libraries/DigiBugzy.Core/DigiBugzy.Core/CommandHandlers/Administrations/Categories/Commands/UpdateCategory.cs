@@ -1,20 +1,19 @@
 ﻿
-using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Models;
 
 namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Commands
 {
 
     public class UpdateCategoryRequest : IMapFrom<UpdateCategoryCommand>, IRequestObject
     {
-        public CategoryModel Properties { get; set; }
-        
+        public CategoryModel Model { get; set; }
+
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateCategoryCommand, UpdateCategoryRequest>();
     }
 
     public class UpdateCategoryDto : IMapFrom<UpdateCategoryResponse>
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateCategoryResponse, UpdateCategoryDto>();
     }
@@ -22,13 +21,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.
 
     public class UpdateCategoryResponse : BaseResponseObject
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
     }
 
 
     public class UpdateCategoryCommand : IRequest<UpdateCategoryDto>
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
 
 
         public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, UpdateCategoryDto>

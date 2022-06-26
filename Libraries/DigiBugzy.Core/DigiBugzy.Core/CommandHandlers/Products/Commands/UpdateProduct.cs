@@ -6,7 +6,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Products.Co
 
     public class UpdateProductRequest : IMapFrom<UpdateProductCommand>, IRequestObject
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
         
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateProductCommand, UpdateProductRequest>();
@@ -14,7 +14,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Products.Co
 
     public class UpdateProductDto : IMapFrom<UpdateProductResponse>
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateProductResponse, UpdateProductDto>();
     }
@@ -22,13 +22,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Products.Co
 
     public class UpdateProductResponse : BaseResponseObject
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
     }
 
 
     public class UpdateProductCommand : IRequest<UpdateProductDto>
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
 
         public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, UpdateProductDto>

@@ -6,7 +6,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Notes.Comma
 
     public class UpdateNoteRequest : IMapFrom<UpdateNoteCommand>, IRequestObject
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
         
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateNoteCommand, UpdateNoteRequest>();
@@ -14,7 +14,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Notes.Comma
 
     public class UpdateNoteDto : IMapFrom<UpdateNoteResponse>
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateNoteResponse, UpdateNoteDto>();
     }
@@ -22,13 +22,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Notes.Comma
 
     public class UpdateNoteResponse : BaseResponseObject
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
     }
 
 
     public class UpdateNoteCommand : IRequest<UpdateNoteDto>
     {
-        public NoteModel Properties { get; set; }
+        public NoteModel Model { get; set; }
 
 
         public class UpdateNoteCommandHandler : IRequestHandler<UpdateNoteCommand, UpdateNoteDto>

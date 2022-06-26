@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 {
     public class DeleteCustomFieldValueRequest : IMapFrom<DeleteCustomFieldValueCommand>, IRequestObject
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteCustomFieldValueCommand, DeleteCustomFieldValueRequest>();
     }
 
     public class DeleteCustomFieldValueDto : IMapFrom<DeleteCustomFieldValueResponse>
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteCustomFieldValueResponse, DeleteCustomFieldValueDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 
     public class DeleteCustomFieldValueResponse : BaseResponseObject
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
     }
 
 
     public class DeleteCustomFieldValueCommand : IRequest<DeleteCustomFieldValueDto>
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
 
 
         public class DeleteCustomFieldValueCommandHandler : IRequestHandler<DeleteCustomFieldValueCommand, DeleteCustomFieldValueDto>

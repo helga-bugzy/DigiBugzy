@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 {
     public class CreateCustomFieldValueRequest : IMapFrom<CreateCustomFieldValueCommand>, IRequestObject
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateCustomFieldValueCommand, CreateCustomFieldValueRequest>();
     }
 
     public class CreateCustomFieldValueDto : IMapFrom<CreateCustomFieldValueResponse>
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateCustomFieldValueResponse, CreateCustomFieldValueDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 
     public class CreateCustomFieldValueResponse : BaseResponseObject
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
     }
 
 
     public class CreateCustomFieldValueCommand : IRequest<CreateCustomFieldValueDto>
     {
-        public CustomFieldValueModel Properties { get; set; }
+        public CustomFieldValueModel Model { get; set; }
 
 
         public class CreateCustomFieldValueCommandHandler : IRequestHandler<CreateCustomFieldValueCommand, CreateCustomFieldValueDto>

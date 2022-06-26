@@ -1,18 +1,21 @@
 ﻿
-using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classifications.Models;
 
 namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classifications.Commands
 {
     public class DeleteClassificationRequest : IMapFrom<DeleteClassificationCommand>, IRequestObject
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
+
+        public StandardFilter Filter { get; set; } = new();
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteClassificationCommand, DeleteClassificationRequest>();
     }
 
     public class DeleteClassificationDto : IMapFrom<DeleteClassificationResponse>
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
+
+        public StandardFilter Filter { get; set; } = new();
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteClassificationResponse, DeleteClassificationDto>();
     }
@@ -20,13 +23,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classificat
 
     public class DeleteClassificationResponse : BaseResponseObject
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
     }
 
 
     public class DeleteClassificationCommand : IRequest<DeleteClassificationDto>
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
 
 
         public class DeleteClassificationCommandHandler : IRequestHandler<DeleteClassificationCommand, DeleteClassificationDto>

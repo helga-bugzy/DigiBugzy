@@ -1,12 +1,10 @@
 ﻿
-using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields.Models;
-
 namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields.Commands
 {
 
     public class UpdateCustomFieldValueRequest : IMapFrom<UpdateCustomFieldValueCommand>, IRequestObject
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
         
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateCustomFieldValueCommand, UpdateCustomFieldValueRequest>();
@@ -14,7 +12,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 
     public class UpdateCustomFieldValueDto : IMapFrom<UpdateCustomFieldValueResponse>
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateCustomFieldValueResponse, UpdateCustomFieldValueDto>();
     }
@@ -22,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 
     public class UpdateCustomFieldValueResponse : BaseResponseObject
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
     }
 
 
     public class UpdateCustomFieldValueCommand : IRequest<UpdateCustomFieldValueDto>
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
 
 
         public class UpdateCustomFieldValueCommandHandler : IRequestHandler<UpdateCustomFieldValueCommand, UpdateCustomFieldValueDto>

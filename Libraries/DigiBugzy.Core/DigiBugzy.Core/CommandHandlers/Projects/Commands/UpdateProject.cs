@@ -6,7 +6,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Projects.Co
 
     public class UpdateProjectRequest : IMapFrom<UpdateProjectCommand>, IRequestObject
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
         
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateProjectCommand, UpdateProjectRequest>();
@@ -14,7 +14,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Projects.Co
 
     public class UpdateProjectDto : IMapFrom<UpdateProjectResponse>
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateProjectResponse, UpdateProjectDto>();
     }
@@ -22,13 +22,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Projects.Co
 
     public class UpdateProjectResponse : BaseResponseObject
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
     }
 
 
     public class UpdateProjectCommand : IRequest<UpdateProjectDto>
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
 
         public class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, UpdateProjectDto>

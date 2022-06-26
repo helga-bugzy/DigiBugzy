@@ -4,14 +4,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.
 {
     public class UpdateDigiAdminRequest : IMapFrom<UpdateDigiAdminCommand>, IRequestObject
     {
-        public DigiAdminModel Properties { get; set; }
+        public DigiAdminModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateDigiAdminCommand, UpdateDigiAdminRequest>();
     }
 
     public class UpdateDigiAdminDto : IMapFrom<UpdateDigiAdminResponse>
     {
-        public DigiAdminModel Properties { get; set; }
+        public DigiAdminModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateDigiAdminResponse, UpdateDigiAdminDto>();
     }
@@ -19,13 +19,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.
 
     public class UpdateDigiAdminResponse : BaseResponseObject
     {
-        public DigiAdminModel Properties { get; set; }
+        public DigiAdminModel Model { get; set; }
     }
 
 
     public class UpdateDigiAdminCommand : IRequest<UpdateDigiAdminDto>
     {
-        public DigiAdminModel Properties { get; set; }
+        public DigiAdminModel Model { get; set; }
 
 
         public class UpdateDigiAdminCommandHandler : IRequestHandler<UpdateDigiAdminCommand, UpdateDigiAdminDto>

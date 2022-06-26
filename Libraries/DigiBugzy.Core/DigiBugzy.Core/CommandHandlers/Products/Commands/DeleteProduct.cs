@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Products.Co
 {
     public class DeleteProductRequest : IMapFrom<DeleteProductCommand>, IRequestObject
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteProductCommand, DeleteProductRequest>();
     }
 
     public class DeleteProductDto : IMapFrom<DeleteProductResponse>
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteProductResponse, DeleteProductDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Products.Co
 
     public class DeleteProductResponse : BaseResponseObject
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
     }
 
 
     public class DeleteProductCommand : IRequest<DeleteProductDto>
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
 
         public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand, DeleteProductDto>

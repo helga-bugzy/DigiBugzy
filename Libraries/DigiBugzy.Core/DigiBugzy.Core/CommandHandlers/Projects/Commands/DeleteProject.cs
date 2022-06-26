@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Projects.Co
 {
     public class DeleteProjectRequest : IMapFrom<DeleteProjectCommand>, IRequestObject
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteProjectCommand, DeleteProjectRequest>();
     }
 
     public class DeleteProjectDto : IMapFrom<DeleteProjectResponse>
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteProjectResponse, DeleteProjectDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Projects.Co
 
     public class DeleteProjectResponse : BaseResponseObject
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
     }
 
 
     public class DeleteProjectCommand : IRequest<DeleteProjectDto>
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
 
         public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand, DeleteProjectDto>

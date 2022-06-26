@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 {
     public class DeleteCustomFieldRequest : IMapFrom<DeleteCategoryCommand>, IRequestObject
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteCategoryCommand, DeleteCategoryRequest>();
     }
 
     public class DeleteCategoryDto : IMapFrom<DeleteCategoryResponse>
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteCategoryResponse, DeleteCategoryDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomField
 
     public class DeleteCategoryResponse : BaseResponseObject
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
     }
 
 
     public class DeleteCategoryCommand : IRequest<DeleteCategoryDto>
     {
-        public CustomFieldModel Properties { get; set; }
+        public CustomFieldModel Model { get; set; }
 
 
         public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, DeleteCategoryDto>

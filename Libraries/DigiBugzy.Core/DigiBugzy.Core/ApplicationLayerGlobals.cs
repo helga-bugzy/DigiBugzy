@@ -20,6 +20,7 @@ global using DigiBugzy.ApplicationLayer.Common.Mappings;
 global using DigiBugzy.ApplicationLayer.Common.xBaseObjects;
 global using DigiBugzy.ApplicationLayer.Common.xBaseObjects.Properties;
 global using DigiBugzy.ApplicationLayer.Common.xBaseObjects.ComObjects;
+global using DigiBugzy.ApplicationLayer.Common.xBaseObjects.FilterObjects;
 
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Commands;
@@ -34,22 +35,15 @@ global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classifi
 
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields.Commands;
-//global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields.Queries;
+global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields.Queries;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.CustomFields.Models;
 
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Commands;
-//global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Queries;
+global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Queries;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Models;
 
 
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Products;
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Products.Commands;
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Products.Queries;
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Products.Queries.GetAllProducts;
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Products.Commands.CreateProduct;
-
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Commands;
 
 
 global using DigiBugzy.Domain.Constants;

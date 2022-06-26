@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Products.Co
 {
     public class CreateProductRequest : IMapFrom<CreateProductCommand>, IRequestObject
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateProductCommand, CreateProductRequest>();
     }
 
     public class CreateProductDto : IMapFrom<CreateProductResponse>
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateProductResponse, CreateProductDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Products.Co
 
     public class CreateProductResponse : BaseResponseObject
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
     }
 
 
     public class CreateProductCommand : IRequest<CreateProductDto>
     {
-        public ProductModel Properties { get; set; }
+        public ProductModel Model { get; set; }
 
 
         public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreateProductDto>

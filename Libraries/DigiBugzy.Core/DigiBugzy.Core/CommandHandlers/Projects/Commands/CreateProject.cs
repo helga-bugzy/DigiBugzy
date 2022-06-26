@@ -5,14 +5,14 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Projects.Co
 {
     public class CreateProjectRequest : IMapFrom<CreateProjectCommand>, IRequestObject
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateProjectCommand, CreateProjectRequest>();
     }
 
     public class CreateProjectDto : IMapFrom<CreateProjectResponse>
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateProjectResponse, CreateProjectDto>();
     }
@@ -20,13 +20,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Projects.Co
 
     public class CreateProjectResponse : BaseResponseObject
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
     }
 
 
     public class CreateProjectCommand : IRequest<CreateProjectDto>
     {
-        public ProjectModel Properties { get; set; }
+        public ProjectModel Model { get; set; }
 
 
         public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, CreateProjectDto>

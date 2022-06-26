@@ -1,18 +1,19 @@
 ﻿
-using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classifications.Models;
 
 namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classifications.Commands
 {
     public class CreateClassificationRequest : IMapFrom<CreateClassificationCommand>, IRequestObject
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
+
+        public StandardFilter Filter { get; set; } = new();
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateClassificationCommand, CreateClassificationRequest>();
     }
 
     public class CreateClassificationDto : IMapFrom<CreateClassificationResponse>
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateClassificationResponse, CreateClassificationDto>();
     }
@@ -20,13 +21,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classificat
 
     public class CreateClassificationResponse : BaseResponseObject
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
     }
 
 
     public class CreateClassificationCommand : IRequest<CreateClassificationDto>
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
 
 
         public class CreateClassificationCommandHandler : IRequestHandler<CreateClassificationCommand, CreateClassificationDto>

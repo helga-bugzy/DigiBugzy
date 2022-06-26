@@ -6,15 +6,17 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classificat
 
     public class UpdateClassificationRequest : IMapFrom<UpdateClassificationCommand>, IRequestObject
     {
-        public ClassificationModel Properties { get; set; }
-        
+        public ClassificationModel Model { get; set; }
+
+        public StandardFilter Filter { get; set; } = new();
+
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateClassificationCommand, UpdateClassificationRequest>();
     }
 
     public class UpdateClassificationDto : IMapFrom<UpdateClassificationResponse>
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<UpdateClassificationResponse, UpdateClassificationDto>();
     }
@@ -22,13 +24,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Classificat
 
     public class UpdateClassificationResponse : BaseResponseObject
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
     }
 
 
     public class UpdateClassificationCommand : IRequest<UpdateClassificationDto>
     {
-        public ClassificationModel Properties { get; set; }
+        public ClassificationModel Model { get; set; }
 
 
         public class UpdateClassificationCommandHandler : IRequestHandler<UpdateClassificationCommand, UpdateClassificationDto>

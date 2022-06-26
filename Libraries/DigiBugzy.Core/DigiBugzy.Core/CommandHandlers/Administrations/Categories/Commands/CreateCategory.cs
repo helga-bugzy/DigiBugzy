@@ -1,18 +1,20 @@
 ﻿
-using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Models;
 
 namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Commands
 {
     public class CreateCategoryRequest : IMapFrom<CreateCategoryCommand>, IRequestObject
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
 
+        public StandardFilter Filter { get; set; } = new();
+       
         public void Mapping(Profile profile) => profile.CreateMap<CreateCategoryCommand, CreateCategoryRequest>();
+
     }
 
     public class CreateCategoryDto : IMapFrom<CreateCategoryResponse>
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<CreateCategoryResponse, CreateCategoryDto>();
     }
@@ -20,13 +22,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.
 
     public class CreateCategoryResponse : BaseResponseObject
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
     }
 
 
     public class CreateCategoryCommand : IRequest<CreateCategoryDto>
     {
-        public CategoryModel Properties { get; set; }
+        public CategoryModel Model { get; set; }
 
 
         public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreateCategoryDto>
