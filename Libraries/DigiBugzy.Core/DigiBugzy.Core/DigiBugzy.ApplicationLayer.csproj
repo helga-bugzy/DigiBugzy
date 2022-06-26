@@ -7,10 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.EF6" Version="2.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="5.0.3" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="FluentMigrator" Version="3.3.2" />
     <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
     <PackageReference Include="FluentMigrator.Runner.SqlServer" Version="3.3.2" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
@@ -20,16 +27,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Sections\" />
-    <Folder Include="Sections\Secure\Commands\" />
-    <Folder Include="Sections\Secure\Queries\" />
-    <Folder Include="Sections\Administration\Commands\" />
-    <Folder Include="Sections\Administration\Queries\" />
-    <Folder Include="Common\Mappings\" />
-    <Folder Include="Sections\Finance\Commands\" />
-    <Folder Include="Sections\Finance\Queries\" />
-    <Folder Include="Sections\Products\Commands\" />
-    <Folder Include="Sections\Products\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\Notes\Commands\" />
+    <Folder Include="CommandHandlers\Administrations\Notes\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\Media\Commands\" />
+    <Folder Include="CommandHandlers\Administrations\Media\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\DigiAdmins\Commands\" />
+    <Folder Include="CommandHandlers\Administrations\DigiAdmins\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\CustomFields\Commands\" />
+    <Folder Include="CommandHandlers\Administrations\CustomFields\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\Classifications\Commands\" />
+    <Folder Include="CommandHandlers\Administrations\Classifications\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\Categories\Commands\" />
+    <Folder Include="CommandHandlers\Administrations\Categories\Queries\" />
+    <Folder Include="CommandHandlers\Secure\Commands\" />
+    <Folder Include="CommandHandlers\Secure\Queries\" />
+    <Folder Include="CommandHandlers\Finance\Commands\" />
+    <Folder Include="CommandHandlers\Finance\Queries\" />
+    <Folder Include="Services\Administration\Media\" />
+    <Folder Include="Services\Finance\" />
   </ItemGroup>
 
 </Project>

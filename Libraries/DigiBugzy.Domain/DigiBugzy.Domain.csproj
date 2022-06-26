@@ -9,7 +9,21 @@
   <ItemGroup>
     <Folder Include="Entities\Administration\Media\" />
     <Folder Include="Entities\Finance\" />
-    <Folder Include="Entities\Projects\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.EF6" Version="2.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="5.0.3" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
   </ItemGroup>
 
 </Project>

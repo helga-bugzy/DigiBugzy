@@ -1,6 +1,9 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -98,6 +101,7 @@ namespace DigiBugzy.Presentation.Desktop
         {
             if (services != null)
             {
+                services.AddMediatR(Assembly.GetExecutingAssembly());
                 //services.AddTransient<IAdministrationService, AdministrationService>();
                 //services.AddTransient<IDigiUserService, DigiUserService>();
                 //services.AddTransient<IStatusAdminService, StatusAdminService>();
