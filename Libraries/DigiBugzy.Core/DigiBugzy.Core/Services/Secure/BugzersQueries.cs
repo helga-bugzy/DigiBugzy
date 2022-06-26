@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DigiBugzy.ApplicationLayer.Services.Secure
+﻿namespace DigiBugzy.ApplicationLayer.Services.Secure
 {
-    internal class BugzersQueries
+    public partial class BugzersService
     {
+        public class Queries
+        {
+
+        }
     }
 }

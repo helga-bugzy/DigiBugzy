@@ -27,18 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CommandHandlers\Administrations\Notes\Commands\" />
-    <Folder Include="CommandHandlers\Administrations\Notes\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\DigiAdmins\Queries\" />
+    <Folder Include="CommandHandlers\Administrations\Media\Models\" />
     <Folder Include="CommandHandlers\Administrations\Media\Commands\" />
     <Folder Include="CommandHandlers\Administrations\Media\Queries\" />
-    <Folder Include="CommandHandlers\Administrations\DigiAdmins\Commands\" />
-    <Folder Include="CommandHandlers\Administrations\DigiAdmins\Queries\" />
-    <Folder Include="CommandHandlers\Administrations\CustomFields\Commands\" />
     <Folder Include="CommandHandlers\Administrations\CustomFields\Queries\" />
-    <Folder Include="CommandHandlers\Administrations\Classifications\Commands\" />
-    <Folder Include="CommandHandlers\Administrations\Classifications\Queries\" />
-    <Folder Include="CommandHandlers\Administrations\Categories\Commands\" />
-    <Folder Include="CommandHandlers\Administrations\Categories\Queries\" />
     <Folder Include="CommandHandlers\Secure\Commands\" />
     <Folder Include="CommandHandlers\Secure\Queries\" />
     <Folder Include="CommandHandlers\Finance\Commands\" />

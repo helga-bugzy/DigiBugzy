@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace DigiBugzy.ApplicationLayer.Services.Projects
 {
-    public  class ProjectQueries
+    public partial class ProjectsService
     {
-        public IEnumerable<Project>
+        public class Queries
+        {
+
+        }
     }
 }

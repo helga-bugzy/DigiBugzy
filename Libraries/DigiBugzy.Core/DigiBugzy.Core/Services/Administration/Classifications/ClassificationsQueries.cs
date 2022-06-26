@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DigiBugzy.ApplicationLayer.Services.Administration.Classifications
 {
-    internal class ClassificationsQueries
+    public partial class ClassificationsService
     {
+        public class Queries { }
+
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DigiBugzy.ApplicationLayer.Services.Administration.DigiAdmins
 {
-    internal class DigiAdminsQueries
+    public partial class DigiAdminsService
     {
+        public class Queries
+        {
+
+        }
     }
 }

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace DigiBugzy.ApplicationLayer.Services.Administration.Classifications
 {
-    internal class ClassificationsCommands
+    public partial class ClassificationsService
     {
+        public class Commands 
+        {
+
+        }
+
     }
 }

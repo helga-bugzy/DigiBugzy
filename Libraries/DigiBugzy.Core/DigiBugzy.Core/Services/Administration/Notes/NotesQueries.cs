@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DigiBugzy.ApplicationLayer.Services.Administration.Notes
 {
-    internal class NotesQueries
+    public partial class NotesService
     {
+        public class Queries
+        {
+
+        }
     }
 }

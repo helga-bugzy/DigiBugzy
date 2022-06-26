@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DigiBugzy.ApplicationLayer.Services.Products
 {
-    internal class ProductsCommands
+    public partial class ProductsService    
     {
+        public class Commands
+        {
+
+        }
     }
 }
