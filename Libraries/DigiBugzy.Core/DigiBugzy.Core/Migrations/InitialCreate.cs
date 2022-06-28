@@ -183,18 +183,7 @@ namespace DigiBugzy.ApplicationLayer.Migrations
 
         private void CreateData_Classifications()
         {
-            Insert.IntoTable(nameof(Classification))
-                .InSchema(DatabaseConstants.Schemas.Admin)
-                .Row(new
-                {                  
-                    DigiAdminId = 1,
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    Name = nameof(Project),
-                    Description = nameof(Project)
-                });
-
+           
             Insert.IntoTable(nameof(Classification))
                 .InSchema(DatabaseConstants.Schemas.Admin)
                 .Row(new
