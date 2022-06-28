@@ -60,7 +60,23 @@ namespace DigiBugzy.ApplicationLayer.Migrations
                 .WithColumn(nameof(BaseEntity.Id)).AsInt64().PrimaryKey().Identity()
                 .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
+                .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime()
+                .WithColumn(nameof(BaseEntity.DigiAdminId)).AsInt64();
+        }
+
+        public void CreateBaseDigiAdminEntity()
+        {
+            Migrator.Create.Table(TableName)
+                .InSchema(SchemaName)
+                .WithColumn(nameof(BaseEntity.Id)).AsInt64().PrimaryKey().Identity()
+                .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
+                .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime();
+
+            Migrator.Alter.Table(TableName)
+                .InSchema(SchemaName)
+                .AddColumn(nameof(BaseAdministrationEntity.Name)).AsString()
+                .AddColumn(nameof(BaseAdministrationEntity.Description)).AsString();
         }
 
         public void CreateBaseAdministrationEntity()
@@ -120,6 +136,8 @@ namespace DigiBugzy.ApplicationLayer.Migrations
             AddColumn(columnName);
             AddForeignKey(TableName, string.IsNullOrEmpty(mainTableName) ? "" : mainTableName, columnName, fromSchemaName, toSchemaName);
         }
+
+
 
         #endregion
 

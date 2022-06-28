@@ -53,15 +53,22 @@ namespace DigiBugzy.ApplicationLayer.Migrations
 
             using(var creatory = new BaseEntityCreator(_currentSchemaName, this))
             {
+                _currentTableName = nameof(DigiAdmin);
+                creatory.StartNewTable(_currentTableName);
+                creatory.CreateBaseDigiAdminEntity();
+                CreateData_DigiAdmin();
+
                 //Classification
                 _currentTableName = nameof(Classification);
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseAdministrationEntity();
+                CreateData_Classifications();
 
                 //CustomFieldType
                 _currentTableName = nameof(CustomFieldType);
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseAdministrationEntity();
+                CreateData_CustomFieldTypes();
 
                 //CustomField
                 _currentTableName = nameof(CustomField);
@@ -100,8 +107,6 @@ namespace DigiBugzy.ApplicationLayer.Migrations
                 creatory.CreateBaseAdministrationEntity();
                 creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
 
-                
-
             }
         }
 
@@ -135,6 +140,154 @@ namespace DigiBugzy.ApplicationLayer.Migrations
         private void CreateProjectsTables()
         {
 
+        }
+
+        #endregion
+
+
+        #region Create Data
+
+        private void CreateData_DigiAdmin()
+        {
+            Insert.IntoTable(nameof(DigiAdmin))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {                    
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = nameof(DigiAdmin)
+                });
+
+
+        }
+
+        private void CreateData_Classifications()
+        {
+            Insert.IntoTable(nameof(Classification))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {                  
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = nameof(Project),
+                    Description = nameof(Project)
+                });
+
+            Insert.IntoTable(nameof(Classification))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = nameof(Project),
+                    Description = nameof(Project)
+                });
+
+            Insert.IntoTable(nameof(Classification))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = nameof(Product),
+                    Description = nameof(Product)
+
+                });
+
+        }
+
+        private void CreateData_CustomFieldTypes()
+        {
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Integer",
+                    Description = "Integer"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Decimal",
+                    Description = "Decimal"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Currency",
+                    Description = "Currency"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "String",
+                    Description = "String"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Memo",
+                    Description = "Memo"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Boolean",
+                    Description = "Boolean"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "List",
+                    Description = "List"
+                });
         }
 
         #endregion
