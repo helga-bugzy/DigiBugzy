@@ -115,25 +115,43 @@ namespace DigiBugzy.ApplicationLayer.Migrations
         /// </summary>
         private void CreateCatalogTables()
         {
-            _currentSchemaName = DatabaseConstants.Schemas.Admin;
+            _currentSchemaName = DatabaseConstants.Schemas.Catalog;
             using(var creatory = new BaseEntityCreator(_currentSchemaName, this))
             {
                 //Product
                 _currentTableName = nameof(Product);
                 creatory.StartNewTable(_currentTableName);
+                creatory.CreateBaseAdministrationEntity();
 
-                //Product Catalog
+                //ProductCategory
                 _currentTableName = nameof(ProductCategory);
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseEntity();
                 creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Category);
+                creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
+
+               // ProductCustomFieldValues
+                _currentTableName = nameof(ProductCustomField);
+                creatory.StartNewTable(_currentTableName);
+                creatory.CreateBaseEntity();
+                creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
+                creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
+                creatory.AddColumn(nameof(ProductCustomField.Value));
             }
             
         }
 
         private void CreateContactBaseTables()
         {
+            _currentSchemaName = DatabaseConstants.Schemas.ContactBase;
+            using (var creatory = new BaseEntityCreator(_currentSchemaName, this))
+            {
+                //BusinessEntityType
+                _currentTableName = nameof(BusinessEntityType);
+                creatory.StartNewTable(_currentTableName);
+                creatory.CreateBaseAdministrationEntity();
+                CreateData_BusinessEntityTypes();                
+            }
 
         }
 
@@ -156,7 +174,8 @@ namespace DigiBugzy.ApplicationLayer.Migrations
                     IsActive = true,
                     IsDeleted = false,
                     CreatedOn = DateTime.Now,
-                    Name = nameof(DigiAdmin)
+                    Name = "Sample Administration",
+                    Description = "Sample Administration"
                 });
 
 
@@ -287,6 +306,69 @@ namespace DigiBugzy.ApplicationLayer.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "List",
                     Description = "List"
+                });
+        }
+
+        private void CreateData_BusinessEntityTypes()
+        {
+            Insert.IntoTable(nameof(BusinessEntityType))
+                .InSchema(DatabaseConstants.Schemas.ContactBase)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Manufacturer",
+                    Description = "Manufacturer"
+                });
+
+            Insert.IntoTable(nameof(BusinessEntityType))
+                .InSchema(DatabaseConstants.Schemas.ContactBase)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Supplier",
+                    Description = "Supplier"
+                });
+
+            Insert.IntoTable(nameof(BusinessEntityType))
+                .InSchema(DatabaseConstants.Schemas.ContactBase)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Customer",
+                    Description = "Customer"
+                });
+
+            Insert.IntoTable(nameof(BusinessEntityType))
+                .InSchema(DatabaseConstants.Schemas.ContactBase)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Financial Institution",
+                    Description = "Financial Institution"
+                });
+
+            Insert.IntoTable(nameof(BusinessEntityType))
+                .InSchema(DatabaseConstants.Schemas.ContactBase)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Other",
+                    Description = "Other"
                 });
         }
 

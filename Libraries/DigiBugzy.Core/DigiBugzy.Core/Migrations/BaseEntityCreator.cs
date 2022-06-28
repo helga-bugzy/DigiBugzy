@@ -17,7 +17,8 @@ namespace DigiBugzy.ApplicationLayer.Migrations
             BusinessEntity,
             CustomField,
             Project,
-            Classification
+            Classification,
+            DigiAdmin
         }
 
 
@@ -55,13 +56,21 @@ namespace DigiBugzy.ApplicationLayer.Migrations
 
         public void CreateBaseEntity()
         {
-            Migrator.Create.Table(TableName)
+            try
+            {
+                Migrator.Create.Table(TableName)
                 .InSchema(SchemaName)
                 .WithColumn(nameof(BaseEntity.Id)).AsInt64().PrimaryKey().Identity()
                 .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
-                .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime()
-                .WithColumn(nameof(BaseEntity.DigiAdminId)).AsInt64();
+                .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime();
+
+                AddMapping(MappingTypes.DigiAdmin, toSchemaName: DatabaseConstants.Schemas.Admin);
+            }
+            catch (Exception)
+            {
+                //Already exist just do nothing
+            }
         }
 
         public void CreateBaseDigiAdminEntity()

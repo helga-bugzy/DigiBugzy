@@ -52,10 +52,10 @@ global using DigiBugzy.Domain.Entities.xBase.Interfaces;
 global using DigiBugzy.Domain.Entities.xBase;
 global using DigiBugzy.Domain.Entities.Administration;
 global using DigiBugzy.Domain.Entities.Administration.Categories;
-
-
 global using DigiBugzy.Domain.Entities.Administration.CustomFields;
 global using DigiBugzy.Domain.Entities.Administration.Classifications;
+
+global using DigiBugzy.Domain.Entities.BusinessEntities;
 
 
 global using DigiBugzy.Domain.Entities.Products;

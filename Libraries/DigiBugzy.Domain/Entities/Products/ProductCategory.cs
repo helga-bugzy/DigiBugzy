@@ -1,7 +1,7 @@
 ﻿
 namespace DigiBugzy.Domain.Entities.Products
 {
-    public class ProductCategory: BaseAdministrationEntity, IBaseCategoryMappingEntity
+    public class ProductCategory: BaseEntity, IBaseCategoryMappingEntity
     {
         public int ProductId { get; set; }
 
