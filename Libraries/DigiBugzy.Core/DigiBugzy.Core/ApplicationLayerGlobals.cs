@@ -22,6 +22,7 @@ global using DigiBugzy.ApplicationLayer.Common.xBaseObjects.Properties;
 global using DigiBugzy.ApplicationLayer.Common.xBaseObjects.ComObjects;
 global using DigiBugzy.ApplicationLayer.Common.xBaseObjects.FilterObjects;
 
+global using DigiBugzy.ApplicationLayer.CommandHandlers;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Commands;
 global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.Categories.Queries;

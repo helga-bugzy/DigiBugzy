@@ -7,9 +7,9 @@
 
         public int DigiAdminId { get; set; }        
 
-        public bool IsDelete { get; set; }
+        public bool IncludeDeleted { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IncludeInActive { get; set; }
 
 
         //Admin entity fields 

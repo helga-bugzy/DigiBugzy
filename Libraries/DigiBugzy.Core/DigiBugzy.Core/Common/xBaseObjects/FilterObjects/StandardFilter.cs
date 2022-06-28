@@ -8,9 +8,9 @@ namespace DigiBugzy.ApplicationLayer.Common.xBaseObjects.FilterObjects
 
         public int DigiAdminId { get; set; }
 
-        public bool IsDelete { get; set; }
+        public bool IncludeDeleted { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IncludeInActive { get; set; }
 
         public string Name { get; set; }
 
@@ -23,6 +23,12 @@ namespace DigiBugzy.ApplicationLayer.Common.xBaseObjects.FilterObjects
         public List<int> CategoryIds { get; set; }
 
         public List<CustomFieldModel> CustomFields { get; set; }
+
+        public StandardFilter(bool includeInActive = false, bool includeDeleted = false)
+        {
+            IncludeInActive = includeInActive;
+            IncludeDeleted = includeDeleted;
+        }
     }
 
 }

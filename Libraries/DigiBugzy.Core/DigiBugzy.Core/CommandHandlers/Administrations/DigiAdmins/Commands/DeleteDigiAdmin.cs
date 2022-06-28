@@ -3,7 +3,7 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.
 {
      public class DeleteDigiAdminRequest : IMapFrom<DeleteDigiAdminCommand>, IRequestObject
     {
-        public DigiAdminModel Model { get; set; }
+        public List<DigiAdminModel> Models { get; set; }
 
         public void Mapping(Profile profile) => profile.CreateMap<DeleteDigiAdminCommand, DeleteDigiAdminRequest>();
     }
@@ -18,13 +18,13 @@ namespace DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.
 
     public class DeleteDigiAdminResponse : BaseResponseObject
     {
-        public DigiAdminModel Model { get; set; }
+        public List<DigiAdminModel> Models { get; set; }
     }    
 
    
     public class DeleteDigiAdminCommand : IRequest<DeleteDigiAdminDto>
     {
-        public DigiAdminModel Model { get; set; }
+        public List<DigiAdminModel> Models { get; set; }
 
 
         public class DeleteDigiAdminCommandHandler : IRequestHandler<DeleteDigiAdminCommand, DeleteDigiAdminDto>

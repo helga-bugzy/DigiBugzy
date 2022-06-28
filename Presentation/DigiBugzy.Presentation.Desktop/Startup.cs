@@ -1,5 +1,6 @@
 ﻿
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace DigiBugzy.Presentation.Desktop
             #region EF Core
 
             //Create database (https://dotnetcorecentral.com/blog/fluentmigrator/)
-            Database.EnsureDatabase(Globals.GetConnectionString(ConnectionEnvironment.Master), "DigiBudgetDev");
+            Database.EnsureDatabase(Globals.GetMasterConnectionString(ConnectionEnvironment.Master), "DigiBugzyDev");
 
             //Entity framework (for migrations)
             ServiceProvider = CreateServices();
@@ -59,6 +60,7 @@ namespace DigiBugzy.Presentation.Desktop
         #endregion
 
         #region Dependency Injection
+
         /// <summary>
         /// Configure the dependency injection services
         /// https://fluentmigrator.github.io/articles/quickstart.html?tabs=runner-in-process
@@ -89,10 +91,8 @@ namespace DigiBugzy.Presentation.Desktop
             if (services != null)
             {
                 services.AddScoped<MainForm>();
-                //services.AddScoped<Login>();
-                // services.AddScoped<InstallationWizard>();
-
-                // services.AddScoped<FinanceAdmin>();
+                services.AddScoped<LoginForm>();
+               
 
             }
         }
@@ -157,7 +157,7 @@ namespace DigiBugzy.Presentation.Desktop
         /// <returns></returns>
         public static T? GetService<T>() where T : class
         {
-            return (T?)ServiceProvider?.GetService(typeof(T));
+            return (T?)ServiceProvider?.GetRequiredService(typeof(T));
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace DigiBugzy.Presentation.Desktop
         /// <returns></returns>
         public static T? GetForm<T>() where T : Form
         {
-            return (T?)ServiceProvider?.GetService(typeof(T));
+            return (T?)ServiceProvider?.GetRequiredService(typeof(T));
         }
 
         #endregion

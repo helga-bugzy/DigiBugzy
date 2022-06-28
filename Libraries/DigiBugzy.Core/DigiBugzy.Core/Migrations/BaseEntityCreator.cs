@@ -96,20 +96,29 @@ namespace DigiBugzy.ApplicationLayer.Migrations
             }
         }
 
-        public void AddForeignKey(string fromTable, string toTable, string fromFieldName)
+        public void AddForeignKey(string fromTable, string toTable, string fromFieldName, string fromSchemaName = "", string toSchemaName = "")
         {
+            if (string.IsNullOrEmpty(fromSchemaName)) fromSchemaName = SchemaName;
+            if (string.IsNullOrEmpty(toSchemaName)) toSchemaName = SchemaName;
+
             Migrator.Create.ForeignKey($"FK_{fromTable}_{toTable}_{fromFieldName}")
-                .FromTable(fromTable).ForeignColumn(fromFieldName)
-                .ToTable(toTable).PrimaryColumn(nameof(BaseEntity.Id));
+                //From schema.table.field
+                .FromTable(fromTable)
+                .InSchema(fromSchemaName)
+                .ForeignColumn(fromFieldName)
+
+                //To schema.table.id
+                .ToTable(toTable)
+                .InSchema(toSchemaName)
+                .PrimaryColumn(nameof(BaseEntity.Id));
         }
 
-        public void AddMapping(MappingTypes mappingType)
+        public void AddMapping(MappingTypes mappingType, string fromSchemaName = "", string toSchemaName = "")
         {
-            
             var mainTableName = Enum.GetName(typeof(MappingTypes), mappingType);
             var columnName = $"{mainTableName}Id";
             AddColumn(columnName);
-            AddForeignKey(TableName, string.IsNullOrEmpty(mainTableName) ? "" : mainTableName, columnName);
+            AddForeignKey(TableName, string.IsNullOrEmpty(mainTableName) ? "" : mainTableName, columnName, fromSchemaName, toSchemaName);
         }
 
         #endregion

@@ -58,11 +58,12 @@ namespace DigiBugzy.ApplicationLayer.Migrations
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseAdministrationEntity();
 
-                //Custom fields
+                //CustomFieldType
                 _currentTableName = nameof(CustomFieldType);
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseAdministrationEntity();
 
+                //CustomField
                 _currentTableName = nameof(CustomField);
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseAdministrationEntity();
@@ -70,13 +71,13 @@ namespace DigiBugzy.ApplicationLayer.Migrations
                 creatory.AddColumn(nameof(CustomField.CustomFieldTypeId));                
                 creatory.AddForeignKey(_currentTableName, nameof(CustomFieldType), nameof(CustomField.CustomFieldTypeId));
                 
-
+                //CustomFieldValue
                 _currentTableName = nameof(CustomFieldValue);
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseEntity();
                 creatory.AddColumn(nameof(CustomFieldValue.CustomFieldId));
                 creatory.AddColumn(nameof(CustomFieldValue.Value), BaseEntityCreator.FieldTypes.AsString);
-                creatory.AddForeignKey(_currentTableName, nameof(CustomField), nameof(CustomFieldValue.Value));
+                creatory.AddForeignKey(_currentTableName, nameof(CustomField), nameof(CustomFieldValue.CustomFieldId));
 
 
                 //Category 
@@ -87,11 +88,11 @@ namespace DigiBugzy.ApplicationLayer.Migrations
                 creatory.AddColumn(nameof(Category.ParentId));                
                 creatory.AddForeignKey(_currentTableName, _currentTableName, nameof(BaseEntity.Id));
                                 
+                //CategoryCustomField
                 _currentTableName = nameof(CategoryCustomField);
                 creatory.StartNewTable(_currentTableName);
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
+                creatory.CreateBaseEntity();
                 creatory.AddMapping(BaseEntityCreator.MappingTypes.Category);
-
 
                 //Notes
                 _currentTableName = nameof(Note);
