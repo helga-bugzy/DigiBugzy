@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Caching\" />
     <Folder Include="ComponentModel\" />
-    <Folder Include="Configuration\" />
     <Folder Include="Domain\Administration\Media\" />
     <Folder Include="Domain\Finance\" />
     <Folder Include="Events\" />
@@ -18,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="EPPlus" Version="6.0.5" />
     <PackageReference Include="EPPlus.Core.Extensions" Version="2.4.0" />
     <PackageReference Include="EPPlusEnumerable" Version="5.0.0" />
@@ -33,6 +33,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="SkiaSharp" Version="2.88.0" />
     <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.0" />
     <PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.0" />
