@@ -1,4 +1,7 @@
-﻿
+﻿global using DigiBugzy.Core;
+global using System.Linq.Expressions;
+global using LinqToDB.Data;
+
 
 namespace DigiBugzy.Data
 {
@@ -8,7 +11,9 @@ namespace DigiBugzy.Data
         /// Represents an entity repository
         /// </summary>
         /// <typeparam name="TEntity">Entity type</typeparam>
+#pragma warning disable CS0693 // Type parameter has the same name as the type parameter from outer type
         public partial interface IRepository<TEntity> where TEntity : BaseEntity
+#pragma warning restore CS0693 // Type parameter has the same name as the type parameter from outer type
         {
             #region Methods
 
@@ -17,7 +22,7 @@ namespace DigiBugzy.Data
             /// </summary>
             /// <param name="id">Entity entry identifier</param>
             /// <param name="getCacheKey">Function to get a cache key; pass null to don't cache; return null from this function to use the default key</param>
-            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="Nop.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
+            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="DigiBugzy.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
             /// <returns>
             /// A task that represents the asynchronous operation
             /// The task result contains the entity entry
@@ -29,7 +34,7 @@ namespace DigiBugzy.Data
             /// </summary>
             /// <param name="ids">Entity entry identifiers</param>
             /// <param name="getCacheKey">Function to get a cache key; pass null to don't cache; return null from this function to use the default key</param>
-            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="Nop.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
+            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="DigiBugzy.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
             /// <returns>
             /// A task that represents the asynchronous operation
             /// The task result contains the entity entries
@@ -41,7 +46,7 @@ namespace DigiBugzy.Data
             /// </summary>
             /// <param name="func">Function to select entries</param>
             /// <param name="getCacheKey">Function to get a cache key; pass null to don't cache; return null from this function to use the default key</param>
-            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="Nop.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
+            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="DigiBugzy.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
             /// <returns>
             /// A task that represents the asynchronous operation
             /// The task result contains the entity entries
@@ -54,7 +59,7 @@ namespace DigiBugzy.Data
             /// </summary>
             /// <param name="func">Function to select entries</param>
             /// <param name="getCacheKey">Function to get a cache key; pass null to don't cache; return null from this function to use the default key</param>
-            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="Nop.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
+            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="DigiBugzy.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
             /// <returns>
             /// A task that represents the asynchronous operation
             /// The task result contains the entity entries
@@ -67,7 +72,7 @@ namespace DigiBugzy.Data
             /// </summary>
             /// <param name="func">Function to select entries</param>
             /// <param name="getCacheKey">Function to get a cache key; pass null to don't cache; return null from this function to use the default key</param>
-            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="Nop.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
+            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="DigiBugzy.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
             /// <returns>
             /// A task that represents the asynchronous operation
             /// The task result contains the entity entries
@@ -79,7 +84,7 @@ namespace DigiBugzy.Data
             /// <param name="pageIndex">Page index</param>
             /// <param name="pageSize">Page size</param>
             /// <param name="getOnlyTotalCount">Whether to get only the total number of entries without actually loading data</param>
-            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="Nop.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
+            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="DigiBugzy.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
             /// <returns>
             /// A task that represents the asynchronous operation
             /// The task result contains the paged list of entity entries
@@ -91,7 +96,7 @@ namespace DigiBugzy.Data
             /// <param name="pageIndex">Page index</param>
             /// <param name="pageSize">Page size</param>
             /// <param name="getOnlyTotalCount">Whether to get only the total number of entries without actually loading data</param>
-            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="Nop.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
+            /// <param name="includeDeleted">Whether to include deleted items (applies only to <see cref="DigiBugzy.Core.Domain.Common.ISoftDeletedEntity"/> entities)</param>
             /// <returns>
             /// A task that represents the asynchronous operation
             /// The task result contains the paged list of entity entries

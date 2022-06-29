@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿global using DigiBugzy.Core.Infrastructure;
 
 namespace DigiBugzy.Data.Caching
 {

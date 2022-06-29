@@ -1,4 +1,7 @@
 ﻿
+global using DigiBugzy.Domain.Helpers;
+global using DigiBugzy.Core.Domain.BusinessEntities;
+
 namespace DigiBugzy.Data.Migrations
 {
     [Migration(001)]

@@ -2,6 +2,8 @@
 
 
 
+global using DigiBugzy.Data.Migrations;
+
 namespace DigiBugzy.Desktop
 {
     public class Startup

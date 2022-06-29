@@ -1,24 +1,9 @@
-﻿global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Text;
-global using System.Threading.Tasks;
-global using System.Reflection;
-
-global using AutoMapper;
+﻿
 
 
 global using FluentMigrator.Runner;
 global using Microsoft.Extensions.DependencyInjection;
-
-global using DigiBugzy.Data.Enumerations;
-global using DigiBugzy.Data.Migrations;
-
-global using DigiBugzy.Data.Common.xBaseObjects.FilterObjects;
-
+global using DigiBugzy.Core.Enumerations;
 
 namespace DigiBugzy.Desktop
 {

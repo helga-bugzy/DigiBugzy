@@ -19,7 +19,7 @@ global using AutoMapper;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.EntityFrameworkCore;
 
-global using DigiBugzy.Data.Enumerations;
+global using DigiBugzy.Core.Enumerations;
 global using DigiBugzy.Data.Common.Mappings;
 global using DigiBugzy.Data.Common.xBaseObjects;
 global using DigiBugzy.Data.Common.xBaseObjects.Properties;

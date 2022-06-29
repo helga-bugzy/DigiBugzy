@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Security.Cryptography;
 
 namespace DigiBugzy.Data.Common.Helpers
@@ -19,7 +19,9 @@ namespace DigiBugzy.Data.Common.Helpers
 
         public SecureRandomNumberGenerator()
         {
+#pragma warning disable SYSLIB0023 // Type or member is obsolete
             _rng = new RNGCryptoServiceProvider();
+#pragma warning restore SYSLIB0023 // Type or member is obsolete
         }
 
         #endregion
