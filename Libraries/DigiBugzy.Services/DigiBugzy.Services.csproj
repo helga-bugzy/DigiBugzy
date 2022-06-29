@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="EPPlus" Version="6.0.5" />
+    <PackageReference Include="EPPlus.Core.Extensions" Version="2.4.0" />
+    <PackageReference Include="EPPlusEnumerable" Version="5.0.0" />
+    <PackageReference Include="FluentMigrator" Version="3.3.2" />
+    <PackageReference Include="FluentMigrator.Extensions.SqlServer" Version="3.3.2" />
+    <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
+    <PackageReference Include="Humanizer" Version="2.14.1" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.8.0" />
+    <PackageReference Include="linq2db" Version="4.1.0" />
+    <PackageReference Include="linq2db.EntityFrameworkCore" Version="6.8.0" />
+    <PackageReference Include="linq2db.SqlServer" Version="4.1.0" />
+    <PackageReference Include="MailKit" Version="3.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.6" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.0" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="2.88.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+    <PackageReference Include="System.Linq.Async.Queryable" Version="6.0.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.19" />
+  </ItemGroup>
+
+</Project>
