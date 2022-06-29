@@ -15,14 +15,14 @@ global using Microsoft.Extensions.DependencyInjection;
 global using DigiBugzy.Presentation.Desktop;
 global using DigiBugzy.Presentation.Desktop.MainContainers.Forms;
 
-global using DigiBugzy.ApplicationLayer.Enumerations;
-global using DigiBugzy.ApplicationLayer.Migrations;
+global using DigiBugzy.Data.Enumerations;
+global using DigiBugzy.Data.Migrations;
 
-global using DigiBugzy.ApplicationLayer.Common.xBaseObjects.FilterObjects;
+global using DigiBugzy.Data.Common.xBaseObjects.FilterObjects;
 
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Models;
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Queries;
-global using DigiBugzy.ApplicationLayer.CommandHandlers.Administrations.DigiAdmins.Commands;
+global using DigiBugzy.Data.CommandHandlers.Administrations.DigiAdmins.Models;
+global using DigiBugzy.Data.CommandHandlers.Administrations.DigiAdmins.Queries;
+global using DigiBugzy.Data.CommandHandlers.Administrations.DigiAdmins.Commands;
 
 namespace DigiBugzy.Presentation.Desktop
 {
