@@ -60,6 +60,8 @@ namespace DigiBugzy.Services
 
         #endregion
 
+        #region Ctor
+
         private string _connectionString;
 
 
@@ -69,13 +71,27 @@ namespace DigiBugzy.Services
 
         }
 
+        #endregion
+
+
+        #region Overrides
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
 
-        
-        
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+           // builder.Entity<CategoryCustomField>();
+
+
+            base.OnModelCreating(builder);
+        }
+
+        #endregion
+
+
     }
 }

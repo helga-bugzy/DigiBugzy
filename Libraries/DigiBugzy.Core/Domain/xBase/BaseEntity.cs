@@ -4,7 +4,7 @@
 
 namespace DigiBugzy.Core.Domain.xBase
 {
-    public abstract partial class BaseEntity: IBaseEntity
+    public partial class BaseEntity: IBaseEntity
 
     {
         [Key]

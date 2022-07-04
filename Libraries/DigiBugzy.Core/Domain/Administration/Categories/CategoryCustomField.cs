@@ -6,7 +6,7 @@
 namespace DigiBugzy.Core.Domain.Administration.Categories
 {
     [Table(name: nameof(CategoryCustomField), Schema=DatabaseConstants.Schemas.Admin)]
-    public abstract class CategoryCustomField: BaseEntity
+    public class CategoryCustomField: BaseEntity
     {
         [Required]
         public int CustomFieldId { get; set; }

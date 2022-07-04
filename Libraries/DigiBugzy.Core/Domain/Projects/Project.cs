@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DigiBugzy.Core.Domain.Projects
 {
     [Table(name: nameof(Project), Schema = DatabaseConstants.Schemas.Catalog)]
-    public abstract class Project : BaseAdministrationEntity
+    public class Project : BaseAdministrationEntity
     {
 
     }

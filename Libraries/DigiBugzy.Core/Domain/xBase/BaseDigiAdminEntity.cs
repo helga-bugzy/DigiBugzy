@@ -1,7 +1,7 @@
 ﻿
 namespace DigiBugzy.Core.Domain.xBase
 {
-    public abstract class BaseDigiAdminEntity: IBaseDigiAdminEntity
+    public class BaseDigiAdminEntity: IBaseDigiAdminEntity
     {
         [Key]
         [Column(Order = 1)]

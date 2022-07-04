@@ -108,6 +108,7 @@ namespace DigiBugzy.Data.Migrations
                 creatory.StartNewTable(_currentTableName);
                 creatory.CreateBaseEntity();
                 creatory.AddMapping(BaseEntityCreator.MappingTypes.Category);
+                creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField);
 
                 //Notes
                 _currentTableName = nameof(Note);

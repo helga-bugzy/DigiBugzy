@@ -2,7 +2,7 @@
 
 namespace DigiBugzy.Core.Domain.xBase
 {
-    public abstract class BaseAdministrationEntity: BaseEntity, IAdministrationEntity
+    public class BaseAdministrationEntity: BaseEntity, IAdministrationEntity
     {
         [MaxLength(150), MinLength(5)]
         [Required]
