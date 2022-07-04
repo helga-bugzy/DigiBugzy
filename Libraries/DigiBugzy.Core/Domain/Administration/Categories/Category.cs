@@ -3,7 +3,7 @@
 namespace DigiBugzy.Core.Domain.Administration.Categories
 {
     [Table(name: nameof(Category), Schema = DatabaseConstants.Schemas.Admin)]
-    public abstract class Category: BaseAdministrationEntity, IBaseParentIncludeEntity
+    public abstract class Category: BaseAdministrationEntity
     {
         public int ClassificationId { get; set; }
 

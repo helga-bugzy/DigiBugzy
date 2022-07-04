@@ -96,7 +96,12 @@ namespace DigiBugzy.Data.Migrations
                 creatory.CreateBaseAdministrationEntity();
                 creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
                 creatory.AddColumn(nameof(Category.ParentId));                
-                creatory.AddForeignKey(_currentTableName, _currentTableName, nameof(BaseEntity.Id));
+                creatory.AddForeignKey( 
+                    fromTable: _currentTableName, 
+                    toTable: _currentTableName, 
+                    fromFieldName: nameof(Category.ParentId),  
+                    fromSchemaName: _currentSchemaName,
+                    toSchemaName: _currentSchemaName);
                                 
                 //CategoryCustomField
                 _currentTableName = nameof(CategoryCustomField);

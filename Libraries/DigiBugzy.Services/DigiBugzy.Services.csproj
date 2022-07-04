@@ -22,6 +22,8 @@
     <PackageReference Include="linq2db.SqlServer" Version="4.1.0" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -41,7 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Catalog\Products\" />
     <Folder Include="Finance\" />
     <Folder Include="ContactBase\" />
   </ItemGroup>

@@ -6,7 +6,7 @@ namespace DigiBugzy.Core.Domain.Administration.Notes
     {
        public int ClassificationId { get; set; }
 
-       [ForeignKey(nameof(Classification))]
+       [ForeignKey(nameof(ClassificationId))]
        public Classification Classification { get; set; }
     }
 }

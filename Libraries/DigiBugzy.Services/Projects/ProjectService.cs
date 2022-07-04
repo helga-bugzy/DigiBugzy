@@ -1,10 +1,14 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DigiBugzy.Services.Administration.Classifications
+namespace DigiBugzy.Services.Catalog.Products
 {
-    public class ClassificationService : IClassificationService
+    public class ProjectService : IProjectService
     {
-        public void Create(Classification entity)
+        public void Create(Project entity)
         {
             throw new NotImplementedException();
         }
@@ -14,17 +18,17 @@ namespace DigiBugzy.Services.Administration.Classifications
             throw new NotImplementedException();
         }
 
-        public List<Classification> Get(StandardFilter filter)
+        public List<Project> Get(StandardFilter filter)
         {
             throw new NotImplementedException();
         }
 
-        public Classification GetById(int id)
+        public Project GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Classification entity)
+        public void Update(Project entity)
         {
             throw new NotImplementedException();
         }

@@ -3,9 +3,9 @@
     public interface IFilterObject
     {
         //Basic Entity Fields
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
-        public int DigiAdminId { get; set; }        
+        public int? DigiAdminId { get; set; }        
 
         public bool IncludeDeleted { get; set; }
 
@@ -19,13 +19,16 @@
 
 
         //Other often occurring relational fields
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         public List<int> ClassificationId { get; set; }
 
         public List<int> CategoryIds { get; set; }
 
         public List<CustomFieldValue> CustomFields { get; set; }
+
+        //General
+        public bool LikeSearch { get; set; }
 
 
 

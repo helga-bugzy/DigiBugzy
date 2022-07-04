@@ -1,8 +1,11 @@
 ﻿
 
-
-
 global using DigiBugzy.Data.Migrations;
+global using DigiBugzy.Services.Administration.DigiAdmins;
+global using DigiBugzy.Services.Administration.Categories;
+global using DigiBugzy.Services.Administration.Classifications;
+global using DigiBugzy.Services.Administration.Notes;
+global using DigiBugzy.Services.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop
 {
@@ -96,11 +99,11 @@ namespace DigiBugzy.Desktop
         {
             if (services != null)
             {
-                //services.AddMediatR(Assembly.GetExecutingAssembly());
-                //services.AddTransient<IAdministrationService, AdministrationService>();
-                //services.AddTransient<IDigiUserService, DigiUserService>();
-                //services.AddTransient<IStatusAdminService, StatusAdminService>();
-                //services.AddTransient<ITypeAdminService, TypeAdminService>();
+                services.AddTransient<IDigiAdminService, DigiAdminService>();
+                services.AddTransient<ICategoryService, CategoryService>();
+                services.AddTransient<IClassificationService, ClassificationService>();
+                services.AddTransient<ICustomFieldService, CustomFieldService>();
+                services.AddTransient<INoteService, NoteService>();
             }
         }
 

@@ -1,10 +1,11 @@
 ﻿
 
-namespace DigiBugzy.Services.Administration.Classifications
+
+namespace DigiBugzy.Services.Administration.CustomFields
 {
-    public class ClassificationService : IClassificationService
+    public class CustomFieldTypeService : ICustomFieldTypeService
     {
-        public void Create(Classification entity)
+        public void Create(CustomFieldType entity)
         {
             throw new NotImplementedException();
         }
@@ -14,17 +15,17 @@ namespace DigiBugzy.Services.Administration.Classifications
             throw new NotImplementedException();
         }
 
-        public List<Classification> Get(StandardFilter filter)
+        public List<CustomFieldType> Get(StandardFilter filter)
         {
             throw new NotImplementedException();
         }
 
-        public Classification GetById(int id)
+        public CustomFieldType GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Classification entity)
+        public void Update(CustomFieldType entity)
         {
             throw new NotImplementedException();
         }
