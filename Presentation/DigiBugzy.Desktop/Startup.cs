@@ -6,6 +6,7 @@ global using DigiBugzy.Services.Administration.Categories;
 global using DigiBugzy.Services.Administration.Classifications;
 global using DigiBugzy.Services.Administration.Notes;
 global using DigiBugzy.Services.Administration.CustomFields;
+global using DigiBugzy.Services.Catalog.Products;
 
 namespace DigiBugzy.Desktop
 {
@@ -99,11 +100,21 @@ namespace DigiBugzy.Desktop
         {
             if (services != null)
             {
+                //Administration
                 services.AddTransient<IDigiAdminService, DigiAdminService>();
                 services.AddTransient<ICategoryService, CategoryService>();
                 services.AddTransient<IClassificationService, ClassificationService>();
                 services.AddTransient<ICustomFieldService, CustomFieldService>();
+                services.AddTransient<ICustomFieldTypeService, CustomFieldTypeService>();
                 services.AddTransient<INoteService, NoteService>();
+
+                //Products
+                services.AddTransient<IProductService, ProductService>();
+                services.AddTransient<IProductCustomFieldService, ProductCustomFieldService>();
+                services.AddTransient<IProductCategoryService, ProductCategoryService>();
+
+                //Projects
+                services.AddTransient<IProjectService, ProjectService>();
             }
         }
 
