@@ -8,6 +8,10 @@ global using DigiBugzy.Services.Administration.Notes;
 global using DigiBugzy.Services.Administration.CustomFields;
 global using DigiBugzy.Services.Catalog.Products;
 global using DigiBugzy.Desktop.Dashboards;
+global using DigiBugzy.Desktop.MultiFunctional;
+global using DigiBugzy.Desktop.Administration;
+global using DigiBugzy.Desktop.Products;
+global using DigiBugzy.Desktop.Projects;
 
 namespace DigiBugzy.Desktop
 {
@@ -28,7 +32,7 @@ namespace DigiBugzy.Desktop
             #region EF Core
 
             //Create database (https://dotnetcorecentral.com/blog/fluentmigrator/)
-            Database.EnsureDatabase(Globals.GetMasterConnectionString(ConnectionEnvironment.Master), "DigiBugzyDev");
+            Database.EnsureDatabase(Globals.GetMasterConnectionString(), "DigiBugzyDev");
 
             //Entity framework (for migrations)
             ServiceProvider = CreateServices();
@@ -69,18 +73,12 @@ namespace DigiBugzy.Desktop
         private static IServiceProvider CreateServices()
         {
             var provider = new ServiceCollection()
-                // Add common FluentMigrator services
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
-                    // Add SQLite support to FluentMigrator
                     .AddSqlServer()
-                    // Set the connection string
-                    .WithGlobalConnectionString(Globals.GetConnectionString(Globals.ConnectionEnvironment))
-                    // Define the assembly containing the migrations
+                    .WithGlobalConnectionString(Globals.GetConnectionString())
                     .ScanIn(typeof(InitialCreate).Assembly).For.Migrations())
-                // Enable logging to console in the FluentMigrator way
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
-                // Build the service provider
                 .BuildServiceProvider(false);
 
             return provider;
@@ -93,10 +91,20 @@ namespace DigiBugzy.Desktop
             {
                 services.AddScoped<LoginForm>();
                 services.AddScoped<MainDashboard>();
-               
+
+                //Administration
+                services.AddScoped<ucFilterStandard>();
+                services.AddScoped<ucCategoriesManager>();
+                services.AddScoped<ucCustomFieldsManager>();
+
+                //Products
+                services.AddScoped<ucProductsManager>();
+                services.AddScoped<ucProjectsManager>();
 
             }
         }
+
+       
 
         private static void RegisterServices()
         {

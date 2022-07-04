@@ -13,14 +13,11 @@ global using System.Globalization;
 global using System.Text.RegularExpressions;
 global using System.Runtime.Serialization;
 
-global using Dapper;
 global using FluentMigrator;
-global using AutoMapper;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.EntityFrameworkCore;
 
 global using DigiBugzy.Core.Enumerations;
-global using DigiBugzy.Data.Common.Mappings;
 global using DigiBugzy.Data.Common.xBaseObjects;
 global using DigiBugzy.Data.Common.xBaseObjects.Properties;
 global using DigiBugzy.Data.Common.xBaseObjects.FilterObjects;

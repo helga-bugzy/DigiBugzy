@@ -145,12 +145,12 @@
             // 
             // cmbCategory
             // 
-            this.cmbCategory.Enabled = false;
             this.cmbCategory.FormattingEnabled = true;
             this.cmbCategory.Location = new System.Drawing.Point(516, 9);
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.Size = new System.Drawing.Size(294, 23);
             this.cmbCategory.TabIndex = 12;
+            this.cmbCategory.Visible = false;
             // 
             // lblCategory
             // 
@@ -160,6 +160,7 @@
             this.lblCategory.Size = new System.Drawing.Size(55, 15);
             this.lblCategory.TabIndex = 11;
             this.lblCategory.Text = "Category";
+            this.lblCategory.Visible = false;
             // 
             // btnFilter
             // 

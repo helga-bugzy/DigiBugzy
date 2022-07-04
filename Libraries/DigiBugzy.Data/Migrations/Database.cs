@@ -1,4 +1,5 @@
 ﻿
+global using Dapper;
 
 namespace DigiBugzy.Data.Migrations
 {

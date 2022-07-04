@@ -1,5 +1,6 @@
 global using DigiBugzy.Data.Common.xBaseObjects.FilterObjects;
 global using DigiBugzy.Core.Domain.Administration.DigiAdmins;
+global using System;
 
 namespace DigiBugzy.Desktop
 {
@@ -7,8 +8,12 @@ namespace DigiBugzy.Desktop
     {
         private int SelectedAdminId { get
             {
+#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CA1305 // Specify IFormatProvider
                 if (cmbAdministrations == null || cmbAdministrations.SelectedValue == null) return 0;
                 else return int.Parse(cmbAdministrations.SelectedValue.ToString());
+#pragma warning restore CA1305 // Specify IFormatProvider
+#pragma warning restore CS8604 // Possible null reference argument.
             } }
 
         public LoginForm()
@@ -20,7 +25,7 @@ namespace DigiBugzy.Desktop
 
         public void LoadAdministrations()
         {
-            using (var service = new DigiAdminService(Globals.GetConnectionString(Globals.ConnectionEnvironment)))
+            using (var service = new DigiAdminService(Globals.GetConnectionString()))
             {
                 if (service == null) return;
 
@@ -68,7 +73,7 @@ namespace DigiBugzy.Desktop
             }
             else
             {
-                using (var service = new DigiAdminService(Globals.GetConnectionString(Globals.ConnectionEnvironment)))
+                using (var service = new DigiAdminService(Globals.GetConnectionString()))
                 {
                     Globals.DigiAdministration = service.GetById(SelectedAdminId);
                 }

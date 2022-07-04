@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.splitMain = new System.Windows.Forms.SplitContainer();
-            this.pnlFilter = new System.Windows.Forms.Panel();
+            this.ucFilterStandard1 = new DigiBugzy.Desktop.MultiFunctional.ucFilterStandard();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.SuspendLayout();
@@ -44,18 +44,19 @@
             // 
             // splitMain.Panel1
             // 
-            this.splitMain.Panel1.Controls.Add(this.pnlFilter);
+            this.splitMain.Panel1.Controls.Add(this.ucFilterStandard1);
             this.splitMain.Size = new System.Drawing.Size(1369, 770);
             this.splitMain.SplitterDistance = 105;
             this.splitMain.TabIndex = 0;
             // 
-            // pnlFilter
+            // ucFilterStandard1
             // 
-            this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFilter.Location = new System.Drawing.Point(0, 0);
-            this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1369, 105);
-            this.pnlFilter.TabIndex = 0;
+            this.ucFilterStandard1.CanFilterCategories = false;
+            this.ucFilterStandard1.CanFilterClassifications = false;
+            this.ucFilterStandard1.Location = new System.Drawing.Point(3, 3);
+            this.ucFilterStandard1.Name = "ucFilterStandard1";
+            this.ucFilterStandard1.Size = new System.Drawing.Size(1383, 112);
+            this.ucFilterStandard1.TabIndex = 0;
             // 
             // ucCustomFieldsManager
             // 
@@ -74,6 +75,6 @@
         #endregion
 
         private SplitContainer splitMain;
-        private Panel pnlFilter;
+        private ucFilterStandard ucFilterStandard1;
     }
 }

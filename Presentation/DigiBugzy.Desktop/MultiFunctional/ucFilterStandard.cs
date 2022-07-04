@@ -6,30 +6,37 @@ namespace DigiBugzy.Desktop.MultiFunctional
 {
     public partial class ucFilterStandard : UserControl
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>")]
+
 
         #region Delegates & Events
 
         public delegate void OnFilterDelegate(StandardFilter filter);
-        public event OnFilterDelegate OnFilter;
+        public event OnFilterDelegate? OnFilter;
 
         #endregion
 
         #region Properties
-        #pragma warning disable CS8604 // Possible null reference argument.
-        
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "<Pending>")]
+#pragma warning disable CS8604 // Possible null reference argument.
         private int SelectedClassificationId =>
                     cmbClassification == null ? 0 :
                         cmbClassification.SelectedValue == null ? 0 :
                         int.Parse(cmbClassification.SelectedValue.ToString());
 
-        
+
+
         private int SelectedCategoryId =>
                 cmbCategory == null ? 0 :
                     cmbCategory.SelectedValue == null ? 0 :
                     int.Parse(cmbCategory.SelectedValue.ToString());
 
-       #pragma warning restore CS8604 // Possible null reference argument.
+#pragma warning restore CS8604 // Possible null reference argument.
+
+        public bool CanFilterCategories { get; set; }
+
+        public bool CanFilterClassifications { get; set; }
 
 
         #endregion
@@ -49,14 +56,18 @@ namespace DigiBugzy.Desktop.MultiFunctional
 
         private void LoadClassifications()
         {
-            using (var service = new ClassificationService(Globals.GetConnectionString()))
-            {                
-                cmbClassification.DataSource = service.Get(new StandardFilter() 
-                { 
-                    DigiAdminId = Globals.DigiAdministration.Id
-                });
-                cmbClassification.ValueMember = nameof(Classification.Id);
-                cmbClassification.DisplayMember = nameof(Classification.Name);
+            using (var service = Startup.GetService<ClassificationService>())
+            {               
+                if(service != null)
+                {
+                    cmbClassification.DataSource = service.Get(new StandardFilter()
+                    {
+                        DigiAdminId = Globals.DigiAdministration.Id
+                    });
+                    cmbClassification.ValueMember = nameof(Classification.Id);
+                    cmbClassification.DisplayMember = nameof(Classification.Name);
+                }
+                
             }
 
             Application.DoEvents();
@@ -65,11 +76,18 @@ namespace DigiBugzy.Desktop.MultiFunctional
 
         private void LoadCategories()
         {
-            if(SelectedClassificationId > 0)
-            {
-                cmbCategory.Enabled = true;
-                using (var service = new CategoryService(Globals.GetConnectionString()))
+            cmbCategory.Visible = false;
+            lblCategory.Visible = false;
+            Application.DoEvents();
+
+            if (!CanFilterCategories) return;
+            
+
+            if (SelectedClassificationId > 0)
+            {                
+                using (var service = Startup.GetService<CategoryService>())
                 {
+                    if (service == null) return;
                     cmbCategory.DataSource = service.Get(new StandardFilter()
                     {
                         DigiAdminId = Globals.DigiAdministration.Id,
@@ -77,12 +95,13 @@ namespace DigiBugzy.Desktop.MultiFunctional
                     });
                     cmbCategory.ValueMember = nameof(Category.Id);
                     cmbCategory.DisplayMember = nameof(Category.Name);
-                }
 
-            }
-            else
-            {
-                cmbCategory.Enabled = false;
+                    if(cmbCategory.Items.Count > 0)
+                    {
+                        cmbCategory.Visible = true;
+                        lblCategory.Visible = true;
+                    }
+                }
             }
 
             Application.DoEvents();
@@ -99,7 +118,7 @@ namespace DigiBugzy.Desktop.MultiFunctional
 
         private void btnFilter_Click(object sender, System.EventArgs e)
         {
-            OnFilter?.Invoke(CreateFilter());
+           OnFilter?.Invoke(CreateFilter());
         }
 
         #endregion

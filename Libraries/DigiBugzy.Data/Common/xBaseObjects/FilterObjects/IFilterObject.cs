@@ -21,9 +21,9 @@
         //Other often occurring relational fields
         public int? ParentId { get; set; }
 
-        public List<int> ClassificationId { get; set; }
+        public int? ClassificationId { get; set; }
 
-        public List<int> CategoryIds { get; set; }
+        public int? CategoryId { get; set; }
 
         public List<CustomFieldValue> CustomFields { get; set; }
 

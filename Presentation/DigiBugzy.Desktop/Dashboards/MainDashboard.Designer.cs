@@ -34,8 +34,15 @@
             this.pnlContent = new System.Windows.Forms.Panel();
             this.ContentTabControl = new System.Windows.Forms.TabControl();
             this.tabProjects = new System.Windows.Forms.TabPage();
+            this.tabProducts = new System.Windows.Forms.TabPage();
+            this.tabAdministration = new System.Windows.Forms.TabPage();
+            this.tabctrlAdministrations = new System.Windows.Forms.TabControl();
+            this.tabCategories = new System.Windows.Forms.TabPage();
+            this.tabCustomFields = new System.Windows.Forms.TabPage();
             this.pnlContent.SuspendLayout();
             this.ContentTabControl.SuspendLayout();
+            this.tabAdministration.SuspendLayout();
+            this.tabctrlAdministrations.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -74,6 +81,8 @@
             // ContentTabControl
             // 
             this.ContentTabControl.Controls.Add(this.tabProjects);
+            this.ContentTabControl.Controls.Add(this.tabProducts);
+            this.ContentTabControl.Controls.Add(this.tabAdministration);
             this.ContentTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContentTabControl.HotTrack = true;
             this.ContentTabControl.Location = new System.Drawing.Point(0, 0);
@@ -81,6 +90,7 @@
             this.ContentTabControl.SelectedIndex = 0;
             this.ContentTabControl.Size = new System.Drawing.Size(1245, 747);
             this.ContentTabControl.TabIndex = 0;
+            this.ContentTabControl.Tag = "Administration";
             // 
             // tabProjects
             // 
@@ -89,8 +99,65 @@
             this.tabProjects.Padding = new System.Windows.Forms.Padding(3);
             this.tabProjects.Size = new System.Drawing.Size(1237, 719);
             this.tabProjects.TabIndex = 0;
+            this.tabProjects.Tag = "Project";
             this.tabProjects.Text = "Projects";
             this.tabProjects.UseVisualStyleBackColor = true;
+            // 
+            // tabProducts
+            // 
+            this.tabProducts.Location = new System.Drawing.Point(4, 24);
+            this.tabProducts.Name = "tabProducts";
+            this.tabProducts.Padding = new System.Windows.Forms.Padding(3);
+            this.tabProducts.Size = new System.Drawing.Size(1237, 719);
+            this.tabProducts.TabIndex = 1;
+            this.tabProducts.Tag = "Product";
+            this.tabProducts.Text = "Products";
+            this.tabProducts.UseVisualStyleBackColor = true;
+            // 
+            // tabAdministration
+            // 
+            this.tabAdministration.Controls.Add(this.tabctrlAdministrations);
+            this.tabAdministration.Location = new System.Drawing.Point(4, 24);
+            this.tabAdministration.Name = "tabAdministration";
+            this.tabAdministration.Padding = new System.Windows.Forms.Padding(3);
+            this.tabAdministration.Size = new System.Drawing.Size(1237, 719);
+            this.tabAdministration.TabIndex = 2;
+            this.tabAdministration.Text = "Administration";
+            this.tabAdministration.UseVisualStyleBackColor = true;
+            // 
+            // tabctrlAdministrations
+            // 
+            this.tabctrlAdministrations.Controls.Add(this.tabCategories);
+            this.tabctrlAdministrations.Controls.Add(this.tabCustomFields);
+            this.tabctrlAdministrations.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabctrlAdministrations.HotTrack = true;
+            this.tabctrlAdministrations.Location = new System.Drawing.Point(3, 3);
+            this.tabctrlAdministrations.Name = "tabctrlAdministrations";
+            this.tabctrlAdministrations.SelectedIndex = 0;
+            this.tabctrlAdministrations.Size = new System.Drawing.Size(1231, 713);
+            this.tabctrlAdministrations.TabIndex = 0;
+            // 
+            // tabCategories
+            // 
+            this.tabCategories.Location = new System.Drawing.Point(4, 24);
+            this.tabCategories.Name = "tabCategories";
+            this.tabCategories.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCategories.Size = new System.Drawing.Size(1223, 685);
+            this.tabCategories.TabIndex = 0;
+            this.tabCategories.Tag = "Category";
+            this.tabCategories.Text = "Categories";
+            this.tabCategories.UseVisualStyleBackColor = true;
+            // 
+            // tabCustomFields
+            // 
+            this.tabCustomFields.Location = new System.Drawing.Point(4, 24);
+            this.tabCustomFields.Name = "tabCustomFields";
+            this.tabCustomFields.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCustomFields.Size = new System.Drawing.Size(1223, 685);
+            this.tabCustomFields.TabIndex = 1;
+            this.tabCustomFields.Tag = "CustomField";
+            this.tabCustomFields.Text = "CustomFields";
+            this.tabCustomFields.UseVisualStyleBackColor = true;
             // 
             // MainDashboard
             // 
@@ -108,6 +175,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlContent.ResumeLayout(false);
             this.ContentTabControl.ResumeLayout(false);
+            this.tabAdministration.ResumeLayout(false);
+            this.tabctrlAdministrations.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +189,10 @@
         private Panel pnlContent;
         private TabControl ContentTabControl;
         private TabPage tabProjects;
+        private TabPage tabProducts;
+        private TabPage tabAdministration;
+        private TabControl tabctrlAdministrations;
+        private TabPage tabCategories;
+        private TabPage tabCustomFields;
     }
 }
