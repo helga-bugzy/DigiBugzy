@@ -22,8 +22,6 @@ namespace DigiBugzy.Services.Administration.DigiAdmins
 
         #endregion
 
-
-
         #region Methods
 
         public void Create(DigiAdmin entity)
@@ -79,7 +77,7 @@ namespace DigiBugzy.Services.Administration.DigiAdmins
                 query = query.Where(x => x.IsDeleted == false);
 
             if (!filter.IncludeInActive)
-                query = query.Where(x => x.IsActive == false);
+                query = query.Where(x => x.IsActive == true);
 
 
             return query.ToList();           

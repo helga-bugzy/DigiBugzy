@@ -20,9 +20,9 @@ namespace DigiBugzy.Data.Common.xBaseObjects.FilterObjects
 
         public int? ParentId { get; set; }
 
-        public List<int> ClassificationId { get; set; } = new();
+        public int? ClassificationId { get; set; } 
 
-        public List<int> CategoryIds { get; set; } = new();
+        public int? CategoryId { get; set; } 
 
         public List<CustomFieldValue> CustomFields { get; set; } = new();
 

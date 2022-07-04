@@ -59,6 +59,7 @@
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnContinue
             // 
@@ -68,6 +69,7 @@
             this.btnContinue.TabIndex = 3;
             this.btnContinue.Text = "Continue";
             this.btnContinue.UseVisualStyleBackColor = true;
+            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
             // 
             // LoginForm
             // 
@@ -79,7 +81,7 @@
             this.Controls.Add(this.lblAdministration);
             this.Controls.Add(this.cmbAdministrations);
             this.Name = "LoginForm";
-            this.Text = "Form1";
+            this.Text = "DigiBugzy Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 

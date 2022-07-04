@@ -7,13 +7,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{E4B29716-3F3F-47C9-8A06-54237FE2516C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiBugzy.Core", "Libraries\DigiBugzy.Core\DigiBugzy.Core.csproj", "{DCA06E7A-D9EB-448C-92C8-8B5790769DCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiBugzy.Core", "Libraries\DigiBugzy.Core\DigiBugzy.Core.csproj", "{DCA06E7A-D9EB-448C-92C8-8B5790769DCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiBugzy.Data", "Libraries\DigiBugzy.Data\DigiBugzy.Data.csproj", "{2AE5A176-EFC2-43F0-B233-96EE1D86EBBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiBugzy.Data", "Libraries\DigiBugzy.Data\DigiBugzy.Data.csproj", "{2AE5A176-EFC2-43F0-B233-96EE1D86EBBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiBugzy.Services", "Libraries\DigiBugzy.Services\DigiBugzy.Services.csproj", "{3881A08B-6B9C-4E21-B7C3-CA4C980EA24F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiBugzy.Services", "Libraries\DigiBugzy.Services\DigiBugzy.Services.csproj", "{3881A08B-6B9C-4E21-B7C3-CA4C980EA24F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigiBugzy.Desktop", "Presentation\DigiBugzy.Desktop\DigiBugzy.Desktop.csproj", "{23370E2E-8ECB-4CFC-9760-E1858A359BF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigiBugzy.Desktop", "Presentation\DigiBugzy.Desktop\DigiBugzy.Desktop.csproj", "{23370E2E-8ECB-4CFC-9760-E1858A359BF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FDFBE3EC-01C7-497D-A7D7-EF5DC2898939}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disabled</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,6 +43,10 @@
     <ProjectReference Include="..\..\Libraries\DigiBugzy.Core\DigiBugzy.Core.csproj" />
     <ProjectReference Include="..\..\Libraries\DigiBugzy.Data\DigiBugzy.Data.csproj" />
     <ProjectReference Include="..\..\Libraries\DigiBugzy.Services\DigiBugzy.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Finance\" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ namespace DigiBugzy.Data.Migrations
     {
 
         public enum FieldTypes { 
-            AsInt64,
+            AsInt32,
             AsString,
             AsDateTime
         }
@@ -60,7 +60,7 @@ namespace DigiBugzy.Data.Migrations
             {
                 Migrator.Create.Table(TableName)
                 .InSchema(SchemaName)
-                .WithColumn(nameof(BaseEntity.Id)).AsInt64().PrimaryKey().Identity()
+                .WithColumn(nameof(BaseEntity.Id)).AsInt32().PrimaryKey().Identity()
                 .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime();
@@ -77,7 +77,7 @@ namespace DigiBugzy.Data.Migrations
         {
             Migrator.Create.Table(TableName)
                 .InSchema(SchemaName)
-                .WithColumn(nameof(BaseEntity.Id)).AsInt64().PrimaryKey().Identity()
+                .WithColumn(nameof(BaseEntity.Id)).AsInt32().PrimaryKey().Identity()
                 .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime();
@@ -101,14 +101,14 @@ namespace DigiBugzy.Data.Migrations
 
         #region Helper Methods
 
-        public void AddColumn(string fieldName,FieldTypes fieldType = FieldTypes.AsInt64)
+        public void AddColumn(string fieldName,FieldTypes fieldType = FieldTypes.AsInt32)
         {
                       
             switch (fieldType)
             {
-                case FieldTypes.AsInt64:
+                case FieldTypes.AsInt32:
                     Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                        .AddColumn(fieldName).AsInt64();
+                        .AddColumn(fieldName).AsInt32();
                     break;
                 case FieldTypes.AsString:
                     Migrator.Alter.Table(TableName).InSchema(SchemaName)

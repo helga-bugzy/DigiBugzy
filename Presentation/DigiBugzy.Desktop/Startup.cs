@@ -7,6 +7,7 @@ global using DigiBugzy.Services.Administration.Classifications;
 global using DigiBugzy.Services.Administration.Notes;
 global using DigiBugzy.Services.Administration.CustomFields;
 global using DigiBugzy.Services.Catalog.Products;
+global using DigiBugzy.Desktop.Dashboards;
 
 namespace DigiBugzy.Desktop
 {
@@ -91,6 +92,7 @@ namespace DigiBugzy.Desktop
             if (services != null)
             {
                 services.AddScoped<LoginForm>();
+                services.AddScoped<MainDashboard>();
                
 
             }
