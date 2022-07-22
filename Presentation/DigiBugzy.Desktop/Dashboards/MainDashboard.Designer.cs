@@ -28,171 +28,181 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlContent = new System.Windows.Forms.Panel();
-            this.ContentTabControl = new System.Windows.Forms.TabControl();
-            this.tabProjects = new System.Windows.Forms.TabPage();
-            this.tabProducts = new System.Windows.Forms.TabPage();
-            this.tabAdministration = new System.Windows.Forms.TabPage();
-            this.tabctrlAdministrations = new System.Windows.Forms.TabControl();
-            this.tabCategories = new System.Windows.Forms.TabPage();
-            this.tabCustomFields = new System.Windows.Forms.TabPage();
-            this.pnlContent.SuspendLayout();
-            this.ContentTabControl.SuspendLayout();
-            this.tabAdministration.SuspendLayout();
-            this.tabctrlAdministrations.SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.fluentDesignFormContainer1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer();
+            this.accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
+            this.mnuAdministration = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.fluentDesignFormControl1 = new DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl();
+            this.fluentFormDefaultManager1 = new DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager(this.components);
+            this.mnuCategories = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnuCustomFields = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnuProducts = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement1 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement2 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnuProjects = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnuFinance = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement3 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.accordionControlElement4 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnuBudgets = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.mnuActuals = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).BeginInit();
             this.SuspendLayout();
             // 
-            // statusStrip1
+            // fluentDesignFormContainer1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 771);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1445, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
+            this.fluentDesignFormContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fluentDesignFormContainer1.Location = new System.Drawing.Point(260, 31);
+            this.fluentDesignFormContainer1.Name = "fluentDesignFormContainer1";
+            this.fluentDesignFormContainer1.Size = new System.Drawing.Size(431, 442);
+            this.fluentDesignFormContainer1.TabIndex = 0;
             // 
-            // menuStrip1
+            // accordionControl1
             // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1445, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
+            this.accordionControl1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.mnuAdministration,
+            this.mnuProducts,
+            this.mnuProjects,
+            this.mnuFinance});
+            this.accordionControl1.Location = new System.Drawing.Point(0, 31);
+            this.accordionControl1.Name = "accordionControl1";
+            this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
+            this.accordionControl1.Size = new System.Drawing.Size(260, 442);
+            this.accordionControl1.TabIndex = 1;
+            this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
-            // panel1
+            // mnuAdministration
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 747);
-            this.panel1.TabIndex = 4;
+            this.mnuAdministration.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.mnuCategories,
+            this.mnuCustomFields});
+            this.mnuAdministration.Expanded = true;
+            this.mnuAdministration.Name = "mnuAdministration";
+            this.mnuAdministration.Text = "Administration";
             // 
-            // pnlContent
+            // fluentDesignFormControl1
             // 
-            this.pnlContent.Controls.Add(this.ContentTabControl);
-            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(200, 24);
-            this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1245, 747);
-            this.pnlContent.TabIndex = 5;
+            this.fluentDesignFormControl1.FluentDesignForm = this;
+            this.fluentDesignFormControl1.Location = new System.Drawing.Point(0, 0);
+            this.fluentDesignFormControl1.Manager = this.fluentFormDefaultManager1;
+            this.fluentDesignFormControl1.Name = "fluentDesignFormControl1";
+            this.fluentDesignFormControl1.Size = new System.Drawing.Size(691, 31);
+            this.fluentDesignFormControl1.TabIndex = 2;
+            this.fluentDesignFormControl1.TabStop = false;
             // 
-            // ContentTabControl
+            // fluentFormDefaultManager1
             // 
-            this.ContentTabControl.Controls.Add(this.tabProjects);
-            this.ContentTabControl.Controls.Add(this.tabProducts);
-            this.ContentTabControl.Controls.Add(this.tabAdministration);
-            this.ContentTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ContentTabControl.HotTrack = true;
-            this.ContentTabControl.Location = new System.Drawing.Point(0, 0);
-            this.ContentTabControl.Name = "ContentTabControl";
-            this.ContentTabControl.SelectedIndex = 0;
-            this.ContentTabControl.Size = new System.Drawing.Size(1245, 747);
-            this.ContentTabControl.TabIndex = 0;
-            this.ContentTabControl.Tag = "Administration";
+            this.fluentFormDefaultManager1.Form = this;
             // 
-            // tabProjects
+            // mnuCategories
             // 
-            this.tabProjects.Location = new System.Drawing.Point(4, 24);
-            this.tabProjects.Name = "tabProjects";
-            this.tabProjects.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProjects.Size = new System.Drawing.Size(1237, 719);
-            this.tabProjects.TabIndex = 0;
-            this.tabProjects.Tag = "Project";
-            this.tabProjects.Text = "Projects";
-            this.tabProjects.UseVisualStyleBackColor = true;
+            this.mnuCategories.Name = "mnuCategories";
+            this.mnuCategories.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnuCategories.Tag = "Categories";
+            this.mnuCategories.Text = "Categories";
+            this.mnuCategories.Click += new System.EventHandler(this.mnuCategories_Click);
             // 
-            // tabProducts
+            // mnuCustomFields
             // 
-            this.tabProducts.Location = new System.Drawing.Point(4, 24);
-            this.tabProducts.Name = "tabProducts";
-            this.tabProducts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabProducts.Size = new System.Drawing.Size(1237, 719);
-            this.tabProducts.TabIndex = 1;
-            this.tabProducts.Tag = "Product";
-            this.tabProducts.Text = "Products";
-            this.tabProducts.UseVisualStyleBackColor = true;
+            this.mnuCustomFields.Name = "mnuCustomFields";
+            this.mnuCustomFields.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.mnuCustomFields.Tag = "CustomFields";
+            this.mnuCustomFields.Text = "Custom Fields";
             // 
-            // tabAdministration
+            // mnuProducts
             // 
-            this.tabAdministration.Controls.Add(this.tabctrlAdministrations);
-            this.tabAdministration.Location = new System.Drawing.Point(4, 24);
-            this.tabAdministration.Name = "tabAdministration";
-            this.tabAdministration.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAdministration.Size = new System.Drawing.Size(1237, 719);
-            this.tabAdministration.TabIndex = 2;
-            this.tabAdministration.Text = "Administration";
-            this.tabAdministration.UseVisualStyleBackColor = true;
+            this.mnuProducts.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.accordionControlElement3});
+            this.mnuProducts.Name = "mnuProducts";
+            this.mnuProducts.Text = "Products";
             // 
-            // tabctrlAdministrations
+            // accordionControlElement1
             // 
-            this.tabctrlAdministrations.Controls.Add(this.tabCategories);
-            this.tabctrlAdministrations.Controls.Add(this.tabCustomFields);
-            this.tabctrlAdministrations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabctrlAdministrations.HotTrack = true;
-            this.tabctrlAdministrations.Location = new System.Drawing.Point(3, 3);
-            this.tabctrlAdministrations.Name = "tabctrlAdministrations";
-            this.tabctrlAdministrations.SelectedIndex = 0;
-            this.tabctrlAdministrations.Size = new System.Drawing.Size(1231, 713);
-            this.tabctrlAdministrations.TabIndex = 0;
+            this.accordionControlElement1.Name = "accordionControlElement1";
+            this.accordionControlElement1.Text = "Products";
             // 
-            // tabCategories
+            // accordionControlElement2
             // 
-            this.tabCategories.Location = new System.Drawing.Point(4, 24);
-            this.tabCategories.Name = "tabCategories";
-            this.tabCategories.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCategories.Size = new System.Drawing.Size(1223, 685);
-            this.tabCategories.TabIndex = 0;
-            this.tabCategories.Tag = "Category";
-            this.tabCategories.Text = "Categories";
-            this.tabCategories.UseVisualStyleBackColor = true;
+            this.accordionControlElement2.Name = "accordionControlElement2";
+            this.accordionControlElement2.Text = "Products";
             // 
-            // tabCustomFields
+            // mnuProjects
             // 
-            this.tabCustomFields.Location = new System.Drawing.Point(4, 24);
-            this.tabCustomFields.Name = "tabCustomFields";
-            this.tabCustomFields.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCustomFields.Size = new System.Drawing.Size(1223, 685);
-            this.tabCustomFields.TabIndex = 1;
-            this.tabCustomFields.Tag = "CustomField";
-            this.tabCustomFields.Text = "CustomFields";
-            this.tabCustomFields.UseVisualStyleBackColor = true;
+            this.mnuProjects.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.accordionControlElement4});
+            this.mnuProjects.Expanded = true;
+            this.mnuProjects.Name = "mnuProjects";
+            this.mnuProjects.Text = "Projects";
+            // 
+            // mnuFinance
+            // 
+            this.mnuFinance.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
+            this.mnuBudgets,
+            this.mnuActuals});
+            this.mnuFinance.Expanded = true;
+            this.mnuFinance.Name = "mnuFinance";
+            this.mnuFinance.Text = "Finance";
+            // 
+            // accordionControlElement3
+            // 
+            this.accordionControlElement3.Name = "accordionControlElement3";
+            this.accordionControlElement3.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.accordionControlElement3.Text = "Manage Products";
+            // 
+            // accordionControlElement4
+            // 
+            this.accordionControlElement4.Name = "accordionControlElement4";
+            this.accordionControlElement4.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.accordionControlElement4.Text = "Manage Projects";
+            // 
+            // mnuBudgets
+            // 
+            this.mnuBudgets.Name = "mnuBudgets";
+            this.mnuBudgets.Text = "Budgets";
+            // 
+            // mnuActuals
+            // 
+            this.mnuActuals.Name = "mnuActuals";
+            this.mnuActuals.Text = "Actuals";
             // 
             // MainDashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1445, 793);
-            this.Controls.Add(this.pnlContent);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
-            this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
+            this.ClientSize = new System.Drawing.Size(691, 473);
+            this.ControlContainer = this.fluentDesignFormContainer1;
+            this.Controls.Add(this.fluentDesignFormContainer1);
+            this.Controls.Add(this.accordionControl1);
+            this.Controls.Add(this.fluentDesignFormControl1);
+            this.FluentDesignFormControl = this.fluentDesignFormControl1;
             this.Name = "MainDashboard";
+            this.NavigationControl = this.accordionControl1;
             this.Text = "MainDashboard";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.pnlContent.ResumeLayout(false);
-            this.ContentTabControl.ResumeLayout(false);
-            this.tabAdministration.ResumeLayout(false);
-            this.tabctrlAdministrations.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private StatusStrip statusStrip1;
-        private MenuStrip menuStrip1;
-        private Panel panel1;
-        private Panel pnlContent;
-        private TabControl ContentTabControl;
-        private TabPage tabProjects;
-        private TabPage tabProducts;
-        private TabPage tabAdministration;
-        private TabControl tabctrlAdministrations;
-        private TabPage tabCategories;
-        private TabPage tabCustomFields;
+        private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormContainer fluentDesignFormContainer1;
+        private DevExpress.XtraBars.Navigation.AccordionControl accordionControl1;
+        private DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl fluentDesignFormControl1;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuAdministration;
+        private DevExpress.XtraBars.FluentDesignSystem.FluentFormDefaultManager fluentFormDefaultManager1;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuCategories;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuCustomFields;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuProducts;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement1;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuProjects;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuFinance;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement2;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement3;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement4;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuBudgets;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement mnuActuals;
     }
 }

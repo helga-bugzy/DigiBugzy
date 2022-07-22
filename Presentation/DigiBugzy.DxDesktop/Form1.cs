@@ -1,18 +1,18 @@
-﻿using System;
+﻿using DevExpress.XtraBars;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DigiBugzy.Desktop.Products
+namespace DigiBugzy.DxDesktop
 {
-    public partial class ucProductsManager : UserControl
+    public partial class Dashboard : DevExpress.XtraBars.FluentDesignSystem.FluentDesignForm
     {
-        public ucProductsManager()
+        public Dashboard()
         {
             InitializeComponent();
         }

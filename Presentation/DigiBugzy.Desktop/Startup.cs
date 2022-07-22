@@ -9,9 +9,8 @@ global using DigiBugzy.Services.Administration.CustomFields;
 global using DigiBugzy.Services.Catalog.Products;
 global using DigiBugzy.Desktop.Dashboards;
 global using DigiBugzy.Desktop.MultiFunctional;
-global using DigiBugzy.Desktop.Administration;
-global using DigiBugzy.Desktop.Products;
-global using DigiBugzy.Desktop.Projects;
+
+using DigiBugzy.Desktop.Administration.Categories;
 
 namespace DigiBugzy.Desktop
 {
@@ -91,15 +90,10 @@ namespace DigiBugzy.Desktop
             {
                 services.AddScoped<LoginForm>();
                 services.AddScoped<MainDashboard>();
+                services.AddScoped<CategoriesManager>();
 
                 //Administration
                 services.AddScoped<ucFilterStandard>();
-                services.AddScoped<ucCategoriesManager>();
-                services.AddScoped<ucCustomFieldsManager>();
-
-                //Products
-                services.AddScoped<ucProductsManager>();
-                services.AddScoped<ucProjectsManager>();
 
             }
         }
@@ -146,25 +140,7 @@ namespace DigiBugzy.Desktop
         }
         #endregion
 
-        #region Installation Validations
-
-        /// <summary>
-        /// Validates if any administrations exists
-        /// If false, the installation wizard must run
-        /// </summary>
-        /// <returns></returns>
-        public static bool HasAdministrations()
-        {
-
-            //using (var service = GetService<IAdministrationService>())
-            //{
-            //    return service != null && service.HasItems();
-            //}
-
-            return false;
-        }
-
-        #endregion
+       
 
         #region Services
 
