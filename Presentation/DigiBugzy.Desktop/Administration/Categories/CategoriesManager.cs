@@ -18,7 +18,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         #region Ctor
 
-        public CategoriesManager(int classificationId )
+        public CategoriesManager(int classificationId =0)
         {
             _classificationId = classificationId;
             InitializeComponent();
@@ -55,6 +55,10 @@ namespace DigiBugzy.Desktop.Administration.Categories
                     LoadCategories();
                     break;
                 }
+            }
+            else
+            {
+                cmbClassifications.SelectedIndex = -1;
             }
 
             Application.DoEvents();
