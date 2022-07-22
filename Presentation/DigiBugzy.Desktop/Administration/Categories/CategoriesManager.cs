@@ -134,8 +134,17 @@ namespace DigiBugzy.Desktop.Administration.Categories
             }
         }
 
+
         #endregion
 
+        #region Control Event Procedures
 
+        private void cmbClassifications_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadCategoryNodes();
+            Application.DoEvents();
+        }
+
+        #endregion
     }
 }
