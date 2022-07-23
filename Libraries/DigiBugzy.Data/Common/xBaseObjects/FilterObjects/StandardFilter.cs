@@ -20,6 +20,8 @@ namespace DigiBugzy.Data.Common.xBaseObjects.FilterObjects
 
         public int? ParentId { get; set; }
 
+        public bool OnlyParents { get; set; }
+
         public int? ClassificationId { get; set; } 
 
         public int? CategoryId { get; set; } 
@@ -29,11 +31,13 @@ namespace DigiBugzy.Data.Common.xBaseObjects.FilterObjects
         public StandardFilter(
             bool includeInActive = false,
             bool includeDeleted = false,
-            bool likeStringSearch = false)
+            bool likeStringSearch = false,
+            bool onlyParents = false)
         {
             IncludeInActive = includeInActive;
             IncludeDeleted = includeDeleted;
             LikeSearch = likeStringSearch;
+            OnlyParents = onlyParents;
         }
     }
 

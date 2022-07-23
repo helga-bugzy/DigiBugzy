@@ -98,7 +98,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
         {
             //Get all parents
             var parents = (from c in Categories
-                    where c.ParentId == 0
+                    where c.ParentId == null
                     select new Category
                     {
                         Id = c.Id, ParentId = c.ParentId, Name = c.Name, IsActive = c.IsActive, IsDeleted = c.IsDeleted
@@ -187,7 +187,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             cmbParents.Visible = chkParent.Checked = false;
 
             using var service = new CategoryService(Globals.GetConnectionString());
-            var collection = service.Get(new StandardFilter { ParentId = 0 });
+            var collection = service.Get(new StandardFilter { OnlyParents = true});
             var source = collection.Where(x => x.Id != SelectedCategory.Id).ToList();
 
             if (SelectedCategory.Id <= 0)
@@ -213,14 +213,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void cmbClassifications_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbClassifications.SelectedIndex < 0)
-            {
-                _classificationId = 0;
-            }
-            else
-            {
-                _classificationId = (cmbClassifications.SelectedItem as Classification)!.Id;
-            }
+            _classificationId = cmbClassifications.SelectedIndex < 0 ? 0 : (cmbClassifications.SelectedItem as Classification)!.Id;
 
             //Reload data
             LoadCategoryNodes();
@@ -265,7 +258,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 }
 
                 SelectedCategory.ClassificationId = _classificationId;
-                SelectedCategory.ParentId = chkParent.Checked ? (cmbClassifications.SelectedItem as Category)?.Id : 0;
+                SelectedCategory.ParentId = chkParent.Checked ? (cmbClassifications.SelectedItem as Category)?.Id : null;
                 SelectedCategory.Name = txtName.Text.Trim();
                 SelectedCategory.Description = txtDescription.Text.Trim();
                 SelectedCategory.IsActive = chkActive.Checked;

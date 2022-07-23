@@ -72,7 +72,11 @@ namespace DigiBugzy.Services.Administration.Categories
                 query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
             }
 
-            if (filter.ParentId.HasValue)
+            if (filter.OnlyParents)
+            {
+                query = query.Where(x => x.ParentId == null);
+            }
+            else if (filter.ParentId.HasValue)
             {
                 query = query.Where(x => x.ParentId == filter.ParentId.Value);
             }
@@ -84,10 +88,7 @@ namespace DigiBugzy.Services.Administration.Categories
 
             if (!string.IsNullOrEmpty(filter.Name))
             {
-                if (filter.LikeSearch)
-                    query = query.Where(x => x.Name.Contains(filter.Name));
-                else
-                    query = query.Where(x => x.Name.Equals(filter.Name));
+                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name)) : query.Where(x => x.Name.Equals(filter.Name));
             }
 
             if (!filter.IncludeDeleted)
