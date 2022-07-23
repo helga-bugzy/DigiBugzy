@@ -101,22 +101,49 @@ namespace DigiBugzy.Data.Migrations
 
         #region Helper Methods
 
-        public void AddColumn(string fieldName,FieldTypes fieldType = FieldTypes.AsInt32)
+        public void AddColumn(string fieldName,FieldTypes fieldType = FieldTypes.AsInt32, bool isNullable = false)
         {
                       
             switch (fieldType)
             {
                 case FieldTypes.AsInt32:
-                    Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                        .AddColumn(fieldName).AsInt32();
+                    if(isNullable)
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                        .AddColumn(fieldName).AsInt32().Nullable();
+
+                    }
+                    else
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsInt32().NotNullable();
+                    }
                     break;
                 case FieldTypes.AsString:
-                    Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                        .AddColumn(fieldName).AsString();
+
+                    if (isNullable)
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsString().Nullable();
+                    }
+                    else
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsString().NotNullable();
+                    }
                     break;
                 case FieldTypes.AsDateTime:
-                    Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                        .AddColumn(fieldName).AsDateTime();
+                    if (isNullable)
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsDateTime().Nullable();
+                    }
+                    else
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsDateTime().NotNullable();
+                    }
+                    
                     break;
             }
         }

@@ -54,69 +54,67 @@ namespace DigiBugzy.Data.Migrations
             
             _currentSchemaName = DatabaseConstants.Schemas.Admin;
 
-            using(var creatory = new BaseEntityCreator(_currentSchemaName, this))
-            {
-                _currentTableName = nameof(DigiAdmin);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseDigiAdminEntity();
-                CreateData_DigiAdmin();
+            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
 
-                //Classification
-                _currentTableName = nameof(Classification);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseAdministrationEntity();
-                CreateData_Classifications();
+            _currentTableName = nameof(DigiAdmin);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseDigiAdminEntity();
+            CreateData_DigiAdmin();
 
-                //CustomFieldType
-                _currentTableName = nameof(CustomFieldType);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseAdministrationEntity();
-                CreateData_CustomFieldTypes();
+            //Classification
+            _currentTableName = nameof(Classification);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            CreateData_Classifications();
 
-                //CustomField
-                _currentTableName = nameof(CustomField);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseAdministrationEntity();
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
-                creatory.AddColumn(nameof(CustomField.CustomFieldTypeId));                
-                creatory.AddForeignKey(_currentTableName, nameof(CustomFieldType), nameof(CustomField.CustomFieldTypeId));
+            //CustomFieldType
+            _currentTableName = nameof(CustomFieldType);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            CreateData_CustomFieldTypes();
+
+            //CustomField
+            _currentTableName = nameof(CustomField);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
+            creatory.AddColumn(nameof(CustomField.CustomFieldTypeId));                
+            creatory.AddForeignKey(_currentTableName, nameof(CustomFieldType), nameof(CustomField.CustomFieldTypeId));
                 
-                //CustomFieldValue
-                _currentTableName = nameof(CustomFieldValue);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseEntity();
-                creatory.AddColumn(nameof(CustomFieldValue.CustomFieldId));
-                creatory.AddColumn(nameof(CustomFieldValue.Value), BaseEntityCreator.FieldTypes.AsString);
-                creatory.AddForeignKey(_currentTableName, nameof(CustomField), nameof(CustomFieldValue.CustomFieldId));
+            //CustomFieldValue
+            _currentTableName = nameof(CustomFieldValue);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddColumn(nameof(CustomFieldValue.CustomFieldId));
+            creatory.AddColumn(nameof(CustomFieldValue.Value), BaseEntityCreator.FieldTypes.AsString);
+            creatory.AddForeignKey(_currentTableName, nameof(CustomField), nameof(CustomFieldValue.CustomFieldId));
 
 
-                //Category 
-                _currentTableName = nameof(Category);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseAdministrationEntity();
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
-                creatory.AddColumn(nameof(Category.ParentId));                
-                creatory.AddForeignKey( 
-                    fromTable: _currentTableName, 
-                    toTable: _currentTableName, 
-                    fromFieldName: nameof(Category.ParentId),  
-                    fromSchemaName: _currentSchemaName,
-                    toSchemaName: _currentSchemaName);
+            //Category 
+            _currentTableName = nameof(Category);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
+            creatory.AddColumn(nameof(Category.ParentId), isNullable: true);                
+            creatory.AddForeignKey( 
+                fromTable: _currentTableName, 
+                toTable: _currentTableName, 
+                fromFieldName: nameof(Category.ParentId),  
+                fromSchemaName: _currentSchemaName,
+                toSchemaName: _currentSchemaName);
                                 
-                //CategoryCustomField
-                _currentTableName = nameof(CategoryCustomField);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseEntity();
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Category);
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField);
+            //CategoryCustomField
+            _currentTableName = nameof(CategoryCustomField);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Category);
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField);
 
-                //Notes
-                _currentTableName = nameof(Note);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseAdministrationEntity();
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
-
-            }
+            //Notes
+            _currentTableName = nameof(Note);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
         }
 
         /// <summary>
