@@ -86,9 +86,9 @@ namespace DigiBugzy.Desktop.Administration.Categories
             if (_classificationId <= 0) return;
 
             using var service = new CategoryService(Globals.GetConnectionString());
-            Categories = service.Get(new StandardFilter());
-
-            if(Categories is not { Count: > 0 }) return;
+            Categories = service.Get(new StandardFilter{ClassificationId = _classificationId, DigiAdminId =1});
+            
+            if (Categories.Count <= 0) return;
 
             LoadCategoryNodes();
 
@@ -101,7 +101,11 @@ namespace DigiBugzy.Desktop.Administration.Categories
                     where c.ParentId == null
                     select new Category
                     {
-                        Id = c.Id, ParentId = c.ParentId, Name = c.Name, IsActive = c.IsActive, IsDeleted = c.IsDeleted
+                        Id = c.Id, 
+                        ParentId = c.ParentId, 
+                        Name = c.Name, 
+                        IsActive = c.IsActive, 
+                        IsDeleted = c.IsDeleted
                     })
                 .ToList();
 
