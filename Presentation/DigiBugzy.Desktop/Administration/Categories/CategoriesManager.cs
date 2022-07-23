@@ -146,13 +146,16 @@ namespace DigiBugzy.Desktop.Administration.Categories
             {
                 txtDescription.Text = txtName.Text = string.Empty;
                 chkActive.Checked = true;
-                
+                lblHeading.Text = @"New Category";
+
             }
             else
             {
                 txtName.Text = SelectedCategory.Name;
                 txtDescription.Text = SelectedCategory.Description;
                 chkActive.Checked = true;
+                lblHeading.Text = $@"Edit {SelectedCategory.Name} ({SelectedCategory.Id})";
+
             }
 
             LoadCategoryEditorParents();
@@ -209,6 +212,61 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            try
+            {
+                //Validations
+                if (chkParent.Checked && cmbParents.SelectedIndex < 0)
+                {
+                    MessageBox.Show(@"Please select a valid parent or indicate that no parent is to be used.",
+                        @"Validation Error", MessageBoxButtons.OK);
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtName.Text.Trim()))
+                {
+                    MessageBox.Show(@"Please enter a name for the category", @"Validation Error", MessageBoxButtons.OK);
+                    return;
+                }
+
+
+                //Set values
+                if (string.IsNullOrEmpty(txtDescription.Text.Trim()))
+                {
+                    txtDescription.Text = txtName.Text;
+                }
+
+                SelectedCategory.ClassificationId = _classificationId;
+                SelectedCategory.ParentId = chkParent.Checked ? (cmbClassifications.SelectedItem as Category)?.Id : 0;
+                SelectedCategory.Name = txtName.Text.Trim();
+                SelectedCategory.Description = txtDescription.Text.Trim();
+                SelectedCategory.IsActive = chkActive.Checked;
+                SelectedCategory.IsDeleted = false;
+
+                //Save
+                using var service = new CategoryService(Globals.GetConnectionString());
+                if (SelectedCategory.Id <= 0)
+                    service.Create(SelectedCategory);
+                else
+                    service.Update(SelectedCategory);
+
+                //Reload & reset values
+                LoadCategories();
+                SelectedCategory = new Category();
+                LoadCategoryEditor();
+
+                //Message
+                MessageBox.Show(@"Database has been updated and screen reloaded.", @"Save success",
+                    MessageBoxButtons.OK);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(@$"Error saving category information: {exception.Message}");
+            }
+            finally
+            {
+                Application.DoEvents();
+            }
+
 
         }
 

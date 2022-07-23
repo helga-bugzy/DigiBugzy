@@ -35,21 +35,23 @@ namespace DigiBugzy.Services.Administration.Categories
 
         public void Delete(int id, bool hardDelete = false)
         {
-            if (hardDelete)
-            {
+            
                 var entity = GetById(id);
-                if (entity != null || entity.Id > 0)
+                if (entity == null) return;
+
+                if (hardDelete)
                 {
                     dbContext.Categories.Remove(entity);
                     dbContext.SaveChanges();
                 }
                 else
                 {
+                    
                     entity.IsDeleted = true;
                     entity.IsActive = false;
                     Update(entity);
                 }
-            }
+           
         }
 
         public List<Category> Get(StandardFilter filter)
@@ -65,6 +67,11 @@ namespace DigiBugzy.Services.Administration.Categories
             if (filter.DigiAdminId.HasValue)
             {
                 query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
+            }
+
+            if (filter.ParentId.HasValue)
+            {
+                query = query.Where(x => x.ParentId == filter.ParentId.Value);
             }
 
             if (filter.ClassificationId.HasValue)
