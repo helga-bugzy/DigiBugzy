@@ -180,7 +180,7 @@
             this.Name = "MainDashboard";
             this.NavigationControl = this.accordionControl1;
             this.Text = "MainDashboard";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentFormDefaultManager1)).EndInit();

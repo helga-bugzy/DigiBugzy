@@ -9,9 +9,13 @@ namespace DigiBugzy.Desktop.Administration.Categories
     {
         #region Properties
 
-        private readonly int _classificationId;
+        private int _classificationId;
 
         private List<Category> Categories { get; set; } = new();
+
+        private Category SelectedCategory { get; set; } = new();
+
+        
 
 
         #endregion
@@ -134,17 +138,85 @@ namespace DigiBugzy.Desktop.Administration.Categories
             }
         }
 
+        private void LoadCategoryEditor()
+        {
+            
+
+            if(SelectedCategory.Id <= 0)
+            {
+                txtDescription.Text = txtName.Text = string.Empty;
+                chkActive.Checked = true;
+                
+            }
+            else
+            {
+                txtName.Text = SelectedCategory.Name;
+                txtDescription.Text = SelectedCategory.Description;
+                chkActive.Checked = true;
+            }
+
+            LoadCategoryEditorParents();
+
+            Application.DoEvents();
+        }
+
+        private void LoadCategoryEditorParents()
+        {
+            cmbParents.Visible = chkParent.Checked = false;
+
+            using var service = new CategoryService(Globals.GetConnectionString());
+            var collection = service.Get(new StandardFilter { ParentId = 0 });
+            var source = collection.Where(x => x.Id != SelectedCategory.Id).ToList();
+
+            if (SelectedCategory.Id <= 0)
+            {
+                cmbParents.SelectedItem = -1;
+            }
+            else
+            {
+                if (SelectedCategory.ParentId > 0)
+                {
+                    cmbParents.Visible = chkParent.Checked = true;
+                }
+            }
+
+        }
+
 
         #endregion
 
         #region Control Event Procedures
 
+        #region Filter
+
         private void cmbClassifications_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadCategoryNodes();
+            SelectedCategory = new Category();
+            LoadCategoryEditor();
             Application.DoEvents();
         }
 
         #endregion
+
+        #region Editor
+
+        private void chkParent_CheckedChanged(object sender, EventArgs e)
+        {
+            cmbParents.Visible = chkParent.Checked;
+            Application.DoEvents();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
+
+        #endregion
+
+
     }
 }

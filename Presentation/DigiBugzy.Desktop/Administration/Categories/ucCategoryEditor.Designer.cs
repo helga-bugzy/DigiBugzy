@@ -41,8 +41,8 @@
             this.tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
             this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
-            this.cmbParent = new DevExpress.XtraEditors.ComboBoxEdit();
             this.chkParent = new DevExpress.XtraEditors.CheckEdit();
+            this.cmbParent = new DevExpress.XtraEditors.ComboBoxEdit();
             this.lblActive = new DevExpress.XtraEditors.LabelControl();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
             this.lblName = new DevExpress.XtraEditors.LabelControl();
@@ -70,8 +70,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).BeginInit();
             this.tablePanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbParent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkParent.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbParent.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbClassification.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlHeader)).BeginInit();
             this.pnlHeader.SuspendLayout();
@@ -233,6 +233,16 @@
             this.tablePanel2.Size = new System.Drawing.Size(761, 20);
             this.tablePanel2.TabIndex = 11;
             // 
+            // chkParent
+            // 
+            this.tablePanel2.SetColumn(this.chkParent, 0);
+            this.chkParent.Location = new System.Drawing.Point(3, 3);
+            this.chkParent.Name = "chkParent";
+            this.chkParent.Properties.Caption = "Has Parent";
+            this.tablePanel2.SetRow(this.chkParent, 0);
+            this.chkParent.Size = new System.Drawing.Size(83, 20);
+            this.chkParent.TabIndex = 1;
+            // 
             // cmbParent
             // 
             this.tablePanel2.SetColumn(this.cmbParent, 1);
@@ -244,16 +254,6 @@
             this.cmbParent.Size = new System.Drawing.Size(666, 20);
             this.cmbParent.TabIndex = 2;
             this.cmbParent.Visible = false;
-            // 
-            // chkParent
-            // 
-            this.tablePanel2.SetColumn(this.chkParent, 0);
-            this.chkParent.Location = new System.Drawing.Point(3, 3);
-            this.chkParent.Name = "chkParent";
-            this.chkParent.Properties.Caption = "Has Parent";
-            this.tablePanel2.SetRow(this.chkParent, 0);
-            this.chkParent.Size = new System.Drawing.Size(83, 20);
-            this.chkParent.TabIndex = 1;
             // 
             // lblActive
             // 
@@ -363,8 +363,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
             this.tablePanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cmbParent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkParent.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbParent.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbClassification.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlHeader)).EndInit();
             this.pnlHeader.ResumeLayout(false);
