@@ -28,6 +28,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
             InitializeComponent();
 
             LoadClassifications();
+            LoadCategories();
+            LoadCategoryEditor();
         }
 
         #endregion
@@ -70,6 +72,16 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void LoadCategories()
         {
+            if (_classificationId <= 0)
+            {
+                treeCategories.ClearNodes();
+                treeCategories.Enabled = false;
+                Application.DoEvents();
+                return;
+            }
+
+            treeCategories.Enabled = true;
+
             treeCategories.ClearNodes();
             if (_classificationId <= 0) return;
 
@@ -140,7 +152,14 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void LoadCategoryEditor()
         {
-            
+            if (_classificationId <= 0)
+            {
+                pnlEditor.Visible = false;
+                Application.DoEvents();
+                return;
+            }
+
+            pnlEditor.Visible = true;
 
             if(SelectedCategory.Id <= 0)
             {
@@ -194,6 +213,16 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void cmbClassifications_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbClassifications.SelectedIndex < 0)
+            {
+                _classificationId = 0;
+            }
+            else
+            {
+                _classificationId = (cmbClassifications.SelectedItem as Classification)!.Id;
+            }
+
+            //Reload data
             LoadCategoryNodes();
             SelectedCategory = new Category();
             LoadCategoryEditor();

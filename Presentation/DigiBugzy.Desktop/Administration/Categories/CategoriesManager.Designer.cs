@@ -40,7 +40,7 @@
             this.pnlEditor = new DevExpress.XtraEditors.PanelControl();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.pnlControls = new DevExpress.XtraEditors.PanelControl();
-            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.pnlEditorContent = new DevExpress.XtraEditors.PanelControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
@@ -92,8 +92,8 @@
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlControls)).BeginInit();
             this.pnlControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
-            this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlEditorContent)).BeginInit();
+            this.pnlEditorContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
@@ -246,21 +246,21 @@
             // 
             // pnlControls
             // 
-            this.pnlControls.Controls.Add(this.panelControl4);
+            this.pnlControls.Controls.Add(this.pnlEditorContent);
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControls.Location = new System.Drawing.Point(2, 2);
             this.pnlControls.Name = "pnlControls";
             this.pnlControls.Size = new System.Drawing.Size(612, 737);
             this.pnlControls.TabIndex = 1;
             // 
-            // panelControl4
+            // pnlEditorContent
             // 
-            this.panelControl4.Controls.Add(this.tablePanel1);
-            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl4.Location = new System.Drawing.Point(2, 2);
-            this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(608, 733);
-            this.panelControl4.TabIndex = 1;
+            this.pnlEditorContent.Controls.Add(this.tablePanel1);
+            this.pnlEditorContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEditorContent.Location = new System.Drawing.Point(2, 2);
+            this.pnlEditorContent.Name = "pnlEditorContent";
+            this.pnlEditorContent.Size = new System.Drawing.Size(608, 733);
+            this.pnlEditorContent.TabIndex = 1;
             // 
             // tablePanel1
             // 
@@ -497,6 +497,7 @@
             this.ClientSize = new System.Drawing.Size(1507, 852);
             this.Controls.Add(this.splitMain);
             this.Name = "CategoriesManager";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Categories Manager";
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).EndInit();
             this.splitMain.Panel1.ResumeLayout(false);
@@ -530,8 +531,8 @@
             this.panelControl5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlControls)).EndInit();
             this.pnlControls.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
-            this.panelControl4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlEditorContent)).EndInit();
+            this.pnlEditorContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             this.tablePanel1.PerformLayout();
@@ -571,7 +572,7 @@
         private DevExpress.XtraEditors.PanelControl pnlEditor;
         private DevExpress.XtraEditors.PanelControl panelControl5;
         private DevExpress.XtraEditors.PanelControl pnlControls;
-        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraEditors.PanelControl pnlEditorContent;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.SimpleButton btnClose;
