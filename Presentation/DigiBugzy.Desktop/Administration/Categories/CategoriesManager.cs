@@ -245,7 +245,11 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 //Save
                 using var service = new CategoryService(Globals.GetConnectionString());
                 if (SelectedCategory.Id <= 0)
+                {
+                    SelectedCategory.CreatedOn = DateTime.Now;
+                    SelectedCategory.DigiAdminId = 1;
                     service.Create(SelectedCategory);
+                }
                 else
                     service.Update(SelectedCategory);
 

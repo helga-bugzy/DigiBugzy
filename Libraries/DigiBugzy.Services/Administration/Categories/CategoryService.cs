@@ -28,7 +28,10 @@ namespace DigiBugzy.Services.Administration.Categories
             };
             var current = Get(filter);
 
-            if (current.Count > 0) Update(entity);
+            if (current.Count > 0) 
+                Update(entity);
+            else 
+                dbContext.Categories.Add(entity);
 
             dbContext.SaveChanges();
         }
@@ -101,7 +104,7 @@ namespace DigiBugzy.Services.Administration.Categories
 
         public Category GetById(int id)
         {
-            return dbContext.Categories.Where(x => x.Id == id).FirstOrDefault();
+            return dbContext.Categories.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Category entity)
@@ -115,6 +118,7 @@ namespace DigiBugzy.Services.Administration.Categories
 
 
             dbContext.Categories.Update(entity);
+            dbContext.SaveChanges();
         }
 
         #endregion

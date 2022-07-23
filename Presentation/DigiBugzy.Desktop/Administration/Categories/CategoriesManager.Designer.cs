@@ -50,6 +50,7 @@
             this.tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
             this.chkActive = new DevExpress.XtraEditors.CheckEdit();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
+            this.cmbParents = new System.Windows.Forms.ComboBox();
             this.chkParent = new DevExpress.XtraEditors.CheckEdit();
             this.lblActive = new DevExpress.XtraEditors.LabelControl();
             this.lblDescription = new DevExpress.XtraEditors.LabelControl();
@@ -60,7 +61,6 @@
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
-            this.cmbParents = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -379,6 +379,17 @@
             this.tablePanel2.Size = new System.Drawing.Size(508, 20);
             this.tablePanel2.TabIndex = 11;
             // 
+            // cmbParents
+            // 
+            this.tablePanel2.SetColumn(this.cmbParents, 1);
+            this.cmbParents.FormattingEnabled = true;
+            this.cmbParents.Location = new System.Drawing.Point(103, 3);
+            this.cmbParents.Name = "cmbParents";
+            this.tablePanel2.SetRow(this.cmbParents, 0);
+            this.cmbParents.Size = new System.Drawing.Size(402, 21);
+            this.cmbParents.TabIndex = 2;
+            this.cmbParents.Visible = false;
+            // 
             // chkParent
             // 
             this.tablePanel2.SetColumn(this.chkParent, 0);
@@ -478,17 +489,6 @@
             this.lblCustomFieldsHeading.Size = new System.Drawing.Size(115, 23);
             this.lblCustomFieldsHeading.TabIndex = 1;
             this.lblCustomFieldsHeading.Text = "Custom Fields";
-            // 
-            // cmbParents
-            // 
-            this.tablePanel2.SetColumn(this.cmbParents, 1);
-            this.cmbParents.FormattingEnabled = true;
-            this.cmbParents.Location = new System.Drawing.Point(103, 3);
-            this.cmbParents.Name = "cmbParents";
-            this.tablePanel2.SetRow(this.cmbParents, 0);
-            this.cmbParents.Size = new System.Drawing.Size(402, 21);
-            this.cmbParents.TabIndex = 2;
-            this.cmbParents.Visible = false;
             // 
             // CategoriesManager
             // 
