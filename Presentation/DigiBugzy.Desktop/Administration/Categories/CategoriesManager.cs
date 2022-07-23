@@ -220,7 +220,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             _classificationId = cmbClassifications.SelectedIndex < 0 ? 0 : (cmbClassifications.SelectedItem as Classification)!.Id;
 
             //Reload data
-            LoadCategoryNodes();
+            LoadCategories();
             SelectedCategory = new Category();
             LoadCategoryEditor();
             Application.DoEvents();
