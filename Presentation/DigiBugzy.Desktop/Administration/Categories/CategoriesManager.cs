@@ -96,6 +96,22 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void LoadCategoryNodes()
         {
+
+            //Prepare the grid
+            treeCategories.BeginUpdate();
+            treeCategories.Columns.Clear();
+            var idCol = treeCategories.Columns.Add();
+            idCol.FieldName = "Id";
+            idCol.Name = "colId";
+            idCol.Caption = @"#";
+
+            var nameCol = treeCategories.Columns.Add();
+            nameCol.FieldName = "Name";
+            nameCol.Name = "colName";
+            nameCol.Caption = @"Name";
+            treeCategories.EndUpdate();
+
+
             //Get all parents
             var parents = (from c in Categories
                     where c.ParentId == null
@@ -108,8 +124,10 @@ namespace DigiBugzy.Desktop.Administration.Categories
                         IsDeleted = c.IsDeleted
                     })
                 .ToList();
-
+            
             //Loop and add
+            treeCategories.BeginUnboundLoad();
+
             foreach (var parent in parents)
             {
                 var node = new TreeNode(text: parent.Name)
@@ -121,6 +139,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 treeCategories.Nodes.Add(node);
             }
 
+            treeCategories.EndUnboundLoad();
 
         }
 

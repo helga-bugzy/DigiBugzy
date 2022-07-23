@@ -35,6 +35,7 @@
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
             this.splitContent = new DevExpress.XtraEditors.SplitContainerControl();
             this.treeCategories = new DevExpress.XtraTreeList.TreeList();
+            this.tcolName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.splitEditors = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.pnlEditor = new DevExpress.XtraEditors.PanelControl();
@@ -191,11 +192,22 @@
             // 
             // treeCategories
             // 
+            this.treeCategories.Caption = "Categories";
+            this.treeCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.tcolName});
             this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCategories.Location = new System.Drawing.Point(0, 0);
             this.treeCategories.Name = "treeCategories";
             this.treeCategories.Size = new System.Drawing.Size(313, 790);
             this.treeCategories.TabIndex = 0;
+            // 
+            // tcolName
+            // 
+            this.tcolName.Caption = "Name";
+            this.tcolName.FieldName = "Name";
+            this.tcolName.Name = "tcolName";
+            this.tcolName.Visible = true;
+            this.tcolName.VisibleIndex = 0;
             // 
             // splitEditors
             // 
@@ -593,5 +605,6 @@
         private DevExpress.XtraEditors.PanelControl panelControl6;
         private DevExpress.XtraEditors.LabelControl lblCustomFieldsHeading;
         private ComboBox cmbParents;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn tcolName;
     }
 }
