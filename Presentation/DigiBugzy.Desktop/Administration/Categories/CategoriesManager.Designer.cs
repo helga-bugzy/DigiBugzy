@@ -34,6 +34,7 @@
             this.lblClassification = new DevExpress.XtraEditors.LabelControl();
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
             this.splitContent = new DevExpress.XtraEditors.SplitContainerControl();
+            this.twCategories = new System.Windows.Forms.TreeView();
             this.splitEditors = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.pnlEditor = new DevExpress.XtraEditors.PanelControl();
@@ -42,7 +43,7 @@
             this.pnlEditorContent = new DevExpress.XtraEditors.PanelControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.txtDescription = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
@@ -57,10 +58,10 @@
             this.lblParent = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.pnlHeader = new DevExpress.XtraEditors.PanelControl();
+            this.btnAddNew = new DevExpress.XtraEditors.SimpleButton();
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
-            this.twCategories = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -188,6 +189,16 @@
             this.splitContent.SplitterPosition = 313;
             this.splitContent.TabIndex = 0;
             // 
+            // twCategories
+            // 
+            this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.twCategories.Location = new System.Drawing.Point(0, 0);
+            this.twCategories.Name = "twCategories";
+            this.twCategories.Size = new System.Drawing.Size(313, 790);
+            this.twCategories.TabIndex = 0;
+            this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCategories_NodeMouseClick);
+            this.twCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.twCategories_DragDrop);
+            // 
             // splitEditors
             // 
             this.splitEditors.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -283,7 +294,7 @@
             // panelControl3
             // 
             this.tablePanel1.SetColumn(this.panelControl3, 1);
-            this.panelControl3.Controls.Add(this.btnClose);
+            this.panelControl3.Controls.Add(this.btnDelete);
             this.panelControl3.Controls.Add(this.btnSave);
             this.panelControl3.Location = new System.Drawing.Point(93, 107);
             this.panelControl3.Name = "panelControl3";
@@ -291,17 +302,17 @@
             this.panelControl3.Size = new System.Drawing.Size(508, 44);
             this.panelControl3.TabIndex = 13;
             // 
-            // btnClose
+            // btnDelete
             // 
-            this.btnClose.Location = new System.Drawing.Point(95, 16);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "Close";
+            this.btnDelete.Location = new System.Drawing.Point(3, 16);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 1;
+            this.btnDelete.Text = "Delete";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(5, 16);
+            this.btnSave.Location = new System.Drawing.Point(399, 16);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 0;
@@ -443,12 +454,21 @@
             // 
             // pnlHeader
             // 
+            this.pnlHeader.Controls.Add(this.btnAddNew);
             this.pnlHeader.Controls.Add(this.lblHeading);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(2, 2);
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(620, 39);
             this.pnlHeader.TabIndex = 1;
+            // 
+            // btnAddNew
+            // 
+            this.btnAddNew.Location = new System.Drawing.Point(529, 11);
+            this.btnAddNew.Name = "btnAddNew";
+            this.btnAddNew.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNew.TabIndex = 1;
+            this.btnAddNew.Text = "Add New";
             // 
             // lblHeading
             // 
@@ -480,14 +500,6 @@
             this.lblCustomFieldsHeading.Size = new System.Drawing.Size(115, 23);
             this.lblCustomFieldsHeading.TabIndex = 1;
             this.lblCustomFieldsHeading.Text = "Custom Fields";
-            // 
-            // twCategories
-            // 
-            this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.twCategories.Location = new System.Drawing.Point(0, 0);
-            this.twCategories.Name = "twCategories";
-            this.twCategories.Size = new System.Drawing.Size(313, 790);
-            this.twCategories.TabIndex = 0;
             // 
             // CategoriesManager
             // 
@@ -572,7 +584,6 @@
         private DevExpress.XtraEditors.PanelControl pnlEditorContent;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
-        private DevExpress.XtraEditors.SimpleButton btnClose;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.TextEdit txtDescription;
         private DevExpress.XtraEditors.TextEdit txtName;
@@ -591,5 +602,7 @@
         private DevExpress.XtraEditors.LabelControl lblCustomFieldsHeading;
         private ComboBox cmbParents;
         private TreeView twCategories;
+        private DevExpress.XtraEditors.SimpleButton btnDelete;
+        private DevExpress.XtraEditors.SimpleButton btnAddNew;
     }
 }

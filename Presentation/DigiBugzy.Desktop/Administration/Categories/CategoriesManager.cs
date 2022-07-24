@@ -46,7 +46,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
         {
             using var service = new ClassificationService(Globals.GetConnectionString());
 
-            var collection = service.Get(new StandardFilter());
+            var collection = service.Get(new StandardFilter { DigiAdminId = Globals.DigiAdministration.Id });
             cmbClassifications.Items.Clear();
             cmbClassifications.DataSource = collection;
             cmbClassifications.DisplayMember = "Name";
@@ -87,7 +87,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             if (_classificationId <= 0) return;
 
             using var service = new CategoryService(Globals.GetConnectionString());
-            Categories = service.Get(new StandardFilter{ClassificationId = _classificationId, DigiAdminId =1});
+            Categories = service.Get(new StandardFilter{ClassificationId = _classificationId, DigiAdminId = Globals.DigiAdministration.Id});
             
             if (Categories.Count <= 0) return;
 
@@ -194,7 +194,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             cmbParents.Visible = chkParent.Checked = false;
 
             using var service = new CategoryService(Globals.GetConnectionString());
-            var collection = service.Get(new StandardFilter { OnlyParents = true});
+            var collection = service.Get(new StandardFilter { OnlyParents = true, DigiAdminId = Globals.DigiAdministration.Id});
             var source = collection.Where(x => x.Id != SelectedCategory.Id).ToList();
 
             if (SelectedCategory.Id <= 0)
@@ -271,7 +271,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 }
 
                 SelectedCategory.ClassificationId = _classificationId;
-                SelectedCategory.ParentId = chkParent.Checked ? (cmbClassifications.SelectedItem as Category)?.Id : null;
+                SelectedCategory.ParentId = chkParent.Checked ? (cmbParents.SelectedItem as Category)?.Id : null;
                 SelectedCategory.Name = txtName.Text.Trim();
                 SelectedCategory.Description = txtDescription.Text.Trim();
                 SelectedCategory.IsActive = chkActive.Checked;
@@ -282,7 +282,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 if (SelectedCategory.Id <= 0)
                 {
                     SelectedCategory.CreatedOn = DateTime.Now;
-                    SelectedCategory.DigiAdminId = 1;
+                    SelectedCategory.DigiAdminId = Globals.DigiAdministration.Id;
                     service.Create(SelectedCategory);
                 }
                 else
@@ -309,8 +309,30 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         }
 
+
+
         #endregion
 
+        #region Treeview
+
+        private void twCategories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            using var service = new CategoryService(Globals.GetConnectionString());
+            SelectedCategory = service.GetById(int.Parse(e.Node.Tag.ToString()!));
+
+            LoadCategoryEditor();
+
+            Application.DoEvents();
+
+        }
+
+        private void twCategories_DragDrop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show("Dropping");
+        }
+
+
+        #endregion
 
         #endregion
 

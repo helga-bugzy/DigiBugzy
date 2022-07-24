@@ -38,5 +38,7 @@ namespace DigiBugzy.Desktop
         /// Selected digiAdmin
         /// </summary>
         public static DigiAdmin DigiAdministration { get; set; } = new();
+
+        
     }
 }
