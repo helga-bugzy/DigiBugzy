@@ -82,12 +82,12 @@ namespace DigiBugzy.Data.Migrations
             creatory.AddForeignKey(_currentTableName, nameof(CustomFieldType), nameof(CustomField.CustomFieldTypeId));
                 
             //CustomFieldValue
-            _currentTableName = nameof(CustomFieldListOptions);
+            _currentTableName = nameof(CustomFieldListOption);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseEntity();
-            creatory.AddColumn(nameof(CustomFieldListOptions.CustomFieldId));
-            creatory.AddColumn(nameof(CustomFieldListOptions.Value), BaseEntityCreator.FieldTypes.AsString);
-            creatory.AddForeignKey(_currentTableName, nameof(CustomField), nameof(CustomFieldListOptions.CustomFieldId));
+            creatory.AddColumn(nameof(CustomFieldListOption.CustomFieldId));
+            creatory.AddColumn(nameof(CustomFieldListOption.Value), BaseEntityCreator.FieldTypes.AsString);
+            creatory.AddForeignKey(_currentTableName, nameof(CustomField), nameof(CustomFieldListOption.CustomFieldId));
 
 
             //Category 
