@@ -30,6 +30,8 @@
         {
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
+            this.chkIncludeDeleted = new System.Windows.Forms.CheckBox();
+            this.chkFilterInactive = new System.Windows.Forms.CheckBox();
             this.cmbClassifications = new System.Windows.Forms.ComboBox();
             this.lblClassification = new DevExpress.XtraEditors.LabelControl();
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
@@ -62,6 +64,7 @@
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
+            this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -136,6 +139,9 @@
             // 
             // pnlFilter
             // 
+            this.pnlFilter.Controls.Add(this.btnFilter);
+            this.pnlFilter.Controls.Add(this.chkIncludeDeleted);
+            this.pnlFilter.Controls.Add(this.chkFilterInactive);
             this.pnlFilter.Controls.Add(this.cmbClassifications);
             this.pnlFilter.Controls.Add(this.lblClassification);
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -143,6 +149,28 @@
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(1507, 48);
             this.pnlFilter.TabIndex = 0;
+            // 
+            // chkIncludeDeleted
+            // 
+            this.chkIncludeDeleted.AutoSize = true;
+            this.chkIncludeDeleted.Location = new System.Drawing.Point(625, 15);
+            this.chkIncludeDeleted.Name = "chkIncludeDeleted";
+            this.chkIncludeDeleted.Size = new System.Drawing.Size(101, 17);
+            this.chkIncludeDeleted.TabIndex = 3;
+            this.chkIncludeDeleted.Text = "Include Deleted";
+            this.chkIncludeDeleted.UseVisualStyleBackColor = true;
+            this.chkIncludeDeleted.CheckedChanged += new System.EventHandler(this.chkIncludeDeleted_CheckedChanged);
+            // 
+            // chkFilterInactive
+            // 
+            this.chkFilterInactive.AutoSize = true;
+            this.chkFilterInactive.Location = new System.Drawing.Point(515, 16);
+            this.chkFilterInactive.Name = "chkFilterInactive";
+            this.chkFilterInactive.Size = new System.Drawing.Size(103, 17);
+            this.chkFilterInactive.TabIndex = 2;
+            this.chkFilterInactive.Text = "Include Inactive";
+            this.chkFilterInactive.UseVisualStyleBackColor = true;
+            this.chkFilterInactive.CheckedChanged += new System.EventHandler(this.chkFilterInactive_CheckedChanged);
             // 
             // cmbClassifications
             // 
@@ -508,6 +536,15 @@
             this.lblCustomFieldsHeading.TabIndex = 1;
             this.lblCustomFieldsHeading.Text = "Custom Fields";
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(775, 13);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 4;
+            this.btnFilter.Text = "Filter...";
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // CategoriesManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -611,5 +648,8 @@
         private TreeView twCategories;
         private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnAddNew;
+        private CheckBox chkIncludeDeleted;
+        private CheckBox chkFilterInactive;
+        private DevExpress.XtraEditors.SimpleButton btnFilter;
     }
 }

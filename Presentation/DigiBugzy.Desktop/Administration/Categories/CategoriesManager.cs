@@ -1,9 +1,6 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using DevExpress.XtraPrinting.Export.Pdf;
 
 namespace DigiBugzy.Desktop.Administration.Categories
 {
@@ -43,6 +40,17 @@ namespace DigiBugzy.Desktop.Administration.Categories
         #endregion
 
         #region Helper Methods
+
+        private void ApplyFilter()
+        {
+            _classificationId = cmbClassifications.SelectedIndex < 0 ? 0 : (cmbClassifications.SelectedItem as Classification)!.Id;
+
+            //Reload data
+            LoadCategories();
+            SelectedCategory = new Category();
+            LoadCategoryEditor();
+            Application.DoEvents();
+        }
 
         private void LoadClassifications()
         {
@@ -272,15 +280,24 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         #region Filter
 
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            ApplyFilter();
+        }
+
         private void cmbClassifications_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _classificationId = cmbClassifications.SelectedIndex < 0 ? 0 : (cmbClassifications.SelectedItem as Classification)!.Id;
+           ApplyFilter();
+        }
 
-            //Reload data
-            LoadCategories();
-            SelectedCategory = new Category();
-            LoadCategoryEditor();
-            Application.DoEvents();
+        private void chkFilterInactive_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyFilter();
+        }
+
+        private void chkIncludeDeleted_CheckedChanged(object sender, EventArgs e)
+        {
+            ApplyFilter();
         }
 
         #endregion
@@ -470,10 +487,13 @@ namespace DigiBugzy.Desktop.Administration.Categories
         }
 
 
-        #endregion
+
+
 
         #endregion
 
+        #endregion
 
+        
     }
 }
