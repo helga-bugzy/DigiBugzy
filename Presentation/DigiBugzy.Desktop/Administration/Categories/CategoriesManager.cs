@@ -327,8 +327,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 LoadCategoryEditor();
 
                 //Message
-                MessageBox.Show(@"Database has been updated and screen reloaded.", @"Save success",
-                    MessageBoxButtons.OK);
+                //MessageBox.Show(@"Database has been updated and screen reloaded.", @"Save success",
+                //    MessageBoxButtons.OK);
             }
             catch (Exception exception)
             {
