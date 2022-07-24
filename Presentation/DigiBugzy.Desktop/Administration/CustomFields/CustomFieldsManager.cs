@@ -85,6 +85,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadCustomFieldTypes()
         {
+            cmbTypes.DataSource = null;
             cmbTypes.Items.Clear();
             cmbTypes.DisplayMember = "Name";
             using var service = new CustomFieldTypeService(Globals.GetConnectionString());
@@ -99,7 +100,21 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             if (SelectedCustomField.Id > 0)
             {
                 using var tService = new CustomFieldTypeService(Globals.GetConnectionString());
-                cmbTypes.SelectedItem = tService.GetById(SelectedCustomField.CustomFieldTypeId);
+                var cType = tService.GetById(SelectedCustomField.CustomFieldTypeId);
+
+                var index = 0;
+
+                foreach (var item in cmbTypes.Items)
+                {
+                    
+                    var i = item as CustomFieldType;
+                    if (i!.Id == SelectedCustomField.CustomFieldTypeId)
+                    {
+                        cmbTypes.SelectedIndex = index;
+                    }
+
+                    index++;
+                }
             }
 
             Application.DoEvents();
