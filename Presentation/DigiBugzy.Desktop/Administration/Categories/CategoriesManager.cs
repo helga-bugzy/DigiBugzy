@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using DevExpress.XtraPrinting.Export.Pdf;
 
 namespace DigiBugzy.Desktop.Administration.Categories
 {
@@ -17,8 +18,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
         private Category SelectedCategory { get; set; } = new();
 
         private bool _isDragging { get; set; }
-
-        
 
 
         #endregion
@@ -120,7 +119,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
             {
                 var node = new TreeNode(text: parent.Name)
                 {
-                    Tag = parent.Id
+                    Tag = parent.Id,
+                    NodeFont = CreateFont(parent.IsDeleted, parent.IsActive)
                 };
                 LoadCategoryNodes(node);
 
@@ -147,12 +147,17 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
             if (children.Count > 0)
             {
+
                 foreach (var child in children)
                 {
+                   
+
                     var node = new TreeNode(text: child.Name)
                     {
-                        Tag = child.Id
+                        Tag = child.Id,
+                        NodeFont = CreateFont(child.IsDeleted, child.IsActive)
                     };
+
                     parentNode.Nodes.Add(node);
 
                     LoadCategoryNodes(node);
@@ -243,6 +248,22 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 Console.WriteLine(e);
                return false;
             }
+        }
+
+        private Font CreateFont(bool isDeleted, bool isActive)
+        {
+            var font = new Font(twCategories.Font.FontFamily, twCategories.Font.Size);
+            if (isDeleted)
+            {
+                font = new Font(font, FontStyle.Strikeout);
+            }
+            else if (!isActive)
+            {
+                font = new Font(font, FontStyle.Italic);
+            }
+
+            return font;
+
         }
 
         #endregion
@@ -431,13 +452,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
                     
                 }
-
-                // If it is a copy operation, clone the dragged node   
-                // and add it to the node at the drop location.  
-                //else if (e.Effect == DragDropEffects.Copy)
-                //{
-                //    targetNode.Nodes.Add((TreeNode)draggedNode.Clone());
-                //}
 
                 // Expand the node at the location   
                 // to show the dropped node.  
