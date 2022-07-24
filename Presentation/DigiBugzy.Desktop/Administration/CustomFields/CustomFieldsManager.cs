@@ -367,7 +367,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             Application.DoEvents();
 
         }
-        
 
 
 
@@ -375,9 +374,14 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
 
 
-        #endregion
 
         #endregion
 
+        #endregion
+
+        private void grdOptions_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show("CellClick");
+        }
     }
 }

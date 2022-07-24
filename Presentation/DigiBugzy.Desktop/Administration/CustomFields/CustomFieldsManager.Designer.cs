@@ -71,6 +71,7 @@
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             this.cmbTypes = new System.Windows.Forms.ComboBox();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
+            this.colOptionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
@@ -483,13 +484,17 @@
             // 
             // grdOptions
             // 
+            this.grdOptions.AllowUserToOrderColumns = true;
             this.grdOptions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdOptions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOptionName});
             this.grdOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdOptions.Location = new System.Drawing.Point(2, 2);
             this.grdOptions.Name = "grdOptions";
             this.grdOptions.RowTemplate.Height = 25;
             this.grdOptions.Size = new System.Drawing.Size(592, 507);
             this.grdOptions.TabIndex = 0;
+            this.grdOptions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdOptions_CellClick);
             // 
             // pnlOptionsHeading
             // 
@@ -597,6 +602,11 @@
             this.lblType.Size = new System.Drawing.Size(24, 13);
             this.lblType.TabIndex = 3;
             this.lblType.Text = "Type";
+            // 
+            // colOptionName
+            // 
+            this.colOptionName.HeaderText = "Name";
+            this.colOptionName.Name = "colOptionName";
             // 
             // CustomFieldsManager
             // 
@@ -718,5 +728,6 @@
         private DevExpress.XtraEditors.PanelControl pnlOptionsEditor;
         private DevExpress.XtraEditors.PanelControl pnlOptionsGrid;
         private DataGridView grdOptions;
+        private DataGridViewTextBoxColumn colOptionName;
     }
 }
