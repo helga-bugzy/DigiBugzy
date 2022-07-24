@@ -67,6 +67,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
             {
                 query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
             }
+            
 
             if (filter.ClassificationId.HasValue)
             {
@@ -75,10 +76,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
             if (!string.IsNullOrEmpty(filter.Name))
             {
-                if (filter.LikeSearch)
-                    query = query.Where(x => x.Name.Contains(filter.Name));
-                else
-                    query = query.Where(x => x.Name.Equals(filter.Name));
+                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name)) : query.Where(x => x.Name.Equals(filter.Name));
             }
 
             if (!filter.IncludeDeleted)
@@ -95,7 +93,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
         public CustomField GetById(int id)
         {
-            return dbContext.CustomFields.Where(x => x.Id == id).FirstOrDefault();
+            return dbContext.CustomFields.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(CustomField entity)
@@ -109,6 +107,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
 
             dbContext.CustomFields.Update(entity);
+            dbContext.SaveChanges();
         }
 
         #endregion

@@ -46,6 +46,7 @@
             this.pnlEditorContent = new DevExpress.XtraEditors.PanelControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.btnRestore = new DevExpress.XtraEditors.SimpleButton();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.txtDescription = new DevExpress.XtraEditors.TextEdit();
@@ -65,7 +66,6 @@
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
-            this.btnRestore = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -346,6 +346,15 @@
             this.panelControl3.Size = new System.Drawing.Size(508, 44);
             this.panelControl3.TabIndex = 13;
             // 
+            // btnRestore
+            // 
+            this.btnRestore.Location = new System.Drawing.Point(87, 16);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(75, 23);
+            this.btnRestore.TabIndex = 2;
+            this.btnRestore.Text = "Restore";
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            // 
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(3, 16);
@@ -546,15 +555,6 @@
             this.lblCustomFieldsHeading.Size = new System.Drawing.Size(115, 23);
             this.lblCustomFieldsHeading.TabIndex = 1;
             this.lblCustomFieldsHeading.Text = "Custom Fields";
-            // 
-            // btnRestore
-            // 
-            this.btnRestore.Location = new System.Drawing.Point(87, 16);
-            this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(75, 23);
-            this.btnRestore.TabIndex = 2;
-            this.btnRestore.Text = "Restore";
-            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // CategoriesManager
             // 
