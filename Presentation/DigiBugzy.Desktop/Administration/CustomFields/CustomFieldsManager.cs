@@ -51,7 +51,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void ApplyFilter()
         {
-            _classificationId = cmbClassifications.SelectedIndex < 0 ? 0 : (cmbClassifications.SelectedItem as Classification)!.Id;
+            _classificationId = cmbClassifications.SelectedIndex < 0
+                ? 0
+                : (cmbClassifications.SelectedItem as Classification)!.Id;
 
             //Reload data
             LoadCustomFields();
@@ -114,7 +116,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                     index++;
                 }
             }
-            
+
 
             Application.DoEvents();
         }
@@ -160,7 +162,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         }
 
-      
+
         private void LoadCustomFieldEditor()
         {
             LoadCustomFieldTypes();
@@ -169,6 +171,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             {
                 pnlEditor.Visible = false;
                 btnRestore.Visible = false;
+                grdOptions.Visible = false;
                 Application.DoEvents();
                 return;
             }
@@ -180,6 +183,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 txtDescription.Text = txtName.Text = string.Empty;
                 chkActive.Checked = true;
                 lblHeading.Text = @"New CustomField";
+                grdOptions.Visible = false;
 
             }
             else
@@ -189,11 +193,13 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 chkActive.Checked = true;
                 lblHeading.Text = $@"Edit {SelectedCustomField.Name} (ID: {SelectedCustomField.Id})";
 
+                grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==
+                                     (int)CustomFieldTypeEnumeration.ListType;
             }
 
             btnRestore.Visible = SelectedCustomField.IsDeleted;
             LoadCustomFieldListOptions();
-            
+
 
             Application.DoEvents();
         }
@@ -256,7 +262,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         #endregion
 
         #region Editor
-        
+
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
@@ -278,7 +284,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
                 {
-                    MessageBox.Show(@"Please enter a name for the CustomField", @"Validation Error", MessageBoxButtons.OK);
+                    MessageBox.Show(@"Please enter a name for the CustomField", @"Validation Error",
+                        MessageBoxButtons.OK);
                     return;
                 }
 
@@ -312,7 +319,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 LoadCustomFields();
                 SelectedCustomField = new CustomField();
                 LoadCustomFieldEditor();
-                
+
             }
             catch (Exception exception)
             {
