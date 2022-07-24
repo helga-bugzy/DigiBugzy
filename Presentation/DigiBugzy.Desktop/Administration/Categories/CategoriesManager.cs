@@ -97,7 +97,13 @@ namespace DigiBugzy.Desktop.Administration.Categories
             if (_classificationId <= 0) return;
 
             using var service = new CategoryService(Globals.GetConnectionString());
-            Categories = service.Get(new StandardFilter{ClassificationId = _classificationId, DigiAdminId = Globals.DigiAdministration.Id});
+            Categories = service.Get(new StandardFilter
+            {
+                ClassificationId = _classificationId, 
+                DigiAdminId = Globals.DigiAdministration.Id,
+                IncludeDeleted = chkIncludeDeleted.Checked, 
+                IncludeInActive = chkFilterInactive.Checked
+            });
             
             if (Categories.Count <= 0) return;
 
