@@ -11,6 +11,7 @@ global using DigiBugzy.Desktop.Dashboards;
 global using DigiBugzy.Desktop.MultiFunctional;
 
 using DigiBugzy.Desktop.Administration.Categories;
+using DigiBugzy.Desktop.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop
 {
@@ -91,6 +92,7 @@ namespace DigiBugzy.Desktop
                 services.AddScoped<LoginForm>();
                 services.AddScoped<MainDashboard>();
                 services.AddScoped<CategoriesManager>();
+                services.AddScoped<CustomFieldsManager>();
 
                 //Administration
                 services.AddScoped<ucFilterStandard>();

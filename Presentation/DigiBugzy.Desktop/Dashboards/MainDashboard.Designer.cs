@@ -96,11 +96,13 @@
             this.mnuCustomFields.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.mnuCustomFields.Tag = "CustomFields";
             this.mnuCustomFields.Text = "Custom Fields";
+            this.mnuCustomFields.Click += new System.EventHandler(this.mnuCustomFields_Click);
             // 
             // mnuProducts
             // 
             this.mnuProducts.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.accordionControlElement3});
+            this.mnuProducts.Expanded = true;
             this.mnuProducts.Name = "mnuProducts";
             this.mnuProducts.Text = "Products";
             // 

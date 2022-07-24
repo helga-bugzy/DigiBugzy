@@ -280,12 +280,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         #endregion
 
         #region Editor
-
-        private void chkParent_CheckedChanged(object sender, EventArgs e)
-        {
-            cmbTypes.Visible = chkParent.Checked;
-            Application.DoEvents();
-        }
+        
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
@@ -298,9 +293,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             try
             {
                 //Validations
-                if (chkParent.Checked && cmbTypes.SelectedIndex < 0)
+                if (cmbTypes.SelectedIndex < 0)
                 {
-                    MessageBox.Show(@"Please select a valid parent or indicate that no parent is to be used.",
+                    MessageBox.Show(@"Please select a valid type.",
                         @"Validation Error", MessageBoxButtons.OK);
                     return;
                 }
@@ -319,7 +314,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 }
 
                 SelectedCustomField.ClassificationId = _classificationId;
-                SelectedCustomField.ParentId = chkParent.Checked ? (cmbTypes.SelectedItem as CustomField)?.Id : null;
+                SelectedCustomField.CustomFieldTypeId =
+                    int.Parse((cmbTypes.SelectedItem as CustomFieldType)!.Id.ToString());
                 SelectedCustomField.Name = txtName.Text.Trim();
                 SelectedCustomField.Description = txtDescription.Text.Trim();
                 SelectedCustomField.IsActive = chkActive.Checked;
@@ -340,10 +336,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 LoadCustomFields();
                 SelectedCustomField = new CustomField();
                 LoadCustomFieldEditor();
-
-                //Message
-                //MessageBox.Show(@"Database has been updated and screen reloaded.", @"Save success",
-                //    MessageBoxButtons.OK);
+                
             }
             catch (Exception exception)
             {
@@ -398,84 +391,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             Application.DoEvents();
 
         }
-
-        private void twCustomFields_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            _isDragging = true;
-            // Move the dragged node when the left mouse button is used.  
-            if (e.Button == MouseButtons.Left)
-            {
-                DoDragDrop(e.Item!, DragDropEffects.Move);
-            }
-
-            // Copy the dragged node when the right mouse button is used.  
-            else if (e.Button == MouseButtons.Right)
-            {
-                DoDragDrop(e.Item!, DragDropEffects.Copy);
-            }
-        }
-
-        private void twCustomFields_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = e.AllowedEffect;
-        }
-
-        private void twCustomFields_DragDrop(object sender, DragEventArgs e)
-        {
-            // Retrieve the client coordinates of the mouse position.  
-            var targetPoint = twCustomFields.PointToClient(new Point(e.X, e.Y));
-
-            // Select the node at the mouse position.  
-            twCustomFields.SelectedNode = twCustomFields.GetNodeAt(targetPoint);
-        }
+        
 
 
-        private void twCustomFields_DragOver(object sender, DragEventArgs e)
-        {
-            // Retrieve the client coordinates of the drop location.  
-            var targetPoint = twCustomFields.PointToClient(new Point(e.X, e.Y));
-
-            // Retrieve the node at the drop location.  
-            var targetNode = twCustomFields.GetNodeAt(targetPoint);
-
-            // Retrieve the node that was dragged.  
-            var draggedNode = (TreeNode)e.Data!.GetData(typeof(TreeNode));
-
-            // Confirm that the node at the drop location is not   
-            // the dragged node or a descendant of the dragged node.  
-            if (!draggedNode.Equals(targetNode) && !ContainsNode(draggedNode, targetNode))
-            {
-                // If it is a move operation, remove the node from its current   
-                // location and add it to the node at the drop location.  
-                if (e.Effect == DragDropEffects.Move)
-                {
-                    SelectedCustomField.ParentId = int.Parse(targetNode.Tag.ToString()!);
-                    using var service = new CustomFieldService(Globals.GetConnectionString());
-                    service.Update(SelectedCustomField);
-                    LoadCustomFields();
-                    LoadCustomFieldEditor();
-
-                    //draggedNode.Remove();
-                    //targetNode.Nodes.Add(draggedNode);
-
-
-                }
-
-                // Expand the node at the location   
-                // to show the dropped node.  
-                targetNode.Expand();
-
-                _isDragging = false;
-            }
-
-            Application.DoEvents();
-        }
-
-        private void twCustomFields_DragLeave(object sender, EventArgs e)
-        {
-
-
-        }
 
 
 

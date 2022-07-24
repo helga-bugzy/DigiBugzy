@@ -1,6 +1,7 @@
 ﻿
 using System.Windows.Forms;
 using DigiBugzy.Desktop.Administration.Categories;
+using DigiBugzy.Desktop.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop.Dashboards
 {
@@ -15,6 +16,12 @@ namespace DigiBugzy.Desktop.Dashboards
         {
             var categories = Startup.GetForm<CategoriesManager>();
             categories?.Show();
+        }
+
+        private void mnuCustomFields_Click(object sender, EventArgs e)
+        {
+            var form = Startup.GetForm<CustomFieldsManager>();
+            form?.Show();
         }
     }
 }
