@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace DigiBugzy.Desktop.Administration.Categories
@@ -14,6 +15,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
         private List<Category> Categories { get; set; } = new();
 
         private Category SelectedCategory { get; set; } = new();
+
+        private bool _isDragging { get; set; }
 
         
 
@@ -217,6 +220,30 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         }
 
+        private bool ContainsNode(TreeNode node1, TreeNode node2)
+        {
+            try
+            {
+                while (true)
+                {
+                    // Check the parent node of the second node.  
+                    if (node2.Parent == null) return false;
+                    if (node2.Parent.Equals(node1)) return true;
+
+                    // If the parent node is not null or equal to the first node,   
+                    // call the ContainsNode method recursively using the parent of   
+                    // the second node.  
+                    node2 = node2.Parent;
+                }
+
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+               return false;
+            }
+        }
 
         #endregion
 
@@ -243,6 +270,12 @@ namespace DigiBugzy.Desktop.Administration.Categories
         {
             cmbParents.Visible = chkParent.Checked;
             Application.DoEvents();
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            SelectedCategory = new Category();
+            LoadCategoryEditor();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -309,7 +342,17 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (SelectedCategory.Id <= 0) return;
+            using var service = new CategoryService(Globals.GetConnectionString());
+            service.Delete(SelectedCategory.Id);
 
+            SelectedCategory = new Category();
+            LoadCategoryEditor();
+        }
+
+        
 
         #endregion
 
@@ -317,6 +360,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void twCategories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            if (_isDragging) return;
             using var service = new CategoryService(Globals.GetConnectionString());
             SelectedCategory = service.GetById(int.Parse(e.Node.Tag.ToString()!));
 
@@ -326,9 +370,88 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         }
 
+        private void twCategories_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            _isDragging = true;
+            // Move the dragged node when the left mouse button is used.  
+            if (e.Button == MouseButtons.Left)
+            {
+                DoDragDrop(e.Item!, DragDropEffects.Move);
+            }
+
+            // Copy the dragged node when the right mouse button is used.  
+            else if (e.Button == MouseButtons.Right)
+            {
+                DoDragDrop(e.Item!, DragDropEffects.Copy);
+            }
+        }
+
+        private void twCategories_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.AllowedEffect;
+        }
+
         private void twCategories_DragDrop(object sender, DragEventArgs e)
         {
-            MessageBox.Show("Dropping");
+            // Retrieve the client coordinates of the mouse position.  
+            var targetPoint = twCategories.PointToClient(new Point(e.X, e.Y));
+
+            // Select the node at the mouse position.  
+            twCategories.SelectedNode = twCategories.GetNodeAt(targetPoint);
+        }
+
+
+        private void twCategories_DragOver(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the drop location.  
+            var targetPoint = twCategories.PointToClient(new Point(e.X, e.Y));
+
+            // Retrieve the node at the drop location.  
+            var targetNode = twCategories.GetNodeAt(targetPoint);
+
+            // Retrieve the node that was dragged.  
+            var draggedNode = (TreeNode)e.Data!.GetData(typeof(TreeNode));
+
+            // Confirm that the node at the drop location is not   
+            // the dragged node or a descendant of the dragged node.  
+            if (!draggedNode.Equals(targetNode) && !ContainsNode(draggedNode, targetNode))
+            {
+                // If it is a move operation, remove the node from its current   
+                // location and add it to the node at the drop location.  
+                if (e.Effect == DragDropEffects.Move)
+                {
+                    SelectedCategory.ParentId = int.Parse(targetNode.Tag.ToString()!);
+                    using var service = new CategoryService(Globals.GetConnectionString());
+                    service.Update(SelectedCategory);
+                    LoadCategoryEditor();
+
+                    draggedNode.Remove();
+                    targetNode.Nodes.Add(draggedNode);
+
+                    
+                }
+
+                // If it is a copy operation, clone the dragged node   
+                // and add it to the node at the drop location.  
+                //else if (e.Effect == DragDropEffects.Copy)
+                //{
+                //    targetNode.Nodes.Add((TreeNode)draggedNode.Clone());
+                //}
+
+                // Expand the node at the location   
+                // to show the dropped node.  
+                targetNode.Expand();
+
+                _isDragging = false;
+            }
+
+            Application.DoEvents();
+        }
+
+        private void twCategories_DragLeave(object sender, EventArgs e)
+        {
+
+
         }
 
 
