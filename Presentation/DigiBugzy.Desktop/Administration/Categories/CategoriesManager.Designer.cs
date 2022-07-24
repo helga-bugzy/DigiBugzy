@@ -30,6 +30,7 @@
         {
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
+            this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             this.chkIncludeDeleted = new System.Windows.Forms.CheckBox();
             this.chkFilterInactive = new System.Windows.Forms.CheckBox();
             this.cmbClassifications = new System.Windows.Forms.ComboBox();
@@ -64,7 +65,7 @@
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
-            this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
+            this.btnRestore = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -149,6 +150,15 @@
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(1507, 48);
             this.pnlFilter.TabIndex = 0;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(775, 13);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 4;
+            this.btnFilter.Text = "Filter...";
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // chkIncludeDeleted
             // 
@@ -327,6 +337,7 @@
             // panelControl3
             // 
             this.tablePanel1.SetColumn(this.panelControl3, 1);
+            this.panelControl3.Controls.Add(this.btnRestore);
             this.panelControl3.Controls.Add(this.btnDelete);
             this.panelControl3.Controls.Add(this.btnSave);
             this.panelControl3.Location = new System.Drawing.Point(93, 107);
@@ -536,14 +547,14 @@
             this.lblCustomFieldsHeading.TabIndex = 1;
             this.lblCustomFieldsHeading.Text = "Custom Fields";
             // 
-            // btnFilter
+            // btnRestore
             // 
-            this.btnFilter.Location = new System.Drawing.Point(775, 13);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(75, 23);
-            this.btnFilter.TabIndex = 4;
-            this.btnFilter.Text = "Filter...";
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            this.btnRestore.Location = new System.Drawing.Point(87, 16);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(75, 23);
+            this.btnRestore.TabIndex = 2;
+            this.btnRestore.Text = "Restore";
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // CategoriesManager
             // 
@@ -651,5 +662,6 @@
         private CheckBox chkIncludeDeleted;
         private CheckBox chkFilterInactive;
         private DevExpress.XtraEditors.SimpleButton btnFilter;
+        private DevExpress.XtraEditors.SimpleButton btnRestore;
     }
 }

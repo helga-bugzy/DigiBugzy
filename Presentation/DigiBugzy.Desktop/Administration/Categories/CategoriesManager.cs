@@ -186,6 +186,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             if (_classificationId <= 0)
             {
                 pnlEditor.Visible = false;
+                btnRestore.Visible = false;
                 Application.DoEvents();
                 return;
             }
@@ -207,6 +208,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 lblHeading.Text = $@"Edit {SelectedCategory.Name} (ID: {SelectedCategory.Id})";
 
             }
+
+            btnRestore.Visible = SelectedCategory.IsDeleted;
 
             LoadCategoryEditorParents();
 
@@ -483,10 +486,11 @@ namespace DigiBugzy.Desktop.Administration.Categories
                     SelectedCategory.ParentId = int.Parse(targetNode.Tag.ToString()!);
                     using var service = new CategoryService(Globals.GetConnectionString());
                     service.Update(SelectedCategory);
+                    LoadCategories();
                     LoadCategoryEditor();
 
-                    draggedNode.Remove();
-                    targetNode.Nodes.Add(draggedNode);
+                    //draggedNode.Remove();
+                    //targetNode.Nodes.Add(draggedNode);
 
                     
                 }
