@@ -25,7 +25,7 @@ namespace DigiBugzy.Services
 
         public DbSet<CustomFieldType> CustomFieldTypes { get; set; }
 
-        public DbSet<CustomFieldValue> CustomFieldValues { get; set; }
+        public DbSet<CustomFieldListOptions> CustomFieldValues { get; set; }
 
         public DbSet<DigiAdmin> DigiAdmins { get; set; }
 

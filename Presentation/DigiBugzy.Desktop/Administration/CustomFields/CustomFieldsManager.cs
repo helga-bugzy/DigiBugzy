@@ -88,6 +88,37 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             Application.DoEvents();
         }
 
+        private void LoadCustomFieldTypes()
+        {
+            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+            var collection = service.Get(new StandardFilter { DigiAdminId = Globals.DigiAdministration.Id });
+            cmbTypes.DataSource = collection;
+            cmbTypes.DisplayMember = "Name";
+            cmbTypes.ValueMember = "Id";
+
+            if (SelectedCustomField.Id <= 0)
+            {
+                cmbTypes.SelectedItem = -1;
+            }
+            else
+            {
+                var index = 0;
+                foreach (var item in cmbTypes.Items)
+                {
+                    if (item is CustomFieldType x && x.Id == SelectedCustomField.Id)
+                    {
+                        cmbTypes.SelectedIndex = index;
+                        break;
+                    }
+
+                    index++;
+                }
+            }
+            
+
+            Application.DoEvents();
+        }
+
         private void LoadCustomFields()
         {
             twCustomFields.Nodes.Clear();
@@ -115,47 +146,26 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             if (CustomFields.Count <= 0) return;
 
-            LoadCustomFieldNodes();
-
-        }
-
-        private void LoadCustomFieldNodes()
-        {
-
-
-            //Get all parents
-            var parents = (from c in CustomFields
-                           where c.ParentId == null
-                           select new CustomField
-                           {
-                               Id = c.Id,
-                               ParentId = c.ParentId,
-                               Name = c.Name,
-                               IsActive = c.IsActive,
-                               IsDeleted = c.IsDeleted
-                           })
-                .ToList();
-
-            //Loop and add
-            foreach (var parent in parents)
+            foreach (var item in CustomFields)
             {
-                var node = new TreeNode(text: parent.Name)
+                var node = new TreeNode(text: item.Name)
                 {
-                    Tag = parent.Id,
-                    NodeFont = CreateFont(parent.IsDeleted, parent.IsActive)
+                    Tag = item.Id,
+                    NodeFont = CreateFont(item.IsDeleted, item.IsActive)
                 };
-                LoadCustomFieldNodes(node);
 
-                node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
+                node.Text = item.Name;
 
                 twCustomFields.Nodes.Add(node);
             }
 
-
         }
-        
+
+      
         private void LoadCustomFieldEditor()
         {
+            LoadCustomFieldTypes();
+
             if (_classificationId <= 0)
             {
                 pnlEditor.Visible = false;
@@ -183,40 +193,23 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             }
 
             btnRestore.Visible = SelectedCustomField.IsDeleted;
-
-            LoadCustomFieldEditorTypes();
+            
 
             Application.DoEvents();
         }
 
-        private void LoadCustomFieldEditorTypes()
+        private void LoadCustomFieldListOptions()
         {
-         
+            grdOptions.Visible = true;
 
-            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
-            var collection = service.Get(new StandardFilter { OnlyParents = true, DigiAdminId = Globals.DigiAdministration.Id });
-            var source = collection.Where(x => x.Id != SelectedCustomField.Id).ToList();
-
-            if (SelectedCustomField.Id <= 0)
+            if (SelectedCustomField.Id <= 0 ||
+                SelectedCustomField.CustomFieldTypeId == (int)CustomFieldTypeEnumeration.ListType)
             {
-                cmbTypes.SelectedItem = -1;
+                grdOptions.Visible = true;
+                using var service = new CustomFieldTypeService(Globals.GetConnectionString());
             }
-            else
-            {
-                if (SelectedCustomField.ParentId > 0)
-                {
-                    cmbTypes.Visible = chkParent.Checked = true;
-                }
-            }
-
-            cmbTypes.DataSource = source;
-            cmbTypes.DisplayMember = "Name";
-            cmbTypes.ValueMember = "Id";
-
-            Application.DoEvents();
-
         }
-
+    
         private bool ContainsNode(TreeNode node1, TreeNode node2)
         {
             try

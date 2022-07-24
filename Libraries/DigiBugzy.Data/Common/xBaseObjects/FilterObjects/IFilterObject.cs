@@ -25,7 +25,7 @@
 
         public int? CategoryId { get; set; }
 
-        public List<CustomFieldValue> CustomFields { get; set; }
+        public List<CustomFieldListOptions> CustomFields { get; set; }
 
         //General
         public bool LikeSearch { get; set; }

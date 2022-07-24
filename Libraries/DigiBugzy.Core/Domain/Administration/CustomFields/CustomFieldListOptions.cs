@@ -1,7 +1,7 @@
 ﻿namespace DigiBugzy.Core.Domain.Administration.CustomFields
 {
-    [Table(name: nameof(CustomFieldValue), Schema = DatabaseConstants.Schemas.Admin)]
-    public class CustomFieldValue : BaseEntity
+    [Table(name: nameof(CustomFieldTypeListOptions), Schema = DatabaseConstants.Schemas.Admin)]
+    public class CustomFieldTypeListOptions : BaseEntity
     {
         [Required]
         public int CustomFieldId { get; set; }

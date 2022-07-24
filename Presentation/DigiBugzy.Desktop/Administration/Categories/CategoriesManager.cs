@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using DigiBugzy.Core.Domain.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop.Administration.Categories
 {
@@ -233,6 +234,18 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 if (SelectedCategory.ParentId > 0)
                 {
                     cmbParents.Visible = chkParent.Checked = true;
+
+                    var index = 0;
+                    foreach (var item in cmbParents.Items)
+                    {
+                        if (item is Category x && x.Id == SelectedCategory.Id)
+                        {
+                            cmbParents.SelectedIndex = index;
+                            break;
+                        }
+
+                        index++;
+                    }
                 }
             }
 

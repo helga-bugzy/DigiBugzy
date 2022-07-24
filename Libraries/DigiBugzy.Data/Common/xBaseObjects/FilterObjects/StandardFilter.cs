@@ -26,7 +26,7 @@ namespace DigiBugzy.Data.Common.xBaseObjects.FilterObjects
 
         public int? CategoryId { get; set; } 
 
-        public List<CustomFieldValue> CustomFields { get; set; } = new();
+        public List<CustomFieldListOptions> CustomFields { get; set; } = new();
 
         public StandardFilter(
             bool includeInActive = false,
