@@ -348,6 +348,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             using var service = new CategoryService(Globals.GetConnectionString());
             service.Delete(SelectedCategory.Id);
 
+            LoadCategories();
             SelectedCategory = new Category();
             LoadCategoryEditor();
         }
