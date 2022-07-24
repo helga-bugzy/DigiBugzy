@@ -138,6 +138,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 };
                 LoadCategoryNodes(node);
 
+                node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
+
                 twCategories.Nodes.Add(node);
             }
             
@@ -202,7 +204,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 txtName.Text = SelectedCategory.Name;
                 txtDescription.Text = SelectedCategory.Description;
                 chkActive.Checked = true;
-                lblHeading.Text = $@"Edit {SelectedCategory.Name} ({SelectedCategory.Id})";
+                lblHeading.Text = $@"Edit {SelectedCategory.Name} (ID: {SelectedCategory.Id})";
 
             }
 
@@ -394,6 +396,19 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
             LoadCategories();
             SelectedCategory = new Category();
+            LoadCategoryEditor();
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            if (SelectedCategory.Id <= 0) return;
+            SelectedCategory.IsDeleted = false;
+            SelectedCategory.IsActive = true;
+            using var service = new CategoryService(Globals.GetConnectionString());
+            service.Update(SelectedCategory);
+
+            LoadCategories();
+            //SelectedCategory = new Category();
             LoadCategoryEditor();
         }
 
