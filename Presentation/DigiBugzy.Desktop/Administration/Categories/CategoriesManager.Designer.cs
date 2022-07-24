@@ -34,8 +34,6 @@
             this.lblClassification = new DevExpress.XtraEditors.LabelControl();
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
             this.splitContent = new DevExpress.XtraEditors.SplitContainerControl();
-            this.treeCategories = new DevExpress.XtraTreeList.TreeList();
-            this.tcolName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.splitEditors = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.pnlEditor = new DevExpress.XtraEditors.PanelControl();
@@ -62,6 +60,7 @@
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
+            this.twCategories = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -78,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContent.Panel2)).BeginInit();
             this.splitContent.Panel2.SuspendLayout();
             this.splitContent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.treeCategories)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel1)).BeginInit();
             this.splitEditors.Panel1.SuspendLayout();
@@ -179,7 +177,7 @@
             // 
             // splitContent.Panel1
             // 
-            this.splitContent.Panel1.Controls.Add(this.treeCategories);
+            this.splitContent.Panel1.Controls.Add(this.twCategories);
             this.splitContent.Panel1.Text = "Panel1";
             // 
             // splitContent.Panel2
@@ -189,25 +187,6 @@
             this.splitContent.Size = new System.Drawing.Size(1503, 790);
             this.splitContent.SplitterPosition = 313;
             this.splitContent.TabIndex = 0;
-            // 
-            // treeCategories
-            // 
-            this.treeCategories.Caption = "Categories";
-            this.treeCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-            this.tcolName});
-            this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeCategories.Location = new System.Drawing.Point(0, 0);
-            this.treeCategories.Name = "treeCategories";
-            this.treeCategories.Size = new System.Drawing.Size(313, 790);
-            this.treeCategories.TabIndex = 0;
-            // 
-            // tcolName
-            // 
-            this.tcolName.Caption = "Name";
-            this.tcolName.FieldName = "Name";
-            this.tcolName.Name = "tcolName";
-            this.tcolName.Visible = true;
-            this.tcolName.VisibleIndex = 0;
             // 
             // splitEditors
             // 
@@ -502,6 +481,14 @@
             this.lblCustomFieldsHeading.TabIndex = 1;
             this.lblCustomFieldsHeading.Text = "Custom Fields";
             // 
+            // twCategories
+            // 
+            this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.twCategories.Location = new System.Drawing.Point(0, 0);
+            this.twCategories.Name = "twCategories";
+            this.twCategories.Size = new System.Drawing.Size(313, 790);
+            this.twCategories.TabIndex = 0;
+            // 
             // CategoriesManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -528,7 +515,6 @@
             this.splitContent.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContent)).EndInit();
             this.splitContent.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.treeCategories)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel1)).EndInit();
             this.splitEditors.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel2)).EndInit();
@@ -576,7 +562,6 @@
         private DevExpress.XtraEditors.PanelControl pnlFilter;
         private DevExpress.XtraEditors.PanelControl pnlContent;
         private DevExpress.XtraEditors.SplitContainerControl splitContent;
-        private DevExpress.XtraTreeList.TreeList treeCategories;
         private ComboBox cmbClassifications;
         private DevExpress.XtraEditors.LabelControl lblClassification;
         private DevExpress.XtraEditors.SplitContainerControl splitEditors;
@@ -605,6 +590,6 @@
         private DevExpress.XtraEditors.PanelControl panelControl6;
         private DevExpress.XtraEditors.LabelControl lblCustomFieldsHeading;
         private ComboBox cmbParents;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn tcolName;
+        private TreeView twCategories;
     }
 }

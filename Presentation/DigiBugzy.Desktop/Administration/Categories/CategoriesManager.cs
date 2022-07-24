@@ -72,17 +72,18 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void LoadCategories()
         {
+            twCategories.Nodes.Clear();
+
             if (_classificationId <= 0)
             {
-                treeCategories.ClearNodes();
-                treeCategories.Enabled = false;
+                twCategories.Enabled = false;
                 Application.DoEvents();
                 return;
             }
 
-            treeCategories.Enabled = true;
+            twCategories.Enabled = true;
 
-            treeCategories.ClearNodes();
+            
             if (_classificationId <= 0) return;
 
             using var service = new CategoryService(Globals.GetConnectionString());
@@ -97,21 +98,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
         private void LoadCategoryNodes()
         {
 
-            //Prepare the grid
-            treeCategories.BeginUpdate();
-            treeCategories.Columns.Clear();
-            var idCol = treeCategories.Columns.Add();
-            idCol.FieldName = "Id";
-            idCol.Name = "colId";
-            idCol.Caption = @"#";
-
-            var nameCol = treeCategories.Columns.Add();
-            nameCol.FieldName = "Name";
-            nameCol.Name = "colName";
-            nameCol.Caption = @"Name";
-            treeCategories.EndUpdate();
-
-
+          
             //Get all parents
             var parents = (from c in Categories
                     where c.ParentId == null
@@ -126,8 +113,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 .ToList();
             
             //Loop and add
-            treeCategories.BeginUnboundLoad();
-
             foreach (var parent in parents)
             {
                 var node = new TreeNode(text: parent.Name)
@@ -136,10 +121,9 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 };
                 LoadCategoryNodes(node);
 
-                treeCategories.Nodes.Add(node);
+                twCategories.Nodes.Add(node);
             }
-
-            treeCategories.EndUnboundLoad();
+            
 
         }
 
@@ -224,6 +208,12 @@ namespace DigiBugzy.Desktop.Administration.Categories
                     cmbParents.Visible = chkParent.Checked = true;
                 }
             }
+
+            cmbParents.DataSource = source;
+            cmbParents.DisplayMember = "Name";
+            cmbParents.ValueMember = "Id";
+
+            Application.DoEvents();
 
         }
 
