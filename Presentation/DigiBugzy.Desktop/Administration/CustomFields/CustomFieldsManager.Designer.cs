@@ -62,6 +62,7 @@
             this.pnlOptionsEditor = new DevExpress.XtraEditors.PanelControl();
             this.pnlOptionsGrid = new DevExpress.XtraEditors.PanelControl();
             this.grdOptions = new System.Windows.Forms.DataGridView();
+            this.colOptionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlOptionsHeading = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
@@ -71,7 +72,6 @@
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             this.cmbTypes = new System.Windows.Forms.ComboBox();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
-            this.colOptionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
@@ -494,7 +494,13 @@
             this.grdOptions.RowTemplate.Height = 25;
             this.grdOptions.Size = new System.Drawing.Size(592, 507);
             this.grdOptions.TabIndex = 0;
+            this.grdOptions.Visible = false;
             this.grdOptions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdOptions_CellClick);
+            // 
+            // colOptionName
+            // 
+            this.colOptionName.HeaderText = "Name";
+            this.colOptionName.Name = "colOptionName";
             // 
             // pnlOptionsHeading
             // 
@@ -602,11 +608,6 @@
             this.lblType.Size = new System.Drawing.Size(24, 13);
             this.lblType.TabIndex = 3;
             this.lblType.Text = "Type";
-            // 
-            // colOptionName
-            // 
-            this.colOptionName.HeaderText = "Name";
-            this.colOptionName.Name = "colOptionName";
             // 
             // CustomFieldsManager
             // 

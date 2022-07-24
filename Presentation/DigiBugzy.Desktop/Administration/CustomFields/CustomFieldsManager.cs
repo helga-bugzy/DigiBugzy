@@ -1,13 +1,6 @@
-﻿using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Controls;
 using DigiBugzy.Core.Domain.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop.Administration.CustomFields
@@ -92,31 +85,22 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadCustomFieldTypes()
         {
+            cmbTypes.Items.Clear();
+            cmbTypes.DisplayMember = "Name";
             using var service = new CustomFieldTypeService(Globals.GetConnectionString());
             var collection = service.Get(new StandardFilter { DigiAdminId = Globals.DigiAdministration.Id });
+
             cmbTypes.DataSource = collection;
             cmbTypes.DisplayMember = "Name";
             cmbTypes.ValueMember = "Id";
 
-            if (SelectedCustomField.Id <= 0)
-            {
-                cmbTypes.SelectedItem = -1;
-            }
-            else
-            {
-                var index = 0;
-                foreach (var item in cmbTypes.Items)
-                {
-                    if (item is CustomFieldType x && x.Id == SelectedCustomField.Id)
-                    {
-                        cmbTypes.SelectedIndex = index;
-                        break;
-                    }
+            cmbTypes.SelectedIndex = -1;
 
-                    index++;
-                }
+            if (SelectedCustomField.Id > 0)
+            {
+                using var tService = new CustomFieldTypeService(Globals.GetConnectionString());
+                cmbTypes.SelectedItem = tService.GetById(SelectedCustomField.CustomFieldTypeId);
             }
-
 
             Application.DoEvents();
         }
@@ -160,6 +144,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 twCustomFields.Nodes.Add(node);
             }
 
+            LoadCustomFieldEditor();
         }
 
 
