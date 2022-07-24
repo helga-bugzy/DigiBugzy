@@ -151,10 +151,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 var node = new TreeNode(text: item.Name)
                 {
                     Tag = item.Id,
-                    NodeFont = CreateFont(item.IsDeleted, item.IsActive)
+                    NodeFont = CreateFont(item.IsDeleted, item.IsActive),
+                    Text = item.Name
                 };
-
-                node.Text = item.Name;
 
                 twCustomFields.Nodes.Add(node);
             }
@@ -193,6 +192,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             }
 
             btnRestore.Visible = SelectedCustomField.IsDeleted;
+            LoadCustomFieldListOptions();
             
 
             Application.DoEvents();
@@ -209,31 +209,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 using var service = new CustomFieldTypeService(Globals.GetConnectionString());
             }
         }
-    
-        private bool ContainsNode(TreeNode node1, TreeNode node2)
-        {
-            try
-            {
-                while (true)
-                {
-                    // Check the parent node of the second node.  
-                    if (node2.Parent == null) return false;
-                    if (node2.Parent.Equals(node1)) return true;
 
-                    // If the parent node is not null or equal to the first node,   
-                    // call the ContainsNode method recursively using the parent of   
-                    // the second node.  
-                    node2 = node2.Parent;
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
-        }
 
         private Font CreateFont(bool isDeleted, bool isActive)
         {

@@ -31,6 +31,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
             if (current.Count > 0) Update(entity);
 
+            dbContext.CustomFields.Add(entity);
             dbContext.SaveChanges();
         }
 
@@ -39,7 +40,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
             if (hardDelete)
             {
                 var entity = GetById(id);
-                if (entity != null || entity.Id > 0)
+                if (entity != null || entity!.Id > 0)
                 {
                     dbContext.CustomFields.Remove(entity);
                     dbContext.SaveChanges();

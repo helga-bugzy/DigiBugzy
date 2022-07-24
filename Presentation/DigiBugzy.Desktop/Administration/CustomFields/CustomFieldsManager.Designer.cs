@@ -587,7 +587,6 @@
             this.cmbTypes.Name = "cmbTypes";
             this.cmbTypes.Size = new System.Drawing.Size(502, 21);
             this.cmbTypes.TabIndex = 2;
-            this.cmbTypes.Visible = false;
             // 
             // lblType
             // 
