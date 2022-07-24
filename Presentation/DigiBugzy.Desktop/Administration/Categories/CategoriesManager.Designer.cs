@@ -191,13 +191,18 @@
             // 
             // twCategories
             // 
+            this.twCategories.AllowDrop = true;
             this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.twCategories.Location = new System.Drawing.Point(0, 0);
             this.twCategories.Name = "twCategories";
             this.twCategories.Size = new System.Drawing.Size(313, 790);
             this.twCategories.TabIndex = 0;
+            this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
             this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCategories_NodeMouseClick);
             this.twCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.twCategories_DragDrop);
+            this.twCategories.DragEnter += new System.Windows.Forms.DragEventHandler(this.twCategories_DragEnter);
+            this.twCategories.DragOver += new System.Windows.Forms.DragEventHandler(this.twCategories_DragOver);
+            this.twCategories.DragLeave += new System.EventHandler(this.twCategories_DragLeave);
             // 
             // splitEditors
             // 
@@ -469,6 +474,7 @@
             this.btnAddNew.Size = new System.Drawing.Size(75, 23);
             this.btnAddNew.TabIndex = 1;
             this.btnAddNew.Text = "Add New";
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // lblHeading
             // 

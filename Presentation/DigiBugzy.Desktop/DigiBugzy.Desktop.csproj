@@ -33,9 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Administration\CustomFields\" />
     <Folder Include="Finance\" />
-    <Folder Include="Products\" />
+    <Folder Include="Projects\" />
     <Folder Include="Projects\" />
   </ItemGroup>
 
