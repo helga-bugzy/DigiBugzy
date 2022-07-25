@@ -85,6 +85,7 @@
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             this.cmbTypes = new System.Windows.Forms.ComboBox();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
@@ -151,6 +152,7 @@
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).BeginInit();
             this.tablePanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl6
@@ -423,6 +425,7 @@
             // 
             // splitEditors.Panel2
             // 
+            this.splitEditors.Panel2.Controls.Add(this.panelControl7);
             this.splitEditors.Panel2.Controls.Add(this.panelControl6);
             this.splitEditors.Panel2.Text = "Panel2";
             this.splitEditors.Size = new System.Drawing.Size(1268, 806);
@@ -772,6 +775,13 @@
             this.lblType.TabIndex = 3;
             this.lblType.Text = "Type";
             // 
+            // panelControl7
+            // 
+            this.panelControl7.Location = new System.Drawing.Point(81, 73);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(223, 111);
+            this.panelControl7.TabIndex = 1;
+            // 
             // CustomFieldsManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -852,6 +862,7 @@
             this.panelControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
             this.tablePanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -915,5 +926,6 @@
         private DevExpress.XtraEditors.PanelControl pnlGridHolder;
         private DevExpress.XtraEditors.SimpleButton btnOptionSave;
         private DevExpress.XtraEditors.SimpleButton bnOptionNew;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
     }
 }

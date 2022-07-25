@@ -184,6 +184,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void LoadCategoryEditor()
         {
+            LoadCustomFieldMappings();
+
             if (_classificationId <= 0)
             {
                 pnlEditor.Visible = false;
@@ -256,6 +258,28 @@ namespace DigiBugzy.Desktop.Administration.Categories
             Application.DoEvents();
 
         }
+
+        private void LoadCustomFieldMappings()
+        {
+            treeCFMappings.Nodes.Clear();
+            if (_classificationId <= 0 || SelectedCategory.Id <= 0) return;
+
+            using var service = new CategoryService(Globals.GetConnectionString());
+            var collection = service.GetCustomFieldMappings(SelectedCategory.Id, _classificationId);
+
+            foreach (var item in collection)
+            {
+                var node = new TreeNode()
+                {
+                    Text = $@"{item.Name} ({item.TypeName})",
+                    Checked = item.IsMapped
+                };
+
+                treeCFMappings.Nodes.Add(node);
+            }
+        }
+
+
 
         private bool ContainsNode(TreeNode node1, TreeNode node2)
         {

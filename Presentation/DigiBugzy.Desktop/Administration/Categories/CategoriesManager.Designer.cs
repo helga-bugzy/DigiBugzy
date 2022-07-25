@@ -64,6 +64,14 @@
             this.pnlHeader = new DevExpress.XtraEditors.PanelControl();
             this.btnAddNew = new DevExpress.XtraEditors.SimpleButton();
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
+            this.pnlMappings = new DevExpress.XtraEditors.PanelControl();
+            this.treeCFMappings = new System.Windows.Forms.TreeView();
+            this.pnlMappingsFilter = new DevExpress.XtraEditors.PanelControl();
+            this.txtMappingsFilterName = new DevExpress.XtraEditors.TextEdit();
+            this.lblMappingFilterName = new System.Windows.Forms.Label();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -114,6 +122,11 @@
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlHeader)).BeginInit();
             this.pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlMappings)).BeginInit();
+            this.pnlMappings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsFilter)).BeginInit();
+            this.pnlMappingsFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMappingsFilterName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             this.SuspendLayout();
@@ -256,6 +269,7 @@
             // 
             // splitEditors.Panel2
             // 
+            this.splitEditors.Panel2.Controls.Add(this.pnlMappings);
             this.splitEditors.Panel2.Controls.Add(this.panelControl6);
             this.splitEditors.Panel2.Text = "Panel2";
             this.splitEditors.Size = new System.Drawing.Size(1180, 790);
@@ -536,6 +550,82 @@
             this.lblHeading.TabIndex = 0;
             this.lblHeading.Text = "New Category";
             // 
+            // pnlMappings
+            // 
+            this.pnlMappings.Controls.Add(this.treeCFMappings);
+            this.pnlMappings.Controls.Add(this.pnlMappingsFilter);
+            this.pnlMappings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMappings.Location = new System.Drawing.Point(0, 41);
+            this.pnlMappings.Name = "pnlMappings";
+            this.pnlMappings.Size = new System.Drawing.Size(546, 749);
+            this.pnlMappings.TabIndex = 1;
+            // 
+            // treeCFMappings
+            // 
+            this.treeCFMappings.CheckBoxes = true;
+            this.treeCFMappings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeCFMappings.Location = new System.Drawing.Point(2, 47);
+            this.treeCFMappings.Name = "treeCFMappings";
+            this.treeCFMappings.Size = new System.Drawing.Size(542, 700);
+            this.treeCFMappings.TabIndex = 1;
+            // 
+            // pnlMappingsFilter
+            // 
+            this.pnlMappingsFilter.Controls.Add(this.txtMappingsFilterName);
+            this.pnlMappingsFilter.Controls.Add(this.lblMappingFilterName);
+            this.pnlMappingsFilter.Controls.Add(this.simpleButton1);
+            this.pnlMappingsFilter.Controls.Add(this.checkBox1);
+            this.pnlMappingsFilter.Controls.Add(this.checkBox2);
+            this.pnlMappingsFilter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMappingsFilter.Location = new System.Drawing.Point(2, 2);
+            this.pnlMappingsFilter.Name = "pnlMappingsFilter";
+            this.pnlMappingsFilter.Size = new System.Drawing.Size(542, 45);
+            this.pnlMappingsFilter.TabIndex = 0;
+            // 
+            // txtMappingsFilterName
+            // 
+            this.txtMappingsFilterName.Location = new System.Drawing.Point(43, 12);
+            this.txtMappingsFilterName.Name = "txtMappingsFilterName";
+            this.txtMappingsFilterName.Size = new System.Drawing.Size(199, 20);
+            this.txtMappingsFilterName.TabIndex = 12;
+            // 
+            // lblMappingFilterName
+            // 
+            this.lblMappingFilterName.AutoSize = true;
+            this.lblMappingFilterName.Location = new System.Drawing.Point(3, 11);
+            this.lblMappingFilterName.Name = "lblMappingFilterName";
+            this.lblMappingFilterName.Size = new System.Drawing.Size(34, 13);
+            this.lblMappingFilterName.TabIndex = 11;
+            this.lblMappingFilterName.Text = "Name";
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(459, 8);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
+            this.simpleButton1.TabIndex = 10;
+            this.simpleButton1.Text = "Filter...";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(357, 11);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(101, 17);
+            this.checkBox1.TabIndex = 9;
+            this.checkBox1.Text = "Include Deleted";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(248, 11);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(103, 17);
+            this.checkBox2.TabIndex = 8;
+            this.checkBox2.Text = "Include Inactive";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // panelControl6
             // 
             this.panelControl6.Controls.Add(this.lblCustomFieldsHeading);
@@ -616,6 +706,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlHeader)).EndInit();
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlMappings)).EndInit();
+            this.pnlMappings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsFilter)).EndInit();
+            this.pnlMappingsFilter.ResumeLayout(false);
+            this.pnlMappingsFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMappingsFilterName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
             this.panelControl6.PerformLayout();
@@ -663,5 +759,13 @@
         private CheckBox chkFilterInactive;
         private DevExpress.XtraEditors.SimpleButton btnFilter;
         private DevExpress.XtraEditors.SimpleButton btnRestore;
+        private DevExpress.XtraEditors.PanelControl pnlMappings;
+        private TreeView treeCFMappings;
+        private DevExpress.XtraEditors.PanelControl pnlMappingsFilter;
+        private DevExpress.XtraEditors.TextEdit txtMappingsFilterName;
+        private Label lblMappingFilterName;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private CheckBox checkBox1;
+        private CheckBox checkBox2;
     }
 }

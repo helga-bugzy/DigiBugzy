@@ -74,7 +74,6 @@ namespace DigiBugzy.Services.Administration.Categories
             return query
                 .Include(admin => admin.CustomFieldMappings)
                 .ThenInclude(cfield => cfield.CustomField)
-                .Include(admin => admin.DigiAdmin)
                 .ToList();
 
 
@@ -86,8 +85,7 @@ namespace DigiBugzy.Services.Administration.Categories
 
             var query = dbContext.Categories.Where(c => c.Id == id)
                 .Include(admin => admin.CustomFieldMappings)
-                .ThenInclude(cfield => cfield.CustomField)
-                .Include(admin => admin.DigiAdmin);
+                .ThenInclude(cfield => cfield.CustomField);
 
             return query.FirstOrDefault();
         }
