@@ -21,6 +21,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
         #endregion
 
         #region Methods
+
         public void Create(CustomField entity)
         {
             var filter = new StandardFilter
@@ -33,7 +34,25 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
             dbContext.CustomFields.Add(entity);
             dbContext.SaveChanges();
-        }
+
+            if (entity.CustomFieldTypeId == 7)
+            {
+
+
+                var option = new CustomFieldListOption()
+                {
+                    CreatedOn = DateTime.Now,
+                    CustomFieldId = entity.Id,
+                    DigiAdminId = entity.DigiAdminId,
+                    IsDeleted = false,
+                    IsActive = true,
+                    Value = @"Default Option"
+                };
+
+                dbContext.CustomFieldListOptions.Add(option);
+                dbContext.SaveChanges();
+            }
+    }
 
         public void Delete(int id, bool hardDelete = false)
         {

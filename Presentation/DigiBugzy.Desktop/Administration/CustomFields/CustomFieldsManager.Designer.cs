@@ -61,9 +61,22 @@
             this.pnlOptions = new DevExpress.XtraEditors.PanelControl();
             this.pnlOptionsEditor = new DevExpress.XtraEditors.PanelControl();
             this.pnlOptionsGrid = new DevExpress.XtraEditors.PanelControl();
+            this.pnlGridHolder = new DevExpress.XtraEditors.PanelControl();
             this.grdOptions = new System.Windows.Forms.DataGridView();
+            this.colOptionId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colOptionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlOptEditor = new DevExpress.XtraEditors.PanelControl();
+            this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
+            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.btnOptionSave = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOptionRestore = new DevExpress.XtraEditors.SimpleButton();
+            this.btnOptionDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.chkOptionActive = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtOptionName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlOptionsHeading = new DevExpress.XtraEditors.PanelControl();
+            this.bnOptionNew = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
@@ -121,7 +134,15 @@
             this.pnlOptionsEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlOptionsGrid)).BeginInit();
             this.pnlOptionsGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlGridHolder)).BeginInit();
+            this.pnlGridHolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdOptions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlOptEditor)).BeginInit();
+            this.pnlOptEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).BeginInit();
+            this.tablePanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+            this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlOptionsHeading)).BeginInit();
             this.pnlOptionsHeading.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
@@ -232,7 +253,7 @@
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(529, 11);
+            this.btnAddNew.Location = new System.Drawing.Point(500, 10);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(75, 23);
             this.btnAddNew.TabIndex = 1;
@@ -304,7 +325,7 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(775, 13);
+            this.btnFilter.Location = new System.Drawing.Point(827, 15);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(75, 23);
             this.btnFilter.TabIndex = 4;
@@ -314,7 +335,7 @@
             // chkIncludeDeleted
             // 
             this.chkIncludeDeleted.AutoSize = true;
-            this.chkIncludeDeleted.Location = new System.Drawing.Point(625, 15);
+            this.chkIncludeDeleted.Location = new System.Drawing.Point(620, 19);
             this.chkIncludeDeleted.Name = "chkIncludeDeleted";
             this.chkIncludeDeleted.Size = new System.Drawing.Size(101, 17);
             this.chkIncludeDeleted.TabIndex = 3;
@@ -325,7 +346,7 @@
             // chkFilterInactive
             // 
             this.chkFilterInactive.AutoSize = true;
-            this.chkFilterInactive.Location = new System.Drawing.Point(515, 16);
+            this.chkFilterInactive.Location = new System.Drawing.Point(453, 17);
             this.chkFilterInactive.Name = "chkFilterInactive";
             this.chkFilterInactive.Size = new System.Drawing.Size(103, 17);
             this.chkFilterInactive.TabIndex = 2;
@@ -338,7 +359,7 @@
             this.cmbClassifications.FormattingEnabled = true;
             this.cmbClassifications.Location = new System.Drawing.Point(82, 13);
             this.cmbClassifications.Name = "cmbClassifications";
-            this.cmbClassifications.Size = new System.Drawing.Size(396, 21);
+            this.cmbClassifications.Size = new System.Drawing.Size(341, 21);
             this.cmbClassifications.TabIndex = 1;
             this.cmbClassifications.SelectedIndexChanged += new System.EventHandler(this.cmbClassifications_SelectedIndexChanged);
             // 
@@ -475,41 +496,183 @@
             // 
             // pnlOptionsGrid
             // 
-            this.pnlOptionsGrid.Controls.Add(this.grdOptions);
+            this.pnlOptionsGrid.Controls.Add(this.pnlGridHolder);
+            this.pnlOptionsGrid.Controls.Add(this.pnlOptEditor);
             this.pnlOptionsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOptionsGrid.Location = new System.Drawing.Point(2, 2);
             this.pnlOptionsGrid.Name = "pnlOptionsGrid";
             this.pnlOptionsGrid.Size = new System.Drawing.Size(596, 511);
             this.pnlOptionsGrid.TabIndex = 1;
             // 
+            // pnlGridHolder
+            // 
+            this.pnlGridHolder.Controls.Add(this.grdOptions);
+            this.pnlGridHolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlGridHolder.Location = new System.Drawing.Point(2, 130);
+            this.pnlGridHolder.Name = "pnlGridHolder";
+            this.pnlGridHolder.Size = new System.Drawing.Size(592, 379);
+            this.pnlGridHolder.TabIndex = 2;
+            // 
             // grdOptions
             // 
+            this.grdOptions.AllowUserToAddRows = false;
             this.grdOptions.AllowUserToOrderColumns = true;
             this.grdOptions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdOptions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colOptionId,
             this.colOptionName});
             this.grdOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdOptions.Location = new System.Drawing.Point(2, 2);
             this.grdOptions.Name = "grdOptions";
             this.grdOptions.RowTemplate.Height = 25;
-            this.grdOptions.Size = new System.Drawing.Size(592, 507);
+            this.grdOptions.Size = new System.Drawing.Size(588, 375);
             this.grdOptions.TabIndex = 0;
             this.grdOptions.Visible = false;
             this.grdOptions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdOptions_CellClick);
+            this.grdOptions.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdOptions_CellEndEdit);
+            // 
+            // colOptionId
+            // 
+            this.colOptionId.Frozen = true;
+            this.colOptionId.HeaderText = "Id";
+            this.colOptionId.Name = "colOptionId";
+            this.colOptionId.Visible = false;
             // 
             // colOptionName
             // 
+            this.colOptionName.DataPropertyName = "Name";
             this.colOptionName.HeaderText = "Name";
             this.colOptionName.Name = "colOptionName";
             // 
+            // pnlOptEditor
+            // 
+            this.pnlOptEditor.Controls.Add(this.tablePanel4);
+            this.pnlOptEditor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlOptEditor.Location = new System.Drawing.Point(2, 2);
+            this.pnlOptEditor.Name = "pnlOptEditor";
+            this.pnlOptEditor.Size = new System.Drawing.Size(592, 128);
+            this.pnlOptEditor.TabIndex = 1;
+            // 
+            // tablePanel4
+            // 
+            this.tablePanel4.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 8.74F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 51.26F)});
+            this.tablePanel4.Controls.Add(this.panelControl4);
+            this.tablePanel4.Controls.Add(this.chkOptionActive);
+            this.tablePanel4.Controls.Add(this.label2);
+            this.tablePanel4.Controls.Add(this.txtOptionName);
+            this.tablePanel4.Controls.Add(this.label1);
+            this.tablePanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel4.Location = new System.Drawing.Point(2, 2);
+            this.tablePanel4.Name = "tablePanel4";
+            this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 42F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            this.tablePanel4.Size = new System.Drawing.Size(588, 124);
+            this.tablePanel4.TabIndex = 0;
+            // 
+            // panelControl4
+            // 
+            this.tablePanel4.SetColumn(this.panelControl4, 1);
+            this.panelControl4.Controls.Add(this.btnOptionSave);
+            this.panelControl4.Controls.Add(this.btnOptionRestore);
+            this.panelControl4.Controls.Add(this.btnOptionDelete);
+            this.panelControl4.Location = new System.Drawing.Point(89, 55);
+            this.panelControl4.Name = "panelControl4";
+            this.tablePanel4.SetRow(this.panelControl4, 2);
+            this.panelControl4.Size = new System.Drawing.Size(496, 36);
+            this.panelControl4.TabIndex = 6;
+            // 
+            // btnOptionSave
+            // 
+            this.btnOptionSave.Location = new System.Drawing.Point(395, 8);
+            this.btnOptionSave.Name = "btnOptionSave";
+            this.btnOptionSave.Size = new System.Drawing.Size(75, 23);
+            this.btnOptionSave.TabIndex = 2;
+            this.btnOptionSave.Text = "Save";
+            this.btnOptionSave.Click += new System.EventHandler(this.btnOptionSave_Click);
+            // 
+            // btnOptionRestore
+            // 
+            this.btnOptionRestore.Location = new System.Drawing.Point(86, 8);
+            this.btnOptionRestore.Name = "btnOptionRestore";
+            this.btnOptionRestore.Size = new System.Drawing.Size(75, 23);
+            this.btnOptionRestore.TabIndex = 1;
+            this.btnOptionRestore.Text = "Restore";
+            this.btnOptionRestore.Click += new System.EventHandler(this.btnOptionRestore_Click);
+            // 
+            // btnOptionDelete
+            // 
+            this.btnOptionDelete.Location = new System.Drawing.Point(5, 8);
+            this.btnOptionDelete.Name = "btnOptionDelete";
+            this.btnOptionDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnOptionDelete.TabIndex = 0;
+            this.btnOptionDelete.Text = "Delete";
+            this.btnOptionDelete.Click += new System.EventHandler(this.btnOptionDelete_Click);
+            // 
+            // chkOptionActive
+            // 
+            this.chkOptionActive.AutoSize = true;
+            this.tablePanel4.SetColumn(this.chkOptionActive, 1);
+            this.chkOptionActive.Location = new System.Drawing.Point(89, 32);
+            this.chkOptionActive.Name = "chkOptionActive";
+            this.tablePanel4.SetRow(this.chkOptionActive, 1);
+            this.chkOptionActive.Size = new System.Drawing.Size(15, 14);
+            this.chkOptionActive.TabIndex = 5;
+            this.chkOptionActive.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.tablePanel4.SetColumn(this.label2, 0);
+            this.label2.Location = new System.Drawing.Point(3, 32);
+            this.label2.Name = "label2";
+            this.tablePanel4.SetRow(this.label2, 1);
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Active";
+            // 
+            // txtOptionName
+            // 
+            this.tablePanel4.SetColumn(this.txtOptionName, 1);
+            this.txtOptionName.Location = new System.Drawing.Point(89, 3);
+            this.txtOptionName.Name = "txtOptionName";
+            this.tablePanel4.SetRow(this.txtOptionName, 0);
+            this.txtOptionName.Size = new System.Drawing.Size(496, 21);
+            this.txtOptionName.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.tablePanel4.SetColumn(this.label1, 0);
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.tablePanel4.SetRow(this.label1, 0);
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Name";
+            // 
             // pnlOptionsHeading
             // 
+            this.pnlOptionsHeading.Controls.Add(this.bnOptionNew);
             this.pnlOptionsHeading.Controls.Add(this.labelControl1);
             this.pnlOptionsHeading.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlOptionsHeading.Location = new System.Drawing.Point(2, 2);
             this.pnlOptionsHeading.Name = "pnlOptionsHeading";
             this.pnlOptionsHeading.Size = new System.Drawing.Size(600, 39);
             this.pnlOptionsHeading.TabIndex = 2;
+            // 
+            // bnOptionNew
+            // 
+            this.bnOptionNew.Location = new System.Drawing.Point(490, 10);
+            this.bnOptionNew.Name = "bnOptionNew";
+            this.bnOptionNew.Size = new System.Drawing.Size(75, 23);
+            this.bnOptionNew.TabIndex = 1;
+            this.bnOptionNew.Text = "Add New";
+            this.bnOptionNew.Click += new System.EventHandler(this.bnOptionNew_Click);
             // 
             // labelControl1
             // 
@@ -669,7 +832,16 @@
             this.pnlOptionsEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlOptionsGrid)).EndInit();
             this.pnlOptionsGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlGridHolder)).EndInit();
+            this.pnlGridHolder.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdOptions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlOptEditor)).EndInit();
+            this.pnlOptEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).EndInit();
+            this.tablePanel4.ResumeLayout(false);
+            this.tablePanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+            this.panelControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlOptionsHeading)).EndInit();
             this.pnlOptionsHeading.ResumeLayout(false);
             this.pnlOptionsHeading.PerformLayout();
@@ -729,6 +901,19 @@
         private DevExpress.XtraEditors.PanelControl pnlOptionsEditor;
         private DevExpress.XtraEditors.PanelControl pnlOptionsGrid;
         private DataGridView grdOptions;
+        private DataGridViewTextBoxColumn colOptionId;
         private DataGridViewTextBoxColumn colOptionName;
+        private DevExpress.XtraEditors.PanelControl pnlOptEditor;
+        private DevExpress.Utils.Layout.TablePanel tablePanel4;
+        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraEditors.SimpleButton btnOptionRestore;
+        private DevExpress.XtraEditors.SimpleButton btnOptionDelete;
+        private CheckBox chkOptionActive;
+        private Label label2;
+        private TextBox txtOptionName;
+        private Label label1;
+        private DevExpress.XtraEditors.PanelControl pnlGridHolder;
+        private DevExpress.XtraEditors.SimpleButton btnOptionSave;
+        private DevExpress.XtraEditors.SimpleButton bnOptionNew;
     }
 }

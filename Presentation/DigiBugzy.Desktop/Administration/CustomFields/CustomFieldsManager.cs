@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Controls;
 using DigiBugzy.Core.Domain.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop.Administration.CustomFields
@@ -15,8 +14,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private CustomField SelectedCustomField { get; set; } = new();
 
-        private bool _isDragging { get; set; }
-
+        private CustomFieldListOption SelectedListOption { get; set; } = new();
 
         #endregion
 
@@ -100,7 +98,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             if (SelectedCustomField.Id > 0)
             {
                 using var tService = new CustomFieldTypeService(Globals.GetConnectionString());
-                var cType = tService.GetById(SelectedCustomField.CustomFieldTypeId);
+               
 
                 var index = 0;
 
@@ -122,6 +120,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadCustomFields()
         {
+            grdOptions.Visible = false;
             twCustomFields.Nodes.Clear();
 
             if (_classificationId <= 0)
@@ -184,6 +183,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 chkActive.Checked = true;
                 lblHeading.Text = @"New CustomField";
                 grdOptions.Visible = false;
+                btnRestore.Visible = false;
 
             }
             else
@@ -193,8 +193,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 chkActive.Checked = true;
                 lblHeading.Text = $@"Edit {SelectedCustomField.Name} (ID: {SelectedCustomField.Id})";
 
-                grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==
-                                     (int)CustomFieldTypeEnumeration.ListType;
+                grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==7;
             }
 
             btnRestore.Visible = SelectedCustomField.IsDeleted;
@@ -206,14 +205,56 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadCustomFieldListOptions()
         {
+
+            grdOptions.Visible = false;
+            grdOptions.Columns.Clear();
+
+            LoadCustomFieldListOptionsEditor();
+
+            if (SelectedCustomField.Id > 0 &&
+                SelectedCustomField.CustomFieldTypeId != (int)CustomFieldTypeEnumeration.ListType) return;
+
+            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+            var collection = service.GetListOptions(SelectedCustomField.Id, new StandardFilter());
+            grdOptions.DataSource = collection;
             grdOptions.Visible = true;
 
-            if (SelectedCustomField.Id <= 0 ||
-                SelectedCustomField.CustomFieldTypeId == (int)CustomFieldTypeEnumeration.ListType)
+            grdOptions.AllowUserToAddRows = true;
+            grdOptions.Columns[0].Visible = false;
+            grdOptions.Columns[1].HeaderText = @"Option Name";
+            grdOptions.Columns[2].Visible = false;
+            grdOptions.Columns[3].Visible = false;
+            grdOptions.Columns[4].Visible = false;
+            grdOptions.Columns[5].Visible = false;
+            grdOptions.Columns[6].Visible = false;
+            grdOptions.Columns[7].Visible = false;
+            grdOptions.Columns[8].Visible = false;    //digiadminid
+
+        }
+
+        private void LoadCustomFieldListOptionsEditor()
+        {
+            if (_classificationId <= 0)
             {
-                grdOptions.Visible = true;
-                using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+                SelectedListOption = new CustomFieldListOption();
+                return;
             }
+
+            if (SelectedListOption.Id <= 0)
+            {
+                txtOptionName.Text = string.Empty;
+                chkOptionActive.Checked = true;
+                btnOptionRestore.Visible = false;
+            }
+            else
+            {
+                txtOptionName.Text = SelectedListOption.Value;
+                chkOptionActive.Checked = SelectedListOption.IsActive;
+                btnRestore.Visible = SelectedListOption.IsDeleted;
+            }
+
+            Application.DoEvents();
+            
         }
 
 
@@ -353,42 +394,113 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             service.Update(SelectedCustomField);
 
             LoadCustomFields();
-            //SelectedCustomField = new CustomField();
             LoadCustomFieldEditor();
         }
-
-
-
+        
         #endregion
 
         #region Treeview
 
         private void twCustomFields_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (_isDragging) return;
+         
             using var service = new CustomFieldService(Globals.GetConnectionString());
             SelectedCustomField = service.GetById(int.Parse(e.Node.Tag.ToString()!));
-
+            SelectedListOption = new CustomFieldListOption();
             LoadCustomFieldEditor();
+            Application.DoEvents();
+        }
 
+
+        #endregion
+
+        #region Options
+
+        private void grdOptions_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (SelectedCustomField.Id <= 0) return;
+            var id = int.Parse(grdOptions.Rows[e.RowIndex].Cells["Id"].Value.ToString()!);
+
+            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+            SelectedListOption = service.GetListOptionById(id);
+
+            LoadCustomFieldListOptionsEditor();
+            Application.DoEvents();
+        }
+
+        private void grdOptions_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnOptionSave_Click(object sender, EventArgs e)
+        {
+            if (SelectedCustomField.Id <= 0) return;
+
+            SelectedListOption.IsActive = chkActive.Checked;
+            SelectedListOption.IsDeleted = false;
+            SelectedListOption.Value = txtOptionName.Text.Trim();
+            SelectedListOption.DigiAdminId = Globals.DigiAdministration.Id;
+            SelectedListOption.CustomFieldId = SelectedCustomField.Id;
+
+            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+
+            if (SelectedListOption.Id <= 0)
+            {
+                SelectedListOption.CreatedOn = DateTime.Now;
+                service.AddListOption(SelectedListOption);
+            }
+            else
+            {
+                service.UpdateListOption(SelectedListOption);
+            }
+
+
+
+            LoadCustomFieldListOptions();
+        }
+
+        private void bnOptionNew_Click(object sender, EventArgs e)
+        {
+            if (SelectedCustomField.Id <= 0) return;
+
+            SelectedListOption = new CustomFieldListOption();
+            LoadCustomFieldListOptionsEditor();
             Application.DoEvents();
 
         }
 
-
-
-
-
-
-
-
-        #endregion
-
-        #endregion
-
-        private void grdOptions_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void btnOptionRestore_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("CellClick");
+            if (SelectedCustomField.Id <= 0 || SelectedListOption.Id <= 0) return;
+
+            SelectedListOption.IsActive = true;
+            SelectedListOption.IsDeleted = false;
+
+            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+            service.UpdateListOption(SelectedListOption);
+
+            LoadCustomFieldListOptions();
+
         }
+
+        private void btnOptionDelete_Click(object sender, EventArgs e)
+        {
+            if (SelectedCustomField.Id <= 0 || SelectedListOption.Id <= 0) return;
+
+            SelectedListOption.IsActive = false;
+            SelectedListOption.IsDeleted = true;
+
+            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+            service.UpdateListOption(SelectedListOption);
+
+            LoadCustomFieldListOptions();
+        }
+
+        #endregion
+
+        #endregion
+
+
     }
 }

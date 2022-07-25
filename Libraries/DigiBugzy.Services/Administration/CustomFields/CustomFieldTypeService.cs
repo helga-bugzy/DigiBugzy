@@ -176,7 +176,9 @@ namespace DigiBugzy.Services.Administration.CustomFields
         /// <inheritdoc />
         public void UpdateListOption(CustomFieldListOption entity)
         {
-            throw new NotImplementedException();
+            dbContext.CustomFieldListOptions.Update(entity);
+            dbContext.SaveChanges();
+
         }
 
 
