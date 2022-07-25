@@ -33,12 +33,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
         }
 
         #endregion
-
-        #region Public Methods
-
         
-
-        #endregion
 
         #region Helper Methods
 
@@ -261,6 +256,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void LoadCustomFieldMappings()
         {
+
             treeCFMappings.Nodes.Clear();
             lblCustomFieldsHeading.Text = @"Custom Fields";
             if (_classificationId <= 0 || SelectedCategory.Id <= 0) return;
@@ -281,8 +277,23 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
                 treeCFMappings.Nodes.Add(node);
             }
+
+            LoadCustomFieldTypes();
+
         }
 
+        private void LoadCustomFieldTypes()
+        {
+            cmbQuickAddType.DataSource = null;
+
+            using var service = new CustomFieldTypeService(Globals.GetConnectionString());
+            var collection = service.Get(new StandardFilter());
+            cmbQuickAddType.DataSource = collection;
+            cmbQuickAddType.DisplayMember = "Name";
+            cmbQuickAddType.ValueMember = "Id";
+
+            Application.DoEvents();
+        }
         
         private bool ContainsNode(TreeNode node1, TreeNode node2)
         {
@@ -564,6 +575,41 @@ namespace DigiBugzy.Desktop.Administration.Categories
         {
             using var service = new CategoryService(Globals.GetConnectionString());
             service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked);
+        }
+
+
+        #endregion
+
+        #region CustomFields QuickAdd
+
+        private void btnQuickAddClear_Click(object sender, EventArgs e)
+        {
+            cmbQuickAddType.SelectedIndex = 0;
+            txtName.Text = string.Empty;
+        }
+
+        private void btnQuickAddSave_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtName.Text)) return;
+
+            var entity = new CustomField
+            {
+                IsDeleted = false,
+                IsActive = true,
+                CustomFieldTypeId = ((cmbQuickAddType.SelectedItem as CustomFieldType)!).Id,
+                ClassificationId = _classificationId,
+                Name = txtName.Text.Trim(),
+                Description = txtName.Text.Trim(),
+                DigiAdminId = Globals.DigiAdministration.Id,
+                CreatedOn = DateTime.Now
+            };
+
+            using var service = new CustomFieldService(Globals.GetConnectionString());
+            service.Update(entity);
+
+            cmbQuickAddType.SelectedIndex = 0;
+            txtName.Text = string.Empty;
+
         }
 
         #endregion

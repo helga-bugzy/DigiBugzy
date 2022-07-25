@@ -65,13 +65,23 @@
             this.btnAddNew = new DevExpress.XtraEditors.SimpleButton();
             this.lblHeading = new DevExpress.XtraEditors.LabelControl();
             this.pnlMappings = new DevExpress.XtraEditors.PanelControl();
+            this.pnlMappingsMapper = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCFEditor = new DevExpress.XtraEditors.PanelControl();
+            this.pnlQuickAddCustomField = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
+            this.txtQuickAddName = new DevExpress.XtraEditors.TextEdit();
+            this.cmbQuickAddType = new System.Windows.Forms.ComboBox();
+            this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.btnQuickAddClear = new DevExpress.XtraEditors.SimpleButton();
+            this.btnQuickAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.treeCFMappings = new System.Windows.Forms.TreeView();
             this.pnlMappingsFilter = new DevExpress.XtraEditors.PanelControl();
             this.txtMappingsFilterName = new DevExpress.XtraEditors.TextEdit();
             this.lblMappingFilterName = new System.Windows.Forms.Label();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -124,6 +134,17 @@
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMappings)).BeginInit();
             this.pnlMappings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsMapper)).BeginInit();
+            this.pnlMappingsMapper.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCFEditor)).BeginInit();
+            this.pnlCFEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlQuickAddCustomField)).BeginInit();
+            this.pnlQuickAddCustomField.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).BeginInit();
+            this.tablePanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuickAddName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
+            this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsFilter)).BeginInit();
             this.pnlMappingsFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtMappingsFilterName.Properties)).BeginInit();
@@ -552,7 +573,7 @@
             // 
             // pnlMappings
             // 
-            this.pnlMappings.Controls.Add(this.treeCFMappings);
+            this.pnlMappings.Controls.Add(this.pnlMappingsMapper);
             this.pnlMappings.Controls.Add(this.pnlMappingsFilter);
             this.pnlMappings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMappings.Location = new System.Drawing.Point(0, 41);
@@ -560,13 +581,142 @@
             this.pnlMappings.Size = new System.Drawing.Size(546, 749);
             this.pnlMappings.TabIndex = 1;
             // 
+            // pnlMappingsMapper
+            // 
+            this.pnlMappingsMapper.Controls.Add(this.pnlCFEditor);
+            this.pnlMappingsMapper.Controls.Add(this.treeCFMappings);
+            this.pnlMappingsMapper.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMappingsMapper.Location = new System.Drawing.Point(2, 47);
+            this.pnlMappingsMapper.Name = "pnlMappingsMapper";
+            this.pnlMappingsMapper.Size = new System.Drawing.Size(542, 700);
+            this.pnlMappingsMapper.TabIndex = 2;
+            // 
+            // pnlCFEditor
+            // 
+            this.pnlCFEditor.Controls.Add(this.pnlQuickAddCustomField);
+            this.pnlCFEditor.Controls.Add(this.tablePanel4);
+            this.pnlCFEditor.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlCFEditor.Location = new System.Drawing.Point(2, 478);
+            this.pnlCFEditor.Name = "pnlCFEditor";
+            this.pnlCFEditor.Size = new System.Drawing.Size(538, 220);
+            this.pnlCFEditor.TabIndex = 2;
+            // 
+            // pnlQuickAddCustomField
+            // 
+            this.pnlQuickAddCustomField.Controls.Add(this.labelControl1);
+            this.pnlQuickAddCustomField.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlQuickAddCustomField.Location = new System.Drawing.Point(2, 2);
+            this.pnlQuickAddCustomField.Name = "pnlQuickAddCustomField";
+            this.pnlQuickAddCustomField.Size = new System.Drawing.Size(534, 35);
+            this.pnlQuickAddCustomField.TabIndex = 1;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(5, 5);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(134, 19);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "New Custom Field:";
+            // 
+            // tablePanel4
+            // 
+            this.tablePanel4.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F)});
+            this.tablePanel4.Controls.Add(this.txtQuickAddName);
+            this.tablePanel4.Controls.Add(this.cmbQuickAddType);
+            this.tablePanel4.Controls.Add(this.panelControl4);
+            this.tablePanel4.Controls.Add(this.label2);
+            this.tablePanel4.Controls.Add(this.label1);
+            this.tablePanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tablePanel4.Location = new System.Drawing.Point(2, 43);
+            this.tablePanel4.Name = "tablePanel4";
+            this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 38F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            this.tablePanel4.Size = new System.Drawing.Size(534, 175);
+            this.tablePanel4.TabIndex = 0;
+            // 
+            // txtQuickAddName
+            // 
+            this.tablePanel4.SetColumn(this.txtQuickAddName, 1);
+            this.txtQuickAddName.Location = new System.Drawing.Point(48, 29);
+            this.txtQuickAddName.Name = "txtQuickAddName";
+            this.tablePanel4.SetRow(this.txtQuickAddName, 1);
+            this.txtQuickAddName.Size = new System.Drawing.Size(484, 20);
+            this.txtQuickAddName.TabIndex = 4;
+            // 
+            // cmbQuickAddType
+            // 
+            this.tablePanel4.SetColumn(this.cmbQuickAddType, 1);
+            this.cmbQuickAddType.FormattingEnabled = true;
+            this.cmbQuickAddType.Location = new System.Drawing.Point(48, 3);
+            this.cmbQuickAddType.Name = "cmbQuickAddType";
+            this.tablePanel4.SetRow(this.cmbQuickAddType, 0);
+            this.cmbQuickAddType.Size = new System.Drawing.Size(484, 21);
+            this.cmbQuickAddType.TabIndex = 3;
+            // 
+            // panelControl4
+            // 
+            this.tablePanel4.SetColumn(this.panelControl4, 1);
+            this.panelControl4.Controls.Add(this.btnQuickAddClear);
+            this.panelControl4.Controls.Add(this.btnQuickAdd);
+            this.panelControl4.Location = new System.Drawing.Point(48, 55);
+            this.panelControl4.Name = "panelControl4";
+            this.tablePanel4.SetRow(this.panelControl4, 2);
+            this.panelControl4.Size = new System.Drawing.Size(484, 32);
+            this.panelControl4.TabIndex = 2;
+            // 
+            // btnQuickAddClear
+            // 
+            this.btnQuickAddClear.Location = new System.Drawing.Point(96, 5);
+            this.btnQuickAddClear.Name = "btnQuickAddClear";
+            this.btnQuickAddClear.Size = new System.Drawing.Size(75, 23);
+            this.btnQuickAddClear.TabIndex = 1;
+            this.btnQuickAddClear.Text = "Clear";
+            this.btnQuickAddClear.Click += new System.EventHandler(this.btnQuickAddClear_Click);
+            // 
+            // btnQuickAdd
+            // 
+            this.btnQuickAdd.Location = new System.Drawing.Point(5, 5);
+            this.btnQuickAdd.Name = "btnQuickAdd";
+            this.btnQuickAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnQuickAdd.TabIndex = 0;
+            this.btnQuickAdd.Text = "Save";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.tablePanel4.SetColumn(this.label2, 0);
+            this.label2.Location = new System.Drawing.Point(3, 32);
+            this.label2.Name = "label2";
+            this.tablePanel4.SetRow(this.label2, 1);
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.tablePanel4.SetColumn(this.label1, 0);
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.tablePanel4.SetRow(this.label1, 0);
+            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Type";
+            // 
             // treeCFMappings
             // 
             this.treeCFMappings.CheckBoxes = true;
             this.treeCFMappings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeCFMappings.Location = new System.Drawing.Point(2, 47);
+            this.treeCFMappings.Location = new System.Drawing.Point(2, 2);
             this.treeCFMappings.Name = "treeCFMappings";
-            this.treeCFMappings.Size = new System.Drawing.Size(542, 700);
+            this.treeCFMappings.Size = new System.Drawing.Size(538, 696);
             this.treeCFMappings.TabIndex = 1;
             this.treeCFMappings.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCFMappings_AfterCheck);
             // 
@@ -575,8 +725,6 @@
             this.pnlMappingsFilter.Controls.Add(this.txtMappingsFilterName);
             this.pnlMappingsFilter.Controls.Add(this.lblMappingFilterName);
             this.pnlMappingsFilter.Controls.Add(this.simpleButton1);
-            this.pnlMappingsFilter.Controls.Add(this.checkBox1);
-            this.pnlMappingsFilter.Controls.Add(this.checkBox2);
             this.pnlMappingsFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMappingsFilter.Location = new System.Drawing.Point(2, 2);
             this.pnlMappingsFilter.Name = "pnlMappingsFilter";
@@ -587,7 +735,7 @@
             // 
             this.txtMappingsFilterName.Location = new System.Drawing.Point(43, 12);
             this.txtMappingsFilterName.Name = "txtMappingsFilterName";
-            this.txtMappingsFilterName.Size = new System.Drawing.Size(199, 20);
+            this.txtMappingsFilterName.Size = new System.Drawing.Size(390, 20);
             this.txtMappingsFilterName.TabIndex = 12;
             // 
             // lblMappingFilterName
@@ -606,26 +754,6 @@
             this.simpleButton1.Size = new System.Drawing.Size(75, 23);
             this.simpleButton1.TabIndex = 10;
             this.simpleButton1.Text = "Filter...";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(357, 11);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(101, 17);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Include Deleted";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(248, 11);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(103, 17);
-            this.checkBox2.TabIndex = 8;
-            this.checkBox2.Text = "Include Inactive";
-            this.checkBox2.UseVisualStyleBackColor = true;
             // 
             // panelControl6
             // 
@@ -709,6 +837,19 @@
             this.pnlHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMappings)).EndInit();
             this.pnlMappings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsMapper)).EndInit();
+            this.pnlMappingsMapper.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCFEditor)).EndInit();
+            this.pnlCFEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlQuickAddCustomField)).EndInit();
+            this.pnlQuickAddCustomField.ResumeLayout(false);
+            this.pnlQuickAddCustomField.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).EndInit();
+            this.tablePanel4.ResumeLayout(false);
+            this.tablePanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQuickAddName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
+            this.panelControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsFilter)).EndInit();
             this.pnlMappingsFilter.ResumeLayout(false);
             this.pnlMappingsFilter.PerformLayout();
@@ -766,7 +907,17 @@
         private DevExpress.XtraEditors.TextEdit txtMappingsFilterName;
         private Label lblMappingFilterName;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private CheckBox checkBox1;
-        private CheckBox checkBox2;
+        private DevExpress.XtraEditors.PanelControl pnlMappingsMapper;
+        private DevExpress.XtraEditors.PanelControl pnlCFEditor;
+        private DevExpress.XtraEditors.PanelControl pnlQuickAddCustomField;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.Utils.Layout.TablePanel tablePanel4;
+        private Label label2;
+        private Label label1;
+        private DevExpress.XtraEditors.TextEdit txtQuickAddName;
+        private ComboBox cmbQuickAddType;
+        private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraEditors.SimpleButton btnQuickAddClear;
+        private DevExpress.XtraEditors.SimpleButton btnQuickAdd;
     }
 }
