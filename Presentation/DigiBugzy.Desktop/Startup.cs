@@ -91,11 +91,8 @@ namespace DigiBugzy.Desktop
             {
                 services.AddScoped<LoginForm>();
                 services.AddScoped<MainDashboard>();
-                services.AddScoped<CategoriesManager>();
-                services.AddScoped<CustomFieldsManager>();
-
-                //Administration
-                services.AddScoped<ucFilterStandard>();
+               
+                
 
             }
         }

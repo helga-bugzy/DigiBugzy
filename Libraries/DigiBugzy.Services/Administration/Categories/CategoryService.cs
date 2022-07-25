@@ -188,6 +188,38 @@ namespace DigiBugzy.Services.Administration.Categories
             return results;
         }
 
+        /// <inheritdoc />
+        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped)
+        {
+            
+            var entity = dbContext.CategoryCustomFields.FirstOrDefault(x =>
+                x.CategoryId == categoryId && x.CustomFieldId == customFieldId);
+
+            if (entity == null && isMapped)
+            {
+                entity = new CategoryCustomField
+                {
+                    CustomFieldId = customFieldId,
+                    CategoryId = categoryId,
+                    DigiAdminId = 1,
+                    CreatedOn = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false
+                };
+
+                dbContext.CategoryCustomFields.Add(entity);
+                dbContext.SaveChanges();
+
+            }
+            else
+            {
+                if (isMapped) return;
+
+                dbContext.CategoryCustomFields.Remove(entity!);
+                dbContext.SaveChanges();
+            }
+        }
+
 
         #endregion 
 

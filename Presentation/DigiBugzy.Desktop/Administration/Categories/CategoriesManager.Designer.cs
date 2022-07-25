@@ -568,6 +568,7 @@
             this.treeCFMappings.Name = "treeCFMappings";
             this.treeCFMappings.Size = new System.Drawing.Size(542, 700);
             this.treeCFMappings.TabIndex = 1;
+            this.treeCFMappings.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCFMappings_AfterCheck);
             // 
             // pnlMappingsFilter
             // 

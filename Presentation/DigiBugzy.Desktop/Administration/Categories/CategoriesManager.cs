@@ -262,25 +262,28 @@ namespace DigiBugzy.Desktop.Administration.Categories
         private void LoadCustomFieldMappings()
         {
             treeCFMappings.Nodes.Clear();
+            lblCustomFieldsHeading.Text = @"Custom Fields";
             if (_classificationId <= 0 || SelectedCategory.Id <= 0) return;
 
+
+            lblCustomFieldsHeading.Text = $@"{SelectedCategory.Name} Custom Fields";
             using var service = new CategoryService(Globals.GetConnectionString());
             var collection = service.GetCustomFieldMappings(SelectedCategory.Id, _classificationId);
 
             foreach (var item in collection)
             {
-                var node = new TreeNode()
+                var node = new TreeNode
                 {
-                    Text = $@"{item.Name} ({item.TypeName})",
-                    Checked = item.IsMapped
+                    Text = $@"  {item.Name} ({item.TypeName})",
+                    Checked = item.IsMapped,
+                    Tag = item.EntityMappedToId
                 };
 
                 treeCFMappings.Nodes.Add(node);
             }
         }
 
-
-
+        
         private bool ContainsNode(TreeNode node1, TreeNode node2)
         {
             try
@@ -456,7 +459,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         #endregion
 
-        #region Treeview
+        #region Categories Treeview
 
         private void twCategories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
@@ -552,10 +555,21 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
 
 
-        #endregion
 
         #endregion
 
-        
+        #region CustomFields Treeview
+
+        private void treeCFMappings_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            using var service = new CategoryService(Globals.GetConnectionString());
+            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked);
+        }
+
+        #endregion
+
+        #endregion
+
+
     }
 }

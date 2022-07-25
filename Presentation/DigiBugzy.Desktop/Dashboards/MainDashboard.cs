@@ -1,5 +1,4 @@
 ﻿
-using System.Windows.Forms;
 using DigiBugzy.Desktop.Administration.Categories;
 using DigiBugzy.Desktop.Administration.CustomFields;
 
@@ -14,14 +13,18 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void mnuCategories_Click(object sender, EventArgs e)
         {
-            var categories = Startup.GetForm<CategoriesManager>();
-            categories?.Show();
+          
+            using var frm = new CategoriesManager();
+            frm.ShowDialog();
+
+
         }
 
         private void mnuCustomFields_Click(object sender, EventArgs e)
         {
-            var form = Startup.GetForm<CustomFieldsManager>();
-            form?.Show();
+
+            using var frm = new CustomFieldsManager();
+            frm.ShowDialog();
         }
     }
 }

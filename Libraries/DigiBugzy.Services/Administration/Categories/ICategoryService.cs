@@ -49,6 +49,12 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <returns></returns>
         public List<MappingViewModel> GetCustomFieldMappings(int categoryId, int classificationId);
 
-        
+        /// <summary>
+        /// Maps or unmaps custom field to a category
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="customFieldId"></param>
+        /// <param name="isMapped"></param>
+        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped);
     }
 }
