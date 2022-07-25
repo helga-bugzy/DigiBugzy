@@ -1,5 +1,9 @@
 ﻿
 
+using DigiBugzy.Core.Domain.xBase;
+using DigiBugzy.Services.Administration.CustomFields;
+using Microsoft.EntityFrameworkCore;
+
 namespace DigiBugzy.Services.Administration.Categories
 {
     public class CategoryService : BaseService, ICategoryService
@@ -19,47 +23,16 @@ namespace DigiBugzy.Services.Administration.Categories
 
         #endregion
 
-        #region Methods
-        public void Create(Category entity)
-        {
-            var filter = new StandardFilter
-            {
-                Name = entity.Name
-            };
-            var current = Get(filter);
+        #region Public Methods
 
-            if (current.Count > 0) 
-                Update(entity);
-            else 
-                dbContext.Categories.Add(entity);
+        #region Category
 
-            dbContext.SaveChanges();
-        }
 
-        public void Delete(int id, bool hardDelete = false)
-        {
-            
-                var entity = GetById(id);
-                if (entity == null) return;
-
-                if (hardDelete)
-                {
-                    dbContext.Categories.Remove(entity);
-                    dbContext.SaveChanges();
-                }
-                else
-                {
-                    
-                    entity.IsDeleted = true;
-                    entity.IsActive = false;
-                    Update(entity);
-                }
-           
-        }
-
+        /// <inheritdoc />
         public List<Category> Get(StandardFilter filter)
         {
             var query = dbContext.Categories.AsQueryable<Category>();
+                
 
             if (filter.Id.HasValue)
             {
@@ -98,16 +71,67 @@ namespace DigiBugzy.Services.Administration.Categories
                 query = query.Where(x => x.IsActive == true);
 
 
-            return query.ToList();
+            return query
+                .Include(admin => admin.CustomFieldMappings)
+                .ThenInclude(cfield => cfield.CustomField)
+                .Include(admin => admin.DigiAdmin)
+                .ToList();
 
 
         }
 
+        /// <inheritdoc />
         public Category GetById(int id)
         {
-            return dbContext.Categories.FirstOrDefault(x => x.Id == id);
+
+            var query = dbContext.Categories.Where(c => c.Id == id)
+                .Include(admin => admin.CustomFieldMappings)
+                .ThenInclude(cfield => cfield.CustomField)
+                .Include(admin => admin.DigiAdmin);
+
+            return query.FirstOrDefault();
         }
 
+        /// <inheritdoc />
+        public void Create(Category entity)
+        {
+            var filter = new StandardFilter
+            {
+                Name = entity.Name
+            };
+            var current = Get(filter);
+
+            if (current.Count > 0)
+                Update(entity);
+            else
+                dbContext.Categories.Add(entity);
+
+            dbContext.SaveChanges();
+        }
+
+        /// <inheritdoc />
+        public void Delete(int id, bool hardDelete = false)
+        {
+
+            var entity = GetById(id);
+            if (entity == null) return;
+
+            if (hardDelete)
+            {
+                dbContext.Categories.Remove(entity);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+
+                entity.IsDeleted = true;
+                entity.IsActive = false;
+                Update(entity);
+            }
+
+        }
+
+        /// <inheritdoc />
         public void Update(Category entity)
         {
             var filter = new StandardFilter
@@ -121,6 +145,53 @@ namespace DigiBugzy.Services.Administration.Categories
             dbContext.Categories.Update(entity);
             dbContext.SaveChanges();
         }
+
+        #endregion
+
+        #region Custom Fields
+
+        /// <inheritdoc />
+        public List<MappingViewModel> GetCustomFieldMappings(int categoryId, int classificationId)
+        {
+            var results = new List<MappingViewModel>();
+
+            if (categoryId <= 0 || classificationId <= 0) return results;
+
+
+            using var cfService = new CustomFieldService(connectionString: _connectionString);
+            var cfCollection = cfService.Get(new StandardFilter { ClassificationId = classificationId });
+            if (cfCollection.Count <= 0) return results;
+
+
+            var category = GetById(categoryId);
+            foreach (var cf in cfCollection)
+            {
+                var result = new MappingViewModel
+                {
+                    Name = cf.Name,
+                    TypeId = cf.CustomFieldTypeId,
+                    TypeName = cf.CustomFieldType.Name,
+                    IsMapped = false,
+                    EntityMappedToId = cf.Id,
+                    EntityMappedFromId = categoryId             //Set by default, not always true
+                };
+
+                var x = category.CustomFieldMappings.FirstOrDefault(x => x.CustomFieldId == cf.Id && cf.IsDeleted == false && cf.IsActive);
+                if (x != null && x.CategoryId == categoryId)
+                {
+                    result.IsMapped = true;
+                }
+                
+                results.Add(result);
+
+            }
+
+
+            return results;
+        }
+
+
+        #endregion 
 
         #endregion
     }

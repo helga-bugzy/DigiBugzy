@@ -1,5 +1,4 @@
-﻿
-
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace DigiBugzy.Services.Administration.CustomFields
 {
@@ -20,59 +19,11 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
-        public void Create(CustomField entity)
-        {
-            var filter = new StandardFilter
-            {
-                Name = entity.Name
-            };
-            var current = Get(filter);
+        
 
-            if (current.Count > 0) Update(entity);
-
-            dbContext.CustomFields.Add(entity);
-            dbContext.SaveChanges();
-
-            if (entity.CustomFieldTypeId == 7)
-            {
-
-
-                var option = new CustomFieldListOption()
-                {
-                    CreatedOn = DateTime.Now,
-                    CustomFieldId = entity.Id,
-                    DigiAdminId = entity.DigiAdminId,
-                    IsDeleted = false,
-                    IsActive = true,
-                    Value = @"Default Option"
-                };
-
-                dbContext.CustomFieldListOptions.Add(option);
-                dbContext.SaveChanges();
-            }
-    }
-
-        public void Delete(int id, bool hardDelete = false)
-        {
-            if (hardDelete)
-            {
-                var entity = GetById(id);
-                if (entity != null || entity!.Id > 0)
-                {
-                    dbContext.CustomFields.Remove(entity);
-                    dbContext.SaveChanges();
-                }
-                else
-                {
-                    entity.IsDeleted = true;
-                    entity.IsActive = false;
-                    Update(entity);
-                }
-            }
-        }
-
+        /// <inheritdoc />
         public List<CustomField> Get(StandardFilter filter)
         {
             var query = dbContext.CustomFields.AsQueryable<CustomField>();
@@ -105,17 +56,74 @@ namespace DigiBugzy.Services.Administration.CustomFields
             if (!filter.IncludeInActive)
                 query = query.Where(x => x.IsActive == true);
 
-
-            return query.ToList();
+            
+            return query
+                .Include(cft => cft.CustomFieldType)                
+                .ToList();
 
 
         }
 
+        /// <inheritdoc />
         public CustomField GetById(int id)
         {
             return dbContext.CustomFields.FirstOrDefault(x => x.Id == id);
         }
 
+        /// <inheritdoc />
+        public void Create(CustomField entity)
+        {
+            var filter = new StandardFilter
+            {
+                Name = entity.Name
+            };
+            var current = Get(filter);
+
+            if (current.Count > 0) Update(entity);
+
+            dbContext.CustomFields.Add(entity);
+            dbContext.SaveChanges();
+
+            if (entity.CustomFieldTypeId == 7)
+            {
+
+
+                var option = new CustomFieldListOption()
+                {
+                    CreatedOn = DateTime.Now,
+                    CustomFieldId = entity.Id,
+                    DigiAdminId = entity.DigiAdminId,
+                    IsDeleted = false,
+                    IsActive = true,
+                    Value = @"Default Option"
+                };
+
+                dbContext.CustomFieldListOptions.Add(option);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <inheritdoc />
+        public void Delete(int id, bool hardDelete = false)
+        {
+            if (hardDelete)
+            {
+                var entity = GetById(id);
+                if (entity!.Id > 0)
+                {
+                    dbContext.CustomFields.Remove(entity);
+                    dbContext.SaveChanges();
+                }
+                else
+                {
+                    entity.IsDeleted = true;
+                    entity.IsActive = false;
+                    Update(entity);
+                }
+            }
+        }
+
+        /// <inheritdoc />
         public void Update(CustomField entity)
         {
             var filter = new StandardFilter

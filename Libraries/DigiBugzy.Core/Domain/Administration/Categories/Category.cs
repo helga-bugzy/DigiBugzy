@@ -15,6 +15,11 @@ namespace DigiBugzy.Core.Domain.Administration.Categories
 
         [ForeignKey(nameof(ParentId))]
         public Category Parent { get; set; }
-        
+
+        /// <summary>
+        /// List of mapped custom fields
+        /// </summary>
+        public List<CategoryCustomField> CustomFieldMappings { get; set; }
+
     }
 }

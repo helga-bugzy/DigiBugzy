@@ -16,5 +16,7 @@ namespace DigiBugzy.Core.Domain.Administration.CustomFields
 
         [ForeignKey(nameof(ClassificationId))]
         public Classification CustomFieldClassification { get; set; }
+
+        
     }
 }

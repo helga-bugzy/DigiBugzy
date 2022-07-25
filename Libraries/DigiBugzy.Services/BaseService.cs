@@ -4,7 +4,7 @@ namespace DigiBugzy.Services
 {
     public class BaseService: IDisposable
     {
-        private string _connectionString;
+        public string _connectionString;
 
         public DatabaseContext dbContext;
 
