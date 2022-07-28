@@ -38,6 +38,6 @@ namespace DigiBugzy.Services.Administration.CustomFields
         /// Creates a new custom field
         /// </summary>
         /// <param name="entity"></param>
-        public void Create(CustomField entity);
+        public int Create(CustomField entity);
     }
 }

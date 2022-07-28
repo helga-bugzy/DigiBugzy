@@ -136,6 +136,11 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
                 node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
 
+                if (node.Nodes.Count > 0)
+                {
+                    node.ImageIndex = 0;
+                }
+
                 twCategories.Nodes.Add(node);
             }
             
@@ -588,10 +593,12 @@ namespace DigiBugzy.Desktop.Administration.Categories
             txtName.Text = string.Empty;
         }
 
-        private void btnQuickAddSave_Click(object sender, EventArgs e)
+        private void btnQuickAdd_Click(object sender, EventArgs e)
         {
+            //Validate
             if (string.IsNullOrEmpty(txtName.Text)) return;
 
+            //Create entity
             var entity = new CustomField
             {
                 IsDeleted = false,
@@ -605,17 +612,30 @@ namespace DigiBugzy.Desktop.Administration.Categories
             };
 
             using var service = new CustomFieldService(Globals.GetConnectionString());
-            service.Update(entity);
+            entity.Id = service.Create(entity);
+            
+            //Link to current category
+            using var cservice = new CategoryService(Globals.GetConnectionString());
+            cservice.HandleCustomFieldMapping(SelectedCategory.Id, entity.Id, true);
 
+            //Interface
             cmbQuickAddType.SelectedIndex = 0;
             txtName.Text = string.Empty;
+            LoadCustomFieldMappings();
+
+            Application.DoEvents();
 
         }
 
+
+
         #endregion
 
         #endregion
 
-
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

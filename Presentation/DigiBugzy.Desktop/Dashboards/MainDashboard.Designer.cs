@@ -181,7 +181,7 @@
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
             this.Name = "MainDashboard";
             this.NavigationControl = this.accordionControl1;
-            this.Text = "MainDashboard";
+            this.Text = "DigiBugzy Dashboard";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).EndInit();

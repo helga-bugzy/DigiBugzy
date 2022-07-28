@@ -497,10 +497,14 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             LoadCustomFieldListOptions();
         }
 
-        #endregion
 
         #endregion
 
+        #endregion
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

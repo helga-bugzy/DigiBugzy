@@ -68,7 +68,7 @@ namespace DigiBugzy.Desktop
         {
             if (SelectedAdminId <= 0)
             {
-                MessageBox.Show("Please select a valid administration");
+                MessageBox.Show(@"Please select a valid administration");
                 return;
             }
             else
@@ -78,17 +78,23 @@ namespace DigiBugzy.Desktop
                     Globals.DigiAdministration = service.GetById(SelectedAdminId);
                 }
 
-                using (var dashboard = Startup.GetForm<MainDashboard>())
+                //using (var dashboard = Startup.GetForm<MainDashboard>())
+                //{
+                //    if (dashboard != null)
+                //    {
+                //        dashboard.ShowDialog();
+                //      //  Close();
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show(@"Could not find/load the dashboard");
+                //    }
+                //}
+
+                using (var dash = new BugzyDashboard())
                 {
-                    if (dashboard != null)
-                    {
-                        dashboard.ShowDialog();
-                      //  Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Could not find/load the dashboard");
-                    }
+
+                    dash.ShowDialog();
                 }
             }
         }

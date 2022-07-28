@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesManager));
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
+            this.btnExit = new DevExpress.XtraEditors.SimpleButton();
             this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             this.chkIncludeDeleted = new System.Windows.Forms.CheckBox();
             this.chkFilterInactive = new System.Windows.Forms.CheckBox();
@@ -84,6 +87,7 @@
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
+            this.treeImages = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -174,6 +178,7 @@
             // 
             // pnlFilter
             // 
+            this.pnlFilter.Controls.Add(this.btnExit);
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.chkIncludeDeleted);
             this.pnlFilter.Controls.Add(this.chkFilterInactive);
@@ -185,11 +190,22 @@
             this.pnlFilter.Size = new System.Drawing.Size(1507, 48);
             this.pnlFilter.TabIndex = 0;
             // 
+            // btnExit
+            // 
+            this.btnExit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.ImageOptions.Image")));
+            this.btnExit.Location = new System.Drawing.Point(854, 6);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(104, 37);
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "Exit";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(775, 13);
+            this.btnFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.ImageOptions.Image")));
+            this.btnFilter.Location = new System.Drawing.Point(751, 5);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.Size = new System.Drawing.Size(97, 38);
             this.btnFilter.TabIndex = 4;
             this.btnFilter.Text = "Filter...";
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
@@ -383,27 +399,30 @@
             // 
             // btnRestore
             // 
-            this.btnRestore.Location = new System.Drawing.Point(87, 16);
+            this.btnRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.ImageOptions.Image")));
+            this.btnRestore.Location = new System.Drawing.Point(103, 5);
             this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(75, 23);
+            this.btnRestore.Size = new System.Drawing.Size(101, 34);
             this.btnRestore.TabIndex = 2;
             this.btnRestore.Text = "Restore";
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(3, 16);
+            this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(3, 5);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(94, 34);
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Delete";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(399, 16);
+            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
+            this.btnSave.Location = new System.Drawing.Point(399, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(104, 34);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -553,9 +572,10 @@
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(529, 11);
+            this.btnAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.ImageOptions.Image")));
+            this.btnAddNew.Location = new System.Drawing.Point(500, 5);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(104, 32);
             this.btnAddNew.TabIndex = 1;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
@@ -636,7 +656,7 @@
             this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 38F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 48F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel4.Size = new System.Drawing.Size(534, 175);
             this.tablePanel4.TabIndex = 0;
@@ -665,28 +685,32 @@
             this.tablePanel4.SetColumn(this.panelControl4, 1);
             this.panelControl4.Controls.Add(this.btnQuickAddClear);
             this.panelControl4.Controls.Add(this.btnQuickAdd);
+            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl4.Location = new System.Drawing.Point(48, 55);
             this.panelControl4.Name = "panelControl4";
             this.tablePanel4.SetRow(this.panelControl4, 2);
-            this.panelControl4.Size = new System.Drawing.Size(484, 32);
+            this.panelControl4.Size = new System.Drawing.Size(484, 42);
             this.panelControl4.TabIndex = 2;
             // 
             // btnQuickAddClear
             // 
-            this.btnQuickAddClear.Location = new System.Drawing.Point(96, 5);
+            this.btnQuickAddClear.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnQuickAddClear.ImageOptions.Image")));
+            this.btnQuickAddClear.Location = new System.Drawing.Point(114, 3);
             this.btnQuickAddClear.Name = "btnQuickAddClear";
-            this.btnQuickAddClear.Size = new System.Drawing.Size(75, 23);
+            this.btnQuickAddClear.Size = new System.Drawing.Size(95, 34);
             this.btnQuickAddClear.TabIndex = 1;
             this.btnQuickAddClear.Text = "Clear";
             this.btnQuickAddClear.Click += new System.EventHandler(this.btnQuickAddClear_Click);
             // 
             // btnQuickAdd
             // 
-            this.btnQuickAdd.Location = new System.Drawing.Point(5, 5);
+            this.btnQuickAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnQuickAdd.ImageOptions.Image")));
+            this.btnQuickAdd.Location = new System.Drawing.Point(5, 3);
             this.btnQuickAdd.Name = "btnQuickAdd";
-            this.btnQuickAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnQuickAdd.Size = new System.Drawing.Size(103, 34);
             this.btnQuickAdd.TabIndex = 0;
             this.btnQuickAdd.Text = "Save";
+            this.btnQuickAdd.Click += new System.EventHandler(this.btnQuickAdd_Click);
             // 
             // label2
             // 
@@ -749,9 +773,10 @@
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(459, 8);
+            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(439, 4);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
+            this.simpleButton1.Size = new System.Drawing.Size(95, 31);
             this.simpleButton1.TabIndex = 10;
             this.simpleButton1.Text = "Filter...";
             // 
@@ -774,6 +799,12 @@
             this.lblCustomFieldsHeading.Size = new System.Drawing.Size(115, 23);
             this.lblCustomFieldsHeading.TabIndex = 1;
             this.lblCustomFieldsHeading.Text = "Custom Fields";
+            // 
+            // treeImages
+            // 
+            this.treeImages.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.treeImages.ImageSize = new System.Drawing.Size(16, 16);
+            this.treeImages.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // CategoriesManager
             // 
@@ -919,5 +950,7 @@
         private DevExpress.XtraEditors.PanelControl panelControl4;
         private DevExpress.XtraEditors.SimpleButton btnQuickAddClear;
         private DevExpress.XtraEditors.SimpleButton btnQuickAdd;
+        private DevExpress.XtraEditors.SimpleButton btnExit;
+        private ImageList treeImages;
     }
 }

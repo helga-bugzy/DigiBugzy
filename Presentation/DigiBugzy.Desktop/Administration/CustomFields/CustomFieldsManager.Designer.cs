@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomFieldsManager));
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
@@ -44,6 +45,7 @@
             this.btnRestore = new DevExpress.XtraEditors.SimpleButton();
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
+            this.btnExit = new DevExpress.XtraEditors.SimpleButton();
             this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             this.chkIncludeDeleted = new System.Windows.Forms.CheckBox();
             this.chkFilterInactive = new System.Windows.Forms.CheckBox();
@@ -191,6 +193,7 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 19.86F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 85.14F)});
             this.tablePanel3.Controls.Add(this.chkActive);
+            this.tablePanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePanel3.Location = new System.Drawing.Point(93, 81);
             this.tablePanel3.Name = "tablePanel3";
             this.tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
@@ -255,9 +258,10 @@
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(500, 10);
+            this.btnAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.ImageOptions.Image")));
+            this.btnAddNew.Location = new System.Drawing.Point(485, 0);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNew.Size = new System.Drawing.Size(104, 37);
             this.btnAddNew.TabIndex = 1;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
@@ -285,9 +289,10 @@
             // 
             // btnRestore
             // 
-            this.btnRestore.Location = new System.Drawing.Point(87, 16);
+            this.btnRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.ImageOptions.Image")));
+            this.btnRestore.Location = new System.Drawing.Point(113, 5);
             this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(75, 23);
+            this.btnRestore.Size = new System.Drawing.Size(104, 37);
             this.btnRestore.TabIndex = 2;
             this.btnRestore.Text = "Restore";
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
@@ -314,6 +319,7 @@
             // 
             // pnlFilter
             // 
+            this.pnlFilter.Controls.Add(this.btnExit);
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.chkIncludeDeleted);
             this.pnlFilter.Controls.Add(this.chkFilterInactive);
@@ -325,11 +331,22 @@
             this.pnlFilter.Size = new System.Drawing.Size(1595, 48);
             this.pnlFilter.TabIndex = 0;
             // 
+            // btnExit
+            // 
+            this.btnExit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.ImageOptions.Image")));
+            this.btnExit.Location = new System.Drawing.Point(944, 8);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(104, 37);
+            this.btnExit.TabIndex = 7;
+            this.btnExit.Text = "Exit";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(827, 15);
+            this.btnFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.ImageOptions.Image")));
+            this.btnFilter.Location = new System.Drawing.Point(813, 8);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.Size = new System.Drawing.Size(104, 37);
             this.btnFilter.TabIndex = 4;
             this.btnFilter.Text = "Filter...";
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
@@ -572,7 +589,7 @@
             this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 42F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 61F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel4.Size = new System.Drawing.Size(588, 124);
             this.tablePanel4.TabIndex = 0;
@@ -583,35 +600,39 @@
             this.panelControl4.Controls.Add(this.btnOptionSave);
             this.panelControl4.Controls.Add(this.btnOptionRestore);
             this.panelControl4.Controls.Add(this.btnOptionDelete);
+            this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl4.Location = new System.Drawing.Point(89, 55);
             this.panelControl4.Name = "panelControl4";
             this.tablePanel4.SetRow(this.panelControl4, 2);
-            this.panelControl4.Size = new System.Drawing.Size(496, 36);
+            this.panelControl4.Size = new System.Drawing.Size(496, 55);
             this.panelControl4.TabIndex = 6;
             // 
             // btnOptionSave
             // 
-            this.btnOptionSave.Location = new System.Drawing.Point(395, 8);
+            this.btnOptionSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionSave.ImageOptions.Image")));
+            this.btnOptionSave.Location = new System.Drawing.Point(380, 7);
             this.btnOptionSave.Name = "btnOptionSave";
-            this.btnOptionSave.Size = new System.Drawing.Size(75, 23);
+            this.btnOptionSave.Size = new System.Drawing.Size(103, 37);
             this.btnOptionSave.TabIndex = 2;
             this.btnOptionSave.Text = "Save";
             this.btnOptionSave.Click += new System.EventHandler(this.btnOptionSave_Click);
             // 
             // btnOptionRestore
             // 
-            this.btnOptionRestore.Location = new System.Drawing.Point(86, 8);
+            this.btnOptionRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionRestore.ImageOptions.Image")));
+            this.btnOptionRestore.Location = new System.Drawing.Point(115, 7);
             this.btnOptionRestore.Name = "btnOptionRestore";
-            this.btnOptionRestore.Size = new System.Drawing.Size(75, 23);
+            this.btnOptionRestore.Size = new System.Drawing.Size(104, 37);
             this.btnOptionRestore.TabIndex = 1;
             this.btnOptionRestore.Text = "Restore";
             this.btnOptionRestore.Click += new System.EventHandler(this.btnOptionRestore_Click);
             // 
             // btnOptionDelete
             // 
-            this.btnOptionDelete.Location = new System.Drawing.Point(5, 8);
+            this.btnOptionDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionDelete.ImageOptions.Image")));
+            this.btnOptionDelete.Location = new System.Drawing.Point(5, 7);
             this.btnOptionDelete.Name = "btnOptionDelete";
-            this.btnOptionDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnOptionDelete.Size = new System.Drawing.Size(104, 37);
             this.btnOptionDelete.TabIndex = 0;
             this.btnOptionDelete.Text = "Delete";
             this.btnOptionDelete.Click += new System.EventHandler(this.btnOptionDelete_Click);
@@ -670,9 +691,10 @@
             // 
             // bnOptionNew
             // 
-            this.bnOptionNew.Location = new System.Drawing.Point(490, 10);
+            this.bnOptionNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bnOptionNew.ImageOptions.Image")));
+            this.bnOptionNew.Location = new System.Drawing.Point(475, 2);
             this.bnOptionNew.Name = "bnOptionNew";
-            this.bnOptionNew.Size = new System.Drawing.Size(75, 23);
+            this.bnOptionNew.Size = new System.Drawing.Size(104, 37);
             this.bnOptionNew.TabIndex = 1;
             this.bnOptionNew.Text = "Add New";
             this.bnOptionNew.Click += new System.EventHandler(this.bnOptionNew_Click);
@@ -709,8 +731,8 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 31F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 45F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
             this.tablePanel1.Size = new System.Drawing.Size(604, 187);
             this.tablePanel1.TabIndex = 0;
@@ -727,18 +749,20 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(3, 16);
+            this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(3, 5);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(104, 37);
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Delete";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(399, 16);
+            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
+            this.btnSave.Location = new System.Drawing.Point(385, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(103, 37);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -927,5 +951,6 @@
         private DevExpress.XtraEditors.SimpleButton btnOptionSave;
         private DevExpress.XtraEditors.SimpleButton bnOptionNew;
         private DevExpress.XtraEditors.PanelControl panelControl7;
+        private DevExpress.XtraEditors.SimpleButton btnExit;
     }
 }

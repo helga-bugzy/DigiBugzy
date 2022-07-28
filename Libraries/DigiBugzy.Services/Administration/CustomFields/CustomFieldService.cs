@@ -71,7 +71,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
         }
 
         /// <inheritdoc />
-        public void Create(CustomField entity)
+        public int Create(CustomField entity)
         {
             var filter = new StandardFilter
             {
@@ -101,6 +101,8 @@ namespace DigiBugzy.Services.Administration.CustomFields
                 dbContext.CustomFieldListOptions.Add(option);
                 dbContext.SaveChanges();
             }
+
+            return entity.Id;
         }
 
         /// <inheritdoc />

@@ -91,7 +91,7 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
-        public void Create(Category entity)
+        public int Create(Category entity)
         {
             var filter = new StandardFilter
             {
@@ -105,6 +105,8 @@ namespace DigiBugzy.Services.Administration.Categories
                 dbContext.Categories.Add(entity);
 
             dbContext.SaveChanges();
+
+            return entity.Id;
         }
 
         /// <inheritdoc />

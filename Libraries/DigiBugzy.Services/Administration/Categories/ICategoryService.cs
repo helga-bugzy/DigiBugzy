@@ -39,7 +39,7 @@ namespace DigiBugzy.Services.Administration.Categories
         /// Adds a new category to the database
         /// </summary>
         /// <param name="entity"></param>
-        public void Create(Category entity);
+        public int Create(Category entity);
 
         /// <summary>
         /// Retrieves list of all active and non-deleted custom fields for a classification with indication asto which ones are mapped
