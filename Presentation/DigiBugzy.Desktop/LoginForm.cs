@@ -73,29 +73,11 @@ namespace DigiBugzy.Desktop
             }
             else
             {
-                using (var service = new DigiAdminService(Globals.GetConnectionString()))
-                {
-                    Globals.DigiAdministration = service.GetById(SelectedAdminId);
-                }
+                using var service = new DigiAdminService(Globals.GetConnectionString());
+                Globals.DigiAdministration = service.GetById(SelectedAdminId);
 
-                //using (var dashboard = Startup.GetForm<MainDashboard>())
-                //{
-                //    if (dashboard != null)
-                //    {
-                //        dashboard.ShowDialog();
-                //      //  Close();
-                //    }
-                //    else
-                //    {
-                //        MessageBox.Show(@"Could not find/load the dashboard");
-                //    }
-                //}
-
-                using (var dash = new BugzyDashboard())
-                {
-
-                    dash.ShowDialog();
-                }
+                using var dash = new BugzyDashboard();
+                dash.ShowDialog();
             }
         }
 

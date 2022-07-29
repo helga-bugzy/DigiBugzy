@@ -151,15 +151,12 @@ namespace DigiBugzy.Data.Migrations
         private void CreateContactBaseTables()
         {
             _currentSchemaName = DatabaseConstants.Schemas.ContactBase;
-            using (var creatory = new BaseEntityCreator(_currentSchemaName, this))
-            {
-                //BusinessEntityType
-                _currentTableName = nameof(BusinessEntityType);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseAdministrationEntity();
-                CreateData_BusinessEntityTypes();                
-            }
-
+            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
+            //BusinessEntityType
+            _currentTableName = nameof(BusinessEntityType);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            CreateData_BusinessEntityTypes();
         }
 
         private void CreateProjectsTables()

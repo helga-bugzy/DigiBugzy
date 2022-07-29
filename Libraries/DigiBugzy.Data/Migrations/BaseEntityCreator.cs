@@ -150,12 +150,12 @@ namespace DigiBugzy.Data.Migrations
                     if (isNullable)
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsBinary().Nullable();
+                            .AddColumn(fieldName).AsBinary(1000000000).Nullable();
                     }
                     else
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsBinary().NotNullable();
+                            .AddColumn(fieldName).AsBinary(1000000000).NotNullable();
                     }
 
                     break;

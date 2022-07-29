@@ -93,7 +93,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
         public Product GetById(int id)
         {
-            return dbContext.Products.Where(x => x.Id == id).FirstOrDefault();
+            return dbContext.Products.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Product entity)
