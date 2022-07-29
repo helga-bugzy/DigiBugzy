@@ -110,6 +110,7 @@ namespace DigiBugzy.Desktop.Products
             SelectedProduct.Name = txtName.Text;
             SelectedProduct.Description = txtDescription.Text;
             SelectedProduct.IsActive = chkActive.Checked;
+            
 
             if (openFileProductImage.FileName != null)
             {
@@ -123,6 +124,9 @@ namespace DigiBugzy.Desktop.Products
             }
             else
             {
+                SelectedProduct.DigiAdminId = Globals.DigiAdministration.Id;
+                SelectedProduct.IsDeleted = false;
+                SelectedProduct.CreatedOn = DateTime.Now;
                 SelectedProduct.Id = service.Create(SelectedProduct);
             }
 

@@ -28,8 +28,15 @@ namespace DigiBugzy.Services.Catalog.Products
             var current = Get(filter);
 
             if (current.Count > 0) Update(entity);
+            else
+            {
+               dbContext.Add(entity);
+               dbContext.SaveChanges();
+               
+            }
 
-            return dbContext.SaveChanges();
+            return entity.Id;
+            
         }
 
         public void Delete(int id, bool hardDelete = false)
