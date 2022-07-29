@@ -1,13 +1,4 @@
 ﻿using DevExpress.XtraBars;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DigiBugzy.Desktop.Administration.Categories;
 using DigiBugzy.Desktop.Administration.CustomFields;

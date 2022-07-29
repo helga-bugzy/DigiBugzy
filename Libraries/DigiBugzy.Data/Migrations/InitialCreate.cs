@@ -123,29 +123,29 @@ namespace DigiBugzy.Data.Migrations
         private void CreateCatalogTables()
         {
             _currentSchemaName = DatabaseConstants.Schemas.Catalog;
-            using(var creatory = new BaseEntityCreator(_currentSchemaName, this))
-            {
-                //Product
-                _currentTableName = nameof(Product);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseAdministrationEntity();
+            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
 
-                //ProductCategory
-                _currentTableName = nameof(ProductCategory);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseEntity();
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
+            //Product
+            _currentTableName = nameof(Product);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddColumn(fieldName: nameof(Product.ProductImage), fieldType: BaseEntityCreator.FieldTypes.AsBinary, isNullable: true);
 
-               // ProductCustomFieldValues
-                _currentTableName = nameof(ProductCustomField);
-                creatory.StartNewTable(_currentTableName);
-                creatory.CreateBaseEntity();
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
-                creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
-                creatory.AddColumn(nameof(ProductCustomField.Value));
-            }
+            //ProductCategory
+            _currentTableName = nameof(ProductCategory);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
             
+
+            // ProductCustomFieldValues
+            _currentTableName = nameof(ProductCustomField);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
+            creatory.AddColumn(nameof(ProductCustomField.Value));
         }
 
         private void CreateContactBaseTables()

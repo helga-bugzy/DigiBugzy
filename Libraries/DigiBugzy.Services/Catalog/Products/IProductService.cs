@@ -6,14 +6,39 @@ namespace DigiBugzy.Services.Catalog.Products
 {
     public interface IProductService
     {
+        /// <summary>
+        /// Retrieves product on hand of it's primary key
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Product GetById(int id);
 
+        /// <summary>
+        /// Gets a list of products on hand of the filter values
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public List<Product> Get(StandardFilter filter);
 
+
+        /// <summary>
+        /// Deletes an existing product (soft/hard)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="hardDelete"></param>
         public void Delete(int id, bool hardDelete = false);
 
+        /// <summary>
+        /// Updates details of an existing product
+        /// </summary>
+        /// <param name="entity"></param>
         public void Update(Product entity);
 
-        public void Create(Product entity);
+        /// <summary>
+        /// Creates a new product in the database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public int Create(Product entity);
     }
 }

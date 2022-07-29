@@ -75,7 +75,7 @@
             this.ribbon.ShowItemCaptionsInCaptionBar = true;
             this.ribbon.ShowItemCaptionsInPageHeader = true;
             this.ribbon.ShowItemCaptionsInQAT = true;
-            this.ribbon.Size = new System.Drawing.Size(954, 158);
+            this.ribbon.Size = new System.Drawing.Size(2036, 158);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // btnCategories
@@ -210,10 +210,10 @@
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 615);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 1099);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(954, 24);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(2036, 24);
             // 
             // barButtonItem2
             // 
@@ -227,14 +227,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 639);
+            this.ClientSize = new System.Drawing.Size(2036, 1123);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.IsMdiContainer = true;
             this.Name = "BugzyDashboard";
             this.Ribbon = this.ribbon;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "BugzyDashboard";
+            this.Text = "DigiBugzy Management Application";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             this.ResumeLayout(false);

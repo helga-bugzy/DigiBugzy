@@ -19,7 +19,7 @@ namespace DigiBugzy.Services.Catalog.Products
         #endregion
 
         #region Methods
-        public void Create(Product entity)
+        public int Create(Product entity)
         {
             var filter = new StandardFilter
             {
@@ -29,7 +29,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
             if (current.Count > 0) Update(entity);
 
-            dbContext.SaveChanges();
+            return dbContext.SaveChanges();
         }
 
         public void Delete(int id, bool hardDelete = false)
@@ -66,14 +66,10 @@ namespace DigiBugzy.Services.Catalog.Products
                 query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
             }
 
-            
 
             if (!string.IsNullOrEmpty(filter.Name))
             {
-                if (filter.LikeSearch)
-                    query = query.Where(x => x.Name.Contains(filter.Name));
-                else
-                    query = query.Where(x => x.Name.Equals(filter.Name));
+                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name)) : query.Where(x => x.Name.Equals(filter.Name));
             }
 
             if (!filter.IncludeDeleted)

@@ -8,7 +8,8 @@ namespace DigiBugzy.Data.Migrations
         public enum FieldTypes { 
             AsInt32,
             AsString,
-            AsDateTime
+            AsDateTime,
+            AsBinary
         }
 
         public enum MappingTypes {
@@ -144,6 +145,19 @@ namespace DigiBugzy.Data.Migrations
                             .AddColumn(fieldName).AsDateTime().NotNullable();
                     }
                     
+                    break;
+                case FieldTypes.AsBinary:
+                    if (isNullable)
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsBinary().Nullable();
+                    }
+                    else
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsBinary().NotNullable();
+                    }
+
                     break;
             }
         }
