@@ -65,6 +65,13 @@ namespace DigiBugzy.Services.Administration.CustomFields
         }
 
         /// <inheritdoc />
+        public List<CustomField> Get(List<int> ids)
+        {
+            return dbContext.CustomFields.Where(x => ids.Contains(x.Id)).ToList();
+        }
+
+
+        /// <inheritdoc />
         public CustomField GetById(int id)
         {
             return dbContext.CustomFields.FirstOrDefault(x => x.Id == id);

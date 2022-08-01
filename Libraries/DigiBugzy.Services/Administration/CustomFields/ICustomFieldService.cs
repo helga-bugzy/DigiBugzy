@@ -22,6 +22,13 @@ namespace DigiBugzy.Services.Administration.CustomFields
         public List<CustomField> Get(StandardFilter filter);
 
         /// <summary>
+        /// Gets a list of customfields on hand of their primary key ids
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<CustomField> Get(List<int> ids);
+
+        /// <summary>
         /// Soft/hard deletes an existing custom field
         /// </summary>
         /// <param name="id"></param>

@@ -23,6 +23,12 @@ namespace DigiBugzy.Services.Administration.Categories
         public List<Category> Get(StandardFilter filter);
 
         /// <summary>
+        /// Gets a list of categories on hand of their id's
+        /// </summary>
+        /// <returns></returns>
+        public List<Category> Get(List<int> categoryIds);
+
+        /// <summary>
         /// Hard/Soft delete a category
         /// </summary>
         /// <param name="id"></param>

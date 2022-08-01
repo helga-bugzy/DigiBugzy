@@ -80,6 +80,12 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
+        public List<Category> Get(List<int> categoryIds)
+        {
+            return dbContext.Categories.Where(x => categoryIds.Contains(x.Id)).ToList();
+        }
+
+        /// <inheritdoc />
         public Category GetById(int id)
         {
 

@@ -44,7 +44,7 @@
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
             this.splitContent = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridListing = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gvProducts = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabPane1 = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabEditor = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.lblSelectedFileName = new System.Windows.Forms.Label();
@@ -84,7 +84,7 @@
             this.splitContent.Panel2.SuspendLayout();
             this.splitContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridListing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).BeginInit();
             this.tabPane1.SuspendLayout();
             this.tabEditor.SuspendLayout();
@@ -257,17 +257,18 @@
             // 
             this.gridListing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridListing.Location = new System.Drawing.Point(0, 0);
-            this.gridListing.MainView = this.gridView1;
+            this.gridListing.MainView = this.gvProducts;
             this.gridListing.Name = "gridListing";
             this.gridListing.Size = new System.Drawing.Size(2210, 375);
             this.gridListing.TabIndex = 0;
             this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gvProducts});
             // 
-            // gridView1
+            // gvProducts
             // 
-            this.gridView1.GridControl = this.gridListing;
-            this.gridView1.Name = "gridView1";
+            this.gvProducts.GridControl = this.gridListing;
+            this.gvProducts.Name = "gvProducts";
+            
             // 
             // tabPane1
             // 
@@ -515,7 +516,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContent)).EndInit();
             this.splitContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridListing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).EndInit();
             this.tabPane1.ResumeLayout(false);
             this.tabEditor.ResumeLayout(false);
@@ -534,7 +535,7 @@
         private DevExpress.XtraEditors.PanelControl pnlContent;
         private DevExpress.XtraEditors.SplitContainerControl splitContent;
         private DevExpress.XtraGrid.GridControl gridListing;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvProducts;
         private DevExpress.XtraBars.Navigation.TabPane tabPane1;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabEditor;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabFields;

@@ -2,36 +2,79 @@
 
 namespace DigiBugzy.Services.Catalog.Products
 {
-    public class ProductCategoryService : IProductCategoryService
+    public class ProductCategoryService : BaseService, IProductCategoryService
     {
-        public void Create(Product entity)
+
+        #region Fields
+
+        #endregion
+
+        #region Ctor
+
+        public ProductCategoryService(string connectionString) : base(connectionString)
         {
-            throw new NotImplementedException();
+
+        }
+
+        #endregion
+
+
+        #region Methods
+        public ProductCategory GetById(int id)
+        {
+            return dbContext.ProductCategories.FirstOrDefault(x => x.Id == id);
+        }
+
+        /// <inheritdoc />
+        public List<ProductCategory> GetByProductId(int productId)
+        {
+            return dbContext.ProductCategories.Where(x => x.ProductId == productId).ToList();
+        }
+
+        /// <inheritdoc />
+        public List<ProductCategory> GetByCategoryId(int categoryId)
+        {
+            return dbContext.ProductCategories.Where(x => x.CategoryId == categoryId).ToList();
+        }
+
+
+        public void Create(ProductCategory entity)
+        {
+            dbContext.ProductCategories.Add(entity);
+            dbContext.SaveChanges();
         }
 
         public void Delete(int id, bool hardDelete = false)
         {
-            throw new NotImplementedException();
+
+
+            var entity = GetById(id);
+            if (entity == null) return;
+
+            if (hardDelete)
+            {
+                dbContext.ProductCategories.Remove(entity);
+
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                entity.IsDeleted = true;
+                entity.IsActive = false;
+                Update(entity);
+            }
+
+
         }
 
-        public ProductCategory GetByCategoryId(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
 
-        public ProductCategory GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public ProductCategory GetByProductId(int productId)
+        public void Update(ProductCategory entity)
         {
-            throw new NotImplementedException();
-        }
+            dbContext.ProductCategories.Update(entity);
+            dbContext.SaveChanges();
+        } 
 
-        public void Update(Product entity)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }

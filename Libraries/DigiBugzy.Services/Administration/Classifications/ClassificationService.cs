@@ -94,7 +94,7 @@ namespace DigiBugzy.Services.Administration.Classifications
 
         public Classification GetById(int id)
         {
-            return dbContext.Classifications.Where(x => x.Id == id).FirstOrDefault();
+            return dbContext.Classifications.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Classification entity)

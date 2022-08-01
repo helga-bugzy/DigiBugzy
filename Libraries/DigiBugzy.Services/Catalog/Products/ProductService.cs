@@ -1,4 +1,9 @@
 ﻿
+using DigiBugzy.Core.Domain.xBase;
+using DigiBugzy.Core.Domain.xBase.Interfaces;
+using DigiBugzy.Services.Administration.Categories;
+using DigiBugzy.Services.Administration.CustomFields;
+
 namespace DigiBugzy.Services.Catalog.Products
 {
     public class ProductService :BaseService, IProductService
@@ -19,6 +24,59 @@ namespace DigiBugzy.Services.Catalog.Products
         #endregion
 
         #region Methods
+
+        public List<Product> Get(StandardFilter filter, bool loadProductComplete = false)
+        {
+            var query = dbContext.Products.AsQueryable<Product>();
+
+            if (filter.Id.HasValue)
+            {
+                query = query.Where(x => x.Id == filter.Id);
+                return query.ToList();
+            }
+
+            if (filter.DigiAdminId.HasValue)
+            {
+                query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
+            }
+
+
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name)) : query.Where(x => x.Name.Equals(filter.Name));
+            }
+
+            if (!filter.IncludeDeleted)
+                query = query.Where(x => x.IsDeleted == false);
+
+            if (!filter.IncludeInActive)
+                query = query.Where(x => x.IsActive == true);
+
+
+            if (!loadProductComplete) return query.ToList();
+
+
+            //ProductComplete
+            var collection = query.ToList();
+
+            return collection.Select(GetProductComplete).ToList();
+
+
+
+        }
+
+        public Product GetById(int id, bool loadProductComplete = false)
+        {
+            var product = dbContext.Products.FirstOrDefault(x => x.Id == id);
+
+            if (loadProductComplete)
+            {
+                product = GetProductComplete(product);
+            }
+
+            return product;
+        }
+
         public int Create(Product entity)
         {
             var filter = new StandardFilter
@@ -58,43 +116,7 @@ namespace DigiBugzy.Services.Catalog.Products
             }
         }
 
-        public List<Product> Get(StandardFilter filter)
-        {
-            var query = dbContext.Products.AsQueryable<Product>();
-
-            if (filter.Id.HasValue)
-            {
-                query = query.Where(x => x.Id == filter.Id);
-                return query.ToList();
-            }
-
-            if (filter.DigiAdminId.HasValue)
-            {
-                query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
-            }
-
-
-            if (!string.IsNullOrEmpty(filter.Name))
-            {
-                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name)) : query.Where(x => x.Name.Equals(filter.Name));
-            }
-
-            if (!filter.IncludeDeleted)
-                query = query.Where(x => x.IsDeleted == false);
-
-            if (!filter.IncludeInActive)
-                query = query.Where(x => x.IsActive == true);
-
-
-            return query.ToList();
-
-
-        }
-
-        public Product GetById(int id)
-        {
-            return dbContext.Products.FirstOrDefault(x => x.Id == id);
-        }
+       
 
         public void Update(Product entity)
         {
@@ -110,5 +132,80 @@ namespace DigiBugzy.Services.Catalog.Products
         }
 
         #endregion
+
+        #region Helper Methods
+
+        private Product GetProductComplete(Product product)
+        {
+            
+            product.Categories.AddRange(GetProductCategoriesViewModels(product));
+            product.CustomFields.AddRange(GetProductCustomFieldModels(product));
+
+            return product;
+
+        }
+
+        /// <summary>
+        /// Gets all category mappings as view model for the product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        private IEnumerable<MappingViewModel> GetProductCategoriesViewModels(IBaseEntity product)
+        {
+            using var service = new ProductCategoryService(_connectionString);
+            var mappings = service.GetByProductId(product.Id);
+            var ids = mappings.Select(x => x.ProductId).ToList();
+
+            using var cservice = new CategoryService(_connectionString);
+            var categories = cservice.Get(ids);
+
+            var collection = (
+                from category in categories
+                let map = mappings.FirstOrDefault(x => x.ProductId == product.Id && x.CategoryId == category.Id)
+                where map != null
+                select new MappingViewModel
+                {
+                    Name = category.Name,
+                    EntityMappedFromId = product.Id,
+                    EntityMappedToId = category.Id,
+                    Id = map.Id
+                }).ToList();
+
+            return collection;
+        }
+
+        /// <summary>
+        /// Gets a custom fioelds view model for the product
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        private IEnumerable<MappingViewModel> GetProductCustomFieldModels(IBaseEntity product)
+        {
+            using var service = new ProductCustomFieldService(_connectionString);
+            var mappings = service.GetByProductId(product.Id);
+            var ids = mappings.Select(x => x.ProductId).ToList();
+
+            var cservice = new CustomFieldService(_connectionString);
+            var fields = cservice.Get(ids);
+
+            var collection = (
+                from field in fields
+                let map = mappings.FirstOrDefault(x => x.ProductId == product.Id && x.CustomFieldId == field.Id)
+                where map != null
+                select new MappingViewModel
+                {
+                    Name = field.Name,
+                    EntityMappedFromId = product.Id,
+                    EntityMappedToId = field.Id,
+                    Id = map.Id,
+                    CustomFieldValue = map.Value
+                }).ToList();
+
+            return collection;
+        }
+
+        #endregion
+
+
     }
 }

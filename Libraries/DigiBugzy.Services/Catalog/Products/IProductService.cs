@@ -10,15 +10,17 @@ namespace DigiBugzy.Services.Catalog.Products
         /// Retrieves product on hand of it's primary key
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="loadProductComplete">Indicator if all product items should be loaded i.e product categories, documents, etc</param>
         /// <returns></returns>
-        public Product GetById(int id);
+        public Product GetById(int id, bool loadProductComplete = false);
 
         /// <summary>
         /// Gets a list of products on hand of the filter values
         /// </summary>
         /// <param name="filter"></param>
+        /// <param name="loadProductComplete">Indicator if all product items should be loaded i.e product categories, documents, etc</param>
         /// <returns></returns>
-        public List<Product> Get(StandardFilter filter);
+        public List<Product> Get(StandardFilter filter, bool loadProductComplete = false);
 
 
         /// <summary>

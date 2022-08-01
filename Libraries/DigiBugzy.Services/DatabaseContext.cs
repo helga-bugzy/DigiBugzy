@@ -47,6 +47,8 @@ namespace DigiBugzy.Services
 
         public DbSet<ProductCategory> ProductCategories { get; set; }
 
+        public DbSet<ProductCustomField> ProductCustomFields { get; set; }
+
         #endregion
 
         #region Projects

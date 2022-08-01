@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Utilities;
 
@@ -9,6 +11,8 @@ namespace DigiBugzy.Desktop.Products
         #region Properties
 
         public Product SelectedProduct { get; set; } = new();
+
+        public List<Product> FilteredProducts { get; set; } = new();
 
         #endregion
 
@@ -26,12 +30,24 @@ namespace DigiBugzy.Desktop.Products
             
             var filter = new StandardFilter(includeInActive: chkFilterInactive.Checked,
                 includeDeleted: chkFilterDeleted.Checked);
-            
+
+            using var service = new ProductService(Globals.GetConnectionString());
+            FilteredProducts = service.Get(filter);
+
+            gridListing.DataSource = FilteredProducts;
+            gvProducts.Columns["Id"].Visible = false;
+            gvProducts.Columns["DigiAdminId"].Visible = false;
+            gvProducts.Columns["DigiAdmin"].Visible = false;
+
             LoadSelectedProduct(clearSelectedProduct ? 0 : SelectedProduct.Id);
         }
 
         private void LoadSelectedProduct(int productId)
         {
+            //Do nothing if the same
+            if (productId == SelectedProduct.Id) return;
+
+
             if (productId == 0)
             {
                 SelectedProduct = new Product();
@@ -217,10 +233,17 @@ namespace DigiBugzy.Desktop.Products
         }
 
 
+
+
+        #endregion
+
+        #region Grid View
+
+
         #endregion
 
         #endregion
 
-
+        
     }
 }

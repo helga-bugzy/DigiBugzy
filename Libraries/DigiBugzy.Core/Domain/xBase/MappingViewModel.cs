@@ -30,5 +30,10 @@ namespace DigiBugzy.Core.Domain.xBase
         /// Indicator if this is already mapped
         /// </summary>
         public bool IsMapped { get; set; }
+
+        /// <summary>
+        /// Optional to indicate value i.e. Product CustomField Value entered
+        /// </summary>
+        public string CustomFieldValue { get; set; }
     }
 }

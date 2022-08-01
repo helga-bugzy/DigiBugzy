@@ -16,5 +16,8 @@ namespace DigiBugzy.Core.Domain.Products
 
         [ForeignKey(nameof(CustomFieldId))]
         public CustomField CustomField { get; set; }
+
+
+
     }
 }
