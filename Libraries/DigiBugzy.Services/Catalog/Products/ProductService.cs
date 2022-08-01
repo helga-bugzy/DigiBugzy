@@ -154,19 +154,24 @@ namespace DigiBugzy.Services.Catalog.Products
             using var mservice = new ProductCategoryService(_connectionString);
             var mappings = mservice.GetByProductId(productId);
 
+            var results = new List<MappingViewModel>();
 
-            var results = (
-                    from category in categories
-                    let map = mappings.FirstOrDefault(m => m.CategoryId == category.Id)
-                    where map != null
-                    select new MappingViewModel
-                    {
-                        EntityMappedFromId = productId, 
-                        EntityMappedToId = category.Id, 
-                        IsMapped = map.Id > 0,
-                        ParentId = category.ParentId
-                    })
-                .ToList();
+            foreach (var category in categories)
+            {
+
+                var map = mappings.FirstOrDefault(x => x.CategoryId == category.Id);
+                var view = new MappingViewModel()
+                {
+                    ParentId = category.ParentId,
+                    EntityMappedFromId = productId,
+                    EntityMappedToId = category.Id,
+                };
+
+                if (map is { Id: > 0 }) view.IsMapped = true;
+
+                results.Add(view);
+            }
+            
 
             return results;
         }
