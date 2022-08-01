@@ -62,5 +62,6 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <param name="customFieldId"></param>
         /// <param name="isMapped"></param>
         public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped);
+        
     }
 }

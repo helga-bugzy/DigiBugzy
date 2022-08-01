@@ -27,12 +27,14 @@ namespace DigiBugzy.Services.Administration.Categories
 
         #region Category
 
+        #region Requests
+
 
         /// <inheritdoc />
         public List<Category> Get(StandardFilter filter)
         {
             var query = dbContext.Categories.AsQueryable<Category>();
-                
+
 
             if (filter.Id.HasValue)
             {
@@ -96,6 +98,10 @@ namespace DigiBugzy.Services.Administration.Categories
             return query.FirstOrDefault();
         }
 
+        #endregion
+
+        #region Commands
+
         /// <inheritdoc />
         public int Create(Category entity)
         {
@@ -151,6 +157,8 @@ namespace DigiBugzy.Services.Administration.Categories
             dbContext.Categories.Update(entity);
             dbContext.SaveChanges();
         }
+
+        #endregion
 
         #endregion
 
@@ -229,8 +237,9 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
 
-        #endregion 
+        #endregion
 
+       
         #endregion
     }
 }

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsManager));
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             this.pnlBackground = new DevExpress.XtraEditors.PanelControl();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
@@ -256,6 +258,11 @@
             // gridListing
             // 
             this.gridListing.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridLevelNode1.RelationName = "Categories";
+            gridLevelNode2.RelationName = "CustomFields";
+            this.gridListing.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1,
+            gridLevelNode2});
             this.gridListing.Location = new System.Drawing.Point(0, 0);
             this.gridListing.MainView = this.gvProducts;
             this.gridListing.Name = "gridListing";
@@ -268,7 +275,7 @@
             // 
             this.gvProducts.GridControl = this.gridListing;
             this.gvProducts.Name = "gvProducts";
-            
+            this.gvProducts.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvProducts_RowClick);
             // 
             // tabPane1
             // 

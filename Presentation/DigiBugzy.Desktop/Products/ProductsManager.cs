@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Utilities;
 
@@ -19,6 +18,8 @@ namespace DigiBugzy.Desktop.Products
         public ProductsManager()
         {
             InitializeComponent();
+
+            LoadFilter(true);
         }
 
         #region Helper Methods
@@ -58,10 +59,11 @@ namespace DigiBugzy.Desktop.Products
                 SelectedProduct = service.GetById(productId);
             }
 
+            LoadEditor();
             LoadCustomFieldsSelector();
             LoadCategoriesSelector();
             LoadDocumentsTab();
-            LoadEditor();
+            
             LoadStockInformation();
 
             Application.DoEvents();
@@ -235,15 +237,19 @@ namespace DigiBugzy.Desktop.Products
 
 
 
+
         #endregion
 
         #region Grid View
-
+        private void gvProducts_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            LoadSelectedProduct(int.Parse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!));
+        }
 
         #endregion
 
         #endregion
 
-        
+
     }
 }

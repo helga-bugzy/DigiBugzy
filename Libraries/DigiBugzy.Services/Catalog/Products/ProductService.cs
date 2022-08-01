@@ -25,6 +25,8 @@ namespace DigiBugzy.Services.Catalog.Products
 
         #region Methods
 
+        #region Requests
+
         public List<Product> Get(StandardFilter filter, bool loadProductComplete = false)
         {
             var query = dbContext.Products.AsQueryable<Product>();
@@ -77,6 +79,10 @@ namespace DigiBugzy.Services.Catalog.Products
             return product;
         }
 
+        #endregion
+
+        #region Commands
+
         public int Create(Product entity)
         {
             var filter = new StandardFilter
@@ -88,13 +94,13 @@ namespace DigiBugzy.Services.Catalog.Products
             if (current.Count > 0) Update(entity);
             else
             {
-               dbContext.Add(entity);
-               dbContext.SaveChanges();
-               
+                dbContext.Add(entity);
+                dbContext.SaveChanges();
+
             }
 
             return entity.Id;
-            
+
         }
 
         public void Delete(int id, bool hardDelete = false)
@@ -116,7 +122,6 @@ namespace DigiBugzy.Services.Catalog.Products
             }
         }
 
-       
 
         public void Update(Product entity)
         {
@@ -130,6 +135,92 @@ namespace DigiBugzy.Services.Catalog.Products
 
             dbContext.Products.Update(entity);
         }
+
+        #endregion
+
+        #region Mappings
+
+        #region Categories
+
+        /// <inheritdoc />
+        public List<MappingViewModel> GetCategoryMappings(int productId, int classificationId)
+        {
+            using var cservice = new CategoryService(_connectionString);
+            var categories = cservice.Get(new StandardFilter
+            {
+                ClassificationId = classificationId
+            });
+
+            using var mservice = new ProductCategoryService(_connectionString);
+            var mappings = mservice.GetByProductId(productId);
+
+
+            var results = (
+                    from category in categories
+                    let map = mappings.FirstOrDefault(m => m.CategoryId == category.Id)
+                    where map != null
+                    select new MappingViewModel
+                    {
+                        EntityMappedFromId = productId, 
+                        EntityMappedToId = category.Id, 
+                        IsMapped = map.Id > 0,
+                    })
+                .ToList();
+
+            return results;
+        }
+
+        /// <inheritdoc />
+        public void HandleCategoryMapping(int categoryId, int productId, bool isMapped)
+        {
+            var item = dbContext.ProductCategories
+                .FirstOrDefault(x => x.CategoryId == categoryId && x.ProductId == productId);
+
+            if (item == null || item is not {Id: > 0})
+            {
+                item = new ProductCategory()
+                {
+                    DigiAdminId = 1,
+                    CategoryId = categoryId,
+                    CreatedOn = DateTime.Now,
+                    ProductId = productId,
+                    IsDeleted = false,
+                    IsActive = true,
+                };
+                dbContext.ProductCategories.Add(item);
+                dbContext.SaveChanges();
+            }
+            else if(!isMapped)
+            {
+                dbContext.ProductCategories.Remove(item);
+                dbContext.SaveChanges();
+            }
+
+        }
+
+        #endregion
+
+        #region Custom Fields
+
+        /// <inheritdoc />
+        public List<MappingViewModel> GetCustomFieldMappings(int categoryId, int classificationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        
+
+        #endregion
+
+
 
         #endregion
 
