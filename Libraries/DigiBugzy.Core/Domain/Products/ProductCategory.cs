@@ -1,6 +1,7 @@
 ﻿
 namespace DigiBugzy.Core.Domain.Products
 {
+    [Table(name: nameof(ProductCategory), Schema = DatabaseConstants.Schemas.Catalog)]
     public class ProductCategory: BaseEntity, IBaseCategoryMappingEntity
     {
         public int ProductId { get; set; }

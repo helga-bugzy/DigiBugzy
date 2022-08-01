@@ -1,11 +1,6 @@
 ﻿
-using DigiBugzy.Core.Domain.Administration.Categories;
-using DigiBugzy.Core.Domain.Administration.Classifications;
-using DigiBugzy.Core.Domain.Administration.CustomFields;
-using DigiBugzy.Core.Domain.Administration.Notes;
+
 using DigiBugzy.Core.Domain.BusinessEntities;
-using DigiBugzy.Core.Domain.Products;
-using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.Domain.Secures;
 using Microsoft.EntityFrameworkCore;
 

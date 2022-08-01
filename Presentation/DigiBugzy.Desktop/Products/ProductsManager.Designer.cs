@@ -69,6 +69,10 @@
             this.tabProjects = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabDocuments = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.openFileProductImage = new System.Windows.Forms.OpenFileDialog();
+            this.pnlCategories = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCategoriesTree = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCategoriesEditor = new DevExpress.XtraEditors.PanelControl();
+            this.treeCategories = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBackground)).BeginInit();
             this.pnlBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -92,6 +96,12 @@
             this.tabEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgProductPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
+            this.tabCategories.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).BeginInit();
+            this.pnlCategories.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).BeginInit();
+            this.pnlCategoriesTree.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesEditor)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBackground
@@ -468,9 +478,10 @@
             // tabCategories
             // 
             this.tabCategories.Caption = "Categories";
+            this.tabCategories.Controls.Add(this.pnlCategories);
             this.tabCategories.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabCategories.ImageOptions.Image")));
             this.tabCategories.Name = "tabCategories";
-            this.tabCategories.Size = new System.Drawing.Size(2210, 605);
+            this.tabCategories.Size = new System.Drawing.Size(2210, 572);
             this.tabCategories.ToolTip = "Categories";
             // 
             // tabProjects
@@ -494,6 +505,41 @@
             this.openFileProductImage.FileName = "openFileDialog1";
             this.openFileProductImage.Filter = "\"png files (*.png)|*.png|All files (*.*)|*.*\"";
             this.openFileProductImage.Title = "\"Browse image files\"";
+            // 
+            // pnlCategories
+            // 
+            this.pnlCategories.Controls.Add(this.pnlCategoriesEditor);
+            this.pnlCategories.Controls.Add(this.pnlCategoriesTree);
+            this.pnlCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCategories.Location = new System.Drawing.Point(0, 0);
+            this.pnlCategories.Name = "pnlCategories";
+            this.pnlCategories.Size = new System.Drawing.Size(2210, 572);
+            this.pnlCategories.TabIndex = 0;
+            // 
+            // pnlCategoriesTree
+            // 
+            this.pnlCategoriesTree.Controls.Add(this.treeCategories);
+            this.pnlCategoriesTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlCategoriesTree.Location = new System.Drawing.Point(2, 2);
+            this.pnlCategoriesTree.Name = "pnlCategoriesTree";
+            this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 568);
+            this.pnlCategoriesTree.TabIndex = 0;
+            // 
+            // pnlCategoriesEditor
+            // 
+            this.pnlCategoriesEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCategoriesEditor.Location = new System.Drawing.Point(614, 2);
+            this.pnlCategoriesEditor.Name = "pnlCategoriesEditor";
+            this.pnlCategoriesEditor.Size = new System.Drawing.Size(1594, 568);
+            this.pnlCategoriesEditor.TabIndex = 1;
+            // 
+            // treeCategories
+            // 
+            this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeCategories.Location = new System.Drawing.Point(2, 2);
+            this.treeCategories.Name = "treeCategories";
+            this.treeCategories.Size = new System.Drawing.Size(608, 564);
+            this.treeCategories.TabIndex = 0;
             // 
             // ProductsManager
             // 
@@ -530,6 +576,12 @@
             this.tabEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgProductPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
+            this.tabCategories.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).EndInit();
+            this.pnlCategories.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).EndInit();
+            this.pnlCategoriesTree.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesEditor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -574,5 +626,9 @@
         private CheckBox chkFilterLikeSearch;
         private TextBox txtFilterName;
         private Label lblFilterName;
+        private DevExpress.XtraEditors.PanelControl pnlCategories;
+        private DevExpress.XtraEditors.PanelControl pnlCategoriesEditor;
+        private DevExpress.XtraEditors.PanelControl pnlCategoriesTree;
+        private TreeView treeCategories;
     }
 }

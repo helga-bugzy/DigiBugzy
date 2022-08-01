@@ -35,5 +35,10 @@ namespace DigiBugzy.Core.Domain.xBase
         /// Optional to indicate value i.e. Product CustomField Value entered
         /// </summary>
         public string CustomFieldValue { get; set; }
+
+        /// <summary>
+        /// Optional value to load i.e. Categories Treeview with mappings
+        /// </summary>
+        public int? ParentId { get; set; }
     }
 }

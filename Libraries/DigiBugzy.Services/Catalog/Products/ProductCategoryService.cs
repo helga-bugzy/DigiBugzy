@@ -1,7 +1,11 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations.Schema;
+using DigiBugzy.Core.Constants;
+
 namespace DigiBugzy.Services.Catalog.Products
 {
+    
     public class ProductCategoryService : BaseService, IProductCategoryService
     {
 

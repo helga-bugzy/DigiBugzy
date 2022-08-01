@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using DigiBugzy.Core.Domain.Products;
+using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Utilities;
 
 namespace DigiBugzy.Desktop.Products
@@ -12,6 +14,10 @@ namespace DigiBugzy.Desktop.Products
         public Product SelectedProduct { get; set; } = new();
 
         public List<Product> FilteredProducts { get; set; } = new();
+
+        private List<MappingViewModel> LoadingCategories { get; set; } = new();
+
+        private List<MappingViewModel> LoadingFields { get; set; } = new();
 
         #endregion
 
@@ -33,7 +39,7 @@ namespace DigiBugzy.Desktop.Products
                 includeDeleted: chkFilterDeleted.Checked);
 
             using var service = new ProductService(Globals.GetConnectionString());
-            FilteredProducts = service.Get(filter);
+            FilteredProducts = service.Get(filter,loadProductComplete:true);
 
             gridListing.DataSource = FilteredProducts;
             gvProducts.Columns["Id"].Visible = false;
@@ -88,7 +94,7 @@ namespace DigiBugzy.Desktop.Products
                 txtName.Text = SelectedProduct.Name;
                 txtDescription.Text = SelectedProduct.Description;
 
-                if (SelectedProduct.ProductImage == null || SelectedProduct.ProductImage.Length <= 0)
+                if (SelectedProduct.ProductImage is not { Length: > 0 })
                 {
                     imgProductPhoto.Visible = false;
                     lblSelectedFileName.Text = string.Empty;
@@ -101,12 +107,58 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCategoriesSelector()
         {
+            using var service = new ProductService(Globals.GetConnectionString());
+            LoadingCategories = service.GetCategoryMappings(SelectedProduct.Id, (int)ClassificationsEnum.Product);
+            treeCategories.Nodes.Clear();
 
+            var parents = LoadingCategories.Where(x => x.ParentId.HasValue && x.ParentId.Value > 0).ToList();
+            foreach (var parent in parents)
+            {
+                var node = new TreeNode
+                {
+                    Text = parent.Name,
+                    Tag = parent.Id
+                };
+
+                LoadCategoryNodes(node);
+
+                node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
+                treeCategories.Nodes.Add(node);
+            }
+
+
+        }
+
+        private void LoadCategoryNodes(TreeNode? parentNode)
+        {
+            if (parentNode == null) return;
+            var children = LoadingCategories
+                .Where(c => c.ParentId == int.Parse(parentNode.Tag.ToString()!))
+                .Select(c => new Category
+                {
+                    Id = c.Id,
+                    ParentId = c.ParentId,
+                    Name = c.Name,
+                    IsActive = c.IsActive,
+                    IsDeleted = c.IsDeleted
+                })
+                .ToList();
+
+            if (children.Count <= 0) return;
+            foreach (var node in children.Select(child => new TreeNode(text: child.Name)
+                     {
+                         Tag = child.Id
+                     }))
+            {
+                parentNode.Nodes.Add(node);
+
+                LoadCategoryNodes(node);
+            }
         }
 
         private void LoadCustomFieldsSelector()
         {
-
+            
         }
 
         private void LoadDocumentsTab()

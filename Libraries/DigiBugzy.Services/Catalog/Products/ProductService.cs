@@ -164,6 +164,7 @@ namespace DigiBugzy.Services.Catalog.Products
                         EntityMappedFromId = productId, 
                         EntityMappedToId = category.Id, 
                         IsMapped = map.Id > 0,
+                        ParentId = category.ParentId
                     })
                 .ToList();
 
@@ -195,6 +196,7 @@ namespace DigiBugzy.Services.Catalog.Products
                 dbContext.ProductCategories.Remove(item);
                 dbContext.SaveChanges();
             }
+
 
         }
 
