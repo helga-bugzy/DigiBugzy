@@ -167,8 +167,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
                 foreach (var child in children)
                 {
-                   
-
                     var node = new TreeNode(text: child.Name)
                     {
                         Tag = child.Id,

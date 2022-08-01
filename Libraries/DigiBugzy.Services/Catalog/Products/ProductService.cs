@@ -160,14 +160,18 @@ namespace DigiBugzy.Services.Catalog.Products
             {
 
                 var map = mappings.FirstOrDefault(x => x.CategoryId == category.Id);
-                var view = new MappingViewModel()
+                var view = new MappingViewModel
                 {
                     ParentId = category.ParentId,
                     EntityMappedFromId = productId,
                     EntityMappedToId = category.Id,
+                    Name = category.Name
                 };
 
-                if (map is { Id: > 0 }) view.IsMapped = true;
+                if (map != null)
+                {
+                    view.IsMapped = true;
+                }
 
                 results.Add(view);
             }

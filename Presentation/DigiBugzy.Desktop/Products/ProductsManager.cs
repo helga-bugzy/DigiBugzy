@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using DevExpress.Mvvm.POCO;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Utilities;
@@ -111,16 +112,18 @@ namespace DigiBugzy.Desktop.Products
             LoadingCategories = service.GetCategoryMappings(SelectedProduct.Id, (int)ClassificationsEnum.Product);
             treeCategories.Nodes.Clear();
 
-            var parents = LoadingCategories.Where(x => x.ParentId.HasValue && x.ParentId.Value > 0).ToList();
+            var parents = LoadingCategories.Where(x => x.ParentId is null).ToList();
             foreach (var parent in parents)
             {
                 var node = new TreeNode
                 {
                     Text = parent.Name,
-                    Tag = parent.Id
+                    Tag = parent.EntityMappedToId,
+                    Checked = parent.IsMapped
                 };
+                
 
-                LoadCategoryNodes(node);
+                LoadCategoryNodes(node, parent.EntityMappedToId);
 
                 node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
                 treeCategories.Nodes.Add(node);
@@ -129,31 +132,33 @@ namespace DigiBugzy.Desktop.Products
 
         }
 
-        private void LoadCategoryNodes(TreeNode? parentNode)
+        private void LoadCategoryNodes(TreeNode? parentNode, int parentId)
         {
             if (parentNode == null) return;
+
             var children = LoadingCategories
-                .Where(c => c.ParentId == int.Parse(parentNode.Tag.ToString()!))
-                .Select(c => new Category
-                {
-                    Id = c.Id,
-                    ParentId = c.ParentId,
-                    Name = c.Name,
-                    IsActive = c.IsActive,
-                    IsDeleted = c.IsDeleted
-                })
+                .Where(c => c.ParentId == parentId)
+               
                 .ToList();
 
-            if (children.Count <= 0) return;
-            foreach (var node in children.Select(child => new TreeNode(text: child.Name)
-                     {
-                         Tag = child.Id
-                     }))
+            if (children.Count > 0)
             {
-                parentNode.Nodes.Add(node);
 
-                LoadCategoryNodes(node);
+                foreach (var child in children)
+                {
+                    var node = new TreeNode(text: child.Name)
+                    {
+                        Tag = child.EntityMappedToId,
+                        Checked = child.IsMapped
+                    };
+
+                    parentNode.Nodes.Add(node);
+
+                    LoadCategoryNodes(node, child.EntityMappedToId);
+                }
             }
+            
+           
         }
 
         private void LoadCustomFieldsSelector()
@@ -297,6 +302,24 @@ namespace DigiBugzy.Desktop.Products
         {
             LoadSelectedProduct(int.Parse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!));
         }
+
+
+        #endregion
+
+        #region Treeview
+
+        #region Categories
+
+        private void treeCategories_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            var service = new ProductService(Globals.GetConnectionString());
+            service.HandleCategoryMapping(
+                categoryId: int.Parse(e.Node!.Tag.ToString()!), 
+                productId: SelectedProduct.Id, 
+                isMapped: e.Node.Checked);
+        }
+
+        #endregion
 
         #endregion
 
