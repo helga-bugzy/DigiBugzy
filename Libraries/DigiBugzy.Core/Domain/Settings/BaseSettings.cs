@@ -2,7 +2,7 @@
 
 using DigiBugzy.Core.Domain.Administration.DigiAdmins;
 
-namespace DigiBugzy.Core.Domain.Administration.Settings
+namespace DigiBugzy.Core.Domain.Settings
 {
    
     public class BaseSettings

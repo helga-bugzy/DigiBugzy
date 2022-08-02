@@ -2,6 +2,7 @@
 
 using DigiBugzy.Core.Domain.BusinessEntities;
 using DigiBugzy.Core.Domain.Secures;
+using DigiBugzy.Core.Domain.Settings;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigiBugzy.Services
@@ -59,9 +60,21 @@ namespace DigiBugzy.Services
 
         #endregion
 
+        #region Settings
+
+        public DbSet<AdministrationSettings> AdministrationSettings { get; set; }
+
+        public DbSet<ProductSettings> ProductSettings { get; set; }
+
+        public DbSet<ProjectSettings> ProjectSettings { get; set; }
+
+        public DbSet<GeneralSettings> GeneralSettings { get; set; }
+
+        #endregion
+
         #region Ctor
 
-        private string _connectionString;
+        private readonly string _connectionString;
 
 
         public DatabaseContext(string connectionString)

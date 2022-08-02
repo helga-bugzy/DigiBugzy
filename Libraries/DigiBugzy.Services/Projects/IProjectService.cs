@@ -1,8 +1,8 @@
 ﻿
 
-global using DigiBugzy.Core.Domain.Projects;
+using DigiBugzy.Core.Domain.Projects;
 
-namespace DigiBugzy.Services.Catalog.Products
+namespace DigiBugzy.Services.Projects
 {
     public interface IProjectService
     {

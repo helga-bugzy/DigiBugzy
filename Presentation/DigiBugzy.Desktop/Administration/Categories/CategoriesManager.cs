@@ -365,6 +365,11 @@ namespace DigiBugzy.Desktop.Administration.Categories
             ApplyFilter();
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         #endregion
 
         #region Editor
@@ -577,7 +582,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
         private void treeCFMappings_AfterCheck(object sender, TreeViewEventArgs e)
         {
             using var service = new CategoryService(Globals.GetConnectionString());
-            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked, true);
+            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked, chkCustomFieldsToChild.Checked);
         }
 
 
@@ -614,7 +619,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             
             //Link to current category
             using var cservice = new CategoryService(Globals.GetConnectionString());
-            cservice.HandleCustomFieldMapping(SelectedCategory.Id, entity.Id, true, true);
+            cservice.HandleCustomFieldMapping(SelectedCategory.Id, entity.Id, true, chkCustomFieldsToChild.Checked);
 
             //Interface
             cmbQuickAddType.SelectedIndex = 0;
@@ -631,9 +636,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         #endregion
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+       
     }
 }

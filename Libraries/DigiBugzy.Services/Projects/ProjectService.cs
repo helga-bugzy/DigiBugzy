@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DigiBugzy.Core.Domain.Projects;
 
-namespace DigiBugzy.Services.Catalog.Products
+namespace DigiBugzy.Services.Projects
 {
     public class ProjectService : IProjectService
     {

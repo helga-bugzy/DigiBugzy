@@ -82,6 +82,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.treeCFMappings = new System.Windows.Forms.TreeView();
             this.pnlMappingsFilter = new DevExpress.XtraEditors.PanelControl();
+            this.chkCustomFieldsToChild = new DevExpress.XtraEditors.CheckEdit();
             this.txtMappingsFilterName = new DevExpress.XtraEditors.TextEdit();
             this.lblMappingFilterName = new System.Windows.Forms.Label();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -151,6 +152,7 @@
             this.panelControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsFilter)).BeginInit();
             this.pnlMappingsFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCustomFieldsToChild.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMappingsFilterName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
@@ -197,7 +199,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(104, 37);
             this.btnExit.TabIndex = 6;
-            this.btnExit.Text = "Exit";
+            this.btnExit.Text = "Cloase";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnFilter
@@ -606,9 +608,9 @@
             this.pnlMappingsMapper.Controls.Add(this.pnlCFEditor);
             this.pnlMappingsMapper.Controls.Add(this.treeCFMappings);
             this.pnlMappingsMapper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMappingsMapper.Location = new System.Drawing.Point(2, 55);
+            this.pnlMappingsMapper.Location = new System.Drawing.Point(2, 68);
             this.pnlMappingsMapper.Name = "pnlMappingsMapper";
-            this.pnlMappingsMapper.Size = new System.Drawing.Size(542, 692);
+            this.pnlMappingsMapper.Size = new System.Drawing.Size(542, 679);
             this.pnlMappingsMapper.TabIndex = 2;
             // 
             // pnlCFEditor
@@ -616,7 +618,7 @@
             this.pnlCFEditor.Controls.Add(this.pnlQuickAddCustomField);
             this.pnlCFEditor.Controls.Add(this.tablePanel4);
             this.pnlCFEditor.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCFEditor.Location = new System.Drawing.Point(2, 470);
+            this.pnlCFEditor.Location = new System.Drawing.Point(2, 457);
             this.pnlCFEditor.Name = "pnlCFEditor";
             this.pnlCFEditor.Size = new System.Drawing.Size(538, 220);
             this.pnlCFEditor.TabIndex = 2;
@@ -740,20 +742,31 @@
             this.treeCFMappings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCFMappings.Location = new System.Drawing.Point(2, 2);
             this.treeCFMappings.Name = "treeCFMappings";
-            this.treeCFMappings.Size = new System.Drawing.Size(538, 688);
+            this.treeCFMappings.Size = new System.Drawing.Size(538, 675);
             this.treeCFMappings.TabIndex = 1;
             this.treeCFMappings.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCFMappings_AfterCheck);
             // 
             // pnlMappingsFilter
             // 
+            this.pnlMappingsFilter.Controls.Add(this.chkCustomFieldsToChild);
             this.pnlMappingsFilter.Controls.Add(this.txtMappingsFilterName);
             this.pnlMappingsFilter.Controls.Add(this.lblMappingFilterName);
             this.pnlMappingsFilter.Controls.Add(this.simpleButton1);
             this.pnlMappingsFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMappingsFilter.Location = new System.Drawing.Point(2, 2);
             this.pnlMappingsFilter.Name = "pnlMappingsFilter";
-            this.pnlMappingsFilter.Size = new System.Drawing.Size(542, 53);
+            this.pnlMappingsFilter.Size = new System.Drawing.Size(542, 66);
             this.pnlMappingsFilter.TabIndex = 0;
+            // 
+            // chkCustomFieldsToChild
+            // 
+            this.chkCustomFieldsToChild.EditValue = true;
+            this.chkCustomFieldsToChild.Location = new System.Drawing.Point(43, 41);
+            this.chkCustomFieldsToChild.Name = "chkCustomFieldsToChild";
+            this.chkCustomFieldsToChild.Properties.Caption = "Automatically Map Child Categories";
+            this.chkCustomFieldsToChild.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.chkCustomFieldsToChild.Size = new System.Drawing.Size(218, 20);
+            this.chkCustomFieldsToChild.TabIndex = 13;
             // 
             // txtMappingsFilterName
             // 
@@ -884,6 +897,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlMappingsFilter)).EndInit();
             this.pnlMappingsFilter.ResumeLayout(false);
             this.pnlMappingsFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCustomFieldsToChild.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMappingsFilterName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
@@ -952,5 +966,6 @@
         private DevExpress.XtraEditors.SimpleButton btnQuickAdd;
         private DevExpress.XtraEditors.SimpleButton btnExit;
         private ImageList treeImages;
+        private DevExpress.XtraEditors.CheckEdit chkCustomFieldsToChild;
     }
 }

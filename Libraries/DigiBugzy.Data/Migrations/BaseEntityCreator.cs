@@ -1,6 +1,6 @@
 ﻿
 
-using DigiBugzy.Core.Domain.Administration.Settings;
+using DigiBugzy.Core.Domain.Settings;
 
 namespace DigiBugzy.Data.Migrations
 {

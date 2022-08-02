@@ -12,6 +12,7 @@ global using DigiBugzy.Desktop.MultiFunctional;
 
 using DigiBugzy.Desktop.Administration.Categories;
 using DigiBugzy.Desktop.Administration.CustomFields;
+using DigiBugzy.Services.Projects;
 
 namespace DigiBugzy.Desktop
 {

@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace DigiBugzy.Data.Helpers
+namespace DigiBugzy.Data.Common.Helpers
 {
     /// <summary>
     /// Represents a common helper

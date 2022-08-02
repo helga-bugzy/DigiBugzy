@@ -1,7 +1,6 @@
-﻿
-global using DigiBugzy.Domain.Helpers;
-global using DigiBugzy.Core.Domain.BusinessEntities;
-using DigiBugzy.Core.Domain.Administration.Settings;
+﻿global using DigiBugzy.Core.Domain.BusinessEntities;
+using DigiBugzy.Core.Domain.Settings;
+using DigiBugzy.Core.Helpers;
 
 namespace DigiBugzy.Data.Migrations
 {

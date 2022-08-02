@@ -4,7 +4,7 @@
 global using FluentMigrator.Runner;
 global using Microsoft.Extensions.DependencyInjection;
 global using DigiBugzy.Core.Enumerations;
-using DigiBugzy.Core.Domain.Administration.Settings;
+using DigiBugzy.Core.Domain.Settings;
 
 namespace DigiBugzy.Desktop
 {

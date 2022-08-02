@@ -3,7 +3,7 @@
 
 
 
-namespace DigiBugzy.Domain.Helpers
+namespace DigiBugzy.Core.Helpers
 {
     public static class ClassHelpers
     {
