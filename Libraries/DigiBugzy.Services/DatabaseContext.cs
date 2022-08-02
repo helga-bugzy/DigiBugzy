@@ -1,6 +1,7 @@
 ﻿
 
 using DigiBugzy.Core.Domain.BusinessEntities;
+using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.Domain.Secures;
 using DigiBugzy.Core.Domain.Settings;
 using Microsoft.EntityFrameworkCore;

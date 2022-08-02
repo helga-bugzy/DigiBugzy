@@ -1,10 +1,9 @@
-﻿
-
-
-global using FluentMigrator.Runner;
+﻿global using FluentMigrator.Runner;
 global using Microsoft.Extensions.DependencyInjection;
 global using DigiBugzy.Core.Enumerations;
+using System.Linq;
 using DigiBugzy.Core.Domain.Settings;
+using DigiBugzy.Services.Settings;
 
 namespace DigiBugzy.Desktop
 {
@@ -42,9 +41,56 @@ namespace DigiBugzy.Desktop
 
         public static class Settings
         {
-            public static ProductSettings ProductSettings { get; set; } = new();
+            #region Properties
 
-            public static AdministrationSettings AdministrationSettings { get; set; } = new();
+            public static ProductSettings? ProductSettings { get; set; } = new();
+
+            public static AdministrationSettings? AdministrationSettings { get; set; } = new();
+
+            public static ProjectSettings? ProjectSettings { get; set; } = new();
+
+            public static GeneralSettings? GeneralSettings { get; set; } = new();
+
+            #endregion
+
+            #region Methods
+
+            public static void Refresh()
+            {
+                Refresh_AdministrationSettings();
+                Refresh_GeneralSettings();
+                Refresh_ProductSettings();
+                Refresh_ProjectSettings();
+            }
+
+            public static void Refresh_AdministrationSettings()
+            {
+                using var service = new AdministrationSettingsService(GetConnectionString());
+                AdministrationSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+            }
+
+            public static void Refresh_GeneralSettings()
+            {
+                using var service = new GeneralSettingsService(GetConnectionString());
+                GeneralSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+            }
+
+            public static void Refresh_ProductSettings()
+            {
+                using var service = new ProductSettingsService(GetConnectionString());
+                ProductSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+            }
+
+
+            public static void Refresh_ProjectSettings()
+            {
+                using var service = new ProjectSettingsService(GetConnectionString());
+                ProjectSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+            }
+
+            #endregion
+
+
 
         }
 

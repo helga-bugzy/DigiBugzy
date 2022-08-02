@@ -13,7 +13,10 @@ namespace DigiBugzy.Desktop
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+
             Startup.ConfigureService();
+
+            Globals.Settings.Refresh();
 
             Application.Run(Startup.GetForm<LoginForm>());
         }

@@ -49,7 +49,7 @@ namespace DigiBugzy.Desktop
 
             #endregion
 
-            #region Dependency Injection
+            #region Dependency Injectio
 
             services = new ServiceCollection();
 
@@ -61,6 +61,9 @@ namespace DigiBugzy.Desktop
             ServiceProvider = services.BuildServiceProvider();
 
             #endregion
+
+            
+
         }
 
         #endregion
@@ -91,7 +94,6 @@ namespace DigiBugzy.Desktop
             if (services != null)
             {
                 services.AddScoped<LoginForm>();
-                services.AddScoped<MainDashboard>();
                
                 
 
