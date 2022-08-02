@@ -16,7 +16,7 @@ namespace DigiBugzy.Desktop
 
             Startup.ConfigureService();
 
-            Globals.Settings.Refresh();
+           
 
             Application.Run(Startup.GetForm<LoginForm>());
         }

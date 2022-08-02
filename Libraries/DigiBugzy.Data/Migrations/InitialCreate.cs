@@ -142,15 +142,15 @@ namespace DigiBugzy.Data.Migrations
             _currentTableName = nameof(ProjectSettings);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseSettingsEntity();
-            creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings));
-            creatory.AddColumn(nameof(ProductSettings.AutomateFieldMappings));
+            creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
+            creatory.AddColumn(nameof(ProductSettings.AutomateFieldMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
 
             //Product Settings
             _currentTableName = nameof(ProductSettings);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseSettingsEntity();
-            creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings));
-            creatory.AddColumn(nameof(ProductSettings.AutomateFieldMappings));
+            creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
+            creatory.AddColumn(nameof(ProductSettings.AutomateFieldMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
 
             //Generate data
             CreateSettingsData();

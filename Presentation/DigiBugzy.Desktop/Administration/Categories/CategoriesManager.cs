@@ -30,6 +30,17 @@ namespace DigiBugzy.Desktop.Administration.Categories
             LoadClassifications();
             LoadCategories();
             LoadCategoryEditor();
+
+            ApplySettings();
+        }
+
+        private void ApplySettings()
+        {
+            if (Globals.Settings.AdministrationSettings is { AllowSettingOverrides: true })
+            {
+                chkCustomFieldsToChild.Visible = true;
+                chkCustomFieldsToChild.Checked = Globals.Settings.AdministrationSettings.ApplyAutomationDown;
+            }
         }
 
         #endregion

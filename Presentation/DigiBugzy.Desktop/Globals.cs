@@ -43,13 +43,57 @@ namespace DigiBugzy.Desktop
         {
             #region Properties
 
-            public static ProductSettings? ProductSettings { get; set; } = new();
+            
+            private static AdministrationSettings? _administrationSettings;
 
-            public static AdministrationSettings? AdministrationSettings { get; set; } = new();
+            public static AdministrationSettings? AdministrationSettings
+            {
+                get
 
-            public static ProjectSettings? ProjectSettings { get; set; } = new();
+                {
+                    if (_administrationSettings is { Id: <= 0 }) Refresh();
+                    return _administrationSettings;
+                }
+                set => _administrationSettings = value;
+            }
 
-            public static GeneralSettings? GeneralSettings { get; set; } = new();
+            private static GeneralSettings?_generalSettings;
+
+            public static GeneralSettings? GeneralSettings
+            {
+                get
+
+                {
+                    if (_generalSettings is { Id: <= 0 }) Refresh();
+                    return _generalSettings;
+                }
+                set => _generalSettings = value;
+            }
+
+            private static ProductSettings? _productSettings;
+            public static ProductSettings? ProductSettings
+            {
+                get
+                {
+                    if (_productSettings is { Id: <= 0 }) Refresh();
+                    return _productSettings;
+                }
+                set => _productSettings = value;
+            }
+
+
+            private static ProjectSettings? _projectSettings;
+            public static ProjectSettings? ProjectSettings
+            {
+                get
+                {
+                    if (_projectSettings is { Id: <= 0 }) Refresh();
+                    return _projectSettings;
+                }
+                set => _projectSettings = value;
+            }
+
+            
 
             #endregion
 
@@ -59,33 +103,34 @@ namespace DigiBugzy.Desktop
             {
                 Refresh_AdministrationSettings();
                 Refresh_GeneralSettings();
-                Refresh_ProductSettings();
+                
                 Refresh_ProjectSettings();
+                Refresh_ProductSettings();
             }
 
             public static void Refresh_AdministrationSettings()
             {
                 using var service = new AdministrationSettingsService(GetConnectionString());
-                AdministrationSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+                AdministrationSettings = service.Get(DigiAdministration.Id).FirstOrDefault()!;
             }
 
             public static void Refresh_GeneralSettings()
             {
                 using var service = new GeneralSettingsService(GetConnectionString());
-                GeneralSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+                GeneralSettings = service.Get(DigiAdministration.Id).FirstOrDefault()!;
             }
 
             public static void Refresh_ProductSettings()
             {
                 using var service = new ProductSettingsService(GetConnectionString());
-                ProductSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+                ProductSettings = service.Get(DigiAdministration.Id).FirstOrDefault()!;
             }
 
 
             public static void Refresh_ProjectSettings()
             {
                 using var service = new ProjectSettingsService(GetConnectionString());
-                ProjectSettings = service.Get(DigiAdministration.Id).FirstOrDefault();
+                ProjectSettings = service.Get(DigiAdministration.Id).FirstOrDefault()!;
             }
 
             #endregion

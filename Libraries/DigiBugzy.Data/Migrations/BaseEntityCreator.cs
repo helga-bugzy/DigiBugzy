@@ -11,7 +11,8 @@ namespace DigiBugzy.Data.Migrations
             AsInt32,
             AsString,
             AsDateTime,
-            AsBinary
+            AsBinary,
+            AsBoolean
         }
 
         public enum MappingTypes {
@@ -177,6 +178,19 @@ namespace DigiBugzy.Data.Migrations
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
                             .AddColumn(fieldName).AsBinary(1000000000).NotNullable();
+                    }
+
+                    break;
+                case FieldTypes.AsBoolean:
+                    if (isNullable)
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsBoolean().Nullable();
+                    }
+                    else
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsBoolean().NotNullable();
                     }
 
                     break;
