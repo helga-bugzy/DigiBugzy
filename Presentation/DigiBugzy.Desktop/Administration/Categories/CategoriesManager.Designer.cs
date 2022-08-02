@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesManager));
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
+            this.btnSampleDataDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSampleData = new DevExpress.XtraEditors.SimpleButton();
             this.btnExit = new DevExpress.XtraEditors.SimpleButton();
             this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             this.chkIncludeDeleted = new System.Windows.Forms.CheckBox();
@@ -180,6 +182,8 @@
             // 
             // pnlFilter
             // 
+            this.pnlFilter.Controls.Add(this.btnSampleDataDelete);
+            this.pnlFilter.Controls.Add(this.btnSampleData);
             this.pnlFilter.Controls.Add(this.btnExit);
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.chkIncludeDeleted);
@@ -192,6 +196,26 @@
             this.pnlFilter.Size = new System.Drawing.Size(1507, 48);
             this.pnlFilter.TabIndex = 0;
             // 
+            // btnSampleDataDelete
+            // 
+            this.btnSampleDataDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleDataDelete.ImageOptions.Image")));
+            this.btnSampleDataDelete.Location = new System.Drawing.Point(1364, 8);
+            this.btnSampleDataDelete.Name = "btnSampleDataDelete";
+            this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleDataDelete.TabIndex = 8;
+            this.btnSampleDataDelete.Text = "Delete Sample Data";
+            this.btnSampleDataDelete.Click += new System.EventHandler(this.btnSampleDataDelete_Click);
+            // 
+            // btnSampleData
+            // 
+            this.btnSampleData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleData.ImageOptions.Image")));
+            this.btnSampleData.Location = new System.Drawing.Point(1229, 8);
+            this.btnSampleData.Name = "btnSampleData";
+            this.btnSampleData.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleData.TabIndex = 7;
+            this.btnSampleData.Text = "Create Sample Data";
+            this.btnSampleData.Click += new System.EventHandler(this.btnSampleData_Click);
+            // 
             // btnExit
             // 
             this.btnExit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.ImageOptions.Image")));
@@ -199,7 +223,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(104, 37);
             this.btnExit.TabIndex = 6;
-            this.btnExit.Text = "Cloase";
+            this.btnExit.Text = "Close";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnFilter
@@ -967,5 +991,7 @@
         private DevExpress.XtraEditors.SimpleButton btnExit;
         private ImageList treeImages;
         private DevExpress.XtraEditors.CheckEdit chkCustomFieldsToChild;
+        private DevExpress.XtraEditors.SimpleButton btnSampleData;
+        private DevExpress.XtraEditors.SimpleButton btnSampleDataDelete;
     }
 }

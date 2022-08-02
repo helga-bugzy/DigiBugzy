@@ -41,10 +41,13 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 chkCustomFieldsToChild.Visible = true;
                 chkCustomFieldsToChild.Checked = Globals.Settings.AdministrationSettings.ApplyAutomationDown;
             }
+
+            //Show sample buttons if in dev
+            btnSampleData.Visible = btnSampleDataDelete.Visible =
+                Globals.ConnectionEnvironment == ConnectionEnvironment.Development;
         }
 
         #endregion
-        
 
         #region Helper Methods
 
@@ -643,10 +646,85 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
 
 
-        #endregion
 
         #endregion
 
-       
+        #region Sample Data
+
+        private void btnSampleData_Click(object sender, EventArgs e)
+        {
+            using var categoryService = new CategoryService(Globals.GetConnectionString());
+            for (var p = 0; p < 11; p++)
+            {
+                var parent = new Category
+                {
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    DigiAdminId = Globals.DigiAdministration.Id,
+                    Name = $@"Sample Category {p}",
+                    Description = "Sample",
+                    ClassificationId = _classificationId,
+                    CustomFieldMappings = null
+                };
+                parent.Id = categoryService.Create(parent);
+
+                for (var c = 0; c < 4; c++)
+                {
+                    var child = new Category
+                    {
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedOn = DateTime.Now,
+                        DigiAdminId = Globals.DigiAdministration.Id,
+                        Name = $@"Sample Category {p}",
+                        Description = "Sample",
+                        ClassificationId = _classificationId,
+                        ParentId = parent.Id
+                    };
+                    child.Id = categoryService.Create(child);
+
+                    for (var cc = 0; cc < 2; cc++)
+                    {
+                        var schild = new Category
+                        {
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreatedOn = DateTime.Now,
+                            DigiAdminId = Globals.DigiAdministration.Id,
+                            Name = $@"Sample Category {p}",
+                            Description = "Sample",
+                            ClassificationId = _classificationId,
+                            ParentId = child.Id
+
+                        };
+                        schild.Id = categoryService.Create(schild);
+                    }
+                }
+
+            }
+
+            LoadCategories();
+
+            Application.DoEvents();
+        }
+
+        private void btnSampleDataDelete_Click(object sender, EventArgs e)
+        {
+            using var categoryService = new CategoryService(Globals.GetConnectionString());
+            var collection = categoryService.Get(new StandardFilter { Name = "Sample", LikeSearch = true });
+            foreach (var category in collection)
+            {
+                categoryService.Delete(category.Id, true);
+            }
+
+            Application.DoEvents();
+        }
+
+        #endregion
+
+        #endregion
+
+
     }
 }
