@@ -140,15 +140,18 @@ namespace DigiBugzy.Data.Migrations
 
 
             //Project Settings
-            _currentTableName = nameof(ProductSettings);
+            _currentTableName = nameof(ProjectSettings);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseSettingsEntity();
+            creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings));
+            creatory.AddColumn(nameof(ProductSettings.AutomateFieldMappings));
 
             //Product Settings
             _currentTableName = nameof(ProductSettings);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseSettingsEntity();
             creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings));
+            creatory.AddColumn(nameof(ProductSettings.AutomateFieldMappings));
 
             //Generate data
             CreateSettingsData();
@@ -412,7 +415,7 @@ namespace DigiBugzy.Data.Migrations
                     ApplyAutomationDown = true,
                     ApplyAutomatioinUp = true,
                     AllowSettingOverrides = true,
-                    AutoMapCategoryChildren = true,
+                    AutomateCategoryMappings = true,
                     AutomateFieldMappings = true,
                 });
 
@@ -424,6 +427,8 @@ namespace DigiBugzy.Data.Migrations
                     ApplyAutomationDown = true,
                     ApplyAutomatioinUp = true,
                     AllowSettingOverrides = true,
+                    AutomateCategoryMappings = true,
+                    AutomateFieldMappings = true,
                 });
 
                 Insert.IntoTable(nameof(GeneralSettings))

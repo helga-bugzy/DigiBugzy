@@ -577,7 +577,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
         private void treeCFMappings_AfterCheck(object sender, TreeViewEventArgs e)
         {
             using var service = new CategoryService(Globals.GetConnectionString());
-            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked);
+            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked, true);
         }
 
 
@@ -614,7 +614,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             
             //Link to current category
             using var cservice = new CategoryService(Globals.GetConnectionString());
-            cservice.HandleCustomFieldMapping(SelectedCategory.Id, entity.Id, true);
+            cservice.HandleCustomFieldMapping(SelectedCategory.Id, entity.Id, true, true);
 
             //Interface
             cmbQuickAddType.SelectedIndex = 0;

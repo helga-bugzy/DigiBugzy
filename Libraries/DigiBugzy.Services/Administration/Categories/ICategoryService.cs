@@ -47,21 +47,21 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <param name="entity"></param>
         public int Create(Category entity);
 
-        /// <summary>
-        /// Retrieves list of all active and non-deleted custom fields for a classification with indication asto which ones are mapped
-        /// </summary>
-        /// <param name="categoryId">Category to be used for mapping indicator</param>
-        /// <param name="classificationId">Classification to retrieve custom fields for</param>
-        /// <returns></returns>
-        public List<MappingViewModel> GetCustomFieldMappings(int categoryId, int classificationId);
+        ///// <summary>
+        ///// Retrieves list of all active and non-deleted custom fields for a classification with indication asto which ones are mapped
+        ///// </summary>
+        ///// <param name="categoryId">Category to be used for mapping indicator</param>
+        ///// <param name="classificationId">Classification to retrieve custom fields for</param>
+        ///// <returns></returns>
+        //public List<MappingViewModel> GetCustomFieldMappings(int categoryId, int classificationId);
 
-        /// <summary>
-        /// Maps or unmaps custom field to a category
-        /// </summary>
-        /// <param name="categoryId"></param>
-        /// <param name="customFieldId"></param>
-        /// <param name="isMapped"></param>
-        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped);
+        ///// <summary>
+        ///// Maps or unmaps custom field to a category
+        ///// </summary>
+        ///// <param name="categoryId"></param>
+        ///// <param name="customFieldId"></param>
+        ///// <param name="isMapped"></param>
+        //public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped);
         
     }
 }
