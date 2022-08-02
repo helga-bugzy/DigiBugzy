@@ -1,5 +1,7 @@
 ﻿
 
+using DigiBugzy.Core.Domain.xBase;
+
 namespace DigiBugzy.Services.Catalog.Products
 {
     public interface IProductCustomFieldService
@@ -25,7 +27,13 @@ namespace DigiBugzy.Services.Catalog.Products
         /// <param name="customFieldId"></param>
         /// <returns></returns>
         public List<ProductCustomField> GetByCustomFieldId(int customFieldId);
-        
+
+        /// <summary>
+        /// Generates view models with detailed mapping information and values
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public List<MappingViewModel> GetMappingViewModels(int productId);
 
         /// <summary>
         /// Deletes and existing mapping

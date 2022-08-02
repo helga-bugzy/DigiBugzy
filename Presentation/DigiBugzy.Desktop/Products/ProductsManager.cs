@@ -5,6 +5,7 @@ using DevExpress.Mvvm.POCO;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Utilities;
+using DigiBugzy.Desktop.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop.Products
 {
@@ -63,7 +64,7 @@ namespace DigiBugzy.Desktop.Products
             else
             {
                 using var service = new ProductService(Globals.GetConnectionString());
-                SelectedProduct = service.GetById(productId);
+                SelectedProduct = service.GetById(productId, true);
             }
 
             LoadEditor();
@@ -108,8 +109,8 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCategoriesSelector()
         {
-            using var service = new ProductService(Globals.GetConnectionString());
-            LoadingCategories = service.GetCategoryMappings(SelectedProduct.Id, (int)ClassificationsEnum.Product);
+            using var service = new ProductCategoryService(Globals.GetConnectionString());
+            LoadingCategories = (List<MappingViewModel>)service.GetMappingViewModels(SelectedProduct.Id);
             treeCategories.Nodes.Clear();
 
             var parents = LoadingCategories.Where(x => x.ParentId is null).ToList();
@@ -163,7 +164,13 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCustomFieldsSelector()
         {
-            
+            foreach (var field in SelectedProduct.CustomFields)
+            {
+                var citem = new CustomFieldItem();
+                citem.CustomField = field;
+                citem.Tag = citem.Name = field.Id.ToString();
+                pnlCustomFieldsList.Controls.Add(citem);
+            }
         }
 
         private void LoadDocumentsTab()
@@ -312,11 +319,12 @@ namespace DigiBugzy.Desktop.Products
 
         private void treeCategories_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            var service = new ProductService(Globals.GetConnectionString());
+            var service = new ProductCategoryService(Globals.GetConnectionString());
             service.HandleCategoryMapping(
                 categoryId: int.Parse(e.Node!.Tag.ToString()!), 
                 productId: SelectedProduct.Id, 
-                isMapped: e.Node.Checked);
+                isMapped: e.Node.Checked,
+                Globals.DigiAdministration.Id);
         }
 
         #endregion

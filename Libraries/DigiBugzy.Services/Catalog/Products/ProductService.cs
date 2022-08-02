@@ -1,8 +1,4 @@
 ﻿
-using DigiBugzy.Core.Domain.xBase;
-using DigiBugzy.Core.Domain.xBase.Interfaces;
-using DigiBugzy.Services.Administration.Categories;
-using DigiBugzy.Services.Administration.CustomFields;
 
 namespace DigiBugzy.Services.Catalog.Products
 {
@@ -137,101 +133,7 @@ namespace DigiBugzy.Services.Catalog.Products
         }
 
         #endregion
-
-        #region Mappings
-
-        #region Categories
-
-        /// <inheritdoc />
-        public List<MappingViewModel> GetCategoryMappings(int productId, int classificationId)
-        {
-            using var cservice = new CategoryService(_connectionString);
-            var categories = cservice.Get(new StandardFilter
-            {
-                ClassificationId = classificationId
-            });
-
-            using var mservice = new ProductCategoryService(_connectionString);
-            var mappings = mservice.GetByProductId(productId);
-
-            var results = new List<MappingViewModel>();
-
-            foreach (var category in categories)
-            {
-
-                var map = mappings.FirstOrDefault(x => x.CategoryId == category.Id);
-                var view = new MappingViewModel
-                {
-                    ParentId = category.ParentId,
-                    EntityMappedFromId = productId,
-                    EntityMappedToId = category.Id,
-                    Name = category.Name
-                };
-
-                if (map != null)
-                {
-                    view.IsMapped = true;
-                }
-
-                results.Add(view);
-            }
-            
-
-            return results;
-        }
-
-        /// <inheritdoc />
-        public void HandleCategoryMapping(int categoryId, int productId, bool isMapped)
-        {
-            var item = dbContext.ProductCategories
-                .FirstOrDefault(x => x.CategoryId == categoryId && x.ProductId == productId);
-
-            if (item == null || item is not {Id: > 0})
-            {
-                item = new ProductCategory()
-                {
-                    DigiAdminId = 1,
-                    CategoryId = categoryId,
-                    CreatedOn = DateTime.Now,
-                    ProductId = productId,
-                    IsDeleted = false,
-                    IsActive = true,
-                };
-                dbContext.ProductCategories.Add(item);
-                dbContext.SaveChanges();
-            }
-            else if(!isMapped)
-            {
-                dbContext.ProductCategories.Remove(item);
-                dbContext.SaveChanges();
-            }
-
-
-        }
-
-        #endregion
-
-        #region Custom Fields
-
-        /// <inheritdoc />
-        public List<MappingViewModel> GetCustomFieldMappings(int categoryId, int classificationId)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
         
-
-        #endregion
-
-
 
         #endregion
 
@@ -239,72 +141,19 @@ namespace DigiBugzy.Services.Catalog.Products
 
         private Product GetProductComplete(Product product)
         {
-            
-            product.Categories.AddRange(GetProductCategoriesViewModels(product));
-            product.CustomFields.AddRange(GetProductCustomFieldModels(product));
+            using var productCategoryService = new ProductCategoryService(_connectionString);
+            product.Categories.AddRange(productCategoryService.GetMappingViewModels(product.Id));
+
+            using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
+            product.CustomFields.AddRange(productCustomFieldService.GetMappingViewModels(product.Id));
 
             return product;
 
         }
 
-        /// <summary>
-        /// Gets all category mappings as view model for the product
-        /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
-        private IEnumerable<MappingViewModel> GetProductCategoriesViewModels(IBaseEntity product)
-        {
-            using var service = new ProductCategoryService(_connectionString);
-            var mappings = service.GetByProductId(product.Id);
-            var ids = mappings.Select(x => x.ProductId).ToList();
+        
 
-            using var cservice = new CategoryService(_connectionString);
-            var categories = cservice.Get(ids);
-
-            var collection = (
-                from category in categories
-                let map = mappings.FirstOrDefault(x => x.ProductId == product.Id && x.CategoryId == category.Id)
-                where map != null
-                select new MappingViewModel
-                {
-                    Name = category.Name,
-                    EntityMappedFromId = product.Id,
-                    EntityMappedToId = category.Id,
-                    Id = map.Id
-                }).ToList();
-
-            return collection;
-        }
-
-        /// <summary>
-        /// Gets a custom fioelds view model for the product
-        /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
-        private IEnumerable<MappingViewModel> GetProductCustomFieldModels(IBaseEntity product)
-        {
-            using var service = new ProductCustomFieldService(_connectionString);
-            var mappings = service.GetByProductId(product.Id);
-            var ids = mappings.Select(x => x.ProductId).ToList();
-
-            var cservice = new CustomFieldService(_connectionString);
-            var fields = cservice.Get(ids);
-
-            var collection = (
-                from field in fields
-                let map = mappings.FirstOrDefault(x => x.ProductId == product.Id && x.CustomFieldId == field.Id)
-                where map != null
-                select new MappingViewModel
-                {
-                    Name = field.Name,
-                    EntityMappedFromId = product.Id,
-                    EntityMappedToId = field.Id,
-                    Id = map.Id,
-                    CustomFieldValue = map.Value
-                }).ToList();
-
-            return collection;
-        }
+        
 
         #endregion
 

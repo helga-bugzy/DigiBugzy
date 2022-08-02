@@ -21,7 +21,6 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
         #region Public Methods
 
-        
 
         /// <inheritdoc />
         public List<CustomField> Get(StandardFilter filter)
@@ -78,6 +77,9 @@ namespace DigiBugzy.Services.Administration.CustomFields
         }
 
         /// <inheritdoc />
+
+        #region Commands
+
         public int Create(CustomField entity)
         {
             var filter = new StandardFilter
@@ -95,7 +97,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
             {
 
 
-                var option = new CustomFieldListOption()
+                var option = new CustomFieldListOption
                 {
                     CreatedOn = DateTime.Now,
                     CustomFieldId = entity.Id,
@@ -135,10 +137,10 @@ namespace DigiBugzy.Services.Administration.CustomFields
         /// <inheritdoc />
         public void Update(CustomField entity)
         {
-            var filter = new StandardFilter
-            {
-                Name = entity.Name,
-            };
+            //var filter = new StandardFilter
+            //{
+            //    Name = entity.Name,
+            //};
 
             //TODO check for duplicate
 
@@ -146,6 +148,8 @@ namespace DigiBugzy.Services.Administration.CustomFields
             dbContext.CustomFields.Update(entity);
             dbContext.SaveChanges();
         }
+
+        #endregion
 
         #endregion
     }
