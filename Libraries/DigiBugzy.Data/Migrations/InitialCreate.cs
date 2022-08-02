@@ -413,7 +413,7 @@ namespace DigiBugzy.Data.Migrations
                 {
                     DigiAdminId = 1,
                     ApplyAutomationDown = true,
-                    ApplyAutomatioinUp = true,
+                    ApplyAutomationUp = true,
                     AllowSettingOverrides = true,
                     AutomateCategoryMappings = true,
                     AutomateFieldMappings = true,
@@ -425,7 +425,7 @@ namespace DigiBugzy.Data.Migrations
                 {
                     DigiAdminId = 1,
                     ApplyAutomationDown = true,
-                    ApplyAutomatioinUp = true,
+                    ApplyAutomationUp = true,
                     AllowSettingOverrides = true,
                     AutomateCategoryMappings = true,
                     AutomateFieldMappings = true,
@@ -437,7 +437,7 @@ namespace DigiBugzy.Data.Migrations
                     {
                         DigiAdminId = 1,
                         ApplyAutomationDown = true,
-                        ApplyAutomatioinUp = true,
+                        ApplyAutomationUp = true,
                         AllowSettingOverrides = true,
                     });
 
@@ -447,7 +447,7 @@ namespace DigiBugzy.Data.Migrations
                     {
                         DigiAdminId = 1,
                         ApplyAutomationDown = true,
-                        ApplyAutomatioinUp = true,
+                        ApplyAutomationUp = true,
                         AllowSettingOverrides = true,
                     });
 
