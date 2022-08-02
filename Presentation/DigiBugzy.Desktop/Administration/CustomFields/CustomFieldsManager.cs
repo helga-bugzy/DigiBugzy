@@ -533,7 +533,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
                         DigiAdminId = Globals.DigiAdministration.Id,
-                        Name = @$"Field {i} - {Enum.GetName(typeof(CustomFieldTypeEnumeration), item)}",
+                        Name = @$"Sample Field {i} - {Enum.GetName(typeof(CustomFieldTypeEnumeration), item)}",
                         Description = "Sample Custom Field",
                         CustomFieldTypeId = (int)item,
                         ClassificationId = _classificationId,
@@ -567,12 +567,19 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void btnSampleDataDelete_Click(object sender, EventArgs e)
         {
+            
+            LoadCustomFields();
+        }
+
+        private void DeleteSampleData()
+        {
             using var customFieldService = new CustomFieldService(Globals.GetConnectionString());
             var collection = customFieldService.Get(new StandardFilter
             {
                 DigiAdminId = Globals.DigiAdministration.Id,
                 Name = "Sample",
-                LikeSearch = true
+                LikeSearch = true,
+                ClassificationId = _classificationId
             });
 
             foreach (var item in collection)
@@ -580,7 +587,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 customFieldService.Delete(item.Id, true);
             }
 
-            LoadCustomFields();
         }
 
         #endregion

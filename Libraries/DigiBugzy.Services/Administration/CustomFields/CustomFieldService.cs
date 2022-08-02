@@ -82,6 +82,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
         public int Create(CustomField entity)
         {
+            
             var filter = new StandardFilter
             {
                 Name = entity.Name

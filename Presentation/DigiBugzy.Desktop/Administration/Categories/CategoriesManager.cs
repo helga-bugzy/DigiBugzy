@@ -653,6 +653,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void btnSampleData_Click(object sender, EventArgs e)
         {
+            DeleteSampleData();
+
             using var categoryService = new CategoryService(Globals.GetConnectionString());
             for (var p = 0; p < 11; p++)
             {
@@ -677,7 +679,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
                         DigiAdminId = Globals.DigiAdministration.Id,
-                        Name = $@"Sample Category {p}",
+                        Name = $@"Sample Child Category {p}",
                         Description = "Sample",
                         ClassificationId = _classificationId,
                         ParentId = parent.Id
@@ -692,7 +694,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                             IsDeleted = false,
                             CreatedOn = DateTime.Now,
                             DigiAdminId = Globals.DigiAdministration.Id,
-                            Name = $@"Sample Category {p}",
+                            Name = $@"Sample Child Sub Category {p}",
                             Description = "Sample",
                             ClassificationId = _classificationId,
                             ParentId = child.Id
@@ -711,14 +713,28 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void btnSampleDataDelete_Click(object sender, EventArgs e)
         {
+            DeleteSampleData();
+
+            LoadCategories();
+
+            Application.DoEvents();
+        }
+
+
+        private void DeleteSampleData()
+        {
             using var categoryService = new CategoryService(Globals.GetConnectionString());
-            var collection = categoryService.Get(new StandardFilter { Name = "Sample", LikeSearch = true });
+            var collection = categoryService.Get(
+                new StandardFilter
+                {
+                    Name = "Sample",
+                    LikeSearch = true,
+                    ClassificationId = _classificationId
+                });
             foreach (var category in collection)
             {
                 categoryService.Delete(category.Id, true);
             }
-
-            Application.DoEvents();
         }
 
         #endregion
