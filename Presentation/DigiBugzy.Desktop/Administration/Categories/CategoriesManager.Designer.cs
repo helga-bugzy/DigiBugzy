@@ -606,9 +606,9 @@
             this.pnlMappingsMapper.Controls.Add(this.pnlCFEditor);
             this.pnlMappingsMapper.Controls.Add(this.treeCFMappings);
             this.pnlMappingsMapper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMappingsMapper.Location = new System.Drawing.Point(2, 47);
+            this.pnlMappingsMapper.Location = new System.Drawing.Point(2, 55);
             this.pnlMappingsMapper.Name = "pnlMappingsMapper";
-            this.pnlMappingsMapper.Size = new System.Drawing.Size(542, 700);
+            this.pnlMappingsMapper.Size = new System.Drawing.Size(542, 692);
             this.pnlMappingsMapper.TabIndex = 2;
             // 
             // pnlCFEditor
@@ -616,7 +616,7 @@
             this.pnlCFEditor.Controls.Add(this.pnlQuickAddCustomField);
             this.pnlCFEditor.Controls.Add(this.tablePanel4);
             this.pnlCFEditor.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCFEditor.Location = new System.Drawing.Point(2, 478);
+            this.pnlCFEditor.Location = new System.Drawing.Point(2, 470);
             this.pnlCFEditor.Name = "pnlCFEditor";
             this.pnlCFEditor.Size = new System.Drawing.Size(538, 220);
             this.pnlCFEditor.TabIndex = 2;
@@ -740,7 +740,7 @@
             this.treeCFMappings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCFMappings.Location = new System.Drawing.Point(2, 2);
             this.treeCFMappings.Name = "treeCFMappings";
-            this.treeCFMappings.Size = new System.Drawing.Size(538, 696);
+            this.treeCFMappings.Size = new System.Drawing.Size(538, 688);
             this.treeCFMappings.TabIndex = 1;
             this.treeCFMappings.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCFMappings_AfterCheck);
             // 
@@ -752,7 +752,7 @@
             this.pnlMappingsFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMappingsFilter.Location = new System.Drawing.Point(2, 2);
             this.pnlMappingsFilter.Name = "pnlMappingsFilter";
-            this.pnlMappingsFilter.Size = new System.Drawing.Size(542, 45);
+            this.pnlMappingsFilter.Size = new System.Drawing.Size(542, 53);
             this.pnlMappingsFilter.TabIndex = 0;
             // 
             // txtMappingsFilterName

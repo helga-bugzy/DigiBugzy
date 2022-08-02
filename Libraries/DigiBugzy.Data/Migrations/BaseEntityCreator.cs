@@ -1,5 +1,7 @@
 ﻿
 
+using DigiBugzy.Core.Domain.Administration.Settings;
+
 namespace DigiBugzy.Data.Migrations
 {
     public class BaseEntityCreator: IDisposable
@@ -65,6 +67,25 @@ namespace DigiBugzy.Data.Migrations
                 .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime();
+
+                AddMapping(MappingTypes.DigiAdmin, toSchemaName: DatabaseConstants.Schemas.Admin);
+            }
+            catch (Exception)
+            {
+                //Already exist just do nothing
+            }
+        }
+
+        public void CreateBaseSettingsEntity()
+        {
+            try
+            {
+                Migrator.Create.Table(TableName)
+                    .InSchema(SchemaName)
+                    .WithColumn(nameof(BaseSettings.Id)).AsInt32().PrimaryKey().Identity()
+                    .WithColumn(nameof(BaseSettings.AllowSettingOverrides)).AsBoolean()
+                    .WithColumn(nameof(BaseSettings.ApplyAutomationDown)).AsBoolean()
+                    .WithColumn(nameof(BaseSettings.ApplyAutomationUp)).AsBoolean();
 
                 AddMapping(MappingTypes.DigiAdmin, toSchemaName: DatabaseConstants.Schemas.Admin);
             }

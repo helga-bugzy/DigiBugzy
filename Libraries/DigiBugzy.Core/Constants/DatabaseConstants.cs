@@ -7,6 +7,7 @@ namespace DigiBugzy.Core.Constants
         public static class Schemas
         {
             public const string Admin = "Admin";
+            public const string Settings = "Settings";
             public const string Auditing = "Auditing";
             public const string Catalog = "Catalog";
             public const string ContactBase = "ContactBase";

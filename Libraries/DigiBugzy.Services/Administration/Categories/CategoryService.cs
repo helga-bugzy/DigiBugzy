@@ -205,8 +205,9 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
-        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped)
+        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped, bool includeChildCategories)
         {
+         
             
             var entity = dbContext.CategoryCustomFields.FirstOrDefault(x =>
                 x.CategoryId == categoryId && x.CustomFieldId == customFieldId);
@@ -229,10 +230,22 @@ namespace DigiBugzy.Services.Administration.Categories
             }
             else
             {
-                if (isMapped) return;
+                if (!isMapped)
+                {
+                    dbContext.CategoryCustomFields.Remove(entity!);
+                    dbContext.SaveChanges();
+                }
 
-                dbContext.CategoryCustomFields.Remove(entity!);
-                dbContext.SaveChanges();
+                
+            }
+
+            if (!includeChildCategories) return;
+            {
+                var children = dbContext.Categories.Where(x => x.ParentId == categoryId).ToList();
+                foreach (var child in children)
+                {
+                    HandleCustomFieldMapping(child.Id, customFieldId, isMapped, true);
+                }
             }
         }
 

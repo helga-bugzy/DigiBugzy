@@ -1,6 +1,7 @@
 ﻿
 global using DigiBugzy.Domain.Helpers;
 global using DigiBugzy.Core.Domain.BusinessEntities;
+using DigiBugzy.Core.Domain.Administration.Settings;
 
 namespace DigiBugzy.Data.Migrations
 {
@@ -19,7 +20,8 @@ namespace DigiBugzy.Data.Migrations
         public override void Up()
         {
             CreateSchemas();
-            CreateAdministrationTables();
+            CreateAdministrationTables(); 
+            CreateSettingsTables();
 
             CreateContactBaseTables();
             CreateCatalogTables();
@@ -115,6 +117,42 @@ namespace DigiBugzy.Data.Migrations
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseAdministrationEntity();
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
+
+            
+           
+            
+        }
+
+        public void CreateSettingsTables()
+        {
+            _currentSchemaName = DatabaseConstants.Schemas.Settings;
+            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
+
+            //General Settings
+            _currentTableName = nameof(GeneralSettings);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseSettingsEntity();
+            
+            //Administration Settings
+            _currentTableName = nameof(AdministrationSettings);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseSettingsEntity();
+
+
+            //Project Settings
+            _currentTableName = nameof(ProductSettings);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseSettingsEntity();
+
+            //Product Settings
+            _currentTableName = nameof(ProductSettings);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseSettingsEntity();
+            creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings));
+
+            //Generate data
+            CreateSettingsData();
+
         }
 
         /// <summary>
@@ -145,7 +183,7 @@ namespace DigiBugzy.Data.Migrations
             creatory.CreateBaseEntity();
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
-            creatory.AddColumn(nameof(ProductCustomField.Value));
+            creatory.AddColumn(nameof(ProductCustomField.Value), isNullable:true);
         }
 
         private void CreateContactBaseTables()
@@ -155,8 +193,7 @@ namespace DigiBugzy.Data.Migrations
             //BusinessEntityType
             _currentTableName = nameof(BusinessEntityType);
             creatory.StartNewTable(_currentTableName);
-            creatory.CreateBaseAdministrationEntity();
-            CreateData_BusinessEntityTypes();
+           creatory.CreateBaseEntity();
         }
 
         private void CreateProjectsTables()
@@ -363,6 +400,53 @@ namespace DigiBugzy.Data.Migrations
                     Name = "Other",
                     Description = "Other"
                 });
+        }
+
+        private void CreateSettingsData()
+        {
+            Insert.IntoTable(nameof(ProductSettings))
+                .InSchema(DatabaseConstants.Schemas.Settings)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    ApplyAutomationDown = true,
+                    ApplyAutomatioinUp = true,
+                    AllowSettingOverrides = true,
+                    AutoMapCategoryChildren = true,
+                    AutomateFieldMappings = true,
+                });
+
+                Insert.IntoTable(nameof(ProjectSettings))
+                .InSchema(DatabaseConstants.Schemas.Settings)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    ApplyAutomationDown = true,
+                    ApplyAutomatioinUp = true,
+                    AllowSettingOverrides = true,
+                });
+
+                Insert.IntoTable(nameof(GeneralSettings))
+                    .InSchema(DatabaseConstants.Schemas.Settings)
+                    .Row(new
+                    {
+                        DigiAdminId = 1,
+                        ApplyAutomationDown = true,
+                        ApplyAutomatioinUp = true,
+                        AllowSettingOverrides = true,
+                    });
+
+                Insert.IntoTable(nameof(AdministrationSettings))
+                    .InSchema(DatabaseConstants.Schemas.Settings)
+                    .Row(new
+                    {
+                        DigiAdminId = 1,
+                        ApplyAutomationDown = true,
+                        ApplyAutomatioinUp = true,
+                        AllowSettingOverrides = true,
+                    });
+
+
         }
 
         #endregion

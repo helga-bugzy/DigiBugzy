@@ -4,6 +4,7 @@
 global using FluentMigrator.Runner;
 global using Microsoft.Extensions.DependencyInjection;
 global using DigiBugzy.Core.Enumerations;
+using DigiBugzy.Core.Domain.Administration.Settings;
 
 namespace DigiBugzy.Desktop
 {
@@ -38,6 +39,16 @@ namespace DigiBugzy.Desktop
         /// Selected digiAdmin
         /// </summary>
         public static DigiAdmin DigiAdministration { get; set; } = new();
+
+        public static class Settings
+        {
+            public static ProductSettings ProductSettings { get; set; } = new();
+
+            public static AdministrationSettings AdministrationSettings { get; set; } = new();
+
+        }
+
+        
 
         
     }
