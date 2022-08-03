@@ -567,7 +567,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void btnSampleDataDelete_Click(object sender, EventArgs e)
         {
-            
+            DeleteSampleData();
             LoadCustomFields();
         }
 
@@ -584,7 +584,15 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             foreach (var item in collection)
             {
-                customFieldService.Delete(item.Id, true);
+                try
+                {
+                    customFieldService.Delete(item.Id, true);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    //throw;
+                }
             }
 
         }

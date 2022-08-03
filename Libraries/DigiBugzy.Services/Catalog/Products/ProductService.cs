@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
+
 namespace DigiBugzy.Services.Catalog.Products
 {
     public class ProductService :BaseService, IProductService
@@ -49,6 +51,10 @@ namespace DigiBugzy.Services.Catalog.Products
 
             if (!filter.IncludeInActive)
                 query = query.Where(x => x.IsActive == true);
+
+            //When there is category mappings, include the category information
+            query = query.Include(x => x.Categories)
+                .ThenInclude(xx => xx.Category);
 
 
             if (!loadProductComplete) return query.ToList();
@@ -128,8 +134,10 @@ namespace DigiBugzy.Services.Catalog.Products
 
             //TODO check for duplicate
 
-
+            
             dbContext.Products.Update(entity);
+           // dbContext.Entry<Product>(entity).Collection(x => x.Categories).IsModified = false;
+          //  dbContext.Entry<Product>(entity).Property(x => x.CustomFields).IsModified = false;
             dbContext.SaveChanges();
         }
 
@@ -143,10 +151,10 @@ namespace DigiBugzy.Services.Catalog.Products
         private Product GetProductComplete(Product product)
         {
             using var productCategoryService = new ProductCategoryService(_connectionString);
-            product.Categories.AddRange(productCategoryService.GetMappingViewModels(product.Id));
+            product.Categories.AddRange(productCategoryService.GetByProductId(product.Id));
 
             using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
-            product.CustomFields.AddRange(productCustomFieldService.GetMappingViewModels(product.Id));
+            product.CustomFields.AddRange(productCustomFieldService.GetByProductId(product.Id));
 
             return product;
 

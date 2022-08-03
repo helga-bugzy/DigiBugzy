@@ -74,9 +74,9 @@ namespace DigiBugzy.Services.Administration.Categories
 
 
             return query
-                .Include(admin => admin.CustomFieldMappings)
-                .ThenInclude(cfield => cfield.CustomField)
-                .ToList();
+               // .Include(admin => admin.CustomFieldMappings)
+               // .ThenInclude(cfield => cfield.CustomField)
+               .ToList();
 
 
         }

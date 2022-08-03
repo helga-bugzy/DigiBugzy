@@ -362,7 +362,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(104, 37);
             this.btnExit.TabIndex = 7;
-            this.btnExit.Text = "Exit";
+            this.btnExit.Text = "Close";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnFilter
@@ -825,9 +825,9 @@
             // 
             // panelControl7
             // 
-            this.panelControl7.Location = new System.Drawing.Point(81, 73);
+            this.panelControl7.Location = new System.Drawing.Point(11, 57);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(223, 111);
+            this.panelControl7.Size = new System.Drawing.Size(293, 127);
             this.panelControl7.TabIndex = 1;
             // 
             // CustomFieldsManager

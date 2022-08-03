@@ -136,6 +136,9 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCategoryNodes(TreeNode? parentNode, int parentId)
         {
+            using var productCategoryService = new ProductCategoryService(Globals.GetConnectionString());
+            LoadingCategories = (List<MappingViewModel>)productCategoryService.GetMappingViewModels(SelectedProduct.Id);
+
             if (parentNode == null) return;
 
             var children = LoadingCategories
@@ -165,7 +168,11 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCustomFieldsSelector()
         {
-            foreach (var field in SelectedProduct.CustomFields)
+           
+
+            using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
+            LoadingFields = (productCustomFieldService.GetMappingViewModels(SelectedProduct.Id));
+            foreach (var field in LoadingFields)
             {
                 var citem = new CustomFieldItem();
                 citem.CustomField = field;
@@ -311,15 +318,13 @@ namespace DigiBugzy.Desktop.Products
 
         private void btnProductImage_Click(object sender, EventArgs e)
         {
-            if (openFileProductImage.ShowDialog() == DialogResult.OK)
-            {
-                if (!string.IsNullOrEmpty(openFileProductImage.FileName))
-                {
-                    lblSelectedFileName.Text = openFileProductImage.FileName;
-                    imgProductPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(openFileProductImage.FileName), Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings!.ImageHeight);
-                    imgProductPhoto.Visible = true;
-                }
-            }
+            if (openFileProductImage.ShowDialog() != DialogResult.OK) return;
+            if (string.IsNullOrEmpty(openFileProductImage.FileName)) return;
+
+            lblSelectedFileName.Text = openFileProductImage.FileName;
+            imgProductPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(openFileProductImage.FileName),
+                Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
+            imgProductPhoto.Visible = true;
         }
 
         private void btnAddNew_Click(object sender, EventArgs e)
@@ -345,10 +350,6 @@ namespace DigiBugzy.Desktop.Products
         {
             SaveProduct();
         }
-
-
-
-
 
         #endregion
 
