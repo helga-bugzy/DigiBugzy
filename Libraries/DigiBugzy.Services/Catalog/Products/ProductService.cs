@@ -130,6 +130,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
 
             dbContext.Products.Update(entity);
+            dbContext.SaveChanges();
         }
 
         #endregion

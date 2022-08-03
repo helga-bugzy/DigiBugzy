@@ -32,6 +32,8 @@
             this.pnlBackground = new DevExpress.XtraEditors.PanelControl();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
+            this.btnSampleDataDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSampleData = new DevExpress.XtraEditors.SimpleButton();
             this.chkFilterLikeSearch = new System.Windows.Forms.CheckBox();
             this.txtFilterName = new System.Windows.Forms.TextBox();
             this.lblFilterName = new System.Windows.Forms.Label();
@@ -61,6 +63,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.tabFields = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.pnlCustomFieldsArea = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCustomFieldsEditor = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCustomFieldsList = new DevExpress.XtraEditors.PanelControl();
             this.tabStock = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabOrders = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabCategories = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -71,9 +76,6 @@
             this.tabProjects = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabDocuments = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.openFileProductImage = new System.Windows.Forms.OpenFileDialog();
-            this.pnlCustomFieldsArea = new DevExpress.XtraEditors.PanelControl();
-            this.pnlCustomFieldsList = new DevExpress.XtraEditors.PanelControl();
-            this.pnlCustomFieldsEditor = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBackground)).BeginInit();
             this.pnlBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -98,16 +100,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgProductPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             this.tabFields.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsArea)).BeginInit();
+            this.pnlCustomFieldsArea.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsList)).BeginInit();
             this.tabCategories.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).BeginInit();
             this.pnlCategories.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesEditor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).BeginInit();
             this.pnlCategoriesTree.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsArea)).BeginInit();
-            this.pnlCustomFieldsArea.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlBackground
@@ -139,6 +141,8 @@
             // 
             // pnlFilter
             // 
+            this.pnlFilter.Controls.Add(this.btnSampleDataDelete);
+            this.pnlFilter.Controls.Add(this.btnSampleData);
             this.pnlFilter.Controls.Add(this.chkFilterLikeSearch);
             this.pnlFilter.Controls.Add(this.txtFilterName);
             this.pnlFilter.Controls.Add(this.lblFilterName);
@@ -153,6 +157,26 @@
             this.pnlFilter.Name = "pnlFilter";
             this.pnlFilter.Size = new System.Drawing.Size(1934, 91);
             this.pnlFilter.TabIndex = 0;
+            // 
+            // btnSampleDataDelete
+            // 
+            this.btnSampleDataDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleDataDelete.ImageOptions.Image")));
+            this.btnSampleDataDelete.Location = new System.Drawing.Point(1761, 36);
+            this.btnSampleDataDelete.Name = "btnSampleDataDelete";
+            this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleDataDelete.TabIndex = 17;
+            this.btnSampleDataDelete.Text = "Delete Sample Data";
+            this.btnSampleDataDelete.Click += new System.EventHandler(this.btnSampleDataDelete_Click);
+            // 
+            // btnSampleData
+            // 
+            this.btnSampleData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleData.ImageOptions.Image")));
+            this.btnSampleData.Location = new System.Drawing.Point(1626, 36);
+            this.btnSampleData.Name = "btnSampleData";
+            this.btnSampleData.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleData.TabIndex = 16;
+            this.btnSampleData.Text = "Create Sample Data";
+            this.btnSampleData.Click += new System.EventHandler(this.btnSampleData_Click);
             // 
             // chkFilterLikeSearch
             // 
@@ -191,7 +215,8 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(104, 37);
             this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "Exit";
+            this.btnExit.Text = "Close";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnFilter
             // 
@@ -300,6 +325,7 @@
             this.tabPane1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPane1.Location = new System.Drawing.Point(0, 0);
             this.tabPane1.Name = "tabPane1";
+            this.tabPane1.PageProperties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPane1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabEditor,
             this.tabFields,
@@ -365,7 +391,7 @@
             // btnRestore
             // 
             this.btnRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.ImageOptions.Image")));
-            this.btnRestore.Location = new System.Drawing.Point(205, 387);
+            this.btnRestore.Location = new System.Drawing.Point(242, 387);
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(101, 34);
             this.btnRestore.TabIndex = 9;
@@ -384,7 +410,7 @@
             // btnSave
             // 
             this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
-            this.btnSave.Location = new System.Drawing.Point(761, 387);
+            this.btnSave.Location = new System.Drawing.Point(392, 387);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(104, 34);
             this.btnSave.TabIndex = 6;
@@ -462,6 +488,32 @@
             this.tabFields.Size = new System.Drawing.Size(1930, 547);
             this.tabFields.ToolTip = "Custom Fields";
             // 
+            // pnlCustomFieldsArea
+            // 
+            this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsEditor);
+            this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsList);
+            this.pnlCustomFieldsArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCustomFieldsArea.Location = new System.Drawing.Point(0, 0);
+            this.pnlCustomFieldsArea.Name = "pnlCustomFieldsArea";
+            this.pnlCustomFieldsArea.Size = new System.Drawing.Size(1930, 547);
+            this.pnlCustomFieldsArea.TabIndex = 0;
+            // 
+            // pnlCustomFieldsEditor
+            // 
+            this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(739, 2);
+            this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
+            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1189, 543);
+            this.pnlCustomFieldsEditor.TabIndex = 1;
+            // 
+            // pnlCustomFieldsList
+            // 
+            this.pnlCustomFieldsList.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlCustomFieldsList.Location = new System.Drawing.Point(2, 2);
+            this.pnlCustomFieldsList.Name = "pnlCustomFieldsList";
+            this.pnlCustomFieldsList.Size = new System.Drawing.Size(737, 543);
+            this.pnlCustomFieldsList.TabIndex = 0;
+            // 
             // tabStock
             // 
             this.tabStock.Caption = "Stock";
@@ -483,7 +535,7 @@
             this.tabCategories.Controls.Add(this.pnlCategories);
             this.tabCategories.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabCategories.ImageOptions.Image")));
             this.tabCategories.Name = "tabCategories";
-            this.tabCategories.Size = new System.Drawing.Size(2210, 572);
+            this.tabCategories.Size = new System.Drawing.Size(1930, 547);
             this.tabCategories.ToolTip = "Categories";
             // 
             // pnlCategories
@@ -493,7 +545,7 @@
             this.pnlCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCategories.Location = new System.Drawing.Point(0, 0);
             this.pnlCategories.Name = "pnlCategories";
-            this.pnlCategories.Size = new System.Drawing.Size(2210, 572);
+            this.pnlCategories.Size = new System.Drawing.Size(1930, 547);
             this.pnlCategories.TabIndex = 0;
             // 
             // pnlCategoriesEditor
@@ -501,7 +553,7 @@
             this.pnlCategoriesEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCategoriesEditor.Location = new System.Drawing.Point(614, 2);
             this.pnlCategoriesEditor.Name = "pnlCategoriesEditor";
-            this.pnlCategoriesEditor.Size = new System.Drawing.Size(1594, 568);
+            this.pnlCategoriesEditor.Size = new System.Drawing.Size(1314, 543);
             this.pnlCategoriesEditor.TabIndex = 1;
             // 
             // pnlCategoriesTree
@@ -510,7 +562,7 @@
             this.pnlCategoriesTree.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlCategoriesTree.Location = new System.Drawing.Point(2, 2);
             this.pnlCategoriesTree.Name = "pnlCategoriesTree";
-            this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 568);
+            this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 543);
             this.pnlCategoriesTree.TabIndex = 0;
             // 
             // treeCategories
@@ -519,7 +571,7 @@
             this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCategories.Location = new System.Drawing.Point(2, 2);
             this.treeCategories.Name = "treeCategories";
-            this.treeCategories.Size = new System.Drawing.Size(608, 564);
+            this.treeCategories.Size = new System.Drawing.Size(608, 539);
             this.treeCategories.TabIndex = 0;
             this.treeCategories.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCategories_AfterCheck);
             // 
@@ -529,14 +581,14 @@
             this.tabProjects.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabProjects.ImageOptions.Image")));
             this.tabProjects.Name = "tabProjects";
             this.tabProjects.PageText = "Projects";
-            this.tabProjects.Size = new System.Drawing.Size(2210, 605);
+            this.tabProjects.Size = new System.Drawing.Size(1930, 547);
             // 
             // tabDocuments
             // 
             this.tabDocuments.Caption = "Documents";
             this.tabDocuments.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabDocuments.ImageOptions.Image")));
             this.tabDocuments.Name = "tabDocuments";
-            this.tabDocuments.Size = new System.Drawing.Size(2210, 605);
+            this.tabDocuments.Size = new System.Drawing.Size(1930, 547);
             // 
             // openFileProductImage
             // 
@@ -544,32 +596,6 @@
             this.openFileProductImage.FileName = "openFileDialog1";
             this.openFileProductImage.Filter = "\"png files (*.png)|*.png|All files (*.*)|*.*\"";
             this.openFileProductImage.Title = "\"Browse image files\"";
-            // 
-            // pnlCustomFieldsArea
-            // 
-            this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsEditor);
-            this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsList);
-            this.pnlCustomFieldsArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCustomFieldsArea.Location = new System.Drawing.Point(0, 0);
-            this.pnlCustomFieldsArea.Name = "pnlCustomFieldsArea";
-            this.pnlCustomFieldsArea.Size = new System.Drawing.Size(1930, 547);
-            this.pnlCustomFieldsArea.TabIndex = 0;
-            // 
-            // pnlCustomFieldsList
-            // 
-            this.pnlCustomFieldsList.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlCustomFieldsList.Location = new System.Drawing.Point(2, 2);
-            this.pnlCustomFieldsList.Name = "pnlCustomFieldsList";
-            this.pnlCustomFieldsList.Size = new System.Drawing.Size(737, 543);
-            this.pnlCustomFieldsList.TabIndex = 0;
-            // 
-            // pnlCustomFieldsEditor
-            // 
-            this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(739, 2);
-            this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
-            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1189, 543);
-            this.pnlCustomFieldsEditor.TabIndex = 1;
             // 
             // ProductsManager
             // 
@@ -607,16 +633,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgProductPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             this.tabFields.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsArea)).EndInit();
+            this.pnlCustomFieldsArea.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsList)).EndInit();
             this.tabCategories.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).EndInit();
             this.pnlCategories.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesEditor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).EndInit();
             this.pnlCategoriesTree.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsArea)).EndInit();
-            this.pnlCustomFieldsArea.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -668,5 +694,7 @@
         private DevExpress.XtraEditors.PanelControl pnlCustomFieldsArea;
         private DevExpress.XtraEditors.PanelControl pnlCustomFieldsEditor;
         private DevExpress.XtraEditors.PanelControl pnlCustomFieldsList;
+        private DevExpress.XtraEditors.SimpleButton btnSampleDataDelete;
+        private DevExpress.XtraEditors.SimpleButton btnSampleData;
     }
 }

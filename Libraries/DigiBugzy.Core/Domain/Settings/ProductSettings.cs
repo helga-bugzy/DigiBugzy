@@ -8,7 +8,7 @@ namespace DigiBugzy.Core.Domain.Settings
 
         public bool AutomateFieldMappings { get; set; }
 
-        
-        
+      
+
     }
 }

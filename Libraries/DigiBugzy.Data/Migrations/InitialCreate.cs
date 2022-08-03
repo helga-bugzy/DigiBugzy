@@ -142,8 +142,8 @@ namespace DigiBugzy.Data.Migrations
             _currentTableName = nameof(ProjectSettings);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseSettingsEntity();
-            creatory.AddColumn(nameof(ProductSettings.AutomateCategoryMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
-            creatory.AddColumn(nameof(ProductSettings.AutomateFieldMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
+            creatory.AddColumn(nameof(ProjectSettings.AutomateCategoryMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
+            creatory.AddColumn(nameof(ProjectSettings.AutomateFieldMappings), fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
 
             //Product Settings
             _currentTableName = nameof(ProductSettings);
@@ -416,6 +416,10 @@ namespace DigiBugzy.Data.Migrations
                     AllowSettingOverrides = true,
                     AutomateCategoryMappings = true,
                     AutomateFieldMappings = true,
+                    ImageHeight = 250,
+                    ImageWidth = 250,
+                    ThumbWidth = 30,
+                    ThumbHeight = 30
                 });
 
                 Insert.IntoTable(nameof(ProjectSettings))
@@ -428,6 +432,11 @@ namespace DigiBugzy.Data.Migrations
                     AllowSettingOverrides = true,
                     AutomateCategoryMappings = true,
                     AutomateFieldMappings = true,
+                    ImageHeight = 250,
+                    ImageWidth = 250,
+                    ThumbWidth = 30,
+                    ThumbHeight = 30
+
                 });
 
                 Insert.IntoTable(nameof(GeneralSettings))
@@ -438,6 +447,10 @@ namespace DigiBugzy.Data.Migrations
                         ApplyAutomationDown = true,
                         ApplyAutomationUp = true,
                         AllowSettingOverrides = true,
+                        ImageHeight = 250,
+                        ImageWidth = 250,
+                        ThumbWidth = 30,
+                        ThumbHeight = 30
                     });
 
                 Insert.IntoTable(nameof(AdministrationSettings))
@@ -448,6 +461,10 @@ namespace DigiBugzy.Data.Migrations
                         ApplyAutomationDown = true,
                         ApplyAutomationUp = true,
                         AllowSettingOverrides = true,
+                        ImageHeight = 250,
+                        ImageWidth = 250,
+                        ThumbWidth = 30,
+                        ThumbHeight = 30
                     });
 
 

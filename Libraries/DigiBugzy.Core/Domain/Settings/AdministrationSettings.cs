@@ -6,7 +6,5 @@ namespace DigiBugzy.Core.Domain.Settings
     public class AdministrationSettings: BaseSettings
     {
       
-        
-
     }
 }

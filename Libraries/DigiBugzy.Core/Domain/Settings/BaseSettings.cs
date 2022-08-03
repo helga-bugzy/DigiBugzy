@@ -20,6 +20,14 @@ namespace DigiBugzy.Core.Domain.Settings
 
         public bool ApplyAutomationUp { get; set; }
 
+        public int ImageWidth { get; set; }
+
+        public int ImageHeight { get; set; }
+
+        public int ThumbWidth { get; set; }
+
+        public int ThumbHeight { get; set; }
+
 
         [ForeignKey(nameof(DigiAdminId))]
         public DigiAdmin DigiAdmin { get; set; }

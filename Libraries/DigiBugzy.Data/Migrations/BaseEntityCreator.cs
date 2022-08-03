@@ -9,6 +9,7 @@ namespace DigiBugzy.Data.Migrations
 
         public enum FieldTypes { 
             AsInt32,
+            AsInt64,
             AsString,
             AsDateTime,
             AsBinary,
@@ -86,7 +87,11 @@ namespace DigiBugzy.Data.Migrations
                     .WithColumn(nameof(BaseSettings.Id)).AsInt32().PrimaryKey().Identity()
                     .WithColumn(nameof(BaseSettings.AllowSettingOverrides)).AsBoolean()
                     .WithColumn(nameof(BaseSettings.ApplyAutomationDown)).AsBoolean()
-                    .WithColumn(nameof(BaseSettings.ApplyAutomationUp)).AsBoolean();
+                    .WithColumn(nameof(BaseSettings.ApplyAutomationUp)).AsBoolean()
+                    .WithColumn(nameof(BaseSettings.ImageHeight)).AsInt32()
+                    .WithColumn(nameof(BaseSettings.ImageWidth)).AsInt32()
+                    .WithColumn(nameof(BaseSettings.ThumbHeight)).AsInt32()
+                    .WithColumn(nameof(BaseSettings.ThumbWidth)).AsInt32(); 
 
                 AddMapping(MappingTypes.DigiAdmin, toSchemaName: DatabaseConstants.Schemas.Admin);
             }
@@ -140,6 +145,19 @@ namespace DigiBugzy.Data.Migrations
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
                             .AddColumn(fieldName).AsInt32().NotNullable();
+                    }
+                    break;
+                case FieldTypes.AsInt64:
+                    if (isNullable)
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsInt64().Nullable();
+
+                    }
+                    else
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsInt64().NotNullable();
                     }
                     break;
                 case FieldTypes.AsString:

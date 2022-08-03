@@ -1,4 +1,5 @@
 ﻿using DigiBugzy.Core.Domain.xBase;
+using DigiBugzy.Core.Enumerations;
 using DigiBugzy.Services.Administration.Categories;
 
 namespace DigiBugzy.Services.Catalog.Products
@@ -44,19 +45,26 @@ namespace DigiBugzy.Services.Catalog.Products
             var ids = mappings.Select(x => x.ProductId).ToList();
 
             using var cservice = new CategoryService(_connectionString);
-            var categories = cservice.Get(ids);
+            var categories = cservice.Get(new StandardFilter{ClassificationId = (int)ClassificationsEnum.Product });
 
-            var collection = (
-                from category in categories
-                let map = mappings.FirstOrDefault(x => x.ProductId == productId && x.CategoryId == category.Id)
-                where map != null
-                select new MappingViewModel
+            var collection = new List<MappingViewModel>();
+
+            foreach (var category in categories)
+            {
+                var model = new MappingViewModel
                 {
                     Name = category.Name,
+                    ParentId = category.ParentId,
+                    CreatedOn = category.CreatedOn,
+                    DigiAdminId = category.DigiAdminId,
                     EntityMappedFromId = productId,
-                    EntityMappedToId = category.Id,
-                    Id = map.Id
-                }).ToList();
+                    EntityMappedToId = category.Id
+                };
+
+                var item = mappings.Where(x => x.CategoryId == category.Id);
+                model.IsMapped = item.Any();
+                collection.Add(model);
+            }
 
             return collection;
         }
@@ -115,11 +123,11 @@ namespace DigiBugzy.Services.Catalog.Products
         }
 
         /// <inheritdoc />
-        public void HandleCategoryMapping(int categoryId, int productId, bool isMapped, int digiAdminId)
+        public void HandleCategoryMapping(int categoryId, int productId, bool isMapped, int digiAdminId, bool applyToChildCategories = true)
         {
             var mapping =
                 dbContext.ProductCategories.Where(x => x.CategoryId == categoryId && x.ProductId == productId);
-            if (!mapping.Any())
+            if (!mapping.Any() && isMapped)
             {
                 Create(new ProductCategory
                 {
@@ -131,7 +139,58 @@ namespace DigiBugzy.Services.Catalog.Products
                     CategoryId = categoryId
                 });
             }
+            else if(isMapped == false)
+            {
+                foreach (var item in mapping)
+                {
+                    Delete(item.Id, true);
+                }
+            }
 
+            if (applyToChildCategories) HandleChildCategoryMapping(categoryId, productId, isMapped, digiAdminId);
+
+        }
+
+        
+        
+
+
+        /// <inheritdoc />
+        public void HandleChildCategoryMapping(int categoryId, int productId, bool isMapped, int digiAdminId)
+        {
+            using var categoryService = new CategoryService(_connectionString);
+            var categories = categoryService.Get(new StandardFilter
+            {
+                ClassificationId = (int)ClassificationsEnum.Product,
+                ParentId = categoryId
+            });
+
+            foreach (var category in categories)
+            {
+                var mapping =
+                    dbContext.ProductCategories.Where(x => x.CategoryId == categoryId && x.ProductId == productId);
+                if (!mapping.Any() && isMapped)
+                {
+                    Create(new ProductCategory
+                    {
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedOn = DateTime.Now,
+                        DigiAdminId = digiAdminId,
+                        ProductId = productId,
+                        CategoryId = categoryId
+                    });
+                }
+                else if (isMapped == false)
+                {
+                    foreach (var item in mapping)
+                    {
+                        Delete(item.Id, true);
+                    }
+                }
+
+                HandleChildCategoryMapping(categoryId, productId, isMapped, digiAdminId);
+            }
 
         }
 

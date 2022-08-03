@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using DevExpress.Mvvm.POCO;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
-using DigiBugzy.Core.Utilities;
+using DigiBugzy.Core.Helpers;
 using DigiBugzy.Desktop.Administration.CustomFields;
 
 namespace DigiBugzy.Desktop.Products
@@ -68,8 +67,9 @@ namespace DigiBugzy.Desktop.Products
             }
 
             LoadEditor();
-            LoadCustomFieldsSelector();
             LoadCategoriesSelector();
+            LoadCustomFieldsSelector();
+           
             LoadDocumentsTab();
             
             LoadStockInformation();
@@ -79,6 +79,7 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadEditor()
         {
+           
             if (SelectedProduct.Id <= 0)
             {
                 btnDelete.Visible = btnRestore.Visible = false;
@@ -103,7 +104,7 @@ namespace DigiBugzy.Desktop.Products
                     return;
                 }
 
-                imgProductPhoto.Image = DigiUtilities.GetImageFromByteArray(SelectedProduct.ProductImage);
+                imgProductPhoto.Image = ImageHelpers.GetImageFromByteArray(SelectedProduct.ProductImage);
             }
         }
 
@@ -194,9 +195,9 @@ namespace DigiBugzy.Desktop.Products
             SelectedProduct.IsActive = chkActive.Checked;
             
 
-            if (openFileProductImage.FileName != null)
+            if (imgProductPhoto.Image != null)
             {
-                SelectedProduct.ProductImage = DigiUtilities.CopyImageToByteArray(imgProductPhoto.Image);
+                SelectedProduct.ProductImage = ImageHelpers.CopyImageToByteArray(imgProductPhoto.Image);
             }
 
             using var service = new ProductService(Globals.GetConnectionString());
@@ -256,8 +257,55 @@ namespace DigiBugzy.Desktop.Products
             LoadFilter(true);
         }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+
         #endregion
 
+        #region Sample Data
+
+        private void btnSampleData_Click(object sender, EventArgs e)
+        {
+            using var productService = new ProductService(Globals.GetConnectionString());
+            for (int p = 0; p <= 30; p++)
+            {
+                var product = new Product
+                {
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    DigiAdminId = Globals.DigiAdministration.Id,
+                    Name = $@"Sample product {p}",
+                    Description = "Sample product",
+                };
+
+                productService.Create(product);
+            }
+
+            LoadFilter(true);
+
+            Application.DoEvents();
+        }
+
+       
+        private void btnSampleDataDelete_Click(object sender, EventArgs e)
+        {
+            using var productService = new ProductService(Globals.GetConnectionString());
+            var collection = productService.Get(new StandardFilter { Name = "Sample", LikeSearch = true });
+            foreach (var item in collection)
+            {
+                productService.Delete(item.Id, true);
+            }
+
+            LoadFilter(true);
+
+            Application.DoEvents();
+        }
+
+        #endregion
 
         #region Product Editor
 
@@ -268,7 +316,7 @@ namespace DigiBugzy.Desktop.Products
                 if (!string.IsNullOrEmpty(openFileProductImage.FileName))
                 {
                     lblSelectedFileName.Text = openFileProductImage.FileName;
-                    imgProductPhoto.Image = new Bitmap(openFileProductImage.FileName);
+                    imgProductPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(openFileProductImage.FileName), Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings!.ImageHeight);
                     imgProductPhoto.Visible = true;
                 }
             }
@@ -324,15 +372,16 @@ namespace DigiBugzy.Desktop.Products
                 categoryId: int.Parse(e.Node!.Tag.ToString()!), 
                 productId: SelectedProduct.Id, 
                 isMapped: e.Node.Checked,
-                Globals.DigiAdministration.Id);
+                digiAdminId: Globals.DigiAdministration.Id);
         }
 
-        #endregion
 
         #endregion
 
         #endregion
 
+        #endregion
 
+        
     }
 }

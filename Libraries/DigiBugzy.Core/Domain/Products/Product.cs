@@ -9,6 +9,7 @@ namespace DigiBugzy.Core.Domain.Products
 
         #region Product Complete Sub List
 
+       
         public List<MappingViewModel> Categories { get; set; } = new();
 
         public List<MappingViewModel> CustomFields { get; set; } = new();

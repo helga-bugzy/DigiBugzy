@@ -118,20 +118,20 @@ namespace DigiBugzy.Services.Administration.CustomFields
         /// <inheritdoc />
         public void Delete(int id, bool hardDelete = false)
         {
-            if (hardDelete)
+            var entity = GetById(id);
+            if (entity == null || entity.Id <= 0) return;
+            if (!hardDelete)
             {
-                var entity = GetById(id);
-                if (entity!.Id > 0)
-                {
-                    dbContext.CustomFields.Remove(entity);
-                    dbContext.SaveChanges();
-                }
-                else
-                {
-                    entity.IsDeleted = true;
-                    entity.IsActive = false;
-                    Update(entity);
-                }
+                entity.IsDeleted = true;
+                entity.IsActive = false;
+                Update(entity);
+                
+            }
+            else
+            {
+                dbContext.CustomFields.Remove(entity);
+                dbContext.SaveChanges();
+
             }
         }
 
