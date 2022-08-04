@@ -156,6 +156,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                         IsActive = c.IsActive, 
                         IsDeleted = c.IsDeleted
                     })
+                .OrderBy(c => c.Name)
                 .ToList();
             
             //Loop and add
@@ -194,6 +195,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                     IsActive = c.IsActive,
                     IsDeleted = c.IsDeleted
                 })
+                .OrderBy(c => c.Name)
                 .ToList();
 
             if (children.Count > 0)

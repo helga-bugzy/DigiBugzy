@@ -1,5 +1,6 @@
 ﻿
 global using DigiBugzy.Core.Domain.Administration.CustomFields;
+using DigiBugzy.Core.Domain.xBase;
 
 namespace DigiBugzy.Services.Administration.CustomFields
 {
@@ -20,6 +21,8 @@ namespace DigiBugzy.Services.Administration.CustomFields
         /// <param name="filter"></param>
         /// <returns></returns>
         public List<CustomField> Get(StandardFilter filter);
+
+        public List<MappingViewModel> GetCategoryMappings(int customFieldId, int classificationId);
 
         /// <summary>
         /// Gets a list of customfields on hand of their primary key ids

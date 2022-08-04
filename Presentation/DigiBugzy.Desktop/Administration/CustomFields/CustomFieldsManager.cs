@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using DevExpress.XtraPivotGrid.TypeConverters;
+using System.Linq;
 using DigiBugzy.Core.Domain.Administration.CustomFields;
+using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Services.SampleData;
 
 namespace DigiBugzy.Desktop.Administration.CustomFields
@@ -16,6 +17,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private readonly bool _isLoading;
 
+        private List<MappingViewModel> _categories;
+
         private List<CustomField> CustomFields { get; set; } = new();
 
         private CustomField SelectedCustomField { get; set; } = new();
@@ -28,6 +31,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         public CustomFieldsManager(int classificationId = 0)
         {
+            _categories = new List<MappingViewModel>();
             _classificationId = classificationId;
             _loadingClassificationId = classificationId;
             _isLoading = true;
@@ -193,11 +197,11 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             LoadCustomFieldEditor();
         }
-
-
+        
         private void LoadCustomFieldEditor()
         {
             LoadCustomFieldTypes();
+            LoadCategoriesTree();
 
             btnRestore.Enabled = false;
             btnDelete.Enabled = false;
@@ -312,6 +316,68 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             
         }
 
+        private void LoadCategoriesTree()
+        {
+            var customFieldService = new CustomFieldService(Globals.GetConnectionString());
+            _categories = customFieldService.GetCategoryMappings(SelectedCustomField.Id, _classificationId);
+            var parents = _categories.Where(m => m.ParentId == null).OrderBy(m => m.Name);
+            foreach (var parent in parents)
+            {
+                var node = new TreeNode(text: parent.Name)
+                {
+                    Tag = parent.Id,
+                    NodeFont = CreateFont(parent.IsDeleted, parent.IsActive)
+                };
+
+                LoadCategoryNodes(node);
+
+                node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
+
+                if (node.Nodes.Count > 0)
+                {
+                    node.ImageIndex = 0;
+                }
+
+                treeCategories.Nodes.Add(node);
+
+            }
+
+        }
+
+        private void LoadCategoryNodes(TreeNode? parentNode)
+        {
+            if (parentNode == null) return;
+            var children = _categories
+                .Where(c => c.ParentId == int.Parse(parentNode.Tag.ToString()!))
+                .Select(c => new Category
+                {
+                    Id = c.Id,
+                    ParentId = c.ParentId,
+                    Name = c.Name,
+                    IsActive = c.IsActive,
+                    IsDeleted = c.IsDeleted
+                })
+                .OrderBy(c => c.Name)
+                .ToList();
+
+            if (children.Count > 0)
+            {
+
+                foreach (var child in children)
+                {
+                    var node = new TreeNode(text: child.Name)
+                    {
+                        Tag = child.Id,
+                        NodeFont = CreateFont(child.IsDeleted, child.IsActive)
+                    };
+
+                    parentNode.Nodes.Add(node);
+
+                    LoadCategoryNodes(node);
+                }
+            }
+        }
+
 
         private Font CreateFont(bool isDeleted, bool isActive)
         {
@@ -353,11 +419,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         private void chkIncludeDeleted_CheckedChanged(object sender, EventArgs e)
         {
             ApplyFilter();
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         #endregion

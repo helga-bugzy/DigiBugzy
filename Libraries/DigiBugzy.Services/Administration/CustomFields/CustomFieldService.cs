@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DigiBugzy.Core.Domain.xBase;
+using DigiBugzy.Services.Administration.Categories;
+using Microsoft.EntityFrameworkCore;
 
 namespace DigiBugzy.Services.Administration.CustomFields
 {
@@ -60,6 +62,48 @@ namespace DigiBugzy.Services.Administration.CustomFields
                 .Include(cft => cft.CustomFieldType)                
                 .ToList();
 
+
+        }
+
+        /// <inheritdoc />
+        public List<MappingViewModel> GetCategoryMappings(int customFieldId, int classificationId)
+        {
+            var results = new List<MappingViewModel>();
+            if (customFieldId <= 0 || classificationId <= 0) return results;
+
+            //Get categories
+            using var categoryService = new CategoryService(_connectionString);
+            var categories = categoryService.Get(new StandardFilter { ClassificationId = classificationId });
+
+            var customField = GetById(customFieldId);
+            foreach (var category in categories)
+            {
+                var result = new MappingViewModel
+                {
+                    Name = category.Name,
+                    IsMapped = false,
+                    EntityMappedToId = category.Id,
+                    EntityMappedFromId = customFieldId,
+                    ParentId =category.ParentId
+                };
+
+                if (category.CustomFieldMappings == null)
+                {
+                    using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
+                    category.CustomFieldMappings = categoryCustomFieldService.GetByCategoryId(customFieldId);
+                }
+
+                var x = category.CustomFieldMappings.FirstOrDefault(x =>
+                    x.CustomFieldId == category.Id && category.IsDeleted == false && category.IsActive);
+                if (x != null && x.CategoryId == customFieldId)
+                {
+                    result.IsMapped = true;
+                }
+
+                results.Add(result);
+            }
+
+            return results;
 
         }
 

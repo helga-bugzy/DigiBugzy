@@ -208,13 +208,13 @@ namespace DigiBugzy.Services.Administration.Categories
             if (categoryId <= 0 || classificationId <= 0) return results;
 
 
-            using var cfService = new CustomFieldService(connectionString: _connectionString);
-            var cfCollection = cfService.Get(new StandardFilter { ClassificationId = classificationId });
-            if (cfCollection.Count <= 0) return results;
+            using var customFieldService = new CustomFieldService(connectionString: _connectionString);
+            var customFields = customFieldService.Get(new StandardFilter { ClassificationId = classificationId });
+            if (customFields.Count <= 0) return results;
 
 
             var category = GetById(categoryId);
-            foreach (var cf in cfCollection)
+            foreach (var cf in customFields)
             {
                 var result = new MappingViewModel
                 {

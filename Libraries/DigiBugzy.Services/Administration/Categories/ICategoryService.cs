@@ -28,6 +28,8 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <returns></returns>
         public List<Category> Get(List<int> categoryIds);
 
+        public List<MappingViewModel> GetCustomFieldMappings(int categoryId, int classificationId);
+
         /// <summary>
         /// Hard/Soft delete a category
         /// </summary>
