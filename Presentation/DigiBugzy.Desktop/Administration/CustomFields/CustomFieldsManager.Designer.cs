@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomFieldsManager));
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkCustomFieldsToChild = new DevExpress.XtraEditors.CheckEdit();
             this.lblCustomFieldsHeading = new DevExpress.XtraEditors.LabelControl();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.chkActive = new DevExpress.XtraEditors.CheckEdit();
@@ -88,9 +88,10 @@
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
-            this.treeCategories = new System.Windows.Forms.TreeView();
+            this.twCategories = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCustomFieldsToChild.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
@@ -158,7 +159,7 @@
             // panelControl6
             // 
             this.panelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl6.Controls.Add(this.checkBox1);
+            this.panelControl6.Controls.Add(this.chkCustomFieldsToChild);
             this.panelControl6.Controls.Add(this.lblCustomFieldsHeading);
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl6.Location = new System.Drawing.Point(0, 0);
@@ -166,17 +167,15 @@
             this.panelControl6.Size = new System.Drawing.Size(634, 41);
             this.panelControl6.TabIndex = 0;
             // 
-            // checkBox1
+            // chkCustomFieldsToChild
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(133, 9);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(156, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Assing to all sub categories";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkCustomFieldsToChild.EditValue = true;
+            this.chkCustomFieldsToChild.Location = new System.Drawing.Point(208, 10);
+            this.chkCustomFieldsToChild.Name = "chkCustomFieldsToChild";
+            this.chkCustomFieldsToChild.Properties.Caption = "Automatically Map Child Categories";
+            this.chkCustomFieldsToChild.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.chkCustomFieldsToChild.Size = new System.Drawing.Size(218, 20);
+            this.chkCustomFieldsToChild.TabIndex = 14;
             // 
             // lblCustomFieldsHeading
             // 
@@ -811,20 +810,27 @@
             // panelControl7
             // 
             this.panelControl7.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl7.Controls.Add(this.treeCategories);
+            this.panelControl7.Controls.Add(this.twCategories);
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl7.Location = new System.Drawing.Point(0, 41);
             this.panelControl7.Name = "panelControl7";
             this.panelControl7.Size = new System.Drawing.Size(634, 765);
             this.panelControl7.TabIndex = 1;
             // 
-            // treeCategories
+            // twCategories
             // 
-            this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeCategories.Location = new System.Drawing.Point(0, 0);
-            this.treeCategories.Name = "treeCategories";
-            this.treeCategories.Size = new System.Drawing.Size(634, 765);
-            this.treeCategories.TabIndex = 0;
+            this.twCategories.CheckBoxes = true;
+            this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.twCategories.Location = new System.Drawing.Point(0, 0);
+            this.twCategories.Name = "twCategories";
+            this.twCategories.Size = new System.Drawing.Size(634, 765);
+            this.twCategories.TabIndex = 0;
+            this.twCategories.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.twCategories_AfterCheck);
+            this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
+            this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCustomFields_NodeMouseClick);
+            this.twCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.twCategories_DragDrop);
+            this.twCategories.DragEnter += new System.Windows.Forms.DragEventHandler(this.twCategories_DragEnter);
+            this.twCategories.DragOver += new System.Windows.Forms.DragEventHandler(this.twCategories_DragOver);
             // 
             // CustomFieldsManager
             // 
@@ -837,6 +843,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
             this.panelControl6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkCustomFieldsToChild.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkActive.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
@@ -968,7 +975,7 @@
         private DevExpress.XtraEditors.PanelControl panelControl7;
         private DevExpress.XtraEditors.SimpleButton btnSampleDataDelete;
         private DevExpress.XtraEditors.SimpleButton btnSampleData;
-        private CheckBox checkBox1;
-        private TreeView treeCategories;
+        private TreeView twCategories;
+        private DevExpress.XtraEditors.CheckEdit chkCustomFieldsToChild;
     }
 }

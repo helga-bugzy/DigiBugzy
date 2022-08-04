@@ -17,6 +17,10 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private readonly bool _isLoading;
 
+        private bool _isDragging;
+
+        public Category SelectedCategory { get; set; }
+
         private List<MappingViewModel> _categories;
 
         private List<CustomField> CustomFields { get; set; } = new();
@@ -338,7 +342,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                     node.ImageIndex = 0;
                 }
 
-                treeCategories.Nodes.Add(node);
+                twCategories.Nodes.Add(node);
 
             }
 
@@ -532,6 +536,93 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             Application.DoEvents();
         }
 
+        #region Categories Treeview
+
+        private void twCategories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (_isDragging) return;
+            using var service = new CategoryService(Globals.GetConnectionString());
+            SelectedCategory = service.GetById(int.Parse(e.Node.Tag.ToString()!));
+
+            //TODO LoadCategoryEditor();
+
+            Application.DoEvents();
+
+        }
+
+        private void twCategories_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            _isDragging = true;
+            // Move the dragged node when the left mouse button is used.  
+            if (e.Button == MouseButtons.Left)
+            {
+                DoDragDrop(e.Item!, DragDropEffects.Move);
+            }
+
+            // Copy the dragged node when the right mouse button is used.  
+            else if (e.Button == MouseButtons.Right)
+            {
+                DoDragDrop(e.Item!, DragDropEffects.Copy);
+            }
+        }
+
+        private void twCategories_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.AllowedEffect;
+        }
+
+        private void twCategories_DragDrop(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the mouse position.  
+            var targetPoint = twCategories.PointToClient(new Point(e.X, e.Y));
+
+            // Select the node at the mouse position.  
+            twCategories.SelectedNode = twCategories.GetNodeAt(targetPoint);
+        }
+
+
+        private void twCategories_DragOver(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the drop location.  
+            var targetPoint = twCategories.PointToClient(new Point(e.X, e.Y));
+
+            // Retrieve the node at the drop location.  
+            var targetNode = twCategories.GetNodeAt(targetPoint);
+
+            // Retrieve the node that was dragged.  
+            var draggedNode = (TreeNode)e.Data!.GetData(typeof(TreeNode));
+
+            // Confirm that the node at the drop location is not   
+            // the dragged node or a descendant of the dragged node.  
+            if (!draggedNode.Equals(targetNode) && !ContainsNode(draggedNode, targetNode))
+            {
+                // If it is a move operation, remove the node from its current   
+                // location and add it to the node at the drop location.  
+                if (e.Effect == DragDropEffects.Move)
+                {
+                    SelectedCategory.ParentId = int.Parse(targetNode.Tag.ToString()!);
+                    using var service = new CategoryService(Globals.GetConnectionString());
+                    service.Update(SelectedCategory);
+                }
+
+                // Expand the node at the location   
+                // to show the dropped node.  
+                targetNode.Expand();
+
+                _isDragging = false;
+            }
+
+            Application.DoEvents();
+        }
+
+        private void twCategories_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            using var service = new CategoryService(Globals.GetConnectionString());
+            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked, chkCustomFieldsToChild.Checked);
+        }
+
+        #endregion
+
 
         #endregion
 
@@ -647,13 +738,43 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             LoadCustomFields();
         }
 
-       
-        #endregion
 
         #endregion
 
+        #endregion
+
+        #region Helper Methods
+
+
+        private bool ContainsNode(TreeNode node1, TreeNode node2)
+        {
+            try
+            {
+                while (true)
+                {
+                    // Check the parent node of the second node.  
+                    if (node2.Parent == null) return false;
+                    if (node2.Parent.Equals(node1)) return true;
+
+                    // If the parent node is not null or equal to the first node,   
+                    // call the ContainsNode method recursively using the parent of   
+                    // the second node.  
+                    node2 = node2.Parent;
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
 
 
 
+        #endregion
+
+        
     }
 }
