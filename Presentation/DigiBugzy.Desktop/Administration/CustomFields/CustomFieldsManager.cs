@@ -324,7 +324,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         {
             var customFieldService = new CustomFieldService(Globals.GetConnectionString());
             _categories = customFieldService.GetCategoryMappings(SelectedCustomField.Id, _classificationId);
-            var parents = _categories.Where(m => m.ParentId == null).OrderBy(m => m.Name);
+            var parents = _categories.Where(m => m.ParentId is null).OrderBy(m => m.Name);
             foreach (var parent in parents)
             {
                 var node = new TreeNode(text: parent.Name)
@@ -333,7 +333,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                     NodeFont = CreateFont(parent.IsDeleted, parent.IsActive)
                 };
 
-                LoadCategoryNodes(node);
+                LoadCategoryNodes(node, parent.Id);
 
                 node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
 
@@ -348,15 +348,15 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         }
 
-        private void LoadCategoryNodes(TreeNode? parentNode)
+        private void LoadCategoryNodes(TreeNode? parentNode, int parentId)
         {
             if (parentNode == null) return;
             var children = _categories
-                .Where(c => c.ParentId == int.Parse(parentNode.Tag.ToString()!))
+                .Where(c => c.ParentId == parentId)
                 .Select(c => new Category
                 {
                     Id = c.Id,
-                    ParentId = c.ParentId,
+                    ParentId = parentId,
                     Name = c.Name,
                     IsActive = c.IsActive,
                     IsDeleted = c.IsDeleted
@@ -364,21 +364,19 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 .OrderBy(c => c.Name)
                 .ToList();
 
-            if (children.Count > 0)
+            if (children.Count <= 0) return;
+
+            foreach (var child in children)
             {
-
-                foreach (var child in children)
+                var node = new TreeNode(text: child.Name)
                 {
-                    var node = new TreeNode(text: child.Name)
-                    {
-                        Tag = child.Id,
-                        NodeFont = CreateFont(child.IsDeleted, child.IsActive)
-                    };
+                    Tag = child.Id,
+                    NodeFont = CreateFont(child.IsDeleted, child.IsActive)
+                };
 
-                    parentNode.Nodes.Add(node);
+                parentNode.Nodes.Add(node);
 
-                    LoadCategoryNodes(node);
-                }
+                LoadCategoryNodes(node, child.Id);
             }
         }
 

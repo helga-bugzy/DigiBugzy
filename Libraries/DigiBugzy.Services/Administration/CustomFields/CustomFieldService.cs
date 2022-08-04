@@ -75,7 +75,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
             using var categoryService = new CategoryService(_connectionString);
             var categories = categoryService.Get(new StandardFilter { ClassificationId = classificationId });
 
-            var customField = GetById(customFieldId);
+          //  var customField = GetById(customFieldId);
             foreach (var category in categories)
             {
                 var result = new MappingViewModel
