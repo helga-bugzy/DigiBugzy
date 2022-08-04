@@ -2,7 +2,6 @@
 
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Services.Administration.CustomFields;
-using Microsoft.EntityFrameworkCore;
 
 namespace DigiBugzy.Services.Administration.Categories
 {
@@ -248,36 +247,28 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <inheritdoc />
         public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped, bool includeChildCategories)
         {
-         
-            
-            var entity = dbContext.CategoryCustomFields.FirstOrDefault(x =>
-                x.CategoryId == categoryId && x.CustomFieldId == customFieldId);
 
-            if (entity == null && isMapped)
+            using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
+            var categoryCustomFields = categoryCustomFieldService.GetByCategoryId(categoryId);
+
+            var category = GetById(categoryId);
+            var existingMapping = categoryCustomFields.FirstOrDefault(c => c.CustomFieldId == customFieldId);
+            if (existingMapping == null && isMapped)
             {
-                entity = new CategoryCustomField
+                var mapping = new CategoryCustomField
                 {
-                    CustomFieldId = customFieldId,
                     CategoryId = categoryId,
-                    DigiAdminId = 1,
+                    CustomFieldId = customFieldId,
+                    DigiAdminId = category.DigiAdminId,
                     CreatedOn = DateTime.Now,
                     IsActive = true,
                     IsDeleted = false
                 };
-
-                dbContext.CategoryCustomFields.Add(entity);
-                dbContext.SaveChanges();
-
+                categoryCustomFieldService.Create(mapping);
             }
-            else
+            else if (!isMapped)
             {
-                if (!isMapped)
-                {
-                    dbContext.CategoryCustomFields.Remove(entity!);
-                    dbContext.SaveChanges();
-                }
-
-                
+                categoryCustomFieldService.Delete(existingMapping, true);
             }
 
             if (!includeChildCategories) return;

@@ -21,6 +21,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         public Category SelectedCategory { get; set; }
 
+        public List<Category> Categories { get; set; }
+
         private List<MappingViewModel> _categories;
 
         private List<CustomField> CustomFields { get; set; } = new();
@@ -205,7 +207,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         private void LoadCustomFieldEditor()
         {
             LoadCustomFieldTypes();
-            LoadCategoriesTree();
+            LoadCategories();
 
             btnRestore.Enabled = false;
             btnDelete.Enabled = false;
@@ -320,20 +322,70 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             
         }
 
-        private void LoadCategoriesTree()
+        private void LoadCategories()
         {
-            var customFieldService = new CustomFieldService(Globals.GetConnectionString());
-            _categories = customFieldService.GetCategoryMappings(SelectedCustomField.Id, _classificationId);
-            var parents = _categories.Where(m => m.ParentId is null).OrderBy(m => m.Name);
+            twCategories.Nodes.Clear();
+
+            if (_classificationId <= 0)
+            {
+                twCategories.Enabled = false;
+                Application.DoEvents();
+                return;
+            }
+
+            twCategories.Enabled = true;
+
+
+            if (_classificationId <= 0) return;
+
+            using var service = new CategoryService(Globals.GetConnectionString());
+            Categories = service.Get(new StandardFilter
+            {
+                ClassificationId = _classificationId,
+                DigiAdminId = Globals.DigiAdministration.Id,
+                IncludeDeleted = chkIncludeDeleted.Checked,
+                IncludeInActive = chkFilterInactive.Checked
+            });
+
+            if (Categories.Count <= 0) return;
+
+            LoadCategoryNodes();
+
+        }
+
+        private void LoadCategoryNodes()
+        {
+            
+
+
+            //Get all parents
+            var parents = (from c in Categories
+                           where c.ParentId == null
+                           select new Category
+                           {
+                               Id = c.Id,
+                               ParentId = c.ParentId,
+                               Name = c.Name,
+                               IsActive = c.IsActive,
+                               IsDeleted = c.IsDeleted
+                           })
+                .OrderBy(c => c.Name)
+                .ToList();
+
+            //Loop and add
             foreach (var parent in parents)
             {
                 var node = new TreeNode(text: parent.Name)
                 {
-                    Tag = parent.EntityMappedToId,
+                    Tag = parent.Id,
                     NodeFont = CreateFont(parent.IsDeleted, parent.IsActive)
                 };
 
-                LoadCategoryNodes(node, parent.EntityMappedToId);
+                using var categoryCustomFieldService = new CategoryCustomFieldService(Globals.GetConnectionString());
+                var mappings = categoryCustomFieldService.GetByCustomFieldId(SelectedCustomField.Id).ToList();
+                node.Checked = mappings.Where(c => c.CategoryId == parent.Id).ToList().Any();
+
+                LoadCategoryNodes(node);
 
                 node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
 
@@ -343,35 +395,48 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 }
 
                 twCategories.Nodes.Add(node);
-
             }
+
 
         }
 
-        private void LoadCategoryNodes(TreeNode? parentNode, int parentId)
+        private void LoadCategoryNodes(TreeNode? parentNode)
         {
             if (parentNode == null) return;
-            var children = _categories
-                .Where(c => c.ParentId == parentId)
+            var children = Categories
+                .Where(c => c.ParentId == int.Parse(parentNode.Tag.ToString()!))
+                .Select(c => new Category
+                {
+                    Id = c.Id,
+                    ParentId = c.ParentId,
+                    Name = c.Name,
+                    IsActive = c.IsActive,
+                    IsDeleted = c.IsDeleted
+                })
                 .OrderBy(c => c.Name)
                 .ToList();
 
-            if (children.Count <= 0) return;
-
-            foreach (var child in children)
+            if (children.Count > 0)
             {
-                var node = new TreeNode(text: child.Name)
+
+                foreach (var child in children)
                 {
-                    Tag = child.EntityMappedToId,
-                    NodeFont = CreateFont(child.IsDeleted, child.IsActive)
-                };
+                    var node = new TreeNode(text: child.Name)
+                    {
+                        Tag = child.Id,
+                        NodeFont = CreateFont(child.IsDeleted, child.IsActive)
+                    };
 
-                parentNode.Nodes.Add(node);
+                    using var categoryCustomFieldService = new CategoryCustomFieldService(Globals.GetConnectionString());
+                    var mappings = categoryCustomFieldService.GetByCustomFieldId(SelectedCustomField.Id).ToList();
+                    node.Checked = mappings.Where(c => c.CategoryId == child.Id).ToList().Any();
 
-                LoadCategoryNodes(node, child.Id);
+                    parentNode.Nodes.Add(node);
+
+                    LoadCategoryNodes(node);
+                }
             }
         }
-
 
         private Font CreateFont(bool isDeleted, bool isActive)
         {
@@ -613,7 +678,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 customFieldId: SelectedCustomField.Id,
                 isMapped:e.Node.Checked, 
                 includeChildCategories: chkCustomFieldsToChild.Checked);
-            LoadCategoriesTree();
+            LoadCategories();
             Application.DoEvents();
 
         }

@@ -53,6 +53,9 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <param name="entity"></param>
         public int Create(Category entity);
 
+        public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped,
+            bool includeChildCategories);
+
         ///// <summary>
         ///// Retrieves list of all active and non-deleted custom fields for a classification with indication asto which ones are mapped
         ///// </summary>
@@ -68,6 +71,6 @@ namespace DigiBugzy.Services.Administration.Categories
         ///// <param name="customFieldId"></param>
         ///// <param name="isMapped"></param>
         //public void HandleCustomFieldMapping(int categoryId, int customFieldId, bool isMapped);
-        
+
     }
 }

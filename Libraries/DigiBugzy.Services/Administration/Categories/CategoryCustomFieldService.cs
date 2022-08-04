@@ -23,6 +23,15 @@ namespace DigiBugzy.Services.Administration.Categories
             return dbContext.CategoryCustomFields.Where(c => c.CustomFieldId == customFieldId).ToList();
         }
 
+        public int Create(CategoryCustomField entity)
+        {
+            dbContext.CategoryCustomFields.Add(entity);
+            dbContext.SaveChanges();
+
+            return entity.Id;
+
+        }
+
         /// <inheritdoc />
         public void Delete(CategoryCustomField entity, bool hardDelete)
         {
