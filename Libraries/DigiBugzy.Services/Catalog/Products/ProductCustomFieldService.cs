@@ -134,7 +134,14 @@ namespace DigiBugzy.Services.Catalog.Products
             
         }
 
-        
+        /// <inheritdoc />
+        public void Delete(ProductCustomField entity)
+        {
+            dbContext.ProductCustomFields.Remove(entity);
+            dbContext.SaveChanges();
+        }
+
+
         public void Update(ProductCustomField entity)
         {
             dbContext.ProductCustomFields.Update(entity);

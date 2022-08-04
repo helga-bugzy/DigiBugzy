@@ -2,6 +2,7 @@
 using System.Drawing;
 using DevExpress.XtraPivotGrid.TypeConverters;
 using DigiBugzy.Core.Domain.Administration.CustomFields;
+using DigiBugzy.Services.SampleData;
 
 namespace DigiBugzy.Desktop.Administration.CustomFields
 {
@@ -542,46 +543,12 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void btnSampleData_Click(object sender, EventArgs e)
         {
-            using var customFieldService = new CustomFieldService(Globals.GetConnectionString());
-            using var customFieldListOptionService = new CustomFieldListOptionService(Globals.GetConnectionString());
-
-            foreach (var item in Enum.GetValues(typeof(CustomFieldTypeEnumeration)))
-            {
-                for (var i = 0; i <= 5; i++)
-                {
-                    var cfield = new CustomField
-                    {
-                        IsActive = true,
-                        IsDeleted = false,
-                        CreatedOn = DateTime.Now,
-                        DigiAdminId = Globals.DigiAdministration.Id,
-                        Name = @$"Sample Field {i} - {Enum.GetName(typeof(CustomFieldTypeEnumeration), item)}",
-                        Description = "Sample Custom Field",
-                        CustomFieldTypeId = (int)item,
-                        ClassificationId = _classificationId,
-                    };
-                    cfield.Id = customFieldService.Create(cfield);
-
-                    if ((int)item == (int)CustomFieldTypeEnumeration.ListType)
-                    {
-                        for (var o = 0; o <= 3; o++)
-                        {
-                            var option = new CustomFieldListOption
-                            {
-                                IsActive = true,
-                                IsDeleted = false,
-                                CreatedOn = DateTime.Now,
-                                DigiAdminId = Globals.DigiAdministration.Id,
-                                CustomFieldId = cfield.Id,
-                                Value = $@"Option {o} for {cfield.Name}"
-                            };
-
-                            option.Id = customFieldListOptionService.Create(option);
-                        }
-
-                    }
-                }
-            }
+            using var service = new SampleDataService(
+                connectionString: Globals.GetConnectionString(),
+                sampleDataType: SampleDataTypeEnum.CustomFields, 
+                classificationId: _classificationId,
+                digiAdminId: Globals.DigiAdministration.Id);
+            service.CreateSampleData();
 
             LoadCustomFields();
             Application.DoEvents();
@@ -589,36 +556,16 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void btnSampleDataDelete_Click(object sender, EventArgs e)
         {
-            DeleteSampleData();
+            using var service = new SampleDataService(
+                connectionString: Globals.GetConnectionString(),
+                sampleDataType: SampleDataTypeEnum.CustomFields,
+                classificationId: _classificationId,
+                digiAdminId: Globals.DigiAdministration.Id);
+            service.DeleteSampleData();
             LoadCustomFields();
         }
 
-        private void DeleteSampleData()
-        {
-            using var customFieldService = new CustomFieldService(Globals.GetConnectionString());
-            var collection = customFieldService.Get(new StandardFilter
-            {
-                DigiAdminId = Globals.DigiAdministration.Id,
-                Name = "Sample",
-                LikeSearch = true,
-                ClassificationId = _classificationId
-            });
-
-            foreach (var item in collection)
-            {
-                try
-                {
-                    customFieldService.Delete(item.Id, true);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    //throw;
-                }
-            }
-
-        }
-
+       
         #endregion
 
         #endregion

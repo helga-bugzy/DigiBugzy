@@ -231,7 +231,7 @@ namespace DigiBugzy.Data.Migrations
                 .ToTable(toTable)
                 .InSchema(toSchemaName)
                 .PrimaryColumn(nameof(BaseEntity.Id))
-                .OnDeleteOrUpdate(Rule.Cascade);
+                .OnDeleteOrUpdate(Rule.SetDefault);
         }
 
         public void AddMapping(MappingTypes mappingType, string fromSchemaName = "", string toSchemaName = "")

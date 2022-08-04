@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using DigiBugzy.Core.Domain.Administration.CustomFields;
+using DigiBugzy.Services.SampleData;
 
 namespace DigiBugzy.Desktop.Administration.Categories
 {
@@ -653,58 +654,12 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void btnSampleData_Click(object sender, EventArgs e)
         {
-            DeleteSampleData();
-
-            using var categoryService = new CategoryService(Globals.GetConnectionString());
-            for (var p = 0; p < 11; p++)
-            {
-                var parent = new Category
-                {
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    DigiAdminId = Globals.DigiAdministration.Id,
-                    Name = $@"Sample Category {p}",
-                    Description = "Sample",
-                    ClassificationId = _classificationId,
-                    CustomFieldMappings = null
-                };
-                parent.Id = categoryService.Create(parent);
-
-                for (var c = 0; c < 4; c++)
-                {
-                    var child = new Category
-                    {
-                        IsActive = true,
-                        IsDeleted = false,
-                        CreatedOn = DateTime.Now,
-                        DigiAdminId = Globals.DigiAdministration.Id,
-                        Name = $@"Sample Child Category {p}",
-                        Description = "Sample",
-                        ClassificationId = _classificationId,
-                        ParentId = parent.Id
-                    };
-                    child.Id = categoryService.Create(child);
-
-                    for (var cc = 0; cc < 2; cc++)
-                    {
-                        var schild = new Category
-                        {
-                            IsActive = true,
-                            IsDeleted = false,
-                            CreatedOn = DateTime.Now,
-                            DigiAdminId = Globals.DigiAdministration.Id,
-                            Name = $@"Sample Child Sub Category {p}",
-                            Description = "Sample",
-                            ClassificationId = _classificationId,
-                            ParentId = child.Id
-
-                        };
-                        schild.Id = categoryService.Create(schild);
-                    }
-                }
-
-            }
+            using var service = new SampleDataService(
+                connectionString: Globals.GetConnectionString(),
+                sampleDataType: SampleDataTypeEnum.Categories,
+                classificationId: _classificationId,
+                digiAdminId: Globals.DigiAdministration.Id);
+            service.CreateSampleData();
 
             LoadCategories();
 
@@ -713,7 +668,12 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private void btnSampleDataDelete_Click(object sender, EventArgs e)
         {
-            DeleteSampleData();
+            using var service = new SampleDataService(
+                connectionString: Globals.GetConnectionString(),
+                sampleDataType: SampleDataTypeEnum.Categories,
+                classificationId: _classificationId,
+                digiAdminId: Globals.DigiAdministration.Id);
+            service.DeleteSampleData();
 
             LoadCategories();
 
@@ -721,21 +681,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
         }
 
 
-        private void DeleteSampleData()
-        {
-            using var categoryService = new CategoryService(Globals.GetConnectionString());
-            var collection = categoryService.Get(
-                new StandardFilter
-                {
-                    Name = "Sample",
-                    LikeSearch = true,
-                    ClassificationId = _classificationId
-                });
-            foreach (var category in collection)
-            {
-                categoryService.Delete(category.Id, true);
-            }
-        }
 
         #endregion
 
