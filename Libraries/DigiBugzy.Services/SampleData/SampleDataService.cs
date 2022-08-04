@@ -1,4 +1,5 @@
 ﻿
+using System.Data.SqlTypes;
 using DigiBugzy.Core.Enumerations;
 using DigiBugzy.Services.Administration.Categories;
 using DigiBugzy.Services.Administration.CustomFields;
@@ -148,6 +149,7 @@ namespace DigiBugzy.Services.SampleData
             using var productService = new ProductService(_connectionString);
             for (var p = 0; p <= 30; p++)
             {
+                //Parent product
                 var product = new Product
                 {
                     IsActive = true,
@@ -157,7 +159,9 @@ namespace DigiBugzy.Services.SampleData
                     Name = $@"Sample product {p}",
                     Description = "Sample product",
                 };
+                product.Id = productService.Create(product);
 
+                //Child products
                 for (var c = 0; c <= 3; c++)
                 {
                     var child = new Product
@@ -168,10 +172,12 @@ namespace DigiBugzy.Services.SampleData
                         DigiAdminId = _digiAdminId,
                         Name = $@"Sample product {p}",
                         Description = "Sample product",
-                        
+                        ParentId = product.Id
                     };
+
+                    productService.Create(child);
                 }
-                productService.Create(product);
+                
             }
         }
 
@@ -220,7 +226,8 @@ namespace DigiBugzy.Services.SampleData
                 DigiAdminId = _digiAdminId,
                 Name = "Sample",
                 LikeSearch = true,
-                ClassificationId = _classificationId
+                ClassificationId = _classificationId,
+                
             });
 
             foreach (var customField in customFields)
@@ -231,7 +238,8 @@ namespace DigiBugzy.Services.SampleData
                 //Product Mappings
                 dbContext.ProductCustomFields.RemoveRange(productCustomFieldService.GetByCustomFieldId(customField.Id));
 
-                //Custom Fields
+                //Custom Field
+                dbContext.SaveChanges();
                 customFieldService.Delete(customField.Id, true);
             }
         }
@@ -248,7 +256,8 @@ namespace DigiBugzy.Services.SampleData
                 {
                     Name = "Sample",
                     LikeSearch = true,
-                    ClassificationId = _classificationId
+                    ClassificationId = _classificationId,
+                    DigiAdminId = _digiAdminId
                 });
             foreach (var category in categories)
             {
@@ -260,13 +269,35 @@ namespace DigiBugzy.Services.SampleData
 
 
                 //Category
+                dbContext.SaveChanges();
                 categoryService.Delete(category.Id, true);
             }
         }
 
         private void DeleteProducts()
         {
+            using var productService = new ProductService(_connectionString);
+            using var productCategoryService = new ProductCategoryService(_connectionString);
+            using var productCustomfieldService = new ProductCustomFieldService(_connectionString);
 
+            var products = productService.Get(new StandardFilter
+            {
+                Name = "Sample",
+                LikeSearch = true
+            });
+
+            foreach (var product in products)
+            {
+                //Categories
+                dbContext.ProductCategories.RemoveRange(productCategoryService.GetByProductId(product.Id));
+
+                //CustomFields
+                dbContext.ProductCustomFields.RemoveRange(productCustomfieldService.GetByProductId(product.Id));
+
+                //Product
+                dbContext.SaveChanges();
+                productService.Delete(product.Id, true);
+            }
         }
 
         private void DeleteProjects()
