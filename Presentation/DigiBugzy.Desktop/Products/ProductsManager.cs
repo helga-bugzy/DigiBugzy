@@ -5,6 +5,7 @@ using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Helpers;
 using DigiBugzy.Desktop.Administration.CustomFields;
+using DigiBugzy.Services.SampleData;
 
 namespace DigiBugzy.Desktop.Products
 {
@@ -286,21 +287,15 @@ namespace DigiBugzy.Desktop.Products
 
         private void btnSampleData_Click(object sender, EventArgs e)
         {
-            using var productService = new ProductService(Globals.GetConnectionString());
-            for (int p = 0; p <= 30; p++)
-            {
-                var product = new Product
-                {
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    DigiAdminId = Globals.DigiAdministration.Id,
-                    Name = $@"Sample product {p}",
-                    Description = "Sample product",
-                };
 
-                productService.Create(product);
-            }
+            using var service = new SampleDataService(
+                connectionString: Globals.GetConnectionString(),
+                sampleDataType: SampleDataTypeEnum.Products,
+                classificationId: (int)ClassificationsEnum.Product,
+                digiAdminId: Globals.DigiAdministration.Id);
+            service.CreateSampleData();
+
+           
 
             LoadFilter(true);
 
@@ -310,6 +305,13 @@ namespace DigiBugzy.Desktop.Products
        
         private void btnSampleDataDelete_Click(object sender, EventArgs e)
         {
+            using var service = new SampleDataService(
+                connectionString: Globals.GetConnectionString(),
+                sampleDataType: SampleDataTypeEnum.Products,
+                classificationId: (int)ClassificationsEnum.Product,
+                digiAdminId: Globals.DigiAdministration.Id);
+            service.DeleteSampleData();
+
             using var productService = new ProductService(Globals.GetConnectionString());
             var collection = productService.Get(new StandardFilter { Name = "Sample", LikeSearch = true });
             foreach (var item in collection)

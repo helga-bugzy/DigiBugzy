@@ -145,7 +145,34 @@ namespace DigiBugzy.Services.SampleData
 
         private void CreateProducts()
         {
+            using var productService = new ProductService(_connectionString);
+            for (var p = 0; p <= 30; p++)
+            {
+                var product = new Product
+                {
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    DigiAdminId = _digiAdminId,
+                    Name = $@"Sample product {p}",
+                    Description = "Sample product",
+                };
 
+                for (var c = 0; c <= 3; c++)
+                {
+                    var child = new Product
+                    {
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedOn = DateTime.Now,
+                        DigiAdminId = _digiAdminId,
+                        Name = $@"Sample product {p}",
+                        Description = "Sample product",
+                        
+                    };
+                }
+                productService.Create(product);
+            }
         }
 
         private void CreateProjects()

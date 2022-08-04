@@ -177,7 +177,14 @@ namespace DigiBugzy.Data.Migrations
             creatory.CreateBaseEntity();
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
-            
+            creatory.AddColumn(nameof(Product.ParentId), isNullable: true);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName,
+                toTable: _currentTableName,
+                fromFieldName: nameof(Product.ParentId),
+                fromSchemaName: _currentSchemaName,
+                toSchemaName: _currentSchemaName);
+
 
             // ProductCustomFieldValues
             _currentTableName = nameof(ProductCustomField);
