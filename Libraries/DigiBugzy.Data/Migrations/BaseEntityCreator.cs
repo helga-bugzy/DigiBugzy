@@ -225,11 +225,13 @@ namespace DigiBugzy.Data.Migrations
                 .FromTable(fromTable)
                 .InSchema(fromSchemaName)
                 .ForeignColumn(fromFieldName)
-
+                
+                
                 //To schema.table.id
                 .ToTable(toTable)
                 .InSchema(toSchemaName)
-                .PrimaryColumn(nameof(BaseEntity.Id));
+                .PrimaryColumn(nameof(BaseEntity.Id))
+                .OnDeleteOrUpdate(Rule.Cascade);
         }
 
         public void AddMapping(MappingTypes mappingType, string fromSchemaName = "", string toSchemaName = "")
