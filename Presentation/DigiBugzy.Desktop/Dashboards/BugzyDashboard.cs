@@ -46,7 +46,7 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void btnProductsFields_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ShowChildForm(new CustomFieldsManager((int)ClassificationsEnum.Project));
+            ShowChildForm(new CustomFieldsManager((int)ClassificationsEnum.Product));
         }
 
         private void btnProjects_ItemClick(object sender, ItemClickEventArgs e)
@@ -69,10 +69,7 @@ namespace DigiBugzy.Desktop.Dashboards
 
         #endregion
 
-
-
-
-
+        
         #region Helper Forms
 
         private void ShowChildForm(XtraForm childForm)

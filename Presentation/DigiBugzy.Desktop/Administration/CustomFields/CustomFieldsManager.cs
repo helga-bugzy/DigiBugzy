@@ -77,10 +77,12 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             if (_classificationId > 0)
             {
+                var index = -1;
                 foreach (var item in cmbClassifications.Items)
                 {
+                    index++;
                     if (item is not Classification classification || classification.Id != _classificationId) continue;
-                    cmbClassifications.SelectedItem = item;
+                    cmbClassifications.SelectedIndex = index;
                     LoadCustomFields();
                     break;
                 }
