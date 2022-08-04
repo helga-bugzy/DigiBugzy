@@ -1,5 +1,5 @@
 ﻿
-using System.Data.SqlTypes;
+using System.Threading.Tasks.Dataflow;
 using DigiBugzy.Core.Enumerations;
 using DigiBugzy.Services.Administration.Categories;
 using DigiBugzy.Services.Administration.CustomFields;
@@ -210,9 +210,7 @@ namespace DigiBugzy.Services.SampleData
                     break;
             }
         }
-
         
-
         private void DeleteCustomFields()
         {
             using var customFieldService = new CustomFieldService(_connectionString);
@@ -232,19 +230,15 @@ namespace DigiBugzy.Services.SampleData
 
             foreach (var customField in customFields)
             {
-                var xx = categoryCustomFieldService.GetByCustomFieldId(customField.Id);
                 //Category Mappings
-               
-                foreach (var x in xx)
-                {
-                    categoryCustomFieldService.Delete(x);
-                }
+                categoryCustomFieldService.Delete(categoryCustomFieldService.GetByCustomFieldId(customField.Id), true);
                 
                 //Product Mappings
-                dbContext.ProductCustomFields.RemoveRange(productCustomFieldService.GetByCustomFieldId(customField.Id));
+                productCustomFieldService.Delete(productCustomFieldService.GetByCustomFieldId(customField.Id));
 
                 //Custom Field
-                customFieldService.Delete(customField.Id, true);
+                dbContext.CustomFieldListOptions.RemoveRange(dbContext.CustomFieldListOptions.Where(x => x.CustomFieldId == customField.Id));
+                customFieldService.Delete(customField, true);
             }
         }
 
@@ -266,14 +260,13 @@ namespace DigiBugzy.Services.SampleData
             foreach (var category in categories)
             {
                 //Custom field mappings
-                dbContext.CategoryCustomFields.RemoveRange(categoryCustomFieldService.GetByCategoryId(category.Id));
+                categoryCustomFieldService.Delete(categoryCustomFieldService.GetByCategoryId(category.Id), true);
 
                 //Product field mappings
-                dbContext.ProductCategories.RemoveRange(productCategoryService.GetByCategoryId(category.Id));
-
+                productCategoryService.Delete(productCategoryService.GetByCategoryId(category.Id), true);
 
                 //Category
-                categoryService.Delete(category.Id, true);
+                categoryService.Delete(category, true);
             }
         }
 
@@ -292,10 +285,10 @@ namespace DigiBugzy.Services.SampleData
             foreach (var product in products)
             {
                 //Categories
-                dbContext.ProductCategories.RemoveRange(productCategoryService.GetByProductId(product.Id));
-
+                productCategoryService.Delete(productCategoryService.GetByProductId(product.Id), true);
+                
                 //CustomFields
-                dbContext.ProductCustomFields.RemoveRange(productCustomfieldService.GetByProductId(product.Id));
+                productCustomfieldService.Delete(productCustomfieldService.GetByProductId(product.Id), true);
 
                 //Product
                 productService.Delete(product.Id, true);
