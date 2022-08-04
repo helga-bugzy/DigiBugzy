@@ -1,5 +1,4 @@
 ﻿
-using System.Threading.Tasks.Dataflow;
 using DigiBugzy.Core.Enumerations;
 using DigiBugzy.Services.Administration.Categories;
 using DigiBugzy.Services.Administration.CustomFields;
@@ -178,10 +177,7 @@ namespace DigiBugzy.Services.SampleData
             }
         }
 
-        private void CreateProjects()
-        {
-
-        }
+        
 
         #endregion
 
@@ -213,6 +209,7 @@ namespace DigiBugzy.Services.SampleData
             using var customFieldService = new CustomFieldService(_connectionString);
             using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
             using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
+            using var customFieldOptionsService = new CustomFieldListOptionService(_connectionString);
            
 
             //Custom Fields
@@ -229,12 +226,12 @@ namespace DigiBugzy.Services.SampleData
             {
                 //Category Mappings
                 categoryCustomFieldService.Delete(categoryCustomFieldService.GetByCustomFieldId(customField.Id), true);
-                
+
                 //Product Mappings
                 productCustomFieldService.Delete(productCustomFieldService.GetByCustomFieldId(customField.Id), true);
 
                 //Custom Field
-                dbContext.CustomFieldListOptions.RemoveRange(dbContext.CustomFieldListOptions.Where(x => x.CustomFieldId == customField.Id));
+                customFieldOptionsService.Delete(customFieldOptionsService.GetForCustomFieldId(customField.Id), true);
                 customFieldService.Delete(customField, true);
             }
         }
