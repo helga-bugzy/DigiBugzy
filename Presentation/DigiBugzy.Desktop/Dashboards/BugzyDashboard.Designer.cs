@@ -38,7 +38,7 @@
             this.btnProductsCategories = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnProjectsFields = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnProductsFields = new DevExpress.XtraBars.BarButtonItem();
             this.bandCatalog = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -67,7 +67,7 @@
             this.btnProductsCategories,
             this.barButtonItem1,
             this.btnProjectsFields,
-            this.barButtonItem3});
+            this.btnProductsFields});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.MaxItemId = 13;
             this.ribbon.Name = "ribbon";
@@ -144,14 +144,14 @@
             this.btnProjectsFields.Name = "btnProjectsFields";
             this.btnProjectsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProjectsFields_ItemClick_1);
             // 
-            // barButtonItem3
+            // btnProductsFields
             // 
-            this.barButtonItem3.Caption = "Fields";
-            this.barButtonItem3.Id = 12;
-            this.barButtonItem3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
-            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
-            this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem3_ItemClick);
+            this.btnProductsFields.Caption = "Fields";
+            this.btnProductsFields.Id = 12;
+            this.btnProductsFields.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
+            this.btnProductsFields.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.btnProductsFields.Name = "btnProductsFields";
+            this.btnProductsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProductsFields_ItemClick);
             // 
             // bandCatalog
             // 
@@ -166,7 +166,7 @@
             this.ribbonPageGroup2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPageGroup2.ImageOptions.Image")));
             this.ribbonPageGroup2.ItemLinks.Add(this.btnProducts);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnProductsCategories);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem3);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnProductsFields);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Products";
             // 
@@ -269,7 +269,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup bargroupSettings;
         private DevExpress.XtraBars.BarButtonItem btnProjectsFields;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem btnProductsFields;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
     }

@@ -12,6 +12,10 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
         private int _classificationId;
 
+        private readonly int _loadingClassificationId;
+
+        private readonly bool _isLoading;
+
         private List<Category> Categories { get; set; } = new();
 
         private Category SelectedCategory { get; set; } = new();
@@ -26,6 +30,9 @@ namespace DigiBugzy.Desktop.Administration.Categories
         public CategoriesManager(int classificationId =0)
         {
             _classificationId = classificationId;
+            _loadingClassificationId = classificationId;
+            _isLoading = true;
+
             InitializeComponent();
 
             LoadClassifications();
@@ -75,12 +82,24 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
             if (_classificationId > 0)
             {
+
                 foreach (var item in cmbClassifications.Items)
                 {
-                    if (item is not Classification classification || classification.Id != _classificationId) continue;
-                    cmbClassifications.SelectedItem = item;
-                    LoadCategories();
-                    break;
+
+                    if (_isLoading)
+                    {
+                        if (item is not Classification classification || classification.Id != _loadingClassificationId) continue;
+                        cmbClassifications.SelectedItem = item;
+                        LoadCategories();
+                        break;
+                    }
+                    else
+                    {
+                        if (item is not Classification classification || classification.Id != _classificationId) continue;
+                        cmbClassifications.SelectedItem = item;
+                        LoadCategories();
+                        break;
+                    }
                 }
             }
             else

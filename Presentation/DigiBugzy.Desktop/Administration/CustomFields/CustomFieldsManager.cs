@@ -12,6 +12,10 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private int _classificationId;
 
+        private readonly int _loadingClassificationId;
+
+        private readonly bool _isLoading;
+
         private List<CustomField> CustomFields { get; set; } = new();
 
         private CustomField SelectedCustomField { get; set; } = new();
@@ -25,6 +29,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         public CustomFieldsManager(int classificationId = 0)
         {
             _classificationId = classificationId;
+            _loadingClassificationId = classificationId;
+            _isLoading = true;
+
             InitializeComponent();
 
             ApplySettings();
@@ -32,6 +39,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             LoadClassifications();
             LoadCustomFields();
             LoadCustomFieldEditor();
+
+            _isLoading = false;
         }
 
         private void ApplySettings()
@@ -77,14 +86,24 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             if (_classificationId > 0)
             {
-                var index = -1;
+                
                 foreach (var item in cmbClassifications.Items)
                 {
-                    index++;
-                    if (item is not Classification classification || classification.Id != _classificationId) continue;
-                    cmbClassifications.SelectedIndex = index;
-                    LoadCustomFields();
-                    break;
+                  
+                    if (_isLoading)
+                    {
+                        if (item is not Classification classification || classification.Id != _loadingClassificationId) continue;
+                        cmbClassifications.SelectedItem = item;
+                        LoadCustomFields();
+                        break;
+                    }
+                    else
+                    {
+                        if (item is not Classification classification || classification.Id != _classificationId) continue;
+                        cmbClassifications.SelectedItem = item;
+                        LoadCustomFields();
+                        break;
+                    }
                 }
             }
             else
