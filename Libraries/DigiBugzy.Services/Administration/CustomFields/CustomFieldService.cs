@@ -75,8 +75,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
             using var categoryService = new CategoryService(_connectionString);
             var categories = categoryService.Get(new StandardFilter { ClassificationId = classificationId });
 
-          //  var customField = GetById(customFieldId);
-            foreach (var category in categories)
+          foreach (var category in categories)
             {
                 var result = new MappingViewModel
                 {
@@ -93,9 +92,9 @@ namespace DigiBugzy.Services.Administration.CustomFields
                     category.CustomFieldMappings = categoryCustomFieldService.GetByCategoryId(customFieldId);
                 }
 
-                var x = category.CustomFieldMappings.FirstOrDefault(x =>
-                    x.CustomFieldId == category.Id && category.IsDeleted == false && category.IsActive);
-                if (x != null && x.CategoryId == customFieldId)
+                var mapping = category.CustomFieldMappings.FirstOrDefault(x =>
+                    x.CustomFieldId == customFieldId && category.IsDeleted == false && category.IsActive);
+                if (mapping != null && mapping.CategoryId == customFieldId)
                 {
                     result.IsMapped = true;
                 }

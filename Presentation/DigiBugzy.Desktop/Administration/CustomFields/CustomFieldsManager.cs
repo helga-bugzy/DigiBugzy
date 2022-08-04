@@ -362,7 +362,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             {
                 var node = new TreeNode(text: child.Name)
                 {
-                    Tag = child.Id,
+                    Tag = child.EntityMappedToId,
                     NodeFont = CreateFont(child.IsDeleted, child.IsActive)
                 };
 
@@ -608,7 +608,14 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         private void twCategories_AfterCheck(object sender, TreeViewEventArgs e)
         {
             using var service = new CategoryService(Globals.GetConnectionString());
-            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked, chkCustomFieldsToChild.Checked);
+            service.HandleCustomFieldMapping(
+                categoryId: int.Parse(e.Node!.Tag.ToString()!), 
+                customFieldId: SelectedCustomField.Id,
+                isMapped:e.Node.Checked, 
+                includeChildCategories: chkCustomFieldsToChild.Checked);
+            LoadCategoriesTree();
+            Application.DoEvents();
+
         }
 
         #endregion
