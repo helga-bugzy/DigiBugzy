@@ -37,7 +37,6 @@
             this.chkFilterLikeSearch = new System.Windows.Forms.CheckBox();
             this.txtFilterName = new System.Windows.Forms.TextBox();
             this.lblFilterName = new System.Windows.Forms.Label();
-            this.btnExit = new DevExpress.XtraEditors.SimpleButton();
             this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             this.chkFilterDeleted = new System.Windows.Forms.CheckBox();
             this.chkFilterInactive = new System.Windows.Forms.CheckBox();
@@ -125,7 +124,7 @@
             // splitMain
             // 
             this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitMain.Location = new System.Drawing.Point(2, 2);
+            this.splitMain.Location = new System.Drawing.Point(0, 0);
             this.splitMain.Name = "splitMain";
             this.splitMain.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -136,7 +135,7 @@
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.pnlContent);
-            this.splitMain.Size = new System.Drawing.Size(1934, 1064);
+            this.splitMain.Size = new System.Drawing.Size(1938, 1068);
             this.splitMain.SplitterDistance = 91;
             this.splitMain.TabIndex = 0;
             // 
@@ -148,7 +147,6 @@
             this.pnlFilter.Controls.Add(this.chkFilterLikeSearch);
             this.pnlFilter.Controls.Add(this.txtFilterName);
             this.pnlFilter.Controls.Add(this.lblFilterName);
-            this.pnlFilter.Controls.Add(this.btnExit);
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.chkFilterDeleted);
             this.pnlFilter.Controls.Add(this.chkFilterInactive);
@@ -157,7 +155,7 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1934, 91);
+            this.pnlFilter.Size = new System.Drawing.Size(1938, 91);
             this.pnlFilter.TabIndex = 0;
             // 
             // btnSampleDataDelete
@@ -209,16 +207,6 @@
             this.lblFilterName.Size = new System.Drawing.Size(34, 13);
             this.lblFilterName.TabIndex = 13;
             this.lblFilterName.Text = "Name";
-            // 
-            // btnExit
-            // 
-            this.btnExit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.ImageOptions.Image")));
-            this.btnExit.Location = new System.Drawing.Point(873, 37);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(104, 37);
-            this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "Close";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnFilter
             // 
@@ -276,14 +264,14 @@
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1934, 969);
+            this.pnlContent.Size = new System.Drawing.Size(1938, 973);
             this.pnlContent.TabIndex = 0;
             // 
             // splitContent
             // 
             this.splitContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContent.Horizontal = false;
-            this.splitContent.Location = new System.Drawing.Point(2, 2);
+            this.splitContent.Location = new System.Drawing.Point(0, 0);
             this.splitContent.Name = "splitContent";
             // 
             // splitContent.Panel1
@@ -295,7 +283,7 @@
             // 
             this.splitContent.Panel2.Controls.Add(this.tabPane1);
             this.splitContent.Panel2.Text = "Panel2";
-            this.splitContent.Size = new System.Drawing.Size(1930, 965);
+            this.splitContent.Size = new System.Drawing.Size(1938, 973);
             this.splitContent.SplitterPosition = 375;
             this.splitContent.TabIndex = 0;
             // 
@@ -305,7 +293,7 @@
             this.gridListing.Location = new System.Drawing.Point(0, 0);
             this.gridListing.MainView = this.gvProducts;
             this.gridListing.Name = "gridListing";
-            this.gridListing.Size = new System.Drawing.Size(1930, 375);
+            this.gridListing.Size = new System.Drawing.Size(1938, 375);
             this.gridListing.TabIndex = 0;
             this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProducts});
@@ -337,9 +325,9 @@
             this.tabOrders,
             this.tabProjects,
             this.tabDocuments});
-            this.tabPane1.RegularSize = new System.Drawing.Size(1930, 580);
+            this.tabPane1.RegularSize = new System.Drawing.Size(1938, 588);
             this.tabPane1.SelectedPage = this.tabEditor;
-            this.tabPane1.Size = new System.Drawing.Size(1930, 580);
+            this.tabPane1.Size = new System.Drawing.Size(1938, 588);
             this.tabPane1.TabIndex = 0;
             this.tabPane1.Text = "Product Information";
             // 
@@ -361,7 +349,7 @@
             this.tabEditor.Controls.Add(this.lblName);
             this.tabEditor.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabEditor.ImageOptions.Image")));
             this.tabEditor.Name = "tabEditor";
-            this.tabEditor.Size = new System.Drawing.Size(1930, 547);
+            this.tabEditor.Size = new System.Drawing.Size(1938, 555);
             this.tabEditor.ToolTip = "Editor";
             // 
             // lblSelectedFileName
@@ -506,18 +494,18 @@
             // 
             this.pnlCustomFieldsEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(739, 2);
+            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(737, 0);
             this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
-            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1189, 543);
+            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1193, 547);
             this.pnlCustomFieldsEditor.TabIndex = 1;
             // 
             // pnlCustomFieldsList
             // 
             this.pnlCustomFieldsList.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCustomFieldsList.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlCustomFieldsList.Location = new System.Drawing.Point(2, 2);
+            this.pnlCustomFieldsList.Location = new System.Drawing.Point(0, 0);
             this.pnlCustomFieldsList.Name = "pnlCustomFieldsList";
-            this.pnlCustomFieldsList.Size = new System.Drawing.Size(737, 543);
+            this.pnlCustomFieldsList.Size = new System.Drawing.Size(737, 547);
             this.pnlCustomFieldsList.TabIndex = 0;
             // 
             // tabStock
@@ -559,9 +547,9 @@
             // 
             this.pnlCategoriesEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCategoriesEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCategoriesEditor.Location = new System.Drawing.Point(614, 2);
+            this.pnlCategoriesEditor.Location = new System.Drawing.Point(612, 0);
             this.pnlCategoriesEditor.Name = "pnlCategoriesEditor";
-            this.pnlCategoriesEditor.Size = new System.Drawing.Size(1314, 543);
+            this.pnlCategoriesEditor.Size = new System.Drawing.Size(1318, 547);
             this.pnlCategoriesEditor.TabIndex = 1;
             // 
             // pnlCategoriesTree
@@ -569,18 +557,18 @@
             this.pnlCategoriesTree.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCategoriesTree.Controls.Add(this.treeCategories);
             this.pnlCategoriesTree.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlCategoriesTree.Location = new System.Drawing.Point(2, 2);
+            this.pnlCategoriesTree.Location = new System.Drawing.Point(0, 0);
             this.pnlCategoriesTree.Name = "pnlCategoriesTree";
-            this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 543);
+            this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 547);
             this.pnlCategoriesTree.TabIndex = 0;
             // 
             // treeCategories
             // 
             this.treeCategories.CheckBoxes = true;
             this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeCategories.Location = new System.Drawing.Point(2, 2);
+            this.treeCategories.Location = new System.Drawing.Point(0, 0);
             this.treeCategories.Name = "treeCategories";
-            this.treeCategories.Size = new System.Drawing.Size(608, 539);
+            this.treeCategories.Size = new System.Drawing.Size(612, 547);
             this.treeCategories.TabIndex = 0;
             this.treeCategories.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCategories_AfterCheck);
             // 
@@ -683,7 +671,6 @@
         private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.SimpleButton btnAddNew;
-        private DevExpress.XtraEditors.SimpleButton btnExit;
         private DevExpress.XtraEditors.SimpleButton btnFilter;
         private CheckBox chkFilterDeleted;
         private CheckBox chkFilterInactive;

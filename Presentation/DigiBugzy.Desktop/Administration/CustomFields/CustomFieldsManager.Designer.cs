@@ -47,7 +47,6 @@
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
             this.btnSampleDataDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnSampleData = new DevExpress.XtraEditors.SimpleButton();
-            this.btnExit = new DevExpress.XtraEditors.SimpleButton();
             this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             this.chkIncludeDeleted = new System.Windows.Forms.CheckBox();
             this.chkFilterInactive = new System.Windows.Forms.CheckBox();
@@ -318,7 +317,6 @@
             // 
             this.pnlFilter.Controls.Add(this.btnSampleDataDelete);
             this.pnlFilter.Controls.Add(this.btnSampleData);
-            this.pnlFilter.Controls.Add(this.btnExit);
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.chkIncludeDeleted);
             this.pnlFilter.Controls.Add(this.chkFilterInactive);
@@ -349,16 +347,6 @@
             this.btnSampleData.TabIndex = 9;
             this.btnSampleData.Text = "Create Sample Data";
             this.btnSampleData.Click += new System.EventHandler(this.btnSampleData_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.ImageOptions.Image")));
-            this.btnExit.Location = new System.Drawing.Point(944, 8);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(104, 37);
-            this.btnExit.TabIndex = 7;
-            this.btnExit.Text = "Close";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnFilter
             // 
@@ -640,7 +628,7 @@
             // 
             // btnOptionNew
             // 
-            this.btnOptionNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bnOptionNew.ImageOptions.Image")));
+            this.btnOptionNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionNew.ImageOptions.Image")));
             this.btnOptionNew.Location = new System.Drawing.Point(4, 9);
             this.btnOptionNew.Name = "btnOptionNew";
             this.btnOptionNew.Size = new System.Drawing.Size(104, 37);
@@ -772,7 +760,7 @@
             this.tablePanel1.SetColumn(this.cmbTypes, 1);
             this.cmbTypes.FormattingEnabled = true;
             this.cmbTypes.ItemHeight = 13;
-            this.cmbTypes.Location = new System.Drawing.Point(96, 4);
+            this.cmbTypes.Location = new System.Drawing.Point(96, 3);
             this.cmbTypes.Name = "cmbTypes";
             this.tablePanel1.SetRow(this.cmbTypes, 0);
             this.cmbTypes.Size = new System.Drawing.Size(521, 21);
@@ -978,7 +966,6 @@
         private DevExpress.XtraEditors.SimpleButton btnOptionSave;
         private DevExpress.XtraEditors.SimpleButton btnOptionNew;
         private DevExpress.XtraEditors.PanelControl panelControl7;
-        private DevExpress.XtraEditors.SimpleButton btnExit;
         private DevExpress.XtraEditors.SimpleButton btnSampleDataDelete;
         private DevExpress.XtraEditors.SimpleButton btnSampleData;
         private CheckBox checkBox1;

@@ -148,8 +148,8 @@
             // 
             this.btnProductsFields.Caption = "Fields";
             this.btnProductsFields.Id = 12;
-            this.btnProductsFields.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
-            this.btnProductsFields.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.btnProductsFields.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProductsFields.ImageOptions.Image")));
+            this.btnProductsFields.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProductsFields.ImageOptions.LargeImage")));
             this.btnProductsFields.Name = "btnProductsFields";
             this.btnProductsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProductsFields_ItemClick);
             // 
@@ -228,6 +228,8 @@
             // 
             // xtraTabbedMdiManager1
             // 
+            this.xtraTabbedMdiManager1.AllowDragDrop = DevExpress.Utils.DefaultBoolean.True;
+            this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageHeaderAndOnMouseHover;
             this.xtraTabbedMdiManager1.MdiParent = this;
             // 
             // BugzyDashboard
