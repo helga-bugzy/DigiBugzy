@@ -116,7 +116,14 @@ namespace DigiBugzy.Services.Catalog.Products
 
         public void Delete(int id, bool hardDelete = false)
         {
-            var entity = GetById(id);
+            Delete(GetById(id), hardDelete);
+           
+            
+        }
+
+        /// <inheritdoc />
+        public void Delete(ProductCustomField entity, bool hardDelete = true)
+        {
             if (entity == null) return;
 
             if (hardDelete)
@@ -131,14 +138,25 @@ namespace DigiBugzy.Services.Catalog.Products
                 entity.IsActive = false;
                 Update(entity);
             }
-            
         }
 
+        
+
         /// <inheritdoc />
-        public void Delete(ProductCustomField entity)
+        public void Delete(List<ProductCustomField> entities, bool hardDelete = true)
         {
-            dbContext.ProductCustomFields.Remove(entity);
-            dbContext.SaveChanges();
+            if (hardDelete)
+            {
+                dbContext.ProductCustomFields.RemoveRange(entities);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                foreach (var entity in entities)
+                {
+                    Delete(entity, false);
+                }
+            }
         }
 
 

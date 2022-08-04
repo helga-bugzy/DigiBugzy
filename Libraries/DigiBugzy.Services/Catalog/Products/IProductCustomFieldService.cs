@@ -42,7 +42,9 @@ namespace DigiBugzy.Services.Catalog.Products
         /// <param name="hardDelete"></param>
         public void Delete(int id, bool hardDelete = false);
 
-        public void Delete(ProductCustomField entity);
+        public void Delete(ProductCustomField entity, bool hardDelete = true);
+
+        public void Delete(List<ProductCustomField> entity, bool hardDelete = true);
 
         /// <summary>
         /// Updates an existing mapping

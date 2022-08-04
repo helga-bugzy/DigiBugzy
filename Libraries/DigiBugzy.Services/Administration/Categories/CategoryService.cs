@@ -144,6 +144,42 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
+        public void Delete(List<Category> entities, bool hardDelete = true)
+        {
+            if (hardDelete)
+            {
+                dbContext.Categories.RemoveRange(entities);
+            }
+            else
+            {
+                foreach (var entity in entities)
+                {
+                    entity.IsDeleted = true;
+                    entity.IsActive = false;
+                    Update(entity);
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public void Delete(Category entity, bool hardDelete = true)
+        {
+            if (hardDelete)
+            {
+                dbContext.Categories.Remove(entity);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                entity.IsDeleted = true;
+                entity.IsActive = false;
+                Update(entity);
+            }
+
+
+        }
+
+        /// <inheritdoc />
         public void Update(Category entity)
         {
             var filter = new StandardFilter

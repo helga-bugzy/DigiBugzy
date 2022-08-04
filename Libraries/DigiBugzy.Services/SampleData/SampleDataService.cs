@@ -170,8 +170,8 @@ namespace DigiBugzy.Services.SampleData
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
                         DigiAdminId = _digiAdminId,
-                        Name = $@"Sample product {p}",
-                        Description = "Sample product",
+                        Name = $@"Sample child {p}-{c}",
+                        Description = "Sample child product",
                         ParentId = product.Id
                     };
 
@@ -232,14 +232,18 @@ namespace DigiBugzy.Services.SampleData
 
             foreach (var customField in customFields)
             {
+                var xx = categoryCustomFieldService.GetByCustomFieldId(customField.Id);
                 //Category Mappings
-                dbContext.CategoryCustomFields.RemoveRange(categoryCustomFieldService.GetByCustomFieldId(customField.Id));
-
+               
+                foreach (var x in xx)
+                {
+                    categoryCustomFieldService.Delete(x);
+                }
+                
                 //Product Mappings
                 dbContext.ProductCustomFields.RemoveRange(productCustomFieldService.GetByCustomFieldId(customField.Id));
 
                 //Custom Field
-                dbContext.SaveChanges();
                 customFieldService.Delete(customField.Id, true);
             }
         }
@@ -269,7 +273,6 @@ namespace DigiBugzy.Services.SampleData
 
 
                 //Category
-                dbContext.SaveChanges();
                 categoryService.Delete(category.Id, true);
             }
         }
@@ -295,7 +298,6 @@ namespace DigiBugzy.Services.SampleData
                 dbContext.ProductCustomFields.RemoveRange(productCustomfieldService.GetByProductId(product.Id));
 
                 //Product
-                dbContext.SaveChanges();
                 productService.Delete(product.Id, true);
             }
         }

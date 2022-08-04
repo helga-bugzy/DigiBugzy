@@ -39,15 +39,40 @@ namespace DigiBugzy.Services.Administration.Classifications
 
         public void Delete(int id, bool hardDelete = false)
         {
+            Delete(GetById(id), hardDelete);
+        }
+
+        /// <inheritdoc />
+        public void Delete(Classification entity, bool hardDelete = true)
+        {
+
             if (hardDelete)
             {
-                var entity = GetById(id);
-                if (entity != null || entity.Id > 0)
-                {
-                    dbContext.Classifications.Remove(entity);
-                    dbContext.SaveChanges();
-                }
-                else
+
+                dbContext.Classifications.Remove(entity);
+                dbContext.SaveChanges();
+               
+            }
+            else
+            {
+                entity.IsDeleted = true;
+                entity.IsActive = false;
+                Update(entity);
+
+            }
+        }
+
+        /// <inheritdoc />
+        public void Delete(List<Classification> entities, bool hardDelete = true)
+        {
+            if (hardDelete)
+            {
+                dbContext.Classifications.RemoveRange(entities);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                foreach (var entity in entities)
                 {
                     entity.IsDeleted = true;
                     entity.IsActive = false;

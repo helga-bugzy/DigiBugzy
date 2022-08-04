@@ -12,6 +12,10 @@ namespace DigiBugzy.Services.Administration.Classifications
 
         public void Delete(int id, bool hardDelete = false);
 
+        public void Delete(Classification entity, bool hardDelete = true);
+
+        public void Delete(List<Classification> entities, bool hardDelete = true);
+
         public void Update(Classification entity);
 
         public void Create(Classification entity);

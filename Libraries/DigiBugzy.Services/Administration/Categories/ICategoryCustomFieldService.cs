@@ -18,6 +18,9 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <returns></returns>
         public List<CategoryCustomField> GetByCustomFieldId(int customFieldId);
 
-        public void Delete(CategoryCustomField entity);
+        
+        public void Delete(CategoryCustomField entity, bool hardDelete = true);
+
+        public void Delete(List<CategoryCustomField> entities, bool hardDelete = true);
     }
 }

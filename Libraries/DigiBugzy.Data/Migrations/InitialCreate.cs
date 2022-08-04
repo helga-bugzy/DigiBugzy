@@ -170,13 +170,6 @@ namespace DigiBugzy.Data.Migrations
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseAdministrationEntity();
             creatory.AddColumn(fieldName: nameof(Product.ProductImage), fieldType: BaseEntityCreator.FieldTypes.AsBinary, isNullable: true);
-
-            //ProductCategory
-            _currentTableName = nameof(ProductCategory);
-            creatory.StartNewTable(_currentTableName);
-            creatory.CreateBaseEntity();
-            creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
-            creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
             creatory.AddColumn(nameof(Product.ParentId), isNullable: true);
             creatory.AddForeignKey(
                 fromTable: _currentTableName,
@@ -184,6 +177,13 @@ namespace DigiBugzy.Data.Migrations
                 fromFieldName: nameof(Product.ParentId),
                 fromSchemaName: _currentSchemaName,
                 toSchemaName: _currentSchemaName);
+
+            //ProductCategory
+            _currentTableName = nameof(ProductCategory);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
 
 
             // ProductCustomFieldValues

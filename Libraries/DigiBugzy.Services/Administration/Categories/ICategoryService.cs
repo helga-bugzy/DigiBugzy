@@ -35,6 +35,10 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <param name="hardDelete"></param>
         public void Delete(int id, bool hardDelete = false);
 
+        public void Delete(List<Category> entities, bool hardDelete = true);
+
+        public void Delete(Category entity, bool hardDelete = true);
+
         /// <summary>
         /// Update changes to a category in the database
         /// </summary>

@@ -1,5 +1,7 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+
 namespace DigiBugzy.Services.Administration.CustomFields
 {
     public class CustomFieldListOptionService: BaseService, ICustomFieldListOptionsService
@@ -35,17 +37,40 @@ namespace DigiBugzy.Services.Administration.CustomFields
         /// <inheritdoc />
         public void Delete(int id, bool hardDelete = false)
         {
+            Delete(GetById(id), hardDelete);
+           
+        }
+
+        /// <inheritdoc />
+        public void Delete(CustomFieldListOption entity, bool hardDelete = true)
+        {
             if (hardDelete)
             {
-                dbContext.CustomFieldListOptions.Remove(GetById(id));
+                dbContext.CustomFieldListOptions.Remove(entity);
                 dbContext.SaveChanges();
             }
             else
             {
-                var entity = GetById(id);
                 entity.IsDeleted = true;
                 entity.IsActive = false;
                 Update(entity);
+            }
+        }
+
+        /// <inheritdoc />
+        public void Delete(List<CustomFieldListOption> entities, bool hardDelete = true)
+        {
+            if (hardDelete)
+            {
+                dbContext.CustomFieldListOptions.RemoveRange(entities);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                foreach (var entity in entities)
+                {
+                    Delete(entity, false);
+                }
             }
         }
 

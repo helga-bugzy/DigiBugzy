@@ -107,19 +107,38 @@ namespace DigiBugzy.Services.Catalog.Products
 
         public void Delete(int id, bool hardDelete = false)
         {
+            
+        }
+
+        /// <inheritdoc />
+        public void Delete(Product entity, bool hardDelete = true)
+        {
             if (hardDelete)
             {
-                var entity = GetById(id);
-                if (entity != null || entity.Id > 0)
+                dbContext.Products.Remove(entity);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                entity.IsDeleted = true;
+                entity.IsActive = false;
+                Update(entity);
+            }
+        }
+
+        /// <inheritdoc />
+        public void Delete(List<Product> entities, bool hardDelete = true)
+        {
+            if (hardDelete)
+            {
+                dbContext.Products.RemoveRange(entities);
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                foreach (var entity in entities)
                 {
-                    dbContext.Products.Remove(entity);
-                    dbContext.SaveChanges();
-                }
-                else
-                {
-                    entity.IsDeleted = true;
-                    entity.IsActive = false;
-                    Update(entity);
+                    Delete(entity, false);
                 }
             }
         }
