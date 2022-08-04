@@ -230,8 +230,8 @@ namespace DigiBugzy.Data.Migrations
                 //To schema.table.id
                 .ToTable(toTable)
                 .InSchema(toSchemaName)
-                .PrimaryColumn(nameof(BaseEntity.Id))
-                .OnDeleteOrUpdate(Rule.SetDefault);
+                .PrimaryColumn(nameof(BaseEntity.Id));
+                //.OnDeleteOrUpdate(Rule.SetDefault);
         }
 
         public void AddMapping(MappingTypes mappingType, string fromSchemaName = "", string toSchemaName = "")
