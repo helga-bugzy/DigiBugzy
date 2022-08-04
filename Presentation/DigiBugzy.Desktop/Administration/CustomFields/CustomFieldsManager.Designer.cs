@@ -759,7 +759,7 @@
             this.tablePanel1.SetColumn(this.cmbTypes, 1);
             this.cmbTypes.FormattingEnabled = true;
             this.cmbTypes.ItemHeight = 13;
-            this.cmbTypes.Location = new System.Drawing.Point(96, 3);
+            this.cmbTypes.Location = new System.Drawing.Point(96, 4);
             this.cmbTypes.Name = "cmbTypes";
             this.tablePanel1.SetRow(this.cmbTypes, 0);
             this.cmbTypes.Size = new System.Drawing.Size(521, 21);
@@ -827,7 +827,7 @@
             this.twCategories.TabIndex = 0;
             this.twCategories.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.twCategories_AfterCheck);
             this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
-            this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCustomFields_NodeMouseClick);
+            this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCategories_NodeMouseClick);
             this.twCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.twCategories_DragDrop);
             this.twCategories.DragEnter += new System.Windows.Forms.DragEventHandler(this.twCategories_DragEnter);
             this.twCategories.DragOver += new System.Windows.Forms.DragEventHandler(this.twCategories_DragOver);

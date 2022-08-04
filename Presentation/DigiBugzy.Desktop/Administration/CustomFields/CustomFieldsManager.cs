@@ -329,11 +329,11 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             {
                 var node = new TreeNode(text: parent.Name)
                 {
-                    Tag = parent.Id,
+                    Tag = parent.EntityMappedToId,
                     NodeFont = CreateFont(parent.IsDeleted, parent.IsActive)
                 };
 
-                LoadCategoryNodes(node, parent.Id);
+                LoadCategoryNodes(node, parent.EntityMappedToId);
 
                 node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
 
@@ -353,14 +353,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             if (parentNode == null) return;
             var children = _categories
                 .Where(c => c.ParentId == parentId)
-                .Select(c => new Category
-                {
-                    Id = c.Id,
-                    ParentId = parentId,
-                    Name = c.Name,
-                    IsActive = c.IsActive,
-                    IsDeleted = c.IsDeleted
-                })
                 .OrderBy(c => c.Name)
                 .ToList();
 
