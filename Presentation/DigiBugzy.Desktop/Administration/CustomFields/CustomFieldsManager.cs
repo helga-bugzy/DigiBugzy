@@ -177,24 +177,24 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         {
             LoadCustomFieldTypes();
 
+            btnRestore.Enabled = false;
+            btnDelete.Enabled = false;
+            btnSave.Enabled = false;
+            btnAddNew.Enabled = false;
+
             if (_classificationId <= 0)
             {
-                pnlEditor.Visible = false;
-                btnRestore.Visible = false;
-                grdOptions.Visible = false;
                 Application.DoEvents();
                 return;
             }
-
-            pnlEditor.Visible = true;
-
+            
             if (SelectedCustomField.Id <= 0)
             {
                 txtDescription.Text = txtName.Text = string.Empty;
                 chkActive.Checked = true;
                 lblHeading.Text = @"New CustomField";
                 grdOptions.Visible = false;
-                btnRestore.Visible = false;
+                
 
             }
             else
@@ -207,7 +207,15 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==7;
             }
 
-            btnRestore.Visible = SelectedCustomField.IsDeleted;
+            if (SelectedCustomField.Id > 0)
+            {
+                btnRestore.Enabled = SelectedCustomField.IsDeleted;
+                btnDelete.Enabled = !SelectedCustomField.IsDeleted;
+                btnSave.Enabled = true;
+            }
+            
+            btnAddNew.Enabled = _classificationId > 0;
+
             LoadCustomFieldListOptions();
 
 
@@ -217,7 +225,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         private void LoadCustomFieldListOptions()
         {
 
-            grdOptions.Visible = false;
+            
             grdOptions.Columns.Clear();
 
             LoadCustomFieldListOptionsEditor();
@@ -228,7 +236,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             using var service = new CustomFieldTypeService(Globals.GetConnectionString());
             var collection = service.GetListOptions(SelectedCustomField.Id, new StandardFilter());
             grdOptions.DataSource = collection;
-            grdOptions.Visible = true;
+            
 
             grdOptions.AllowUserToAddRows = true;
             grdOptions.Columns[0].Visible = false;
@@ -245,6 +253,11 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadCustomFieldListOptionsEditor()
         {
+            btnOptionRestore.Enabled = false;
+            btnOptionDelete.Enabled = false;
+            btnOptionSave.Enabled = false;
+            btnOptionNew.Enabled = false;
+
             if (_classificationId <= 0)
             {
                 SelectedListOption = new CustomFieldListOption();
@@ -255,14 +268,23 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             {
                 txtOptionName.Text = string.Empty;
                 chkOptionActive.Checked = true;
-                btnOptionRestore.Visible = false;
+                btnOptionRestore.Enabled  = false;
             }
             else
             {
                 txtOptionName.Text = SelectedListOption.Value;
                 chkOptionActive.Checked = SelectedListOption.IsActive;
-                btnRestore.Visible = SelectedListOption.IsDeleted;
+                
             }
+
+            if (SelectedListOption.Id > 0)
+            {
+                btnOptionRestore.Enabled = SelectedListOption.IsDeleted;
+                btnOptionDelete.Enabled = !SelectedListOption.IsDeleted;
+                btnOptionSave.Enabled = true;
+            }
+
+            btnOptionNew.Enabled = SelectedCustomField.Id > 0 && SelectedCustomField.CustomFieldTypeId == (int)CustomFieldTypeEnumeration.ListType;
 
             Application.DoEvents();
             

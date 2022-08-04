@@ -182,6 +182,7 @@
             // 
             // pnlFilter
             // 
+            this.pnlFilter.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlFilter.Controls.Add(this.btnSampleDataDelete);
             this.pnlFilter.Controls.Add(this.btnSampleData);
             this.pnlFilter.Controls.Add(this.btnExit);
@@ -277,6 +278,7 @@
             // 
             // pnlContent
             // 
+            this.pnlContent.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlContent.Controls.Add(this.splitContent);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
@@ -287,7 +289,7 @@
             // splitContent
             // 
             this.splitContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContent.Location = new System.Drawing.Point(2, 2);
+            this.splitContent.Location = new System.Drawing.Point(0, 0);
             this.splitContent.Name = "splitContent";
             // 
             // splitContent.Panel1
@@ -299,7 +301,7 @@
             // 
             this.splitContent.Panel2.Controls.Add(this.splitEditors);
             this.splitContent.Panel2.Text = "Panel2";
-            this.splitContent.Size = new System.Drawing.Size(1503, 790);
+            this.splitContent.Size = new System.Drawing.Size(1507, 794);
             this.splitContent.SplitterPosition = 313;
             this.splitContent.TabIndex = 0;
             // 
@@ -309,7 +311,7 @@
             this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.twCategories.Location = new System.Drawing.Point(0, 0);
             this.twCategories.Name = "twCategories";
-            this.twCategories.Size = new System.Drawing.Size(313, 790);
+            this.twCategories.Size = new System.Drawing.Size(313, 794);
             this.twCategories.TabIndex = 0;
             this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
             this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCategories_NodeMouseClick);
@@ -335,53 +337,58 @@
             this.splitEditors.Panel2.Controls.Add(this.pnlMappings);
             this.splitEditors.Panel2.Controls.Add(this.panelControl6);
             this.splitEditors.Panel2.Text = "Panel2";
-            this.splitEditors.Size = new System.Drawing.Size(1180, 790);
+            this.splitEditors.Size = new System.Drawing.Size(1184, 794);
             this.splitEditors.SplitterPosition = 624;
             this.splitEditors.TabIndex = 0;
             // 
             // panelControl2
             // 
+            this.panelControl2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl2.Controls.Add(this.pnlEditor);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(0, 41);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(624, 749);
+            this.panelControl2.Size = new System.Drawing.Size(624, 753);
             this.panelControl2.TabIndex = 1;
             // 
             // pnlEditor
             // 
+            this.pnlEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlEditor.Controls.Add(this.panelControl5);
             this.pnlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEditor.Location = new System.Drawing.Point(2, 2);
+            this.pnlEditor.Location = new System.Drawing.Point(0, 0);
             this.pnlEditor.Name = "pnlEditor";
-            this.pnlEditor.Size = new System.Drawing.Size(620, 745);
+            this.pnlEditor.Size = new System.Drawing.Size(624, 753);
             this.pnlEditor.TabIndex = 3;
             // 
             // panelControl5
             // 
+            this.panelControl5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.panelControl5.Controls.Add(this.pnlControls);
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl5.Location = new System.Drawing.Point(2, 2);
+            this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(616, 741);
+            this.panelControl5.Size = new System.Drawing.Size(624, 753);
             this.panelControl5.TabIndex = 0;
             // 
             // pnlControls
             // 
+            this.pnlControls.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlControls.Controls.Add(this.pnlEditorContent);
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControls.Location = new System.Drawing.Point(2, 2);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(612, 737);
+            this.pnlControls.Size = new System.Drawing.Size(620, 749);
             this.pnlControls.TabIndex = 1;
             // 
             // pnlEditorContent
             // 
+            this.pnlEditorContent.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlEditorContent.Controls.Add(this.tablePanel1);
             this.pnlEditorContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlEditorContent.Location = new System.Drawing.Point(2, 2);
+            this.pnlEditorContent.Location = new System.Drawing.Point(0, 0);
             this.pnlEditorContent.Name = "pnlEditorContent";
-            this.pnlEditorContent.Size = new System.Drawing.Size(608, 733);
+            this.pnlEditorContent.Size = new System.Drawing.Size(620, 749);
             this.pnlEditorContent.TabIndex = 1;
             // 
             // tablePanel1
@@ -399,7 +406,7 @@
             this.tablePanel1.Controls.Add(this.lblName);
             this.tablePanel1.Controls.Add(this.lblParent);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel1.Location = new System.Drawing.Point(2, 2);
+            this.tablePanel1.Location = new System.Drawing.Point(0, 0);
             this.tablePanel1.Name = "tablePanel1";
             this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
@@ -408,19 +415,20 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(604, 729);
+            this.tablePanel1.Size = new System.Drawing.Size(620, 749);
             this.tablePanel1.TabIndex = 0;
             // 
             // panelControl3
             // 
+            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.tablePanel1.SetColumn(this.panelControl3, 1);
             this.panelControl3.Controls.Add(this.btnRestore);
             this.panelControl3.Controls.Add(this.btnDelete);
             this.panelControl3.Controls.Add(this.btnSave);
-            this.panelControl3.Location = new System.Drawing.Point(93, 107);
+            this.panelControl3.Location = new System.Drawing.Point(96, 107);
             this.panelControl3.Name = "panelControl3";
             this.tablePanel1.SetRow(this.panelControl3, 4);
-            this.panelControl3.Size = new System.Drawing.Size(508, 44);
+            this.panelControl3.Size = new System.Drawing.Size(521, 44);
             this.panelControl3.TabIndex = 13;
             // 
             // btnRestore
@@ -456,19 +464,19 @@
             // txtDescription
             // 
             this.tablePanel1.SetColumn(this.txtDescription, 1);
-            this.txtDescription.Location = new System.Drawing.Point(93, 55);
+            this.txtDescription.Location = new System.Drawing.Point(96, 55);
             this.txtDescription.Name = "txtDescription";
             this.tablePanel1.SetRow(this.txtDescription, 2);
-            this.txtDescription.Size = new System.Drawing.Size(508, 20);
+            this.txtDescription.Size = new System.Drawing.Size(521, 20);
             this.txtDescription.TabIndex = 4;
             // 
             // txtName
             // 
             this.tablePanel1.SetColumn(this.txtName, 1);
-            this.txtName.Location = new System.Drawing.Point(93, 29);
+            this.txtName.Location = new System.Drawing.Point(96, 29);
             this.txtName.Name = "txtName";
             this.tablePanel1.SetRow(this.txtName, 1);
-            this.txtName.Size = new System.Drawing.Size(508, 20);
+            this.txtName.Size = new System.Drawing.Size(521, 20);
             this.txtName.TabIndex = 3;
             // 
             // tablePanel3
@@ -479,13 +487,13 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 19.86F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 85.14F)});
             this.tablePanel3.Controls.Add(this.chkActive);
-            this.tablePanel3.Location = new System.Drawing.Point(93, 81);
+            this.tablePanel3.Location = new System.Drawing.Point(96, 81);
             this.tablePanel3.Name = "tablePanel3";
             this.tablePanel1.SetRow(this.tablePanel3, 3);
             this.tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel3.Size = new System.Drawing.Size(508, 20);
+            this.tablePanel3.Size = new System.Drawing.Size(521, 20);
             this.tablePanel3.TabIndex = 12;
             // 
             // chkActive
@@ -495,7 +503,7 @@
             this.chkActive.Name = "chkActive";
             this.chkActive.Properties.Caption = "";
             this.tablePanel3.SetRow(this.chkActive, 0);
-            this.chkActive.Size = new System.Drawing.Size(17, 20);
+            this.chkActive.Size = new System.Drawing.Size(18, 20);
             this.chkActive.TabIndex = 5;
             // 
             // tablePanel2
@@ -506,23 +514,23 @@
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 48.2F)});
             this.tablePanel2.Controls.Add(this.cmbParents);
             this.tablePanel2.Controls.Add(this.chkParent);
-            this.tablePanel2.Location = new System.Drawing.Point(93, 3);
+            this.tablePanel2.Location = new System.Drawing.Point(96, 3);
             this.tablePanel2.Name = "tablePanel2";
             this.tablePanel1.SetRow(this.tablePanel2, 0);
             this.tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel2.Size = new System.Drawing.Size(508, 20);
+            this.tablePanel2.Size = new System.Drawing.Size(521, 20);
             this.tablePanel2.TabIndex = 11;
             // 
             // cmbParents
             // 
             this.tablePanel2.SetColumn(this.cmbParents, 1);
             this.cmbParents.FormattingEnabled = true;
-            this.cmbParents.Location = new System.Drawing.Point(103, 3);
+            this.cmbParents.Location = new System.Drawing.Point(105, 3);
             this.cmbParents.Name = "cmbParents";
             this.tablePanel2.SetRow(this.cmbParents, 0);
-            this.cmbParents.Size = new System.Drawing.Size(402, 21);
+            this.cmbParents.Size = new System.Drawing.Size(413, 21);
             this.cmbParents.TabIndex = 2;
             this.cmbParents.Visible = false;
             // 
@@ -533,7 +541,7 @@
             this.chkParent.Name = "chkParent";
             this.chkParent.Properties.Caption = "Has Parent";
             this.tablePanel2.SetRow(this.chkParent, 0);
-            this.chkParent.Size = new System.Drawing.Size(94, 20);
+            this.chkParent.Size = new System.Drawing.Size(96, 20);
             this.chkParent.TabIndex = 1;
             this.chkParent.CheckedChanged += new System.EventHandler(this.chkParent_CheckedChanged);
             // 
@@ -579,6 +587,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.pnlHeader);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
@@ -588,12 +597,13 @@
             // 
             // pnlHeader
             // 
+            this.pnlHeader.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlHeader.Controls.Add(this.btnAddNew);
             this.pnlHeader.Controls.Add(this.lblHeading);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(2, 2);
+            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(620, 39);
+            this.pnlHeader.Size = new System.Drawing.Size(624, 39);
             this.pnlHeader.TabIndex = 1;
             // 
             // btnAddNew
@@ -611,7 +621,7 @@
             this.lblHeading.Appearance.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblHeading.Appearance.Options.UseFont = true;
             this.lblHeading.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblHeading.Location = new System.Drawing.Point(2, 2);
+            this.lblHeading.Location = new System.Drawing.Point(0, 0);
             this.lblHeading.Name = "lblHeading";
             this.lblHeading.Size = new System.Drawing.Size(117, 23);
             this.lblHeading.TabIndex = 0;
@@ -619,41 +629,45 @@
             // 
             // pnlMappings
             // 
+            this.pnlMappings.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlMappings.Controls.Add(this.pnlMappingsMapper);
             this.pnlMappings.Controls.Add(this.pnlMappingsFilter);
             this.pnlMappings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMappings.Location = new System.Drawing.Point(0, 41);
             this.pnlMappings.Name = "pnlMappings";
-            this.pnlMappings.Size = new System.Drawing.Size(546, 749);
+            this.pnlMappings.Size = new System.Drawing.Size(550, 753);
             this.pnlMappings.TabIndex = 1;
             // 
             // pnlMappingsMapper
             // 
+            this.pnlMappingsMapper.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlMappingsMapper.Controls.Add(this.pnlCFEditor);
             this.pnlMappingsMapper.Controls.Add(this.treeCFMappings);
             this.pnlMappingsMapper.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMappingsMapper.Location = new System.Drawing.Point(2, 68);
+            this.pnlMappingsMapper.Location = new System.Drawing.Point(0, 66);
             this.pnlMappingsMapper.Name = "pnlMappingsMapper";
-            this.pnlMappingsMapper.Size = new System.Drawing.Size(542, 679);
+            this.pnlMappingsMapper.Size = new System.Drawing.Size(550, 687);
             this.pnlMappingsMapper.TabIndex = 2;
             // 
             // pnlCFEditor
             // 
+            this.pnlCFEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCFEditor.Controls.Add(this.pnlQuickAddCustomField);
             this.pnlCFEditor.Controls.Add(this.tablePanel4);
             this.pnlCFEditor.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCFEditor.Location = new System.Drawing.Point(2, 457);
+            this.pnlCFEditor.Location = new System.Drawing.Point(0, 467);
             this.pnlCFEditor.Name = "pnlCFEditor";
-            this.pnlCFEditor.Size = new System.Drawing.Size(538, 220);
+            this.pnlCFEditor.Size = new System.Drawing.Size(550, 220);
             this.pnlCFEditor.TabIndex = 2;
             // 
             // pnlQuickAddCustomField
             // 
+            this.pnlQuickAddCustomField.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlQuickAddCustomField.Controls.Add(this.labelControl1);
             this.pnlQuickAddCustomField.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlQuickAddCustomField.Location = new System.Drawing.Point(2, 2);
+            this.pnlQuickAddCustomField.Location = new System.Drawing.Point(0, 0);
             this.pnlQuickAddCustomField.Name = "pnlQuickAddCustomField";
-            this.pnlQuickAddCustomField.Size = new System.Drawing.Size(534, 35);
+            this.pnlQuickAddCustomField.Size = new System.Drawing.Size(550, 35);
             this.pnlQuickAddCustomField.TabIndex = 1;
             // 
             // labelControl1
@@ -677,45 +691,46 @@
             this.tablePanel4.Controls.Add(this.label2);
             this.tablePanel4.Controls.Add(this.label1);
             this.tablePanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tablePanel4.Location = new System.Drawing.Point(2, 43);
+            this.tablePanel4.Location = new System.Drawing.Point(0, 45);
             this.tablePanel4.Name = "tablePanel4";
             this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 48F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel4.Size = new System.Drawing.Size(534, 175);
+            this.tablePanel4.Size = new System.Drawing.Size(550, 175);
             this.tablePanel4.TabIndex = 0;
             // 
             // txtQuickAddName
             // 
             this.tablePanel4.SetColumn(this.txtQuickAddName, 1);
-            this.txtQuickAddName.Location = new System.Drawing.Point(48, 29);
+            this.txtQuickAddName.Location = new System.Drawing.Point(49, 29);
             this.txtQuickAddName.Name = "txtQuickAddName";
             this.tablePanel4.SetRow(this.txtQuickAddName, 1);
-            this.txtQuickAddName.Size = new System.Drawing.Size(484, 20);
+            this.txtQuickAddName.Size = new System.Drawing.Size(498, 20);
             this.txtQuickAddName.TabIndex = 4;
             // 
             // cmbQuickAddType
             // 
             this.tablePanel4.SetColumn(this.cmbQuickAddType, 1);
             this.cmbQuickAddType.FormattingEnabled = true;
-            this.cmbQuickAddType.Location = new System.Drawing.Point(48, 3);
+            this.cmbQuickAddType.Location = new System.Drawing.Point(49, 3);
             this.cmbQuickAddType.Name = "cmbQuickAddType";
             this.tablePanel4.SetRow(this.cmbQuickAddType, 0);
-            this.cmbQuickAddType.Size = new System.Drawing.Size(484, 21);
+            this.cmbQuickAddType.Size = new System.Drawing.Size(498, 21);
             this.cmbQuickAddType.TabIndex = 3;
             // 
             // panelControl4
             // 
+            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.tablePanel4.SetColumn(this.panelControl4, 1);
             this.panelControl4.Controls.Add(this.btnQuickAddClear);
             this.panelControl4.Controls.Add(this.btnQuickAdd);
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl4.Location = new System.Drawing.Point(48, 55);
+            this.panelControl4.Location = new System.Drawing.Point(49, 55);
             this.panelControl4.Name = "panelControl4";
             this.tablePanel4.SetRow(this.panelControl4, 2);
-            this.panelControl4.Size = new System.Drawing.Size(484, 42);
+            this.panelControl4.Size = new System.Drawing.Size(498, 42);
             this.panelControl4.TabIndex = 2;
             // 
             // btnQuickAddClear
@@ -764,22 +779,23 @@
             // 
             this.treeCFMappings.CheckBoxes = true;
             this.treeCFMappings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeCFMappings.Location = new System.Drawing.Point(2, 2);
+            this.treeCFMappings.Location = new System.Drawing.Point(0, 0);
             this.treeCFMappings.Name = "treeCFMappings";
-            this.treeCFMappings.Size = new System.Drawing.Size(538, 675);
+            this.treeCFMappings.Size = new System.Drawing.Size(550, 687);
             this.treeCFMappings.TabIndex = 1;
             this.treeCFMappings.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCFMappings_AfterCheck);
             // 
             // pnlMappingsFilter
             // 
+            this.pnlMappingsFilter.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlMappingsFilter.Controls.Add(this.chkCustomFieldsToChild);
             this.pnlMappingsFilter.Controls.Add(this.txtMappingsFilterName);
             this.pnlMappingsFilter.Controls.Add(this.lblMappingFilterName);
             this.pnlMappingsFilter.Controls.Add(this.simpleButton1);
             this.pnlMappingsFilter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlMappingsFilter.Location = new System.Drawing.Point(2, 2);
+            this.pnlMappingsFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlMappingsFilter.Name = "pnlMappingsFilter";
-            this.pnlMappingsFilter.Size = new System.Drawing.Size(542, 66);
+            this.pnlMappingsFilter.Size = new System.Drawing.Size(550, 66);
             this.pnlMappingsFilter.TabIndex = 0;
             // 
             // chkCustomFieldsToChild
@@ -819,11 +835,12 @@
             // 
             // panelControl6
             // 
+            this.panelControl6.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl6.Controls.Add(this.lblCustomFieldsHeading);
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl6.Location = new System.Drawing.Point(0, 0);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(546, 41);
+            this.panelControl6.Size = new System.Drawing.Size(550, 41);
             this.panelControl6.TabIndex = 0;
             // 
             // lblCustomFieldsHeading
@@ -831,7 +848,7 @@
             this.lblCustomFieldsHeading.Appearance.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblCustomFieldsHeading.Appearance.Options.UseFont = true;
             this.lblCustomFieldsHeading.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblCustomFieldsHeading.Location = new System.Drawing.Point(2, 2);
+            this.lblCustomFieldsHeading.Location = new System.Drawing.Point(0, 0);
             this.lblCustomFieldsHeading.Name = "lblCustomFieldsHeading";
             this.lblCustomFieldsHeading.Size = new System.Drawing.Size(115, 23);
             this.lblCustomFieldsHeading.TabIndex = 1;

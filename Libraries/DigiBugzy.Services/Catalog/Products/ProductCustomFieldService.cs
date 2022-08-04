@@ -1,5 +1,6 @@
 ﻿using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Services.Administration.Categories;
+using DigiBugzy.Services.Administration.CustomFields;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigiBugzy.Services.Catalog.Products
@@ -44,25 +45,60 @@ namespace DigiBugzy.Services.Catalog.Products
         /// <inheritdoc />
         public List<MappingViewModel> GetMappingViewModels(int productId)
         {
+            using var productCategoryFieldService = new ProductCategoryService(_connectionString);
             using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
-            var mappings =
-                dbContext.ProductCustomFields
-                    .Where(p => p.ProductId == productId)
-                    .Include(x => x.CustomField).ToList();
+            using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
+            using var customFieldService = new CustomFieldService(_connectionString);
+            using var customFieldTypeService = new CustomFieldTypeService(_connectionString);
 
-            return mappings.Select(
-                m => new MappingViewModel
+
+            var results = new List<MappingViewModel>();
+
+            var categoryMappings = productCategoryFieldService.GetByProductId(productId);
+            var customFieldMappings = productCustomFieldService.GetByProductId(productId);
+
+
+            foreach (var categoryMapping in categoryMappings)
+            {
+                var categoryCustomFields = categoryCustomFieldService.GetByCategoryId(categoryMapping.CategoryId);
+                foreach (var categoryCustomField in categoryCustomFields)
                 {
-                    Id = m.Id,
-                    Name = m.CustomField.Name,
-                    DigiAdminId = m.ProductId,
-                    CreatedOn = m.CreatedOn,
-                    CustomFieldValue = m.Value,
-                    EntityMappedToId = m.CustomFieldId,
-                    EntityMappedFromId = m.ProductId,
-                    IsDeleted = false,
-                    IsActive = true
-                }).ToList();
+                    categoryCustomField.CustomField ??= customFieldService.GetById(categoryCustomField.CustomFieldId);
+
+                    categoryCustomField.CustomField.CustomFieldType ??=
+                        customFieldTypeService.GetById(categoryCustomField.CustomField.CustomFieldTypeId);
+
+                    var viewModel = new MappingViewModel
+                    {
+
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedOn = DateTime.Now,
+                        DigiAdminId = 1,
+                        EntityMappedFromId = productId,
+                        EntityMappedToId = categoryCustomField.Id,
+                        Name = categoryCustomField.CustomField.Name,
+                        TypeName = categoryCustomField.CustomField.CustomFieldType.Name,
+                        TypeId = categoryCustomField.CustomField.CustomFieldTypeId,
+                        IsMapped = false,
+                        CustomFieldValue = null,
+                    };
+
+                    var hasMaps = customFieldMappings.Where(x => x.CustomFieldId == categoryCustomField.CustomFieldId);
+                    if (hasMaps!.Any())
+                    {
+                        viewModel.IsMapped = true;
+                        viewModel.CustomFieldValue = hasMaps.FirstOrDefault().Value;
+
+                    }
+
+                    results.Add(viewModel);
+                }
+            }
+
+
+            return results;
+
 
 
         }

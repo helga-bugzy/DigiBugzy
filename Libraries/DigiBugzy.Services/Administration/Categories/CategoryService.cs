@@ -91,9 +91,9 @@ namespace DigiBugzy.Services.Administration.Categories
         public Category GetById(int id)
         {
 
-            var query = dbContext.Categories.Where(c => c.Id == id)
-                .Include(admin => admin.CustomFieldMappings)
-                .ThenInclude(cfield => cfield.CustomField);
+            var query = dbContext.Categories.Where(c => c.Id == id);
+               // .Include(admin => admin.CustomFieldMappings)
+               // .ThenInclude(cfield => cfield.CustomField);
 
             return query.FirstOrDefault();
         }
@@ -190,6 +190,11 @@ namespace DigiBugzy.Services.Administration.Categories
                     EntityMappedFromId = categoryId             //Set by default, not always true
                 };
 
+                if (category.CustomFieldMappings == null)
+                {
+                    using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
+                    category.CustomFieldMappings = categoryCustomFieldService.GetByCategoryId(categoryId);
+                }
                 var x = category.CustomFieldMappings.FirstOrDefault(x => x.CustomFieldId == cf.Id && cf.IsDeleted == false && cf.IsActive);
                 if (x != null && x.CategoryId == categoryId)
                 {

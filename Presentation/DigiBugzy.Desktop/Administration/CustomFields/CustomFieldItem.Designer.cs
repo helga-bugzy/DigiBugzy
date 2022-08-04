@@ -91,7 +91,7 @@
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.lblName);
             this.Name = "CustomFieldItem";
-            this.Size = new System.Drawing.Size(454, 81);
+            this.Size = new System.Drawing.Size(454, 41);
             this.ResumeLayout(false);
             this.PerformLayout();
 

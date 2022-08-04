@@ -114,6 +114,7 @@
             // 
             // pnlBackground
             // 
+            this.pnlBackground.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlBackground.Controls.Add(this.splitMain);
             this.pnlBackground.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBackground.Location = new System.Drawing.Point(0, 0);
@@ -141,6 +142,7 @@
             // 
             // pnlFilter
             // 
+            this.pnlFilter.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlFilter.Controls.Add(this.btnSampleDataDelete);
             this.pnlFilter.Controls.Add(this.btnSampleData);
             this.pnlFilter.Controls.Add(this.chkFilterLikeSearch);
@@ -269,6 +271,7 @@
             // 
             // pnlContent
             // 
+            this.pnlContent.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlContent.Controls.Add(this.splitContent);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
@@ -490,6 +493,7 @@
             // 
             // pnlCustomFieldsArea
             // 
+            this.pnlCustomFieldsArea.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsEditor);
             this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsList);
             this.pnlCustomFieldsArea.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -500,6 +504,7 @@
             // 
             // pnlCustomFieldsEditor
             // 
+            this.pnlCustomFieldsEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(739, 2);
             this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
@@ -508,6 +513,7 @@
             // 
             // pnlCustomFieldsList
             // 
+            this.pnlCustomFieldsList.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCustomFieldsList.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlCustomFieldsList.Location = new System.Drawing.Point(2, 2);
             this.pnlCustomFieldsList.Name = "pnlCustomFieldsList";
@@ -540,6 +546,7 @@
             // 
             // pnlCategories
             // 
+            this.pnlCategories.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCategories.Controls.Add(this.pnlCategoriesEditor);
             this.pnlCategories.Controls.Add(this.pnlCategoriesTree);
             this.pnlCategories.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -550,6 +557,7 @@
             // 
             // pnlCategoriesEditor
             // 
+            this.pnlCategoriesEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCategoriesEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCategoriesEditor.Location = new System.Drawing.Point(614, 2);
             this.pnlCategoriesEditor.Name = "pnlCategoriesEditor";
@@ -558,6 +566,7 @@
             // 
             // pnlCategoriesTree
             // 
+            this.pnlCategoriesTree.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCategoriesTree.Controls.Add(this.treeCategories);
             this.pnlCategoriesTree.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlCategoriesTree.Location = new System.Drawing.Point(2, 2);

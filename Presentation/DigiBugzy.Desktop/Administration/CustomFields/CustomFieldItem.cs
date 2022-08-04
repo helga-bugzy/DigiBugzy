@@ -20,9 +20,10 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         public CustomFieldItem(MappingViewModel? customField = null)
         {
+            InitializeComponent();
             CustomField = customField;
             txtValue.Visible = cmbValue.Visible = rbFalse.Visible = rbTrue.Visible = false;
-            InitializeComponent();
+            
         }
 
         #region Private Methods
