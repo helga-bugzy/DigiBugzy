@@ -21,11 +21,11 @@ namespace DigiBugzy.Services.Catalog.Products
         #region Commands
 
 
-        public void Delete(int id, bool hardDelete = true);
+        public void Delete(int id, bool hardDelete);
 
-        public void Delete(ProductCategory entity, bool hardDelete = true);
+        public void Delete(ProductCategory entity, bool hardDelete);
 
-        public void Delete(List<ProductCategory> entities, bool hardDelete = true);
+        public void Delete(List<ProductCategory> entities, bool hardDelete);
 
         public void Update(ProductCategory entity);
 

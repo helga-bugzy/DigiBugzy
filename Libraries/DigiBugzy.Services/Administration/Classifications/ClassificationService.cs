@@ -37,13 +37,13 @@ namespace DigiBugzy.Services.Administration.Classifications
             dbContext.SaveChanges();
         }
 
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
             Delete(GetById(id), hardDelete);
         }
 
         /// <inheritdoc />
-        public void Delete(Classification entity, bool hardDelete = true)
+        public void Delete(Classification entity, bool hardDelete)
         {
 
             if (hardDelete)
@@ -63,7 +63,7 @@ namespace DigiBugzy.Services.Administration.Classifications
         }
 
         /// <inheritdoc />
-        public void Delete(List<Classification> entities, bool hardDelete = true)
+        public void Delete(List<Classification> entities, bool hardDelete)
         {
             if (hardDelete)
             {

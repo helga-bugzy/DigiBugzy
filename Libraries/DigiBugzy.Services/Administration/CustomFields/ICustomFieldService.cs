@@ -33,12 +33,12 @@ namespace DigiBugzy.Services.Administration.CustomFields
         /// </summary>
         /// <param name="id"></param>
         /// <param name="hardDelete"></param>
-        public void Delete(int id, bool hardDelete = false);
+        public void Delete(int id, bool hardDelete);
 
-        public void Delete(CustomField entity, bool hardDelete = false);
+        public void Delete(CustomField entity, bool hardDelete);
 
 
-        public void Delete(List<CustomField> entities, bool hardDelete = false);
+        public void Delete(List<CustomField> entities, bool hardDelete);
 
         /// <summary>
         /// Updates an existing custom field

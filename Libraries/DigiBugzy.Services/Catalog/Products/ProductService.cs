@@ -105,13 +105,13 @@ namespace DigiBugzy.Services.Catalog.Products
 
         }
 
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
             
         }
 
         /// <inheritdoc />
-        public void Delete(Product entity, bool hardDelete = true)
+        public void Delete(Product entity, bool hardDelete)
         {
             if (hardDelete)
             {
@@ -127,7 +127,7 @@ namespace DigiBugzy.Services.Catalog.Products
         }
 
         /// <inheritdoc />
-        public void Delete(List<Product> entities, bool hardDelete = true)
+        public void Delete(List<Product> entities, bool hardDelete)
         {
             if (hardDelete)
             {

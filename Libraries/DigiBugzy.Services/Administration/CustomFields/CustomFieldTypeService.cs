@@ -34,7 +34,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
             dbContext.SaveChanges();
         }
 
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
             var entity = GetById(id);
             if (entity == null) return;
@@ -137,7 +137,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
         }
 
         /// <inheritdoc />
-        public void DeleteListOption(int optionId, bool hardDelete = false)
+        public void DeleteListOption(int optionId, bool hardDelete)
         {
             var entity = GetListOptionById(optionId);
             if (entity == null) return;

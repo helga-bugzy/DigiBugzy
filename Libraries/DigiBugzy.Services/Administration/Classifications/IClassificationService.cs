@@ -10,11 +10,11 @@ namespace DigiBugzy.Services.Administration.Classifications
 
         public List<Classification> Get(StandardFilter filter);
 
-        public void Delete(int id, bool hardDelete = false);
+        public void Delete(int id, bool hardDelete);
 
-        public void Delete(Classification entity, bool hardDelete = true);
+        public void Delete(Classification entity, bool hardDelete);
 
-        public void Delete(List<Classification> entities, bool hardDelete = true);
+        public void Delete(List<Classification> entities, bool hardDelete);
 
         public void Update(Classification entity);
 

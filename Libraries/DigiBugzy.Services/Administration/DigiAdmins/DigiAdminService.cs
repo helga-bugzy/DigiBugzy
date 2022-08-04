@@ -36,7 +36,7 @@ namespace DigiBugzy.Services.Administration.DigiAdmins
             dbContext.SaveChanges();
         }
 
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
             if (hardDelete)
             {

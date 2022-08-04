@@ -469,7 +469,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
         {
             if (SelectedCategory.Id <= 0) return;
             using var service = new CategoryService(Globals.GetConnectionString());
-            service.Delete(SelectedCategory.Id);
+            service.Delete(SelectedCategory.Id, true);
 
             LoadCategories();
             SelectedCategory = new Category();

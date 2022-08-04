@@ -36,11 +36,11 @@ namespace DigiBugzy.Services.Catalog.Products
         /// </summary>
         /// <param name="id"></param>
         /// <param name="hardDelete"></param>
-        public void Delete(int id, bool hardDelete = true);
+        public void Delete(int id, bool hardDelete);
 
-        public void Delete(Product entity, bool hardDelete = true);
+        public void Delete(Product entity, bool hardDelete);
 
-        public void Delete(List<Product> entities, bool hardDelete = true);
+        public void Delete(List<Product> entities, bool hardDelete);
 
 
 

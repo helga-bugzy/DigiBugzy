@@ -122,7 +122,7 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
 
             var entity = GetById(id);
@@ -144,7 +144,7 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
-        public void Delete(List<Category> entities, bool hardDelete = true)
+        public void Delete(List<Category> entities, bool hardDelete)
         {
             if (hardDelete)
             {
@@ -162,7 +162,7 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
-        public void Delete(Category entity, bool hardDelete = true)
+        public void Delete(Category entity, bool hardDelete)
         {
             if (hardDelete)
             {

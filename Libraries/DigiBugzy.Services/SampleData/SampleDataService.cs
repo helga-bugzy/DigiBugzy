@@ -67,23 +67,20 @@ namespace DigiBugzy.Services.SampleData
                     };
                     cfield.Id = customFieldService.Create(cfield);
 
-                    if ((int)item == (int)CustomFieldTypeEnumeration.ListType)
+                    if ((int)item != (int)CustomFieldTypeEnumeration.ListType) continue;
+                    for (var o = 0; o <= 3; o++)
                     {
-                        for (var o = 0; o <= 3; o++)
+                        var option = new CustomFieldListOption
                         {
-                            var option = new CustomFieldListOption
-                            {
-                                IsActive = true,
-                                IsDeleted = false,
-                                CreatedOn = DateTime.Now,
-                                DigiAdminId = _digiAdminId,
-                                CustomFieldId = cfield.Id,
-                                Value = $@"Option {o} for {cfield.Name}"
-                            };
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreatedOn = DateTime.Now,
+                            DigiAdminId = _digiAdminId,
+                            CustomFieldId = cfield.Id,
+                            Value = $@"Option {o} for {cfield.Name}"
+                        };
 
-                            option.Id = customFieldListOptionService.Create(option);
-                        }
-
+                        option.Id = customFieldListOptionService.Create(option);
                     }
                 }
             }
@@ -234,7 +231,7 @@ namespace DigiBugzy.Services.SampleData
                 categoryCustomFieldService.Delete(categoryCustomFieldService.GetByCustomFieldId(customField.Id), true);
                 
                 //Product Mappings
-                productCustomFieldService.Delete(productCustomFieldService.GetByCustomFieldId(customField.Id));
+                productCustomFieldService.Delete(productCustomFieldService.GetByCustomFieldId(customField.Id), true);
 
                 //Custom Field
                 dbContext.CustomFieldListOptions.RemoveRange(dbContext.CustomFieldListOptions.Where(x => x.CustomFieldId == customField.Id));

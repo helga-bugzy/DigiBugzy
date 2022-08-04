@@ -417,7 +417,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         {
             if (SelectedCustomField.Id <= 0) return;
             using var service = new CustomFieldService(Globals.GetConnectionString());
-            service.Delete(SelectedCustomField.Id);
+            service.Delete(SelectedCustomField.Id, true);
 
             LoadCustomFields();
             SelectedCustomField = new CustomField();

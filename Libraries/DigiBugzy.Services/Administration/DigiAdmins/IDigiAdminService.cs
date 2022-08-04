@@ -11,7 +11,7 @@ namespace DigiBugzy.Services.Administration.DigiAdmins
 
         public List<DigiAdmin> Get(StandardFilter filter);
 
-        public void Delete(int id, bool hardDelete = false);
+        public void Delete(int id, bool hardDelete);
 
         public void Update(DigiAdmin entity);
 

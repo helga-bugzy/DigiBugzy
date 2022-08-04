@@ -9,7 +9,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
         public List<CustomFieldType> Get(StandardFilter filter);
 
-        public void Delete(int id, bool hardDelete = false);
+        public void Delete(int id, bool hardDelete);
 
         public void Update(CustomFieldType entity);
 
@@ -19,7 +19,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
 
         public List<CustomFieldListOption> GetListOptions(int customFieldId, StandardFilter filter);
 
-        public void DeleteListOption(int optionId, bool hardDelete = false);
+        public void DeleteListOption(int optionId, bool hardDelete);
 
         public void AddListOption(CustomFieldListOption entity);
 

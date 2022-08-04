@@ -116,13 +116,13 @@ namespace DigiBugzy.Services.Administration.CustomFields
         }
 
         /// <inheritdoc />
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
             Delete(GetById(id), hardDelete);
         }
 
         /// <inheritdoc />
-        public void Delete(CustomField entity, bool hardDelete = false)
+        public void Delete(CustomField entity, bool hardDelete)
         {
             if (hardDelete)
             {
@@ -139,7 +139,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
         }
 
         /// <inheritdoc />
-        public void Delete(List<CustomField> entities, bool hardDelete = false)
+        public void Delete(List<CustomField> entities, bool hardDelete)
         {
             if (hardDelete)
             {

@@ -9,7 +9,7 @@ namespace DigiBugzy.Services.Projects
             throw new NotImplementedException();
         }
 
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
             throw new NotImplementedException();
         }

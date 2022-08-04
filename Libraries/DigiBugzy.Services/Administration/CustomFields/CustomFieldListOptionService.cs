@@ -35,14 +35,14 @@ namespace DigiBugzy.Services.Administration.CustomFields
         #region Commands
 
         /// <inheritdoc />
-        public void Delete(int id, bool hardDelete = false)
+        public void Delete(int id, bool hardDelete)
         {
             Delete(GetById(id), hardDelete);
            
         }
 
         /// <inheritdoc />
-        public void Delete(CustomFieldListOption entity, bool hardDelete = true)
+        public void Delete(CustomFieldListOption entity, bool hardDelete)
         {
             if (hardDelete)
             {
@@ -58,7 +58,7 @@ namespace DigiBugzy.Services.Administration.CustomFields
         }
 
         /// <inheritdoc />
-        public void Delete(List<CustomFieldListOption> entities, bool hardDelete = true)
+        public void Delete(List<CustomFieldListOption> entities, bool hardDelete)
         {
             if (hardDelete)
             {

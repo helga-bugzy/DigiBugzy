@@ -9,7 +9,7 @@ namespace DigiBugzy.Services.Administration.Notes
 
         public List<Note> Get(StandardFilter filter);
 
-        public void Delete(int id, bool hardDelete = false);
+        public void Delete(int id, bool hardDelete);
 
         public void Update(Note entity);
 

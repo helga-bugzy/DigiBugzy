@@ -25,7 +25,7 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
-        public void Delete(CategoryCustomField entity, bool hardDelete = true)
+        public void Delete(CategoryCustomField entity, bool hardDelete)
         {
             if (hardDelete)
             {
@@ -42,7 +42,7 @@ namespace DigiBugzy.Services.Administration.Categories
         }
 
         /// <inheritdoc />
-        public void Delete(List<CategoryCustomField> entities, bool hardDelete = true)
+        public void Delete(List<CategoryCustomField> entities, bool hardDelete)
         {
             if (hardDelete)
             {
