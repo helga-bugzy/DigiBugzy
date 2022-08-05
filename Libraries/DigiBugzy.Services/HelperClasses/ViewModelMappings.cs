@@ -1,4 +1,6 @@
 ﻿
+using DigiBugzy.Core.Utilities;
+using DigiBugzy.Core.ViewModels.Administration;
 using DigiBugzy.Core.ViewModels.Catalog;
 using DigiBugzy.Services.Catalog.Products;
 namespace DigiBugzy.Services.HelperClasses
@@ -8,14 +10,18 @@ namespace DigiBugzy.Services.HelperClasses
 
         private static List<ProductGridViewModel> _viewModels;
 
+        private static List<Category> _categories;
+
         private static string _connectionString;
-        
-        
+
+
+        #region Products
+
 
         public static List<ProductGridViewModel> ConvertProductToView(List<Product> products, string connectionString, bool doParentGrouping)
         {
             _connectionString = connectionString;
-            _viewModels =products.Select(product => ConvertProductToView(product, connectionString)).ToList();
+            _viewModels = products.Select(product => ConvertProductToView(product, connectionString)).ToList();
 
             if (doParentGrouping)
                 _viewModels = ConvertToHierarchy();
@@ -26,7 +32,7 @@ namespace DigiBugzy.Services.HelperClasses
         public static ProductGridViewModel ConvertProductToView(Product product, string connectionString, bool addParentInfo = true)
         {
             _connectionString = connectionString;
-            var model =  new ProductGridViewModel
+            var model = new ProductGridViewModel
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -54,9 +60,9 @@ namespace DigiBugzy.Services.HelperClasses
             var parents = (from p in _viewModels where p.ParentId == null select p).ToList();
 
             var pp = from model in parents
-                where model.ParentId == null &&
-                      !(from model2 in _viewModels where model2.ParentId == model.Id select model2).Any()
-                select model;
+                     where model.ParentId == null &&
+                           !(from model2 in _viewModels where model2.ParentId == model.Id select model2).Any()
+                     select model;
 
             parents.AddRange(pp);
 
@@ -73,15 +79,60 @@ namespace DigiBugzy.Services.HelperClasses
         {
             var result = new List<ProductGridViewModel>();
             var children = _viewModels.Where(c => c.ParentId == parentId);
-            
+
             foreach (var child in children)
             {
                 child.SubProducts = CreateChildProducts(child.Id).OrderBy(p => p.Name).ToList();
                 result.Add(child);
-                
+
             }
 
             return result;
         }
+
+        #endregion
+
+        #region Categories
+
+        public static List<CategoryComboViewModel> CreateCategoryComboItems(List<Category> categories)
+        {
+            var parents = (from c in categories where c.ParentId == null select c).OrderBy(c => c.Name).ToList();
+
+            var results = new List<CategoryComboViewModel>();
+
+            foreach (var parent in parents)
+            {
+                var model = new CategoryComboViewModel { Name = parent.Name, Id = parent.Id };
+                results.Add(model);
+                results.AddRange(CreateChildCategoryComboItems(parent.Id, 1));
+
+            }
+
+            return results;
+
+        }
+
+        private static List<CategoryComboViewModel> CreateChildCategoryComboItems(int parentId, int level)
+        {
+            var results = new List<CategoryComboViewModel>();
+                          var children = (from c in _categories where c.ParentId == parentId select c).OrderBy(c => c.Name).ToList();
+            foreach (var child in children)
+            {
+                var model = new CategoryComboViewModel
+                {
+                    Id = child.Id,
+                    Name = DigiUtilities.CreateLevelName(child.Name, level)
+                };
+                results.Add(model);
+
+                results.AddRange(CreateChildCategoryComboItems(child.Id, level + 1));
+            }
+
+            return results;
+        }
+
+
+        #endregion
+
     }
 }

@@ -10,9 +10,19 @@ namespace DigiBugzy.Core.Utilities
     public static class DigiUtilities
     {
 
-        #region Imaging
+        #region Strings
 
-       
+        public static string CreateLevelName(string name, int level)
+        {
+            if (level == 0) return name;
+
+            var stringName = "";
+            for (var i = 0; i < level; i++)
+            {
+                stringName += "-";
+            }
+            return $@"{stringName} {name}";
+        }
 
         #endregion
     }

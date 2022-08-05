@@ -5,6 +5,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Helpers;
+using DigiBugzy.Core.ViewModels.Administration;
 using DigiBugzy.Desktop.Administration.CustomFields;
 using DigiBugzy.Services.HelperClasses;
 using DigiBugzy.Services.SampleData;
@@ -29,20 +30,22 @@ namespace DigiBugzy.Desktop.Products
         {
             InitializeComponent();
 
-            LoadCategorySelector();
+            LoadFilterCategories();
 
             LoadFilter(true);
         }
 
-        private void LoadCategorySelector()
+        private void LoadFilterCategories()
         {
             cmbFilterCategories.DataSource = null;
             cmbFilterCategories.Items.Clear();
 
             using var categoryService = new CategoryService(Globals.GetConnectionString());
             var collection = categoryService.Get(new StandardFilter{ClassificationId = (int)ClassificationsEnum.Product}).OrderBy(c => c.Name).ToList();
-            collection.Insert(0, new Category { Id = 0, Name = "<Select a category>" });
-            
+
+            var viewModels = ViewModelMappings.CreateCategoryComboItems(collection);
+            viewModels.Insert(0, new CategoryComboViewModel { Id = 0, Name = "<Select a category>" });
+
             cmbFilterCategories.DataSource = collection;
             cmbFilterCategories.DisplayMember = "Name";
             cmbFilterCategories.ValueMember = "Id";
@@ -51,6 +54,8 @@ namespace DigiBugzy.Desktop.Products
 
             Application.DoEvents();
         }
+
+        
 
         #region Helper Methods
 
@@ -64,7 +69,7 @@ namespace DigiBugzy.Desktop.Products
 
             if(cmbFilterCategories.SelectedIndex > 0)
             {
-                var cat = (Category)cmbFilterCategories.SelectedItem;
+                var cat = (CategoryComboViewModel)cmbFilterCategories.SelectedItem;
                 filter.CategoryId = cat.Id;
             }
 
