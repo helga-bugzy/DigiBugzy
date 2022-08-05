@@ -355,9 +355,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadCategoryNodes()
         {
-            
-
-
             //Get all parents
             var parents = (from c in Categories
                            where c.ParentId == null

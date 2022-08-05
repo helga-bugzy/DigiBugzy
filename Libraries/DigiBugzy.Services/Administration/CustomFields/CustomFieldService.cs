@@ -128,19 +128,23 @@ namespace DigiBugzy.Services.Administration.CustomFields
             
             var filter = new StandardFilter
             {
-                Name = entity.Name
+                Name = entity.Name,
+                ClassificationId = entity.ClassificationId
             };
             var current = Get(filter);
 
-            if (current.Count > 0) Update(entity);
+            if (current.Count > 0)
+            {
+                entity.Id = current[0].Id;
+                Update(entity);
+                return entity.Id;
+            }
 
             dbContext.CustomFields.Add(entity);
             dbContext.SaveChanges();
 
             if (entity.CustomFieldTypeId == 7)
             {
-
-
                 var option = new CustomFieldListOption
                 {
                     CreatedOn = DateTime.Now,
