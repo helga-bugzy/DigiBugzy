@@ -1,11 +1,14 @@
 ﻿using DevExpress.XtraEditors;
 using DigiBugzy.Core.Domain.Administration.CustomFields;
+using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 
 namespace DigiBugzy.Desktop.Administration.CustomFields
 {
     public partial class CustomFieldItem : XtraUserControl
     {
+        public SampleDataTypeEnum MappingType { get; set; }
+        
         private MappingViewModel? _customFieldModel;
 
         public MappingViewModel? CustomField
@@ -18,12 +21,12 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             }
         }
 
-        public CustomFieldItem(MappingViewModel? customField = null)
+        public CustomFieldItem(MappingViewModel? customField = null, SampleDataTypeEnum mappingType = default)
         {
             InitializeComponent();
             CustomField = customField;
-            txtValue.Visible = cmbValue.Visible = rbFalse.Visible = rbTrue.Visible = false;
-            
+            txtValue.Visible = cmbValue.Visible = rbFalse.Visible = rbTrue.Visible = btnRefresh.Visible = false;
+            MappingType = mappingType;
         }
 
         #region Private Methods
@@ -43,7 +46,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             var service = new CustomFieldListOptionService(Globals.GetConnectionString());
             var options = service.GetForCustomFieldId(CustomField.EntityMappedToId);
             cmbValue.DataSource = options;
-            cmbValue.DisplayMember = "Name";
+            cmbValue.DisplayMember = "Value";
             cmbValue.ValueMember = "Id";
 
             if (CustomField.TypeId > 0)
@@ -68,6 +71,11 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             switch (CustomField.TypeId)
             {
                 case (int)CustomFieldTypeEnumeration.ListType:
+                    if (cmbValue.SelectedIndex >= 0)
+                    {
+                        var option = (CustomFieldListOption)cmbValue.SelectedItem;
+                        CustomField.CustomFieldValue = option.Id.ToString();
+                    }
                     break;
                 case (int)CustomFieldTypeEnumeration.Boolean:
                     CustomField.CustomFieldValue = rbFalse.Checked ? "0" : "1";
@@ -77,6 +85,30 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                     break;
             }
 
+            switch (MappingType)
+            {
+                case SampleDataTypeEnum.Products:
+                    SaveProductMapping();
+                    break;
+            }
+
+        }
+
+        #endregion
+
+        #region Saving
+
+        private void SaveProductMapping()
+        {
+            if (CustomField == null) return;
+            using var service = new ProductCustomFieldService(Globals.GetConnectionString());
+            var entity = new ProductCustomField()
+            {
+                ProductId = CustomField.EntityMappedFromId,
+                CustomFieldId = CustomField.EntityMappedToId,
+                Value = CustomField.CustomFieldValue
+            };
+            service.Update(entity);
         }
 
         #endregion
@@ -92,7 +124,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             switch (CustomField.TypeId)
             {
                 case (int)CustomFieldTypeEnumeration.ListType:
-                    cmbValue.Visible = true;
+                    cmbValue.Visible = btnRefresh.Visible = true;
                     LoadOptionsListValues();
 
                     break;
@@ -123,13 +155,24 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             }
 
         }
-
-
-
-
+        
 
         #endregion
 
+        #region Control Event Procedures
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadOptionsListValues();
+            Application.DoEvents();
+        }
+
+        #endregion
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveCustomField();
+        }
     }
 
 }

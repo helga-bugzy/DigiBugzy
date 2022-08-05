@@ -179,7 +179,12 @@ namespace DigiBugzy.Services.Catalog.Products
 
         public void Update(ProductCustomField entity)
         {
-            dbContext.ProductCustomFields.Update(entity);
+            var item = dbContext.ProductCustomFields.FirstOrDefault(x =>
+                x.ProductId == entity.ProductId && x.CustomFieldId == entity.CustomFieldId);
+            if (item == null) return;
+            item.Value = entity.Value;
+
+            dbContext.ProductCustomFields.Update(item);
             dbContext.SaveChanges();
         }
 

@@ -211,7 +211,9 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCustomFieldsSelector()
         {
-           
+           ClearCustomFieldControls();
+
+
             using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
             LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
 
@@ -231,6 +233,23 @@ namespace DigiBugzy.Desktop.Products
             pnlCustomFieldsList.Controls.Add(citem);
                 
             }
+        }
+
+        private void ClearCustomFieldControls()
+        {
+            for (int i = 0; i < pnlCustomFieldsList.Controls.Count + 10; i++)
+            {
+                foreach (UserControl control in pnlCustomFieldsList.Controls)
+                {
+                    if (control != null)
+                    {
+                        pnlCustomFieldsList.Controls.Remove(control);
+                    }
+
+                }
+
+            }
+            
         }
 
         private void LoadDocumentsTab()
