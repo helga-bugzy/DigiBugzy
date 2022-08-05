@@ -212,7 +212,6 @@ namespace DigiBugzy.Desktop.Products
         private void LoadCustomFieldsSelector()
         {
            
-
             using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
             LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
 
@@ -220,16 +219,16 @@ namespace DigiBugzy.Desktop.Products
 
             foreach (var field in LoadingFields)
             {
-                var citem = new CustomFieldItem();
-                citem.CustomField = field;
-                citem.Tag = citem.Name = field.Id.ToString();
-                citem.Dock = DockStyle.None;
-                citem.Location = new Point(0, top);
-               
-                top += citem.Bounds.Height;
+                var citem = new CustomFieldItem()
+                {
+                    CustomField = field,
+                    Tag = Name = field.Id.ToString(),
+                    Dock = DockStyle.None,
+                    Location = new Point(0, top)
+            };
+            top += citem.Bounds.Height;
 
-
-                pnlCustomFieldsList.Controls.Add(citem);
+            pnlCustomFieldsList.Controls.Add(citem);
                 
             }
         }

@@ -50,46 +50,63 @@ namespace DigiBugzy.Services.Catalog.Products
             using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
             using var customFieldService = new CustomFieldService(_connectionString);
             using var customFieldTypeService = new CustomFieldTypeService(_connectionString);
+            
 
 
             var results = new List<MappingViewModel>();
 
-            var categoryMappings = productCategoryFieldService.GetByProductId(productId);
-            var customFieldMappings = productCustomFieldService.GetByProductId(productId);
+            var productCategoryMappings = productCategoryFieldService.GetByProductId(productId);
+            var productCustomFieldsMappings = productCustomFieldService.GetByProductId(productId);
 
 
-            foreach (var categoryMapping in categoryMappings)
+            foreach (var productCategoryMapping in productCategoryMappings)
             {
-                var categoryCustomFields = categoryCustomFieldService.GetByCategoryId(categoryMapping.CategoryId);
-                foreach (var categoryCustomField in categoryCustomFields)
+                
+                var categoryCustomFieldsMappings = categoryCustomFieldService.GetByCategoryId(productCategoryMapping.CategoryId);
+                foreach (var categoryCustomFieldMapping in categoryCustomFieldsMappings)
                 {
-                    categoryCustomField.CustomField ??= customFieldService.GetById(categoryCustomField.CustomFieldId);
+                    //Do we have this mapping already for the product?
+                    var resultItem = results.Where(r => r.EntityMappedToId == categoryCustomFieldMapping.CustomFieldId);
+                    if (resultItem.Any()) continue;
 
-                    categoryCustomField.CustomField.CustomFieldType ??=
-                        customFieldTypeService.GetById(categoryCustomField.CustomField.CustomFieldTypeId);
-
+                    //No productCustomField mapping yet, so lets add one to the results
+                    var customField = categoryCustomFieldMapping.CustomField ??= customFieldService.GetById(categoryCustomFieldMapping.CustomFieldId);
+                    var customFieldType = categoryCustomFieldMapping.CustomField.CustomFieldType ??= customFieldTypeService.GetById(categoryCustomFieldMapping.CustomField.CustomFieldTypeId);
+                    
                     var viewModel = new MappingViewModel
                     {
-
                         IsActive = true,
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
                         DigiAdminId = 1,
                         EntityMappedFromId = productId,
-                        EntityMappedToId = categoryCustomField.Id,
-                        Name = categoryCustomField.CustomField.Name,
-                        TypeName = categoryCustomField.CustomField.CustomFieldType.Name,
-                        TypeId = categoryCustomField.CustomField.CustomFieldTypeId,
+                        EntityMappedToId = customField.Id,
+                        Name = customField.Name,
+                        TypeName = customFieldType.Name,
+                        TypeId = customFieldType.Id,
                         IsMapped = false,
                         CustomFieldValue = null,
                     };
 
-                    var hasMaps = customFieldMappings.Where(x => x.CustomFieldId == categoryCustomField.CustomFieldId);
-                    if (hasMaps!.Any())
+                    var productCustomFieldMapping = productCustomFieldsMappings.FirstOrDefault(x => x.CustomFieldId == customField.Id);
+                    if (productCustomFieldMapping == null)
+                    {
+                        viewModel.IsMapped = false;
+                        productCustomFieldService.Create(new ProductCustomField()
+                        {
+                            CreatedOn = DateTime.Now,
+                            CustomFieldId = customField.Id,
+                            DigiAdminId = customField.DigiAdminId,
+                            IsActive = true,
+                            IsDeleted = false,
+                            ProductId = productId
+                        });   
+
+                    }
+                    else
                     {
                         viewModel.IsMapped = true;
-                        viewModel.CustomFieldValue = hasMaps.FirstOrDefault().Value;
-
+                        viewModel.CustomFieldValue = productCustomFieldMapping.Value;
                     }
 
                     results.Add(viewModel);

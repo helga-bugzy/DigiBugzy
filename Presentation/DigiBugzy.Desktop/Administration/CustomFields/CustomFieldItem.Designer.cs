@@ -38,7 +38,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(3, 14);
+            this.lblName.Location = new System.Drawing.Point(3, 7);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(56, 13);
             this.lblName.TabIndex = 0;
@@ -46,7 +46,7 @@
             // 
             // txtValue
             // 
-            this.txtValue.Location = new System.Drawing.Point(105, 11);
+            this.txtValue.Location = new System.Drawing.Point(153, 3);
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(346, 21);
             this.txtValue.TabIndex = 1;
@@ -54,7 +54,7 @@
             // cmbValue
             // 
             this.cmbValue.FormattingEnabled = true;
-            this.cmbValue.Location = new System.Drawing.Point(105, 11);
+            this.cmbValue.Location = new System.Drawing.Point(153, 3);
             this.cmbValue.Name = "cmbValue";
             this.cmbValue.Size = new System.Drawing.Size(346, 21);
             this.cmbValue.TabIndex = 2;
@@ -62,7 +62,7 @@
             // rbTrue
             // 
             this.rbTrue.AutoSize = true;
-            this.rbTrue.Location = new System.Drawing.Point(105, 15);
+            this.rbTrue.Location = new System.Drawing.Point(153, 5);
             this.rbTrue.Name = "rbTrue";
             this.rbTrue.Size = new System.Drawing.Size(68, 17);
             this.rbTrue.TabIndex = 3;
@@ -73,7 +73,7 @@
             // rbFalse
             // 
             this.rbFalse.AutoSize = true;
-            this.rbFalse.Location = new System.Drawing.Point(208, 14);
+            this.rbFalse.Location = new System.Drawing.Point(256, 5);
             this.rbFalse.Name = "rbFalse";
             this.rbFalse.Size = new System.Drawing.Size(75, 17);
             this.rbFalse.TabIndex = 4;
@@ -91,7 +91,7 @@
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.lblName);
             this.Name = "CustomFieldItem";
-            this.Size = new System.Drawing.Size(454, 41);
+            this.Size = new System.Drawing.Size(502, 35);
             this.ResumeLayout(false);
             this.PerformLayout();
 
