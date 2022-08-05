@@ -221,7 +221,7 @@ namespace DigiBugzy.Desktop.Products
 
             foreach (var field in LoadingFields)
             {
-                var citem = new CustomFieldItem()
+                var citem = new CustomFieldItem(mappingType:SampleDataTypeEnum.Products)
                 {
                     CustomField = field,
                     Tag = Name = field.Id.ToString(),
