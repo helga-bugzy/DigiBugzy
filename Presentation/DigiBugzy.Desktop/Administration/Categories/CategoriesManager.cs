@@ -618,7 +618,11 @@ namespace DigiBugzy.Desktop.Administration.Categories
         private void treeCFMappings_AfterCheck(object sender, TreeViewEventArgs e)
         {
             using var service = new CategoryService(Globals.GetConnectionString());
-            service.HandleCustomFieldMapping(SelectedCategory.Id, int.Parse(e.Node!.Tag.ToString()!), e.Node.Checked, chkCustomFieldsToChild.Checked);
+            service.HandleCustomFieldMapping(
+                categoryId: SelectedCategory.Id, 
+                customFieldId:int.Parse(e.Node!.Tag.ToString()!), 
+                isMapped: e.Node.Checked, 
+                includeChildCategories: chkCustomFieldsToChild.Checked);
         }
 
 

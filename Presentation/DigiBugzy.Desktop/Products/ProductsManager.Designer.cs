@@ -297,12 +297,15 @@
             this.gridListing.TabIndex = 0;
             this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProducts});
+            this.gridListing.ViewRegistered += new DevExpress.XtraGrid.ViewOperationEventHandler(this.gridListing_ViewRegistered);
             // 
             // gvProducts
             // 
             this.gvProducts.GridControl = this.gridListing;
             this.gvProducts.Name = "gvProducts";
             this.gvProducts.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvProducts_RowClick);
+            this.gvProducts.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gvProducts_RowCellClick);
+            this.gvProducts.Click += new System.EventHandler(this.gvProducts_Click);
             // 
             // tabPane1
             // 

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using DevExpress.XtraGrid.Views.Grid;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Helpers;
 using DigiBugzy.Desktop.Administration.CustomFields;
+using DigiBugzy.Services.HelperClasses;
 using DigiBugzy.Services.SampleData;
 
 namespace DigiBugzy.Desktop.Products
@@ -41,12 +43,22 @@ namespace DigiBugzy.Desktop.Products
                 includeDeleted: chkFilterDeleted.Checked);
 
             using var service = new ProductService(Globals.GetConnectionString());
-            FilteredProducts = service.Get(filter,loadProductComplete:true);
+            var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), true);
 
-            gridListing.DataSource = FilteredProducts;
-            gvProducts.Columns["Id"].Visible = false;
-            gvProducts.Columns["DigiAdminId"].Visible = false;
-            gvProducts.Columns["DigiAdmin"].Visible = false;
+            gridListing.DataSource = viewModels;
+            //gvProducts.Columns["Id"].Visible = false;
+            //gvProducts.Columns["ParentId"].Visible = false;
+            //gvProducts.Columns["ParentName"].Visible = false;
+
+            foreach (GridView view in gridListing.ViewCollection)
+            {
+                view.Columns["Id"].Visible = false;
+                view.Columns["ParentId"].Visible = false;
+                view.Columns["ParentName"].Visible = false;
+
+            }
+
+//            foreach(var row in gvProducts.ro)
 
             LoadSelectedProduct(clearSelectedProduct ? 0 : SelectedProduct.Id);
         }
@@ -160,7 +172,7 @@ namespace DigiBugzy.Desktop.Products
 
                     parentNode.Nodes.Add(node);
 
-                    LoadCategoryNodes(node, child.EntityMappedToId);
+                    //LoadCategoryNodes(node, child.EntityMappedToId);
                 }
             }
             
@@ -366,11 +378,30 @@ namespace DigiBugzy.Desktop.Products
         #endregion
 
         #region Grid View
-        private void gvProducts_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+
+      
+        private void gridListing_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
+        {
+            var view = (GridView)e.View;
+            view.Columns["Id"].Visible = false;
+            view.Columns["ParentId"].Visible = false;
+            view.Columns["ParentName"].Visible = false;
+        }
+
+        private void gvProducts_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void gvProducts_RowClick(object sender, RowClickEventArgs e)
         {
             try
             {
-                LoadSelectedProduct(int.Parse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!));
+                if (gvProducts?.GetRowCellValue(e.RowHandle, "Id") == null) return;
+                var ok = int.TryParse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!, out _);
+                if(ok)
+                    LoadSelectedProduct(int.Parse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!));
             }
             catch (Exception exception)
             {
@@ -378,7 +409,14 @@ namespace DigiBugzy.Desktop.Products
             }
         }
 
-
+        private void gvProducts_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            var row = gvProducts.GetRowCellValue(e.RowHandle, "Id");
+            if (row != null)
+            {
+                LoadSelectedProduct(int.Parse(row.ToString()!));
+            }
+        }
         #endregion
 
         #region Treeview
@@ -396,12 +434,14 @@ namespace DigiBugzy.Desktop.Products
         }
 
 
-        #endregion
+
 
         #endregion
 
         #endregion
 
-        
+        #endregion
+
+       
     }
 }

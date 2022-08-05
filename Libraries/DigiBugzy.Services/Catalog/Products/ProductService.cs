@@ -35,6 +35,8 @@ namespace DigiBugzy.Services.Catalog.Products
                 return query.ToList();
             }
 
+            
+
             if (filter.DigiAdminId.HasValue)
             {
                 query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
@@ -59,13 +61,22 @@ namespace DigiBugzy.Services.Catalog.Products
 
             if (!loadProductComplete) return query.ToList();
 
-
             //ProductComplete
             var collection = query.ToList();
 
+            if (filter.CategoryId.HasValue && filter.CategoryId.Value > 0)
+            {
+                var categoryMappings = dbContext.ProductCategories.Where(pc => pc.CategoryId == filter.CategoryId);
+
+                collection = (
+                    from p in collection 
+                    join cm in categoryMappings
+                        on p.Id equals cm.ProductId
+                              select p).ToList();
+
+            }
+
             return collection.Select(GetProductComplete).ToList();
-
-
 
         }
 
@@ -107,7 +118,8 @@ namespace DigiBugzy.Services.Catalog.Products
 
         public void Delete(int id, bool hardDelete)
         {
-            
+            var entity = GetById(id);
+            Delete(entity, hardDelete);
         }
 
         /// <inheritdoc />

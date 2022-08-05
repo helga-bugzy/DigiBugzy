@@ -11,7 +11,6 @@
     <Folder Include="Domain\Administration\Media\" />
     <Folder Include="Domain\Finance\" />
     <Folder Include="Events\" />
-    <Folder Include="ViewModels\Catalog\" />
   </ItemGroup>
 
   <ItemGroup>

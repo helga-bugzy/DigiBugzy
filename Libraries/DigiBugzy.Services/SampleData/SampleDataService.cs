@@ -285,7 +285,8 @@ namespace DigiBugzy.Services.SampleData
                 productCustomfieldService.Delete(productCustomfieldService.GetByProductId(product.Id), true);
 
                 //Product
-                productService.Delete(product.Id, true);
+                
+                productService.Delete(product, true);
             }
         }
 

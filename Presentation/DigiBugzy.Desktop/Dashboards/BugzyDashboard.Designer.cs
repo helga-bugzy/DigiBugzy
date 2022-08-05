@@ -105,6 +105,8 @@
             this.btnProducts.Id = 3;
             this.btnProducts.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProducts.ImageOptions.Image")));
             this.btnProducts.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProducts.ImageOptions.LargeImage")));
+            this.btnProducts.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.Z));
             this.btnProducts.Name = "btnProducts";
             this.btnProducts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProducts_ItemClick);
             // 
@@ -114,6 +116,8 @@
             this.btnProjects.Id = 4;
             this.btnProjects.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjects.ImageOptions.Image")));
             this.btnProjects.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProjects.ImageOptions.LargeImage")));
+            this.btnProjects.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.Q));
             this.btnProjects.Name = "btnProjects";
             this.btnProjects.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProjects_ItemClick);
             // 
@@ -123,7 +127,11 @@
             this.btnProductsCategories.Id = 6;
             this.btnProductsCategories.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProductsCategories.ImageOptions.Image")));
             this.btnProductsCategories.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProductsCategories.ImageOptions.LargeImage")));
+            this.btnProductsCategories.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.Z), ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.C));
             this.btnProductsCategories.Name = "btnProductsCategories";
+            this.btnProductsCategories.ShortcutKeyDisplayString = "Ctrl+a,m";
             this.btnProductsCategories.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProductsCategories_ItemClick);
             // 
             // barButtonItem1
@@ -132,6 +140,9 @@
             this.barButtonItem1.Id = 7;
             this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
             this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barButtonItem1.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.Q), ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.C));
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProjectsCategories_ItemClick);
             // 
@@ -141,6 +152,9 @@
             this.btnProjectsFields.Id = 9;
             this.btnProjectsFields.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectsFields.ImageOptions.Image")));
             this.btnProjectsFields.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProjectsFields.ImageOptions.LargeImage")));
+            this.btnProjectsFields.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.Q), ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.F));
             this.btnProjectsFields.Name = "btnProjectsFields";
             this.btnProjectsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProjectsFields_ItemClick_1);
             // 
@@ -150,6 +164,9 @@
             this.btnProductsFields.Id = 12;
             this.btnProductsFields.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProductsFields.ImageOptions.Image")));
             this.btnProductsFields.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProductsFields.ImageOptions.LargeImage")));
+            this.btnProductsFields.ItemShortcut = new DevExpress.XtraBars.BarShortcut(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.Z), ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+                | System.Windows.Forms.Keys.F));
             this.btnProductsFields.Name = "btnProductsFields";
             this.btnProductsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProductsFields_ItemClick);
             // 
