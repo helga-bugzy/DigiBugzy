@@ -181,10 +181,7 @@ namespace DigiBugzy.Services.Administration.Categories
         /// <inheritdoc />
         public void Update(Category entity)
         {
-            var filter = new StandardFilter
-            {
-                Name = entity.Name,
-            };
+          
 
             //TODO check for duplicate
 
