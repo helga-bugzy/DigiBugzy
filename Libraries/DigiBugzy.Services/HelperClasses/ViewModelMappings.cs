@@ -96,6 +96,7 @@ namespace DigiBugzy.Services.HelperClasses
 
         public static List<CategoryComboViewModel> CreateCategoryComboItems(List<Category> categories)
         {
+            _categories = categories;
             var parents = (from c in categories where c.ParentId == null select c).OrderBy(c => c.Name).ToList();
 
             var results = new List<CategoryComboViewModel>();
@@ -115,7 +116,8 @@ namespace DigiBugzy.Services.HelperClasses
         private static List<CategoryComboViewModel> CreateChildCategoryComboItems(int parentId, int level)
         {
             var results = new List<CategoryComboViewModel>();
-                          var children = (from c in _categories where c.ParentId == parentId select c).OrderBy(c => c.Name).ToList();
+            var children = (from c in _categories where c.ParentId == parentId select c).OrderBy(c => c.Name);
+            
             foreach (var child in children)
             {
                 var model = new CategoryComboViewModel

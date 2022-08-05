@@ -177,19 +177,19 @@ namespace DigiBugzy.Services.Catalog.Products
 
 
         /// <inheritdoc />
-        public void HandleChildCategoryMapping(int categoryId, int productId, bool isMapped, int digiAdminId)
+        public void HandleChildCategoryMapping(int parentId, int productId, bool isMapped, int digiAdminId)
         {
             using var categoryService = new CategoryService(_connectionString);
             var categories = categoryService.Get(new StandardFilter
             {
                 ClassificationId = (int)ClassificationsEnum.Product,
-                ParentId = categoryId
+                ParentId = parentId
             });
 
             foreach (var category in categories)
             {
                 var mapping =
-                    dbContext.ProductCategories.Where(x => x.CategoryId == categoryId && x.ProductId == productId);
+                    dbContext.ProductCategories.Where(x => x.CategoryId == category.Id && x.ProductId == productId);
                 if (!mapping.Any() && isMapped)
                 {
                     Create(new ProductCategory
@@ -199,7 +199,7 @@ namespace DigiBugzy.Services.Catalog.Products
                         CreatedOn = DateTime.Now,
                         DigiAdminId = digiAdminId,
                         ProductId = productId,
-                        CategoryId = categoryId
+                        CategoryId = category.Id
                     });
                 }
                 else if (isMapped == false)
@@ -210,7 +210,7 @@ namespace DigiBugzy.Services.Catalog.Products
                     }
                 }
 
-                HandleChildCategoryMapping(categoryId, productId, isMapped, digiAdminId);
+                HandleChildCategoryMapping(category.Id, productId, isMapped, digiAdminId);
             }
 
         }

@@ -35,6 +35,10 @@ namespace DigiBugzy.Desktop.Products
             LoadFilter(true);
         }
 
+        #region Helper Methods
+
+        #region Loading
+
         private void LoadFilterCategories()
         {
             cmbFilterCategories.DataSource = null;
@@ -46,7 +50,7 @@ namespace DigiBugzy.Desktop.Products
             var viewModels = ViewModelMappings.CreateCategoryComboItems(collection);
             viewModels.Insert(0, new CategoryComboViewModel { Id = 0, Name = "<Select a category>" });
 
-            cmbFilterCategories.DataSource = collection;
+            cmbFilterCategories.DataSource = viewModels;
             cmbFilterCategories.DisplayMember = "Name";
             cmbFilterCategories.ValueMember = "Id";
 
@@ -54,12 +58,7 @@ namespace DigiBugzy.Desktop.Products
 
             Application.DoEvents();
         }
-
         
-
-        #region Helper Methods
-
-        #region Loading
 
         private void LoadFilter(bool clearSelectedProduct)
         {
