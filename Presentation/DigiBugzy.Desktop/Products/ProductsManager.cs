@@ -29,7 +29,22 @@ namespace DigiBugzy.Desktop.Products
         {
             InitializeComponent();
 
+            LoadCategorySelector();
+
             LoadFilter(true);
+        }
+
+        private void LoadCategorySelector()
+        {
+            using var categoryService = new CategoryService(Globals.GetConnectionString());
+            var collection = categoryService.Get(new StandardFilter()).OrderBy(c => c.Name).ToList();
+            cmbFilterCategories.DataSource = null;
+            cmbFilterCategories.Items.Clear();
+            cmbFilterCategories.DataSource = collection;
+            cmbFilterCategories.DisplayMember = "Name";
+            cmbFilterCategories.ValueMember = "Id";
+
+            Application.DoEvents();
         }
 
         #region Helper Methods
@@ -38,7 +53,7 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadFilter(bool clearSelectedProduct)
         {
-            
+
             var filter = new StandardFilter(includeInActive: chkFilterInactive.Checked,
                 includeDeleted: chkFilterDeleted.Checked);
 
