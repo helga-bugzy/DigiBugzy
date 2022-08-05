@@ -36,13 +36,18 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCategorySelector()
         {
-            using var categoryService = new CategoryService(Globals.GetConnectionString());
-            var collection = categoryService.Get(new StandardFilter()).OrderBy(c => c.Name).ToList();
             cmbFilterCategories.DataSource = null;
             cmbFilterCategories.Items.Clear();
+
+            using var categoryService = new CategoryService(Globals.GetConnectionString());
+            var collection = categoryService.Get(new StandardFilter{ClassificationId = (int)ClassificationsEnum.Product}).OrderBy(c => c.Name).ToList();
+            collection.Insert(0, new Category { Id = 0, Name = "<Select a category>" });
+            
             cmbFilterCategories.DataSource = collection;
             cmbFilterCategories.DisplayMember = "Name";
             cmbFilterCategories.ValueMember = "Id";
+
+            cmbFilterCategories.SelectedIndex = -1;
 
             Application.DoEvents();
         }
@@ -56,6 +61,12 @@ namespace DigiBugzy.Desktop.Products
 
             var filter = new StandardFilter(includeInActive: chkFilterInactive.Checked,
                 includeDeleted: chkFilterDeleted.Checked);
+
+            if(cmbFilterCategories.SelectedIndex > 0)
+            {
+                var cat = (Category)cmbFilterCategories.SelectedItem;
+                filter.CategoryId = cat.Id;
+            }
 
             using var service = new ProductService(Globals.GetConnectionString());
             var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), true);
