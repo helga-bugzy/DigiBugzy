@@ -171,8 +171,6 @@ namespace DigiBugzy.Services.Catalog.Products
             if (applyToChildCategories) HandleChildCategoryMapping(categoryId, productId, isMapped, digiAdminId);
 
         }
-
-        
         
 
 

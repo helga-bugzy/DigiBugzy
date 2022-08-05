@@ -461,6 +461,9 @@ namespace DigiBugzy.Desktop.Products
                 productId: SelectedProduct.Id, 
                 isMapped: e.Node.Checked,
                 digiAdminId: Globals.DigiAdministration.Id);
+
+            LoadCustomFieldsSelector();
+            Application.DoEvents();
         }
 
 
