@@ -16,6 +16,8 @@ namespace DigiBugzy.Data.Common.xBaseObjects.FilterObjects
 
         public string Name { get; set; }
 
+        public string ParentName { get; set; }
+
         public string Description { get; set; }
 
         public int? ParentId { get; set; }

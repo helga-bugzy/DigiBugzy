@@ -13,6 +13,7 @@ namespace DigiBugzy.Core.Constants
             public const string ContactBase = "ContactBase";
             public const string Finance = "Finance";
             public const string Security = "Security";
+            public const string Project = "Project";
         }
 
         

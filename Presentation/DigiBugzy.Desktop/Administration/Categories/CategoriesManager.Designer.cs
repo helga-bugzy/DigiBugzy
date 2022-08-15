@@ -41,6 +41,9 @@
             this.lblClassification = new DevExpress.XtraEditors.LabelControl();
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
             this.splitContent = new DevExpress.XtraEditors.SplitContainerControl();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.btnNameFilter = new DevExpress.XtraEditors.SimpleButton();
+            this.txtFilterName = new System.Windows.Forms.TextBox();
             this.twCategories = new System.Windows.Forms.TreeView();
             this.splitEditors = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
@@ -106,6 +109,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContent.Panel2)).BeginInit();
             this.splitContent.Panel2.SuspendLayout();
             this.splitContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel1)).BeginInit();
             this.splitEditors.Panel1.SuspendLayout();
@@ -176,7 +181,7 @@
             this.splitMain.Panel2.Controls.Add(this.pnlContent);
             this.splitMain.Panel2.Text = "Panel2";
             this.splitMain.Size = new System.Drawing.Size(1507, 852);
-            this.splitMain.SplitterPosition = 48;
+            this.splitMain.SplitterPosition = 63;
             this.splitMain.TabIndex = 0;
             // 
             // pnlFilter
@@ -191,7 +196,7 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1507, 48);
+            this.pnlFilter.Size = new System.Drawing.Size(1507, 63);
             this.pnlFilter.TabIndex = 0;
             // 
             // btnSampleDataDelete
@@ -217,7 +222,7 @@
             // btnFilter
             // 
             this.btnFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.ImageOptions.Image")));
-            this.btnFilter.Location = new System.Drawing.Point(751, 5);
+            this.btnFilter.Location = new System.Drawing.Point(738, 8);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(97, 38);
             this.btnFilter.TabIndex = 4;
@@ -227,7 +232,7 @@
             // chkIncludeDeleted
             // 
             this.chkIncludeDeleted.AutoSize = true;
-            this.chkIncludeDeleted.Location = new System.Drawing.Point(627, 17);
+            this.chkIncludeDeleted.Location = new System.Drawing.Point(631, 22);
             this.chkIncludeDeleted.Name = "chkIncludeDeleted";
             this.chkIncludeDeleted.Size = new System.Drawing.Size(101, 17);
             this.chkIncludeDeleted.TabIndex = 3;
@@ -238,7 +243,7 @@
             // chkFilterInactive
             // 
             this.chkFilterInactive.AutoSize = true;
-            this.chkFilterInactive.Location = new System.Drawing.Point(517, 18);
+            this.chkFilterInactive.Location = new System.Drawing.Point(504, 22);
             this.chkFilterInactive.Name = "chkFilterInactive";
             this.chkFilterInactive.Size = new System.Drawing.Size(103, 17);
             this.chkFilterInactive.TabIndex = 2;
@@ -249,19 +254,19 @@
             // cmbClassifications
             // 
             this.cmbClassifications.FormattingEnabled = true;
-            this.cmbClassifications.Location = new System.Drawing.Point(82, 13);
+            this.cmbClassifications.Location = new System.Drawing.Point(82, 18);
             this.cmbClassifications.Name = "cmbClassifications";
-            this.cmbClassifications.Size = new System.Drawing.Size(396, 21);
+            this.cmbClassifications.Size = new System.Drawing.Size(416, 21);
             this.cmbClassifications.TabIndex = 1;
             this.cmbClassifications.SelectedIndexChanged += new System.EventHandler(this.cmbClassifications_SelectedIndexChanged);
             // 
             // lblClassification
             // 
-            this.lblClassification.Location = new System.Drawing.Point(7, 14);
+            this.lblClassification.Location = new System.Drawing.Point(7, 22);
             this.lblClassification.Name = "lblClassification";
-            this.lblClassification.Size = new System.Drawing.Size(62, 13);
+            this.lblClassification.Size = new System.Drawing.Size(66, 13);
             this.lblClassification.TabIndex = 0;
-            this.lblClassification.Text = "Classification";
+            this.lblClassification.Text = "Classification:";
             // 
             // pnlContent
             // 
@@ -270,7 +275,7 @@
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1507, 794);
+            this.pnlContent.Size = new System.Drawing.Size(1507, 779);
             this.pnlContent.TabIndex = 0;
             // 
             // splitContent
@@ -281,6 +286,7 @@
             // 
             // splitContent.Panel1
             // 
+            this.splitContent.Panel1.Controls.Add(this.panelControl7);
             this.splitContent.Panel1.Controls.Add(this.twCategories);
             this.splitContent.Panel1.Text = "Panel1";
             // 
@@ -288,9 +294,35 @@
             // 
             this.splitContent.Panel2.Controls.Add(this.splitEditors);
             this.splitContent.Panel2.Text = "Panel2";
-            this.splitContent.Size = new System.Drawing.Size(1507, 794);
+            this.splitContent.Size = new System.Drawing.Size(1507, 779);
             this.splitContent.SplitterPosition = 313;
             this.splitContent.TabIndex = 0;
+            // 
+            // panelControl7
+            // 
+            this.panelControl7.Controls.Add(this.btnNameFilter);
+            this.panelControl7.Controls.Add(this.txtFilterName);
+            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl7.Location = new System.Drawing.Point(0, 0);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(313, 53);
+            this.panelControl7.TabIndex = 1;
+            // 
+            // btnNameFilter
+            // 
+            this.btnNameFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnNameFilter.ImageOptions.Image")));
+            this.btnNameFilter.Location = new System.Drawing.Point(264, 11);
+            this.btnNameFilter.Name = "btnNameFilter";
+            this.btnNameFilter.Size = new System.Drawing.Size(28, 23);
+            this.btnNameFilter.TabIndex = 11;
+            this.btnNameFilter.Click += new System.EventHandler(this.btnNameFilter_Click);
+            // 
+            // txtFilterName
+            // 
+            this.txtFilterName.Location = new System.Drawing.Point(7, 11);
+            this.txtFilterName.Name = "txtFilterName";
+            this.txtFilterName.Size = new System.Drawing.Size(251, 21);
+            this.txtFilterName.TabIndex = 10;
             // 
             // twCategories
             // 
@@ -298,7 +330,7 @@
             this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.twCategories.Location = new System.Drawing.Point(0, 0);
             this.twCategories.Name = "twCategories";
-            this.twCategories.Size = new System.Drawing.Size(313, 794);
+            this.twCategories.Size = new System.Drawing.Size(313, 779);
             this.twCategories.TabIndex = 0;
             this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
             this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCategories_NodeMouseClick);
@@ -324,7 +356,7 @@
             this.splitEditors.Panel2.Controls.Add(this.pnlMappings);
             this.splitEditors.Panel2.Controls.Add(this.panelControl6);
             this.splitEditors.Panel2.Text = "Panel2";
-            this.splitEditors.Size = new System.Drawing.Size(1184, 794);
+            this.splitEditors.Size = new System.Drawing.Size(1184, 779);
             this.splitEditors.SplitterPosition = 624;
             this.splitEditors.TabIndex = 0;
             // 
@@ -335,7 +367,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(0, 41);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(624, 753);
+            this.panelControl2.Size = new System.Drawing.Size(624, 738);
             this.panelControl2.TabIndex = 1;
             // 
             // pnlEditor
@@ -345,7 +377,7 @@
             this.pnlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEditor.Location = new System.Drawing.Point(0, 0);
             this.pnlEditor.Name = "pnlEditor";
-            this.pnlEditor.Size = new System.Drawing.Size(624, 753);
+            this.pnlEditor.Size = new System.Drawing.Size(624, 738);
             this.pnlEditor.TabIndex = 3;
             // 
             // panelControl5
@@ -355,7 +387,7 @@
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(624, 753);
+            this.panelControl5.Size = new System.Drawing.Size(624, 738);
             this.panelControl5.TabIndex = 0;
             // 
             // pnlControls
@@ -365,7 +397,7 @@
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControls.Location = new System.Drawing.Point(2, 2);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(620, 749);
+            this.pnlControls.Size = new System.Drawing.Size(620, 734);
             this.pnlControls.TabIndex = 1;
             // 
             // pnlEditorContent
@@ -375,7 +407,7 @@
             this.pnlEditorContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEditorContent.Location = new System.Drawing.Point(0, 0);
             this.pnlEditorContent.Name = "pnlEditorContent";
-            this.pnlEditorContent.Size = new System.Drawing.Size(620, 749);
+            this.pnlEditorContent.Size = new System.Drawing.Size(620, 734);
             this.pnlEditorContent.TabIndex = 1;
             // 
             // tablePanel1
@@ -402,7 +434,7 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(620, 749);
+            this.tablePanel1.Size = new System.Drawing.Size(620, 734);
             this.tablePanel1.TabIndex = 0;
             // 
             // panelControl3
@@ -621,7 +653,7 @@
             this.pnlMappings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMappings.Location = new System.Drawing.Point(0, 41);
             this.pnlMappings.Name = "pnlMappings";
-            this.pnlMappings.Size = new System.Drawing.Size(550, 753);
+            this.pnlMappings.Size = new System.Drawing.Size(550, 738);
             this.pnlMappings.TabIndex = 1;
             // 
             // pnlMappingsMapper
@@ -632,7 +664,7 @@
             this.pnlMappingsMapper.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMappingsMapper.Location = new System.Drawing.Point(2, 68);
             this.pnlMappingsMapper.Name = "pnlMappingsMapper";
-            this.pnlMappingsMapper.Size = new System.Drawing.Size(546, 683);
+            this.pnlMappingsMapper.Size = new System.Drawing.Size(546, 668);
             this.pnlMappingsMapper.TabIndex = 2;
             // 
             // pnlCFEditor
@@ -641,7 +673,7 @@
             this.pnlCFEditor.Controls.Add(this.pnlQuickAddCustomField);
             this.pnlCFEditor.Controls.Add(this.tablePanel4);
             this.pnlCFEditor.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCFEditor.Location = new System.Drawing.Point(0, 463);
+            this.pnlCFEditor.Location = new System.Drawing.Point(0, 448);
             this.pnlCFEditor.Name = "pnlCFEditor";
             this.pnlCFEditor.Size = new System.Drawing.Size(546, 220);
             this.pnlCFEditor.TabIndex = 2;
@@ -767,7 +799,7 @@
             this.treeCFMappings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCFMappings.Location = new System.Drawing.Point(0, 0);
             this.treeCFMappings.Name = "treeCFMappings";
-            this.treeCFMappings.Size = new System.Drawing.Size(546, 683);
+            this.treeCFMappings.Size = new System.Drawing.Size(546, 668);
             this.treeCFMappings.TabIndex = 1;
             this.treeCFMappings.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCFMappings_AfterCheck);
             // 
@@ -871,6 +903,9 @@
             this.splitContent.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContent)).EndInit();
             this.splitContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
+            this.panelControl7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel1)).EndInit();
             this.splitEditors.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel2)).EndInit();
@@ -994,5 +1029,8 @@
         private DevExpress.XtraEditors.CheckEdit chkCustomFieldsToChild;
         private DevExpress.XtraEditors.SimpleButton btnSampleData;
         private DevExpress.XtraEditors.SimpleButton btnSampleDataDelete;
+        private TextBox txtFilterName;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
+        private DevExpress.XtraEditors.SimpleButton btnNameFilter;
     }
 }

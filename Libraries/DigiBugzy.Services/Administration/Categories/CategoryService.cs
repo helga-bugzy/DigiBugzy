@@ -62,9 +62,10 @@ namespace DigiBugzy.Services.Administration.Categories
 
             if (!string.IsNullOrEmpty(filter.Name))
             {
-                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name)) : query.Where(x => x.Name.Equals(filter.Name));
+                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name) && x.ParentId == null) : query.Where(x => x.Name.Equals(filter.Name) && x.ParentId == null);
             }
 
+     
             if (!filter.IncludeDeleted)
                 query = query.Where(x => x.IsDeleted == false);
 

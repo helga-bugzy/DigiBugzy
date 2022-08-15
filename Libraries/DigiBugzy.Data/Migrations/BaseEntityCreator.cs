@@ -125,6 +125,21 @@ namespace DigiBugzy.Data.Migrations
                 .AddColumn(nameof(BaseAdministrationEntity.Description)).AsString();
         }
 
+        public void CreateBaseProjectSublementEntity()
+        {
+            CreateBaseAdministrationEntity();
+            Migrator.Alter.Table(TableName)
+                .InSchema(SchemaName)
+                .AddColumn(nameof(BaseProjectSublementEntity.ProjectId)).AsInt32().NotNullable()
+                .AddColumn(nameof(BaseProjectSublementEntity.ProjectSectionId)).AsInt32().Nullable()
+                .AddColumn(nameof(BaseProjectSublementEntity.ProjectSectionPartId)).AsInt32().Nullable();
+
+            AddForeignKey(TableName, nameof(Project), nameof(BaseProjectSublementEntity.ProjectId), SchemaName, SchemaName);
+            AddForeignKey(TableName, nameof(ProjectSection), nameof(BaseProjectSublementEntity.ProjectSectionId), SchemaName, SchemaName);
+            AddForeignKey(TableName, nameof(ProjectSectionPart), nameof(BaseProjectSublementEntity.ProjectSectionPartId), SchemaName, SchemaName);
+
+        }
+
 
 
         #region Helper Methods

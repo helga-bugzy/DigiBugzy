@@ -132,7 +132,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 ClassificationId = _classificationId, 
                 DigiAdminId = Globals.DigiAdministration.Id,
                 IncludeDeleted = chkIncludeDeleted.Checked, 
-                IncludeInActive = chkFilterInactive.Checked
+                IncludeInActive = chkFilterInactive.Checked,
+
             });
             
             if (Categories.Count <= 0) return;
@@ -169,13 +170,14 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 };
                 LoadCategoryNodes(node);
 
-                node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
+                node.Text = $"{parent.Name} ({node.Nodes.Count} subs)";
 
                 if (node.Nodes.Count > 0)
                 {
                     node.ImageIndex = 0;
                 }
 
+                node.ExpandAll();
                 twCategories.Nodes.Add(node);
             }
             
@@ -210,7 +212,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                     };
 
                     parentNode.Nodes.Add(node);
-
+                    node.ExpandAll();
                     LoadCategoryNodes(node);
                 }
             }
@@ -234,7 +236,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             {
                 txtDescription.Text = txtName.Text = string.Empty;
                 chkActive.Checked = true;
-                lblHeading.Text = @"New Category";
+                lblHeading.Text = "New Category";
 
             }
             else
@@ -242,7 +244,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 txtName.Text = SelectedCategory.Name;
                 txtDescription.Text = SelectedCategory.Description;
                 chkActive.Checked = true;
-                lblHeading.Text = $@"Edit {SelectedCategory.Name} (ID: {SelectedCategory.Id})";
+                lblHeading.Text = $"Edit {SelectedCategory.Name} (ID: {SelectedCategory.Id})";
 
             }
 
@@ -297,11 +299,11 @@ namespace DigiBugzy.Desktop.Administration.Categories
         {
 
             treeCFMappings.Nodes.Clear();
-            lblCustomFieldsHeading.Text = @"Custom Fields";
+            lblCustomFieldsHeading.Text = "Custom Fields";
             if (_classificationId <= 0 || SelectedCategory.Id <= 0) return;
 
 
-            lblCustomFieldsHeading.Text = $@"{SelectedCategory.Name} Custom Fields";
+            lblCustomFieldsHeading.Text = $"{SelectedCategory.Name} Custom Fields";
             using var service = new CategoryService(Globals.GetConnectionString());
             var collection = service.GetCustomFieldMappings(SelectedCategory.Id, _classificationId);
 
@@ -309,7 +311,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
             {
                 var node = new TreeNode
                 {
-                    Text = $@"  {item.Name} ({item.TypeName})",
+                    Text = $"  {item.Name} ({item.TypeName})",
                     Checked = item.IsMapped,
                     Tag = item.EntityMappedToId
                 };
@@ -401,10 +403,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
             ApplyFilter();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
 
         #endregion
 
@@ -429,14 +427,14 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 //Validations
                 if (chkParent.Checked && cmbParents.SelectedIndex < 0)
                 {
-                    MessageBox.Show(@"Please select a valid parent or indicate that no parent is to be used.",
-                        @"Validation Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Please select a valid parent or indicate that no parent is to be used.",
+                        "Validation Error", MessageBoxButtons.OK);
                     return;
                 }
 
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
                 {
-                    MessageBox.Show(@"Please enter a name for the category", @"Validation Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Please enter a name for the category", "Validation Error", MessageBoxButtons.OK);
                     return;
                 }
 
@@ -469,14 +467,10 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 LoadCategories();
                 SelectedCategory = new Category();
                 LoadCategoryEditor();
-
-                //Message
-                //MessageBox.Show(@"Database has been updated and screen reloaded.", @"Save success",
-                //    MessageBoxButtons.OK);
             }
             catch (Exception exception)
             {
-                MessageBox.Show(@$"Error saving category information: {exception.Message}");
+                MessageBox.Show($"Error saving category information: {exception.Message}");
             }
             finally
             {
@@ -558,7 +552,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
             twCategories.SelectedNode = twCategories.GetNodeAt(targetPoint);
         }
 
-
         private void twCategories_DragOver(object sender, DragEventArgs e)
         {
             // Retrieve the client coordinates of the drop location.  
@@ -605,11 +598,6 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
 
         }
-
-
-
-
-
 
         #endregion
 
@@ -707,10 +695,27 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
 
 
-        #endregion
 
         #endregion
 
+        #endregion
 
+        private void btnNameFilter_Click(object sender, EventArgs e)
+        {
+
+            LoadCategories();
+
+            if (string.IsNullOrEmpty(txtFilterName.Text)) return;
+            
+            foreach(TreeNode node in twCategories.Nodes)
+            {
+                if (node == null) continue;
+
+                if (!node.Text.Contains(txtFilterName.Text))
+                {
+                    node.Remove();
+                }
+            }
+        }
     }
 }

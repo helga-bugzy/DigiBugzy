@@ -8,10 +8,6 @@ global using DigiBugzy.Services.Administration.Notes;
 global using DigiBugzy.Services.Administration.CustomFields;
 global using DigiBugzy.Services.Catalog.Products;
 global using DigiBugzy.Desktop.Dashboards;
-global using DigiBugzy.Desktop.MultiFunctional;
-
-using DigiBugzy.Desktop.Administration.Categories;
-using DigiBugzy.Desktop.Administration.CustomFields;
 using DigiBugzy.Services.Projects;
 
 namespace DigiBugzy.Desktop
@@ -33,7 +29,7 @@ namespace DigiBugzy.Desktop
             #region EF Core
 
             //Create database (https://dotnetcorecentral.com/blog/fluentmigrator/)
-            Database.EnsureDatabase(Globals.GetMasterConnectionString(), "DigiBugzyDev");
+            Database.EnsureDatabase(Globals.GetMasterConnectionString(), Globals.GetDatabaseName);
 
             //Entity framework (for migrations)
             ServiceProvider = CreateServices();

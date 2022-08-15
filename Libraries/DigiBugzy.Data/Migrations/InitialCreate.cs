@@ -1,4 +1,6 @@
 ﻿global using DigiBugzy.Core.Domain.BusinessEntities;
+using DigiBugzy.Core.Domain.Administration.Documents;
+using DigiBugzy.Core.Domain.Finance.Assets;
 using DigiBugzy.Core.Domain.Settings;
 using DigiBugzy.Core.Helpers;
 
@@ -22,9 +24,12 @@ namespace DigiBugzy.Data.Migrations
             CreateAdministrationTables(); 
             CreateSettingsTables();
 
+            
             CreateContactBaseTables();
+
+            CreateFinanceTables();
             CreateCatalogTables();
-            CreateProjectsTables();            
+            CreateProjectsTables();
 
         }
 
@@ -117,9 +122,39 @@ namespace DigiBugzy.Data.Migrations
             creatory.CreateBaseAdministrationEntity();
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
 
+            //Documents
+            _currentTableName = nameof(DocumentType);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            CreateData_DocumentTypes();
+
+            _currentTableName = nameof(Document);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
+            creatory.AddColumn(nameof(Document.DocumentTypeId), isNullable: false);
+            creatory.AddForeignKey(_currentTableName, nameof(DocumentType), nameof(Document.DocumentTypeId), _currentSchemaName, _currentSchemaName);
             
-           
-            
+
+        }
+
+        private void CreateFinanceTables()
+        {
+            _currentSchemaName = DatabaseConstants.Schemas.Finance;
+            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
+
+            //Assets
+            _currentTableName = nameof(AssetType);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            CreateData_AssetTypes();
+
+            _currentTableName = nameof(Asset);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddColumn(nameof(Asset.AssetTypeId), isNullable: false);
+            creatory.AddForeignKey(_currentTableName, nameof(AssetType), nameof(Asset.AssetTypeId), _currentSchemaName, _currentSchemaName);
+
         }
 
         public void CreateSettingsTables()
@@ -207,13 +242,146 @@ namespace DigiBugzy.Data.Migrations
 
         private void CreateProjectsTables()
         {
+            _currentSchemaName = DatabaseConstants.Schemas.Project;
+            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
 
+            _currentTableName = nameof(Project);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            
+            _currentTableName = nameof(ProjectSection);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddColumn(nameof(ProjectSection.ProjectId), isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddForeignKey(_currentTableName, nameof(Project), nameof(ProjectSection.ProjectId), _currentSchemaName, _currentSchemaName);
+
+            _currentTableName = nameof(ProjectSectionPart);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+            creatory.AddColumn(nameof(ProjectSectionPart.ProjectSectionId), isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddForeignKey(_currentTableName, nameof(ProjectSection), nameof(ProjectSectionPart.ProjectSectionId), _currentSchemaName, _currentSchemaName);
+
+            _currentTableName = nameof(ProjectPrinting);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseProjectSublementEntity();
+
+            _currentTableName = nameof(ProjectDocument);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseProjectSublementEntity();
+
+            _currentTableName = nameof(ProjectProduct);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseProjectSublementEntity();
+            creatory.AddColumn(nameof(ProjectProduct.ProductId), isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddForeignKey(_currentTableName, nameof(Product), nameof(ProjectProduct.ProjectId), _currentSchemaName, DatabaseConstants.Schemas.Catalog);
         }
 
+        
         #endregion
 
 
         #region Create Data
+
+        private void CreateData_AssetTypes()
+        {
+            Insert.IntoTable(nameof(AssetType))
+                .InSchema(DatabaseConstants.Schemas.Finance)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Books",
+                    Description = "Books"
+                });
+
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Woodworking Tools",
+                    Description = "Woodworking Tools"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Robotic Tools",
+                    Description = "Robotic Tools"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "General Tools",
+                    Description = "General Tools"
+                });
+
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Tool Accessories",
+                    Description = "Tool Accessories"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Tool Consumables",
+                    Description = "Consumables"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Cartridges",
+                    Description = "Cartidges"
+                });
+
+            Insert.IntoTable(nameof(CustomFieldType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Filamenten",
+                    Description = "Filamenten"
+                });
+        }
 
         private void CreateData_DigiAdmin()
         {
@@ -227,8 +395,6 @@ namespace DigiBugzy.Data.Migrations
                     Name = "Sample Administration",
                     Description = "Sample Administration"
                 });
-
-
         }
 
         private void CreateData_Classifications()
@@ -345,6 +511,69 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "List",
                     Description = "List"
+                });
+        }
+
+        private void CreateData_DocumentTypes()
+        {
+            Insert.IntoTable(nameof(DocumentType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Invoice",
+                    Description = "Invoice"
+                });
+
+            Insert.IntoTable(nameof(DocumentType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Quotation",
+                    Description = "Quotation"
+                });
+
+            Insert.IntoTable(nameof(DocumentType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "Specifications",
+                    Description = "Specifications"
+                });
+
+            Insert.IntoTable(nameof(DocumentType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "STL File",
+                    Description = "STL File"
+                });
+
+            Insert.IntoTable(nameof(DocumentType))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = "GCode File",
+                    Description = "GCode File"
                 });
         }
 
