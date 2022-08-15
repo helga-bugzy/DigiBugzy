@@ -192,7 +192,7 @@ namespace DigiBugzy.Data.Migrations
             creatory.CreateBaseEntity();
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
-            creatory.AddColumn(nameof(ProductCustomField.Value), isNullable:true);
+            creatory.AddColumn(nameof(ProductCustomField.Value), isNullable:true, fieldType: BaseEntityCreator.FieldTypes.AsString);
         }
 
         private void CreateContactBaseTables()

@@ -301,6 +301,7 @@
             // 
             // gvProducts
             // 
+            this.gvProducts.ChildGridLevelName = "ChildProducts";
             this.gvProducts.GridControl = this.gridListing;
             this.gvProducts.Name = "gvProducts";
             this.gvProducts.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvProducts_RowClick);

@@ -83,14 +83,16 @@ namespace DigiBugzy.Desktop.Dashboards
 
         #endregion
 
-        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ShowChildForm(new CustomFieldsManager((int)ClassificationsEnum.Product));
-        }
 
         private void btnProjectsFields_ItemClick_1(object sender, ItemClickEventArgs e)
         {
             ShowChildForm(new CustomFieldsManager((int)ClassificationsEnum.Project));
+        }
+
+        private void btnTestForm_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ShowChildForm(new XtraForm1());
+            
         }
     }
 }

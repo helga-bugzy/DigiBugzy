@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Helpers;
 using DigiBugzy.Core.ViewModels.Administration;
+using DigiBugzy.Core.ViewModels.Catalog;
 using DigiBugzy.Desktop.Administration.CustomFields;
 using DigiBugzy.Services.HelperClasses;
 using DigiBugzy.Services.SampleData;
@@ -24,15 +27,21 @@ namespace DigiBugzy.Desktop.Products
 
         private List<MappingViewModel> LoadingFields { get; set; } = new();
 
+        private bool _isLoading = false;
+
         #endregion
 
         public ProductsManager()
         {
+            _isLoading = true;
+
             InitializeComponent();
 
             LoadFilterCategories();
 
             LoadFilter(true);
+
+            _isLoading = false;
         }
 
         #region Helper Methods
@@ -62,6 +71,7 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadFilter(bool clearSelectedProduct)
         {
+           // UseWaitCursor = true;
 
             var filter = new StandardFilter(includeInActive: chkFilterInactive.Checked,
                 includeDeleted: chkFilterDeleted.Checked);
@@ -73,24 +83,30 @@ namespace DigiBugzy.Desktop.Products
             }
 
             using var service = new ProductService(Globals.GetConnectionString());
-            var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), true);
-
+            var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: false), Globals.GetConnectionString(), true);
+            
             gridListing.DataSource = viewModels;
-            //gvProducts.Columns["Id"].Visible = false;
-            //gvProducts.Columns["ParentId"].Visible = false;
-            //gvProducts.Columns["ParentName"].Visible = false;
 
-            foreach (GridView view in gridListing.ViewCollection)
-            {
-                view.Columns["Id"].Visible = false;
-                view.Columns["ParentId"].Visible = false;
-                view.Columns["ParentName"].Visible = false;
+            var gridFormatRule = new GridFormatRule();
+            var formatConditionRuleValue = new FormatConditionRuleValue();
+            gridFormatRule.Column = gvProducts.Columns["IsActive"];
+            formatConditionRuleValue.PredefinedName = "Grey Text";
+            formatConditionRuleValue.Condition = FormatCondition.Equal;
+            formatConditionRuleValue.Value1 = false;
+            gridFormatRule.ApplyToRow = true;
+            gvProducts.FormatRules.Add(gridFormatRule);
 
-            }
+            gvProducts.CollapseAllDetails();
 
-//            foreach(var row in gvProducts.ro)
+            gvProducts.BestFitColumns();
 
+
+            gvProducts.Columns["Id"].Visible = false;
+            gvProducts.Columns["ParentId"].Visible = false;
+            
             LoadSelectedProduct(clearSelectedProduct ? 0 : SelectedProduct.Id);
+
+            if (!_isLoading) UseWaitCursor = false;
         }
 
         private void LoadSelectedProduct(int productId)
@@ -213,15 +229,14 @@ namespace DigiBugzy.Desktop.Products
         {
            ClearCustomFieldControls();
 
-
-            using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
-            LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
+           using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
+           LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
 
             var top = 0;
 
             foreach (var field in LoadingFields)
             {
-                var citem = new CustomFieldItem(mappingType:SampleDataTypeEnum.Products)
+                var citem = new CustomFieldItem(mappingType:SampleDataTypeEnum.Products, customField: field)
                 {
                     CustomField = field,
                     Tag = Name = field.Id.ToString(),
@@ -438,7 +453,7 @@ namespace DigiBugzy.Desktop.Products
 
         private void gvProducts_Click(object sender, EventArgs e)
         {
-
+        
         }
 
 
@@ -446,6 +461,14 @@ namespace DigiBugzy.Desktop.Products
         {
             try
             {
+                //if (e.Clicks != 2) return;
+                if (e.RowHandle < 0) return;
+
+                var viewModel = (ProductGridViewModel)gvProducts.GetRow(e.RowHandle);
+                LoadSelectedProduct(viewModel.Id);
+
+               // UseWaitCursor = false;
+
                 if (gvProducts?.GetRowCellValue(e.RowHandle, "Id") == null) return;
                 var ok = int.TryParse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!, out _);
                 if(ok)
@@ -459,10 +482,12 @@ namespace DigiBugzy.Desktop.Products
 
         private void gvProducts_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
         {
-            var row = gvProducts.GetRowCellValue(e.RowHandle, "Id");
-            if (row != null)
+            if (e.RowHandle < 0) return;
+            var viewModel = (ProductGridViewModel)gvProducts.GetRow(e.RowHandle);
+            LoadSelectedProduct(viewModel.Id);
+            if (viewModel.Id > 0)
             {
-                LoadSelectedProduct(int.Parse(row.ToString()!));
+                LoadSelectedProduct(viewModel.Id);
             }
         }
         #endregion

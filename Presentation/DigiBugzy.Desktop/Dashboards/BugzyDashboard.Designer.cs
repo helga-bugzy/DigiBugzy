@@ -39,6 +39,7 @@
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnProjectsFields = new DevExpress.XtraBars.BarButtonItem();
             this.btnProductsFields = new DevExpress.XtraBars.BarButtonItem();
+            this.btnTestForm = new DevExpress.XtraBars.BarButtonItem();
             this.bandCatalog = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -47,9 +48,10 @@
             this.bandAdministration = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.bargroupSettings = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -67,9 +69,10 @@
             this.btnProductsCategories,
             this.barButtonItem1,
             this.btnProjectsFields,
-            this.btnProductsFields});
+            this.btnProductsFields,
+            this.btnTestForm});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 13;
+            this.ribbon.MaxItemId = 14;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.bandCatalog,
@@ -79,7 +82,7 @@
             this.ribbon.ShowItemCaptionsInPageHeader = true;
             this.ribbon.ShowItemCaptionsInQAT = true;
             this.ribbon.Size = new System.Drawing.Size(2036, 158);
-            this.ribbon.StatusBar = this.ribbonStatusBar;
+            this.ribbon.StatusBar = this.ribbonStatusBar1;
             // 
             // btnCategories
             // 
@@ -170,6 +173,15 @@
             this.btnProductsFields.Name = "btnProductsFields";
             this.btnProductsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProductsFields_ItemClick);
             // 
+            // btnTestForm
+            // 
+            this.btnTestForm.Caption = "Test";
+            this.btnTestForm.Id = 13;
+            this.btnTestForm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnTestForm.ImageOptions.Image")));
+            this.btnTestForm.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnTestForm.ImageOptions.LargeImage")));
+            this.btnTestForm.Name = "btnTestForm";
+            this.btnTestForm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTestForm_ItemClick);
+            // 
             // bandCatalog
             // 
             this.bandCatalog.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -184,6 +196,7 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.btnProducts);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnProductsCategories);
             this.ribbonPageGroup2.ItemLinks.Add(this.btnProductsFields);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnTestForm);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Products";
             // 
@@ -228,13 +241,6 @@
             this.bargroupSettings.Name = "bargroupSettings";
             this.bargroupSettings.Text = "Settings";
             // 
-            // ribbonStatusBar
-            // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 1099);
-            this.ribbonStatusBar.Name = "ribbonStatusBar";
-            this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(2036, 24);
-            // 
             // barButtonItem2
             // 
             this.barButtonItem2.Caption = "Categories";
@@ -248,18 +254,34 @@
             this.xtraTabbedMdiManager1.AllowDragDrop = DevExpress.Utils.DefaultBoolean.True;
             this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageHeaderAndOnMouseHover;
             this.xtraTabbedMdiManager1.MdiParent = this;
+            this.xtraTabbedMdiManager1.PinPageButtonShowMode = DevExpress.XtraTab.PinPageButtonShowMode.InActiveTabPageHeaderAndOnMouseHover;
+            // 
+            // ribbonStatusBar1
+            // 
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 1096);
+            this.ribbonStatusBar1.Name = "ribbonStatusBar1";
+            this.ribbonStatusBar1.Ribbon = this.ribbon;
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(2036, 27);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 1074);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(2036, 22);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
             // 
             // BugzyDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2036, 1123);
-            this.Controls.Add(this.ribbonStatusBar);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbon);
             this.IsMdiContainer = true;
             this.Name = "BugzyDashboard";
             this.Ribbon = this.ribbon;
-            this.StatusBar = this.ribbonStatusBar;
             this.Text = "DigiBugzy Management Application";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
@@ -274,7 +296,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbon;
         private DevExpress.XtraBars.Ribbon.RibbonPage bandAdministration;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.XtraBars.BarButtonItem btnCategories;
         private DevExpress.XtraBars.BarButtonItem bandCustomFields;
         private DevExpress.XtraBars.BarButtonItem btnProducts;
@@ -291,5 +312,8 @@
         private DevExpress.XtraBars.BarButtonItem btnProductsFields;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
+        private DevExpress.XtraBars.BarButtonItem btnTestForm;
+        private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
+        private StatusStrip statusStrip1;
     }
 }

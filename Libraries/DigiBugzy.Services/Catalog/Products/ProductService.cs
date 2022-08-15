@@ -64,7 +64,7 @@ namespace DigiBugzy.Services.Catalog.Products
             //ProductComplete
             var collection = query.ToList();
 
-            if (filter.CategoryId.HasValue && filter.CategoryId.Value > 0)
+            if (filter.CategoryId is > 0)
             {
                 var categoryMappings = dbContext.ProductCategories.Where(pc => pc.CategoryId == filter.CategoryId);
 

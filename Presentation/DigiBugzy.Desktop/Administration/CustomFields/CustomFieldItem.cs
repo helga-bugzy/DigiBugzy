@@ -27,6 +27,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             CustomField = customField;
             txtValue.Visible = cmbValue.Visible = rbFalse.Visible = rbTrue.Visible = btnRefresh.Visible = false;
             MappingType = mappingType;
+
+            if (customField != null) LoadCustomField();
         }
 
         #region Private Methods
@@ -36,6 +38,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             
             HandleTypeControls();
             lblName.Text = CustomField?.Name;
+            
         }
 
         private void LoadOptionsListValues()
@@ -126,7 +129,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 case (int)CustomFieldTypeEnumeration.ListType:
                     cmbValue.Visible = btnRefresh.Visible = true;
                     LoadOptionsListValues();
-
                     break;
                 case (int)CustomFieldTypeEnumeration.Boolean:
                     rbFalse.Visible = rbTrue.Visible = true;
@@ -145,11 +147,11 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                     break;
                 case (int)CustomFieldTypeEnumeration.Memo:
                     txtValue.Visible = true;
-
+                    txtValue.Text = CustomField.CustomFieldValue;
                     break;
                 default:
                     txtValue.Visible = true;
-
+                    txtValue.Text = CustomField.CustomFieldValue;
                     break;
 
             }
@@ -167,12 +169,14 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             Application.DoEvents();
         }
 
-        #endregion
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveCustomField();
         }
+
+        #endregion
+
+
     }
 
 }

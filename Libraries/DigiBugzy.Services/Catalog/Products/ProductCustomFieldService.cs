@@ -1,7 +1,6 @@
 ﻿using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Services.Administration.Categories;
 using DigiBugzy.Services.Administration.CustomFields;
-using Microsoft.EntityFrameworkCore;
 
 namespace DigiBugzy.Services.Catalog.Products
 {
