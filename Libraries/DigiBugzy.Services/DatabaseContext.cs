@@ -52,6 +52,10 @@ namespace DigiBugzy.Services
 
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<ProjectSection> ProjectSections { get; set; }
+
+        public DbSet<ProjectSectionPart> ProjectSectionParts { get; set; }
+
         #endregion
 
         #region Secure

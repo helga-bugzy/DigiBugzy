@@ -14,6 +14,6 @@ namespace DigiBugzy.Services.Projects
 
         public void Update(Project entity);
 
-        public void Create(Project entity);
+        public int Create(Project entity);
     }
 }
