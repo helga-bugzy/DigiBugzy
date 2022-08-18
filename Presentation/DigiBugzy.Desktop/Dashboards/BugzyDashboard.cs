@@ -56,7 +56,7 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void btnProjects_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ShowChildForm(new ProductsManager(), "Projects Management");
+            ShowChildForm(new ProjectsManager(), "Projects Management");
         }
 
         private void btnProjectsCategories_ItemClick(object sender, ItemClickEventArgs e)
