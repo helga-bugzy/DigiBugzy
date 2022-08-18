@@ -36,12 +36,14 @@ namespace DigiBugzy.Desktop.Products
 
         #region Helper Methods
 
+        #region Load Grids
+
         private void LoadGrid_Projects()
         {
             using var service = new ProjectService(Globals.GetConnectionString());
             gridProjects.DataSource = service.Get(new StandardFilter { Name = txtFilterProjectName.Text.Trim() });
 
-            
+
             LoadGrid_ProjectSections();
 
             Application.DoEvents();
@@ -66,7 +68,7 @@ namespace DigiBugzy.Desktop.Products
             LoadGrid_ProjectSectionParts();
 
             Application.DoEvents();
-            
+
         }
 
         private void LoadGrid_ProjectSectionParts()
@@ -85,6 +87,10 @@ namespace DigiBugzy.Desktop.Products
             Application.DoEvents();
         }
 
+        #endregion
+
+        #region Load Selected Items
+
         private void LoadSelected_Project()
         {
             _selectedProjectSection = new ProjectSection(); ;
@@ -97,14 +103,14 @@ namespace DigiBugzy.Desktop.Products
             btnProjectAddNew.Visible = _selectedProject.Id > 0;
             btnProjectDelete.Visible = !_selectedProject.IsDeleted;
             btnProjectRestore.Visible = _selectedProject.IsDeleted;
-            if (_selectedProject.ProjectImage is not { Length: > 0 })
+            if (_selectedProject.CoverImage is not { Length: > 0 })
             {
                 imgProjectPhoto.Visible = false;
                 lblProjectSelectedFileName.Text = string.Empty;
                 return;
             }
 
-            imgProjectPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProject.ProjectImage);
+            imgProjectPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProject.CoverImage);
 
             //documents
 
@@ -115,20 +121,65 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadSelected_ProjectSection()
         {
-            //editor
+            _selectedProjectSectionPart = new ProjectSectionPart();
+
+            //editor,
+            txtSectionDescription.Text = _selectedProjectSection.Description;
+            txtSectionName.Text = _selectedProjectSection.Name;
+            chkSectionActive.Checked = _selectedProjectSection.IsActive;
+            btnSectionAddNew.Visible = _selectedProjectSection.Id > 0;
+            btnSectionDelete.Visible = !_selectedProjectSection.IsDeleted;
+            btnSectionRestore.Visible = _selectedProjectSection.IsDeleted;
+            if (_selectedProjectSection.CoverImage is not { Length: > 0 })
+            {
+                imgSectionPhoto.Visible = false;
+                lblSectionSelectedFileName.Text = string.Empty;
+                return;
+            }
+
+            imgSectionPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProjectSection.CoverImage);
+
+            //documents
+
+            //products
+
+            LoadGrid_ProjectSectionParts();
+
             //docs,
             //products
-            _selectedProjectSectionPart = new ProjectSectionPart(); ;
-            LoadGrid_ProjectSectionParts();
+
         }
 
         private void LoadSelected_ProjectSectionPart()
         {
-            //editor
+            //editor,
+            txtPartDescription.Text = _selectedProjectSectionPart.Description;
+            txtPartName.Text = _selectedProjectSectionPart.Name;
+            chkPartActive.Checked = _selectedProjectSectionPart.IsActive;
+            btnPartAddNew.Visible = _selectedProjectSectionPart.Id > 0;
+            btnPartDelete.Visible = !_selectedProjectSectionPart.IsDeleted;
+            btnPartRestore.Visible = _selectedProjectSectionPart.IsDeleted;
+            if (_selectedProjectSectionPart.CoverImage is not { Length: > 0 })
+            {
+                imgPartPhoto.Visible = false;
+                lblPartSelectedFileName.Text = string.Empty;
+                return;
+            }
+
+            imgPartPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProjectSectionPart.CoverImage);
+
+            //documents
+
+            //products
+
+            LoadGrid_ProjectSectionParts();
+
             //docs,
             //products
-            
+
         }
+
+        #endregion
 
         #endregion
 
@@ -260,9 +311,6 @@ namespace DigiBugzy.Desktop.Products
             Application.DoEvents();
         }
 
-        private void pnlProject_Editor_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+      
     }
 }
