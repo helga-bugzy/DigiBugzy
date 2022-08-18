@@ -109,12 +109,14 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            
             //Load & Show page
             _childForm.MdiParent = this;
             _childForm.Show();
 
             //Hide splasher
-           _splash.Close();
+            if(_splash.IsDisposed is false)
+                _splash.Close();
             Application.DoEvents();
 
             UseWaitCursor = false;
