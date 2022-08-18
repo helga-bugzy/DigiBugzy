@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;using System.Collections.Generic;
 using DigiBugzy.Core.Domain.Projects;
+using DigiBugzy.Core.Helpers;
 using DigiBugzy.Services.Projects;
 using DigiBugzy.Services.SampleData;
 
@@ -86,11 +87,29 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadSelected_Project()
         {
-            _selectedProjectSection = null;
-            _selectedProjectSectionPart = null;
+            _selectedProjectSection = new ProjectSection(); ;
+            _selectedProjectSectionPart = new ProjectSectionPart();
+
             //editor,
+            txtProjectDescription.Text = _selectedProject.Description;
+            txtProject_Name.Text = _selectedProject.Name;
+            chkProjectActive.Checked = _selectedProject.IsActive;
+            btnProjectAddNew.Visible = _selectedProject.Id > 0;
+            btnProjectDelete.Visible = !_selectedProject.IsDeleted;
+            btnProjectRestore.Visible = _selectedProject.IsDeleted;
+            if (_selectedProject.ProjectImage is not { Length: > 0 })
+            {
+                imgProjectPhoto.Visible = false;
+                lblProjectSelectedFileName.Text = string.Empty;
+                return;
+            }
+
+            imgProjectPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProject.ProjectImage);
+
             //documents
+
             //products
+
             LoadGrid_ProjectSections();
         }
 
@@ -239,6 +258,11 @@ namespace DigiBugzy.Desktop.Products
             LoadGrid_Projects();
 
             Application.DoEvents();
+        }
+
+        private void pnlProject_Editor_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

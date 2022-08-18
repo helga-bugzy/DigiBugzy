@@ -243,37 +243,72 @@ namespace DigiBugzy.Data.Migrations
         private void CreateProjectsTables()
         {
             _currentSchemaName = DatabaseConstants.Schemas.Project;
-            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
+            using var creatory = new BaseEntityCreator(schemaName: _currentSchemaName, migrator: this);
 
             _currentTableName = nameof(Project);
-            creatory.StartNewTable(_currentTableName);
+            creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseAdministrationEntity();
-            
+            creatory.AddColumn(
+                fieldName: nameof(Project.CoverImage), 
+                fieldType: BaseEntityCreator.FieldTypes.AsBinary, 
+                isNullable: true);
+
             _currentTableName = nameof(ProjectSection);
-            creatory.StartNewTable(_currentTableName);
+            creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseAdministrationEntity();
-            creatory.AddColumn(nameof(ProjectSection.ProjectId), isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
-            creatory.AddForeignKey(_currentTableName, nameof(Project), nameof(ProjectSection.ProjectId), _currentSchemaName, _currentSchemaName);
+            creatory.AddColumn(
+                fieldName: nameof(ProjectSection.ProjectId), 
+                isNullable: false, 
+                fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName, 
+                toTable: nameof(Project), 
+                fromFieldName: nameof(ProjectSection.ProjectId), 
+                fromSchemaName: _currentSchemaName, 
+                toSchemaName: _currentSchemaName);
+            creatory.AddColumn(
+                fieldName: nameof(ProjectSection.CoverImage), 
+                fieldType: BaseEntityCreator.FieldTypes.AsBinary, 
+                isNullable: true);
 
             _currentTableName = nameof(ProjectSectionPart);
-            creatory.StartNewTable(_currentTableName);
+            creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseAdministrationEntity();
-            creatory.AddColumn(nameof(ProjectSectionPart.ProjectSectionId), isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
-            creatory.AddForeignKey(_currentTableName, nameof(ProjectSection), nameof(ProjectSectionPart.ProjectSectionId), _currentSchemaName, _currentSchemaName);
+            creatory.AddColumn(
+                fieldName: nameof(ProjectSectionPart.ProjectSectionId), 
+                isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName, 
+                toTable: nameof(ProjectSection), 
+                fromFieldName: nameof(ProjectSectionPart.ProjectSectionId), 
+                fromSchemaName: _currentSchemaName, 
+                toSchemaName: _currentSchemaName);
+            creatory.AddColumn(
+                fieldName: nameof(ProjectSectionPart.CoverImage), 
+                fieldType: BaseEntityCreator.FieldTypes.AsBinary, 
+                isNullable: true);
 
             _currentTableName = nameof(ProjectPrinting);
-            creatory.StartNewTable(_currentTableName);
+            creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseProjectSublementEntity();
 
             _currentTableName = nameof(ProjectDocument);
-            creatory.StartNewTable(_currentTableName);
+            creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseProjectSublementEntity();
 
             _currentTableName = nameof(ProjectProduct);
-            creatory.StartNewTable(_currentTableName);
+            creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseProjectSublementEntity();
-            creatory.AddColumn(nameof(ProjectProduct.ProductId), isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
-            creatory.AddForeignKey(_currentTableName, nameof(Product), nameof(ProjectProduct.ProjectId), _currentSchemaName, DatabaseConstants.Schemas.Catalog);
+            creatory.AddColumn(
+                fieldName: nameof(ProjectProduct.ProductId), 
+                isNullable: false, 
+                fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName, 
+                toTable: nameof(Product), 
+                fromFieldName: nameof(ProjectProduct.ProjectId), 
+                fromSchemaName: _currentSchemaName,
+                toSchemaName: DatabaseConstants.Schemas.Catalog);
         }
 
         
