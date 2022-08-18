@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;using System.Collections.Generic;
+using System.Drawing;
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.Helpers;
 using DigiBugzy.Services.Projects;
@@ -111,12 +112,16 @@ namespace DigiBugzy.Desktop.Products
             }
 
             imgProjectPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProject.CoverImage);
+            tabProject.Show();
+            
 
             //documents
 
             //products
 
             LoadGrid_ProjectSections();
+
+            Application.DoEvents();
         }
 
         private void LoadSelected_ProjectSection()
@@ -138,6 +143,7 @@ namespace DigiBugzy.Desktop.Products
             }
 
             imgSectionPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProjectSection.CoverImage);
+            tabSections.Show();
 
             //documents
 
@@ -147,6 +153,8 @@ namespace DigiBugzy.Desktop.Products
 
             //docs,
             //products
+
+            Application.DoEvents();
 
         }
 
@@ -167,6 +175,7 @@ namespace DigiBugzy.Desktop.Products
             }
 
             imgPartPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProjectSectionPart.CoverImage);
+            tabProjectSectionParts.Show();
 
             //documents
 
@@ -176,6 +185,99 @@ namespace DigiBugzy.Desktop.Products
 
             //docs,
             //products
+
+            Application.DoEvents();
+
+        }
+
+        #endregion
+
+        #region Saving
+
+        private void SaveProject()
+        {
+            _selectedProject.Name = txtProject_Name.Text;
+            _selectedProject.Description = txtProjectDescription.Text;
+            _selectedProject.IsActive = chkProjectActive.Checked;
+
+
+            if (imgProjectPhoto.Image != null)
+            {
+                _selectedProject.CoverImage = ImageHelpers.CopyImageToByteArray(imgProjectPhoto.Image);
+            }
+
+            using var service = new ProjectService(Globals.GetConnectionString());
+            if (_selectedProject.Id > 0)
+            {
+                service.Update(_selectedProject);
+            }
+            else
+            {
+                _selectedProject.DigiAdminId = Globals.DigiAdministration.Id;
+                _selectedProject.IsDeleted = false;
+                _selectedProject.CreatedOn = DateTime.Now;
+                _selectedProject.Id = service.Create(_selectedProject);
+            }
+
+            LoadGrid_Projects();
+
+        }
+
+        private void SaveProjectSection()
+        {
+            _selectedProjectSection.Name = txtSectionName.Text;
+            _selectedProjectSection.Description = txtSectionDescription.Text;
+            _selectedProjectSection.IsActive = chkSectionActive.Checked;
+
+
+            if (imgSectionPhoto.Image != null)
+            {
+                _selectedProjectSection.CoverImage = ImageHelpers.CopyImageToByteArray(imgSectionPhoto.Image);
+            }
+
+            using var service = new ProjectSectionService(Globals.GetConnectionString());
+            if (_selectedProjectSection.Id > 0)
+            {
+                service.Update(_selectedProjectSection);
+            }
+            else
+            {
+                _selectedProjectSection.DigiAdminId = Globals.DigiAdministration.Id;
+                _selectedProjectSection.IsDeleted = false;
+                _selectedProjectSection.CreatedOn = DateTime.Now;
+                _selectedProjectSection.Id = service.Create(_selectedProjectSection);
+            }
+
+            LoadGrid_ProjectSections();
+
+        }
+
+        private void SaveProjectSectionPart()
+        {
+            _selectedProjectSectionPart.Name = txtPartName.Text;
+            _selectedProjectSectionPart.Description = txtPartDescription.Text;
+            _selectedProjectSectionPart.IsActive = chkPartActive.Checked;
+
+
+            if (imgPartPhoto.Image != null)
+            {
+                _selectedProjectSectionPart.CoverImage = ImageHelpers.CopyImageToByteArray(imgPartPhoto.Image);
+            }
+
+            using var service = new ProjectSectionPartService(Globals.GetConnectionString());
+            if (_selectedProjectSectionPart.Id > 0)
+            {
+                service.Update(_selectedProjectSectionPart);
+            }
+            else
+            {
+                _selectedProjectSectionPart.DigiAdminId = Globals.DigiAdministration.Id;
+                _selectedProjectSectionPart.IsDeleted = false;
+                _selectedProjectSectionPart.CreatedOn = DateTime.Now;
+                _selectedProjectSectionPart.Id = service.Create(_selectedProjectSectionPart);
+            }
+
+            LoadSelected_ProjectSectionPart();
 
         }
 
@@ -204,8 +306,7 @@ namespace DigiBugzy.Desktop.Products
 
 
         #endregion
-
-
+        
         #region Grid Controls
 
         private void gvProjects_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -265,24 +366,51 @@ namespace DigiBugzy.Desktop.Products
 
         #endregion
 
-        #endregion
+        #region Projects
 
-        private void btnSampleData_Click(object sender, EventArgs e)
+        #region Editor
+
+        private void btnProjectAddNew_Click(object sender, EventArgs e)
         {
-            using var service = new SampleDataService(
-                connectionString: Globals.GetConnectionString(),
-                sampleDataType: SampleDataTypeEnum.Projects,
-                classificationId: (int)ClassificationsEnum.Project,
-                digiAdminId: Globals.DigiAdministration.Id);
-            service.CreateSampleData();
-
             _selectedProject = new Project();
-            _selectedProjectSection = new ProjectSection();
-            _selectedProjectSectionPart = new ProjectSectionPart();
+            LoadSelected_Project();
+        }
 
+        private void btnProjectImage_Click(object sender, EventArgs e)
+        {
+            if (dlgProjectImage.ShowDialog() != DialogResult.OK) return;
+            if (string.IsNullOrEmpty(dlgProjectImage.FileName)) return;
+
+            lblProjectSelectedFileName.Text = dlgProjectImage.FileName;
+            imgProjectPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(dlgProjectImage.FileName),
+                Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
+            imgProjectPhoto.Visible = true;
+        }
+
+        private void btnProjectRestore_Click(object sender, EventArgs e)
+        {
+            if (_selectedProject.Id <= 0) return;
+
+            _selectedProject.IsDeleted = false;
+            _selectedProject.IsActive = true;
+
+            using var service = new ProjectService(Globals.GetConnectionString());
+            service.Update(_selectedProject);
 
             LoadGrid_Projects();
+        }
 
+        private void btnProjectSave_Click(object sender, EventArgs e)
+        {
+            SaveProject();
+        }
+
+        private void btnProjectDelete_Click(object sender, EventArgs e)
+        {
+            if (_selectedProject.Id <= 0) return;
+            var service = new ProjectService(Globals.GetConnectionString());
+            service.Delete(_selectedProject.Id, false);
+            LoadGrid_Projects();
             Application.DoEvents();
         }
 
@@ -311,6 +439,144 @@ namespace DigiBugzy.Desktop.Products
             Application.DoEvents();
         }
 
-      
+
+        private void btnSampleData_Click(object sender, EventArgs e)
+        {
+            using var service = new SampleDataService(
+                connectionString: Globals.GetConnectionString(),
+                sampleDataType: SampleDataTypeEnum.Projects,
+                classificationId: (int)ClassificationsEnum.Project,
+                digiAdminId: Globals.DigiAdministration.Id);
+            service.CreateSampleData();
+
+            _selectedProject = new Project();
+            _selectedProjectSection = new ProjectSection();
+            _selectedProjectSectionPart = new ProjectSectionPart();
+
+            LoadGrid_Projects();
+
+            Application.DoEvents();
+        }
+
+
+        #endregion
+
+        #endregion
+        
+        #region Sections
+
+        #region Editor
+
+        private void btnSectionAddNew_Click(object sender, EventArgs e)
+        {
+            _selectedProjectSection = new ProjectSection();
+            LoadSelected_ProjectSection();
+        }
+
+
+        private void btnSectionvImage_Click(object sender, EventArgs e)
+        {
+            if (dlgProjectSectionPhoto.ShowDialog() != DialogResult.OK) return;
+            if (string.IsNullOrEmpty(dlgProjectSectionPhoto.FileName)) return;
+
+            lblSectionSelectedFileName.Text = dlgProjectSectionPhoto.FileName;
+            imgSectionPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(dlgProjectSectionPhoto.FileName),
+                Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
+            imgSectionPhoto.Visible = true;
+        }
+
+        private void btnSectionSave_Click(object sender, EventArgs e)
+        {
+            SaveProjectSection();
+        }
+
+        private void btnSectionRestore_Click(object sender, EventArgs e)
+        {
+            if (_selectedProjectSection.Id <= 0) return;
+
+            _selectedProjectSection.IsDeleted = false;
+            _selectedProjectSection.IsActive = true;
+
+            using var service = new ProjectSectionService(Globals.GetConnectionString());
+            service.Update(_selectedProjectSection);
+
+            LoadGrid_ProjectSections();
+        }
+
+        private void btnSectionDelete_Click(object sender, EventArgs e)
+        {
+            if (_selectedProjectSection.Id <= 0) return;
+            var service = new ProjectSectionService(Globals.GetConnectionString());
+            service.Delete(_selectedProjectSection.Id, false);
+            LoadGrid_ProjectSections();
+            Application.DoEvents();
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Parts
+
+        #region Editor
+
+        private void btnPartAddNew_Click(object sender, EventArgs e)
+        {
+            _selectedProjectSectionPart = new ProjectSectionPart();
+            LoadSelected_ProjectSectionPart();
+        }
+
+        private void btnPartImage_Click(object sender, EventArgs e)
+        {
+            if (dlgProjectSectionPartPhoto.ShowDialog() != DialogResult.OK) return;
+            if (string.IsNullOrEmpty(dlgProjectSectionPartPhoto.FileName)) return;
+
+            lblPartSelectedFileName.Text = dlgProjectSectionPartPhoto.FileName;
+            imgPartPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(dlgProjectSectionPartPhoto.FileName),
+                Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
+            imgPartPhoto.Visible = true;
+        }
+
+        private void btnPartRestore_Click(object sender, EventArgs e)
+        {
+            if (_selectedProjectSectionPart.Id <= 0) return;
+
+            _selectedProjectSectionPart.IsDeleted = false;
+            _selectedProjectSectionPart.IsActive = true;
+
+            using var service = new ProjectSectionPartService(Globals.GetConnectionString());
+            service.Update(_selectedProjectSectionPart);
+
+            LoadGrid_ProjectSectionParts();
+        }
+
+        private void btnPartSave_Click(object sender, EventArgs e)
+        {
+            SaveProjectSectionPart();
+        }
+
+        private void btnPartDelete_Click(object sender, EventArgs e)
+        {
+            if (_selectedProjectSectionPart.Id <= 0) return;
+            var service = new ProjectSectionPartService(Globals.GetConnectionString());
+            service.Delete(_selectedProjectSectionPart.Id, false);
+            LoadGrid_ProjectSectionParts();
+            Application.DoEvents();
+        }
+
+
+
+
+
+
+
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+
     }
 }

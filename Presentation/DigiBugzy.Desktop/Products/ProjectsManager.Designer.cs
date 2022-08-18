@@ -80,15 +80,8 @@
             this.tabProjectSection = new System.Windows.Forms.TabPage();
             this.tabSections = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabProjectSectionParts = new System.Windows.Forms.TabPage();
-            this.tabControlParts = new System.Windows.Forms.TabControl();
-            this.tabEditor = new System.Windows.Forms.TabPage();
-            this.tabDocuments = new System.Windows.Forms.TabPage();
-            this.tabProducts = new System.Windows.Forms.TabPage();
-            this.tabSampleData = new System.Windows.Forms.TabPage();
             this.pnlSectionEditor = new DevExpress.XtraEditors.PanelControl();
+            this.lblSectopmActive = new System.Windows.Forms.Label();
             this.lblSectionSelectedFileName = new System.Windows.Forms.Label();
             this.imgSectionPhoto = new System.Windows.Forms.PictureBox();
             this.btnSectionvImage = new DevExpress.XtraEditors.SimpleButton();
@@ -101,7 +94,11 @@
             this.txtSectionName = new DevExpress.XtraEditors.TextEdit();
             this.lblSectionDescription = new System.Windows.Forms.Label();
             this.lblSectionName = new System.Windows.Forms.Label();
-            this.lblSectopmActive = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabProjectSectionParts = new System.Windows.Forms.TabPage();
+            this.tabControlParts = new System.Windows.Forms.TabControl();
+            this.tabEditor = new System.Windows.Forms.TabPage();
             this.pnlPartsEdtior = new DevExpress.XtraEditors.PanelControl();
             this.lblPartSelectedFileName = new System.Windows.Forms.Label();
             this.imgPartPhoto = new System.Windows.Forms.PictureBox();
@@ -116,6 +113,12 @@
             this.txtPartName = new DevExpress.XtraEditors.TextEdit();
             this.lblPartDescription = new System.Windows.Forms.Label();
             this.lblPartName = new System.Windows.Forms.Label();
+            this.tabDocuments = new System.Windows.Forms.TabPage();
+            this.tabProducts = new System.Windows.Forms.TabPage();
+            this.tabSampleData = new System.Windows.Forms.TabPage();
+            this.dlgProjectImage = new System.Windows.Forms.OpenFileDialog();
+            this.dlgProjectSectionPhoto = new System.Windows.Forms.OpenFileDialog();
+            this.dlgProjectSectionPartPhoto = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -166,13 +169,13 @@
             this.tabProjectSection.SuspendLayout();
             this.tabSections.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabProjectSectionParts.SuspendLayout();
-            this.tabControlParts.SuspendLayout();
-            this.tabEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlSectionEditor)).BeginInit();
             this.pnlSectionEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgSectionPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSectionName.Properties)).BeginInit();
+            this.tabProjectSectionParts.SuspendLayout();
+            this.tabControlParts.SuspendLayout();
+            this.tabEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlPartsEdtior)).BeginInit();
             this.pnlPartsEdtior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPartPhoto)).BeginInit();
@@ -507,7 +510,7 @@
             // lblProjectSelectedFileName
             // 
             this.lblProjectSelectedFileName.AutoSize = true;
-            this.lblProjectSelectedFileName.Location = new System.Drawing.Point(556, 331);
+            this.lblProjectSelectedFileName.Location = new System.Drawing.Point(531, 332);
             this.lblProjectSelectedFileName.Name = "lblProjectSelectedFileName";
             this.lblProjectSelectedFileName.Size = new System.Drawing.Size(15, 13);
             this.lblProjectSelectedFileName.TabIndex = 34;
@@ -515,7 +518,7 @@
             // 
             // imgProjectPhoto
             // 
-            this.imgProjectPhoto.Location = new System.Drawing.Point(556, 59);
+            this.imgProjectPhoto.Location = new System.Drawing.Point(531, 60);
             this.imgProjectPhoto.Name = "imgProjectPhoto";
             this.imgProjectPhoto.Size = new System.Drawing.Size(465, 257);
             this.imgProjectPhoto.TabIndex = 33;
@@ -524,52 +527,57 @@
             // btnProjectImage
             // 
             this.btnProjectImage.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectImage.ImageOptions.Image")));
-            this.btnProjectImage.Location = new System.Drawing.Point(414, 326);
+            this.btnProjectImage.Location = new System.Drawing.Point(389, 327);
             this.btnProjectImage.Name = "btnProjectImage";
             this.btnProjectImage.Size = new System.Drawing.Size(104, 23);
             this.btnProjectImage.TabIndex = 32;
             this.btnProjectImage.Text = "Select Image";
+            this.btnProjectImage.Click += new System.EventHandler(this.btnProjectImage_Click);
             // 
             // btnProjectRestore
             // 
             this.btnProjectRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectRestore.ImageOptions.Image")));
-            this.btnProjectRestore.Location = new System.Drawing.Point(265, 380);
+            this.btnProjectRestore.Location = new System.Drawing.Point(246, 375);
             this.btnProjectRestore.Name = "btnProjectRestore";
             this.btnProjectRestore.Size = new System.Drawing.Size(101, 34);
             this.btnProjectRestore.TabIndex = 31;
             this.btnProjectRestore.Text = "Restore";
+            this.btnProjectRestore.Click += new System.EventHandler(this.btnProjectRestore_Click);
             // 
             // btnProjectDelete
             // 
             this.btnProjectDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectDelete.ImageOptions.Image")));
-            this.btnProjectDelete.Location = new System.Drawing.Point(122, 380);
+            this.btnProjectDelete.Location = new System.Drawing.Point(103, 375);
             this.btnProjectDelete.Name = "btnProjectDelete";
             this.btnProjectDelete.Size = new System.Drawing.Size(94, 34);
             this.btnProjectDelete.TabIndex = 29;
             this.btnProjectDelete.Text = "Delete";
+            this.btnProjectDelete.Click += new System.EventHandler(this.btnProjectDelete_Click);
             // 
             // btnProjectSave
             // 
             this.btnProjectSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectSave.ImageOptions.Image")));
-            this.btnProjectSave.Location = new System.Drawing.Point(415, 380);
+            this.btnProjectSave.Location = new System.Drawing.Point(396, 375);
             this.btnProjectSave.Name = "btnProjectSave";
             this.btnProjectSave.Size = new System.Drawing.Size(104, 34);
             this.btnProjectSave.TabIndex = 28;
             this.btnProjectSave.Text = "Save";
+            this.btnProjectSave.Click += new System.EventHandler(this.btnProjectSave_Click);
             // 
             // btnProjectAddNew
             // 
             this.btnProjectAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectAddNew.ImageOptions.Image")));
-            this.btnProjectAddNew.Location = new System.Drawing.Point(35, 5);
+            this.btnProjectAddNew.Location = new System.Drawing.Point(10, 19);
             this.btnProjectAddNew.Name = "btnProjectAddNew";
             this.btnProjectAddNew.Size = new System.Drawing.Size(104, 32);
             this.btnProjectAddNew.TabIndex = 30;
             this.btnProjectAddNew.Text = "Add New";
+            this.btnProjectAddNew.Click += new System.EventHandler(this.btnProjectAddNew_Click);
             // 
             // chkProjectActive
             // 
             this.chkProjectActive.AutoSize = true;
-            this.chkProjectActive.Location = new System.Drawing.Point(122, 331);
+            this.chkProjectActive.Location = new System.Drawing.Point(97, 332);
             this.chkProjectActive.Name = "chkProjectActive";
             this.chkProjectActive.Size = new System.Drawing.Size(15, 14);
             this.chkProjectActive.TabIndex = 27;
@@ -578,7 +586,7 @@
             // lblProjectActive
             // 
             this.lblProjectActive.AutoSize = true;
-            this.lblProjectActive.Location = new System.Drawing.Point(35, 331);
+            this.lblProjectActive.Location = new System.Drawing.Point(10, 332);
             this.lblProjectActive.Name = "lblProjectActive";
             this.lblProjectActive.Size = new System.Drawing.Size(41, 13);
             this.lblProjectActive.TabIndex = 26;
@@ -586,7 +594,7 @@
             // 
             // txtProjectDescription
             // 
-            this.txtProjectDescription.Location = new System.Drawing.Point(122, 82);
+            this.txtProjectDescription.Location = new System.Drawing.Point(97, 83);
             this.txtProjectDescription.MaxLength = 255;
             this.txtProjectDescription.Multiline = true;
             this.txtProjectDescription.Name = "txtProjectDescription";
@@ -595,7 +603,7 @@
             // 
             // txtProject_Name
             // 
-            this.txtProject_Name.Location = new System.Drawing.Point(122, 56);
+            this.txtProject_Name.Location = new System.Drawing.Point(97, 57);
             this.txtProject_Name.Name = "txtProject_Name";
             this.txtProject_Name.Size = new System.Drawing.Size(398, 20);
             this.txtProject_Name.TabIndex = 24;
@@ -603,7 +611,7 @@
             // lblProjectDescription
             // 
             this.lblProjectDescription.AutoSize = true;
-            this.lblProjectDescription.Location = new System.Drawing.Point(35, 94);
+            this.lblProjectDescription.Location = new System.Drawing.Point(10, 95);
             this.lblProjectDescription.Name = "lblProjectDescription";
             this.lblProjectDescription.Size = new System.Drawing.Size(64, 13);
             this.lblProjectDescription.TabIndex = 23;
@@ -612,7 +620,7 @@
             // lblProjectName
             // 
             this.lblProjectName.AutoSize = true;
-            this.lblProjectName.Location = new System.Drawing.Point(35, 59);
+            this.lblProjectName.Location = new System.Drawing.Point(10, 60);
             this.lblProjectName.Name = "lblProjectName";
             this.lblProjectName.Size = new System.Drawing.Size(38, 13);
             this.lblProjectName.TabIndex = 22;
@@ -621,7 +629,7 @@
             // btnSampleDataDelete
             // 
             this.btnSampleDataDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleDataDelete.ImageOptions.Image")));
-            this.btnSampleDataDelete.Location = new System.Drawing.Point(720, 380);
+            this.btnSampleDataDelete.Location = new System.Drawing.Point(688, 375);
             this.btnSampleDataDelete.Name = "btnSampleDataDelete";
             this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 34);
             this.btnSampleDataDelete.TabIndex = 21;
@@ -631,7 +639,7 @@
             // btnSampleData
             // 
             this.btnSampleData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleData.ImageOptions.Image")));
-            this.btnSampleData.Location = new System.Drawing.Point(560, 380);
+            this.btnSampleData.Location = new System.Drawing.Point(531, 375);
             this.btnSampleData.Name = "btnSampleData";
             this.btnSampleData.Size = new System.Drawing.Size(129, 34);
             this.btnSampleData.TabIndex = 20;
@@ -691,86 +699,6 @@
             this.tabPage3.Text = "Editor";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(2220, 444);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "Documents";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 24);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(2172, 257);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "Products";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabProjectSectionParts
-            // 
-            this.tabProjectSectionParts.Controls.Add(this.tabControlParts);
-            this.tabProjectSectionParts.Location = new System.Drawing.Point(4, 22);
-            this.tabProjectSectionParts.Name = "tabProjectSectionParts";
-            this.tabProjectSectionParts.Size = new System.Drawing.Size(2234, 476);
-            this.tabProjectSectionParts.TabIndex = 2;
-            this.tabProjectSectionParts.Text = "Part Editors";
-            this.tabProjectSectionParts.UseVisualStyleBackColor = true;
-            // 
-            // tabControlParts
-            // 
-            this.tabControlParts.Controls.Add(this.tabEditor);
-            this.tabControlParts.Controls.Add(this.tabDocuments);
-            this.tabControlParts.Controls.Add(this.tabProducts);
-            this.tabControlParts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlParts.Location = new System.Drawing.Point(0, 0);
-            this.tabControlParts.Name = "tabControlParts";
-            this.tabControlParts.SelectedIndex = 0;
-            this.tabControlParts.Size = new System.Drawing.Size(2234, 476);
-            this.tabControlParts.TabIndex = 0;
-            // 
-            // tabEditor
-            // 
-            this.tabEditor.Controls.Add(this.pnlPartsEdtior);
-            this.tabEditor.Location = new System.Drawing.Point(4, 22);
-            this.tabEditor.Name = "tabEditor";
-            this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditor.Size = new System.Drawing.Size(2226, 450);
-            this.tabEditor.TabIndex = 0;
-            this.tabEditor.Text = "Editor";
-            this.tabEditor.UseVisualStyleBackColor = true;
-            // 
-            // tabDocuments
-            // 
-            this.tabDocuments.Location = new System.Drawing.Point(4, 24);
-            this.tabDocuments.Name = "tabDocuments";
-            this.tabDocuments.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDocuments.Size = new System.Drawing.Size(2226, 373);
-            this.tabDocuments.TabIndex = 1;
-            this.tabDocuments.Text = "Documents";
-            this.tabDocuments.UseVisualStyleBackColor = true;
-            // 
-            // tabProducts
-            // 
-            this.tabProducts.Location = new System.Drawing.Point(4, 24);
-            this.tabProducts.Name = "tabProducts";
-            this.tabProducts.Size = new System.Drawing.Size(2226, 373);
-            this.tabProducts.TabIndex = 2;
-            this.tabProducts.Text = "Products";
-            this.tabProducts.UseVisualStyleBackColor = true;
-            // 
-            // tabSampleData
-            // 
-            this.tabSampleData.Location = new System.Drawing.Point(4, 22);
-            this.tabSampleData.Name = "tabSampleData";
-            this.tabSampleData.Size = new System.Drawing.Size(2234, 476);
-            this.tabSampleData.TabIndex = 3;
-            this.tabSampleData.Text = "Sample Data";
-            this.tabSampleData.UseVisualStyleBackColor = true;
-            // 
             // pnlSectionEditor
             // 
             this.pnlSectionEditor.Controls.Add(this.lblSectopmActive);
@@ -792,6 +720,15 @@
             this.pnlSectionEditor.Size = new System.Drawing.Size(2214, 438);
             this.pnlSectionEditor.TabIndex = 0;
             // 
+            // lblSectopmActive
+            // 
+            this.lblSectopmActive.AutoSize = true;
+            this.lblSectopmActive.Location = new System.Drawing.Point(7, 339);
+            this.lblSectopmActive.Name = "lblSectopmActive";
+            this.lblSectopmActive.Size = new System.Drawing.Size(41, 13);
+            this.lblSectopmActive.TabIndex = 25;
+            this.lblSectopmActive.Text = "Active:";
+            // 
             // lblSectionSelectedFileName
             // 
             this.lblSectionSelectedFileName.AutoSize = true;
@@ -811,48 +748,53 @@
             // 
             // btnSectionvImage
             // 
-            this.btnSectionvImage.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProductImage.ImageOptions.Image")));
+            this.btnSectionvImage.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSectionvImage.ImageOptions.Image")));
             this.btnSectionvImage.Location = new System.Drawing.Point(386, 334);
             this.btnSectionvImage.Name = "btnSectionvImage";
             this.btnSectionvImage.Size = new System.Drawing.Size(104, 23);
             this.btnSectionvImage.TabIndex = 22;
             this.btnSectionvImage.Text = "Select Image";
+            this.btnSectionvImage.Click += new System.EventHandler(this.btnSectionvImage_Click);
             // 
             // btnSectionRestore
             // 
-            this.btnSectionRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.ImageOptions.Image")));
-            this.btnSectionRestore.Location = new System.Drawing.Point(237, 388);
+            this.btnSectionRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSectionRestore.ImageOptions.Image")));
+            this.btnSectionRestore.Location = new System.Drawing.Point(236, 376);
             this.btnSectionRestore.Name = "btnSectionRestore";
             this.btnSectionRestore.Size = new System.Drawing.Size(101, 34);
             this.btnSectionRestore.TabIndex = 21;
             this.btnSectionRestore.Text = "Restore";
+            this.btnSectionRestore.Click += new System.EventHandler(this.btnSectionRestore_Click);
             // 
             // btnSectionDelete
             // 
-            this.btnSectionDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
-            this.btnSectionDelete.Location = new System.Drawing.Point(94, 388);
+            this.btnSectionDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSectionDelete.ImageOptions.Image")));
+            this.btnSectionDelete.Location = new System.Drawing.Point(93, 376);
             this.btnSectionDelete.Name = "btnSectionDelete";
             this.btnSectionDelete.Size = new System.Drawing.Size(94, 34);
             this.btnSectionDelete.TabIndex = 19;
             this.btnSectionDelete.Text = "Delete";
+            this.btnSectionDelete.Click += new System.EventHandler(this.btnSectionDelete_Click);
             // 
             // btnSectionSave
             // 
-            this.btnSectionSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
-            this.btnSectionSave.Location = new System.Drawing.Point(387, 388);
+            this.btnSectionSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSectionSave.ImageOptions.Image")));
+            this.btnSectionSave.Location = new System.Drawing.Point(386, 376);
             this.btnSectionSave.Name = "btnSectionSave";
             this.btnSectionSave.Size = new System.Drawing.Size(104, 34);
             this.btnSectionSave.TabIndex = 18;
             this.btnSectionSave.Text = "Save";
+            this.btnSectionSave.Click += new System.EventHandler(this.btnSectionSave_Click);
             // 
             // btnSectionAddNew
             // 
-            this.btnSectionAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.ImageOptions.Image")));
+            this.btnSectionAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSectionAddNew.ImageOptions.Image")));
             this.btnSectionAddNew.Location = new System.Drawing.Point(7, 13);
             this.btnSectionAddNew.Name = "btnSectionAddNew";
             this.btnSectionAddNew.Size = new System.Drawing.Size(104, 32);
             this.btnSectionAddNew.TabIndex = 20;
             this.btnSectionAddNew.Text = "Add New";
+            this.btnSectionAddNew.Click += new System.EventHandler(this.btnSectionAddNew_Click);
             // 
             // chkSectionActive
             // 
@@ -897,14 +839,57 @@
             this.lblSectionName.TabIndex = 13;
             this.lblSectionName.Text = "Name:";
             // 
-            // lblSectopmActive
+            // tabPage4
             // 
-            this.lblSectopmActive.AutoSize = true;
-            this.lblSectopmActive.Location = new System.Drawing.Point(7, 339);
-            this.lblSectopmActive.Name = "lblSectopmActive";
-            this.lblSectopmActive.Size = new System.Drawing.Size(41, 13);
-            this.lblSectopmActive.TabIndex = 25;
-            this.lblSectopmActive.Text = "Active:";
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(2220, 442);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Documents";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 24);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(2220, 442);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "Products";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabProjectSectionParts
+            // 
+            this.tabProjectSectionParts.Controls.Add(this.tabControlParts);
+            this.tabProjectSectionParts.Location = new System.Drawing.Point(4, 22);
+            this.tabProjectSectionParts.Name = "tabProjectSectionParts";
+            this.tabProjectSectionParts.Size = new System.Drawing.Size(2234, 476);
+            this.tabProjectSectionParts.TabIndex = 2;
+            this.tabProjectSectionParts.Text = "Part Editors";
+            this.tabProjectSectionParts.UseVisualStyleBackColor = true;
+            // 
+            // tabControlParts
+            // 
+            this.tabControlParts.Controls.Add(this.tabEditor);
+            this.tabControlParts.Controls.Add(this.tabDocuments);
+            this.tabControlParts.Controls.Add(this.tabProducts);
+            this.tabControlParts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlParts.Location = new System.Drawing.Point(0, 0);
+            this.tabControlParts.Name = "tabControlParts";
+            this.tabControlParts.SelectedIndex = 0;
+            this.tabControlParts.Size = new System.Drawing.Size(2234, 476);
+            this.tabControlParts.TabIndex = 0;
+            // 
+            // tabEditor
+            // 
+            this.tabEditor.Controls.Add(this.pnlPartsEdtior);
+            this.tabEditor.Location = new System.Drawing.Point(4, 22);
+            this.tabEditor.Name = "tabEditor";
+            this.tabEditor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEditor.Size = new System.Drawing.Size(2226, 450);
+            this.tabEditor.TabIndex = 0;
+            this.tabEditor.Text = "Editor";
+            this.tabEditor.UseVisualStyleBackColor = true;
             // 
             // pnlPartsEdtior
             // 
@@ -946,48 +931,53 @@
             // 
             // btnPartImage
             // 
-            this.btnPartImage.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProductImage.ImageOptions.Image1")));
+            this.btnPartImage.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPartImage.ImageOptions.Image")));
             this.btnPartImage.Location = new System.Drawing.Point(395, 336);
             this.btnPartImage.Name = "btnPartImage";
             this.btnPartImage.Size = new System.Drawing.Size(104, 23);
             this.btnPartImage.TabIndex = 23;
             this.btnPartImage.Text = "Select Image";
+            this.btnPartImage.Click += new System.EventHandler(this.btnPartImage_Click);
             // 
             // btnPartRestore
             // 
-            this.btnPartRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.ImageOptions.Image1")));
-            this.btnPartRestore.Location = new System.Drawing.Point(246, 390);
+            this.btnPartRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPartRestore.ImageOptions.Image")));
+            this.btnPartRestore.Location = new System.Drawing.Point(245, 375);
             this.btnPartRestore.Name = "btnPartRestore";
             this.btnPartRestore.Size = new System.Drawing.Size(101, 34);
             this.btnPartRestore.TabIndex = 22;
             this.btnPartRestore.Text = "Restore";
+            this.btnPartRestore.Click += new System.EventHandler(this.btnPartRestore_Click);
             // 
             // btnPartDelete
             // 
-            this.btnPartDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image1")));
-            this.btnPartDelete.Location = new System.Drawing.Point(103, 390);
+            this.btnPartDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPartDelete.ImageOptions.Image")));
+            this.btnPartDelete.Location = new System.Drawing.Point(102, 375);
             this.btnPartDelete.Name = "btnPartDelete";
             this.btnPartDelete.Size = new System.Drawing.Size(94, 34);
             this.btnPartDelete.TabIndex = 20;
             this.btnPartDelete.Text = "Delete";
+            this.btnPartDelete.Click += new System.EventHandler(this.btnPartDelete_Click);
             // 
             // btnPartSave
             // 
-            this.btnPartSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image1")));
-            this.btnPartSave.Location = new System.Drawing.Point(396, 390);
+            this.btnPartSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPartSave.ImageOptions.Image")));
+            this.btnPartSave.Location = new System.Drawing.Point(395, 375);
             this.btnPartSave.Name = "btnPartSave";
             this.btnPartSave.Size = new System.Drawing.Size(104, 34);
             this.btnPartSave.TabIndex = 19;
             this.btnPartSave.Text = "Save";
+            this.btnPartSave.Click += new System.EventHandler(this.btnPartSave_Click);
             // 
             // btnPartAddNew
             // 
-            this.btnPartAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.ImageOptions.Image1")));
+            this.btnPartAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPartAddNew.ImageOptions.Image")));
             this.btnPartAddNew.Location = new System.Drawing.Point(16, 15);
             this.btnPartAddNew.Name = "btnPartAddNew";
             this.btnPartAddNew.Size = new System.Drawing.Size(104, 32);
             this.btnPartAddNew.TabIndex = 21;
             this.btnPartAddNew.Text = "Add New";
+            this.btnPartAddNew.Click += new System.EventHandler(this.btnPartAddNew_Click);
             // 
             // chkPartActive
             // 
@@ -1040,6 +1030,46 @@
             this.lblPartName.Size = new System.Drawing.Size(38, 13);
             this.lblPartName.TabIndex = 13;
             this.lblPartName.Text = "Name:";
+            // 
+            // tabDocuments
+            // 
+            this.tabDocuments.Location = new System.Drawing.Point(4, 24);
+            this.tabDocuments.Name = "tabDocuments";
+            this.tabDocuments.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDocuments.Size = new System.Drawing.Size(2226, 448);
+            this.tabDocuments.TabIndex = 1;
+            this.tabDocuments.Text = "Documents";
+            this.tabDocuments.UseVisualStyleBackColor = true;
+            // 
+            // tabProducts
+            // 
+            this.tabProducts.Location = new System.Drawing.Point(4, 24);
+            this.tabProducts.Name = "tabProducts";
+            this.tabProducts.Size = new System.Drawing.Size(2226, 448);
+            this.tabProducts.TabIndex = 2;
+            this.tabProducts.Text = "Products";
+            this.tabProducts.UseVisualStyleBackColor = true;
+            // 
+            // tabSampleData
+            // 
+            this.tabSampleData.Location = new System.Drawing.Point(4, 22);
+            this.tabSampleData.Name = "tabSampleData";
+            this.tabSampleData.Size = new System.Drawing.Size(2234, 476);
+            this.tabSampleData.TabIndex = 3;
+            this.tabSampleData.Text = "Sample Data";
+            this.tabSampleData.UseVisualStyleBackColor = true;
+            // 
+            // dlgProjectImage
+            // 
+            this.dlgProjectImage.FileName = "openFileDialog1";
+            // 
+            // dlgProjectSectionPhoto
+            // 
+            this.dlgProjectSectionPhoto.FileName = "openFileDialog2";
+            // 
+            // dlgProjectSectionPartPhoto
+            // 
+            this.dlgProjectSectionPartPhoto.FileName = "openFileDialog3";
             // 
             // ProjectsManager
             // 
@@ -1105,14 +1135,14 @@
             this.tabProjectSection.ResumeLayout(false);
             this.tabSections.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.tabProjectSectionParts.ResumeLayout(false);
-            this.tabControlParts.ResumeLayout(false);
-            this.tabEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlSectionEditor)).EndInit();
             this.pnlSectionEditor.ResumeLayout(false);
             this.pnlSectionEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgSectionPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSectionName.Properties)).EndInit();
+            this.tabProjectSectionParts.ResumeLayout(false);
+            this.tabControlParts.ResumeLayout(false);
+            this.tabEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlPartsEdtior)).EndInit();
             this.pnlPartsEdtior.ResumeLayout(false);
             this.pnlPartsEdtior.PerformLayout();
@@ -1211,5 +1241,8 @@
         private DevExpress.XtraEditors.TextEdit txtPartName;
         private Label lblPartDescription;
         private Label lblPartName;
+        private OpenFileDialog dlgProjectImage;
+        private OpenFileDialog dlgProjectSectionPhoto;
+        private OpenFileDialog dlgProjectSectionPartPhoto;
     }
 }
