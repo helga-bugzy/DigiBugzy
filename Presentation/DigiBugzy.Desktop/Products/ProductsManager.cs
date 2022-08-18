@@ -117,29 +117,36 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadSelectedProduct()
         {
-            //Do nothing if the same
-            if (SelectedProductModel.Id == SelectedProduct.Id) return;
-
-
-            if (SelectedProductModel.Id == 0)
+            try
             {
-                SelectedProduct = new Product();
-            }
-            else
-            {
-                using var service = new ProductService(Globals.GetConnectionString());
-                SelectedProduct = service.GetById(SelectedProductModel.Id, true);
-            }
+                if (SelectedProductModel.Id == SelectedProduct.Id) return;
 
-            LoadEditor();
-            LoadCategoriesSelector();
-            LoadCustomFieldsSelector();
-           
-            LoadDocumentsTab();
+
+                if (SelectedProductModel.Id == 0)
+                {
+                    SelectedProduct = new Product();
+                }
+                else
+                {
+                    using var service = new ProductService(Globals.GetConnectionString());
+                    SelectedProduct = service.GetById(SelectedProductModel.Id, true);
+                }
+
+                LoadEditor();
+                LoadCategoriesSelector();
+                LoadCustomFieldsSelector();
+
+                LoadDocumentsTab();
+
+                LoadStockInformation();
+
+                Application.DoEvents();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
             
-            LoadStockInformation();
-
-            Application.DoEvents();
         }
 
         private void LoadEditor()
