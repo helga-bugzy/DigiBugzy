@@ -82,13 +82,13 @@ namespace DigiBugzy.Desktop.Dashboards
             UseWaitCursor = true;
 
             _childForm = childForm;
-            
+
+            if (_splash.IsDisposed) _splash = new PageSplashScreen();
+            _splash.Title = title;
             _splash.Show();
             Application.DoEvents();
 
             timer1.Start();
-            
-            
                 
         }
 
