@@ -249,10 +249,41 @@ namespace DigiBugzy.Services.SampleData
                     Name = "Sample",
                     LikeSearch = true,
                     ClassificationId = _classificationId,
-                    DigiAdminId = _digiAdminId
-                });
+                    DigiAdminId = _digiAdminId,
+                    OnlyParents = true
+                }) ;
             foreach (var category in categories)
             {
+                DeleteCategoryRecursive(category.Id);
+                
+                //Custom field mappings
+                categoryCustomFieldService.Delete(categoryCustomFieldService.GetByCategoryId(category.Id), true);
+
+                //Product field mappings
+                productCategoryService.Delete(productCategoryService.GetByCategoryId(category.Id), true);
+
+                //Category
+                categoryService.Delete(category, true);
+            }
+        }
+
+        private void DeleteCategoryRecursive(int parentId)
+        {
+            using var categoryService = new CategoryService(_connectionString);
+            using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
+            using var productCategoryService = new ProductCategoryService(_connectionString);
+
+            var categories = categoryService.Get(
+                new StandardFilter
+                {
+                    ParentId = parentId,
+                });
+
+            foreach (var category in categories)
+            {
+                
+                DeleteCategoryRecursive(category.Id);
+
                 //Custom field mappings
                 categoryCustomFieldService.Delete(categoryCustomFieldService.GetByCategoryId(category.Id), true);
 
