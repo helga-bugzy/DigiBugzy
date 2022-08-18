@@ -484,12 +484,18 @@ namespace DigiBugzy.Desktop.Products
         }
 
 
-        #endregion
 
         #endregion
 
         #endregion
 
-        
+        #endregion
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (SelectedProduct.Id <= 0) return;
+            var service = new ProductService(Globals.GetConnectionString());
+            service.Delete(SelectedProduct.Id, false);
+        }
     }
 }
