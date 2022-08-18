@@ -19,9 +19,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private bool _isDragging;
 
-        public Category SelectedCategory { get; set; }
+        public Category SelectedCategory { get; set; } = new();
 
-        public List<Category> Categories { get; set; }
+        public List<Category> Categories { get; set; } = new();
 
         private List<MappingViewModel> _categories;
 
@@ -61,11 +61,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         #endregion
 
-        #region Public Methods
-
-
-
-        #endregion
 
         #region Helper Methods
 
@@ -669,6 +664,10 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void twCategories_AfterCheck(object sender, TreeViewEventArgs e)
         {
+            //No custom field selected - will cause an error
+            if (SelectedCustomField.Id <= 0) return;    
+
+            //All selections ok, now map
             using var service = new CategoryService(Globals.GetConnectionString());
             service.HandleCustomFieldMapping(
                 categoryId: int.Parse(e.Node!.Tag.ToString()!), 
