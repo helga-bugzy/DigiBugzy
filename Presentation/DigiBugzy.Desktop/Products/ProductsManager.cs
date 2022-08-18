@@ -460,33 +460,10 @@ namespace DigiBugzy.Desktop.Products
         private void View_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             var gridView = sender as GridView;
-            var value = gridView?.GetRowCellValue(gridView.FocusedRowHandle, gridView.FocusedColumn);
             SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
             LoadSelectedProduct();
         }
 
-      
-
-        private void gvProducts_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
-        {
-            var master = sender as GridView;
-            var detail = master?.GetDetailView(e.RowHandle, e.RelationIndex) as GridView;
-            detail.Click += new EventHandler(detail_Click);
-        }
-
-        /// <summary>
-        /// https://docs.devexpress.com/WindowsForms/732/controls-and-libraries/data-grid/master-detail/working-with-master-detail-relationships-in-code#load-details-dynamically-by-handling-events
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void detail_Click(object sender, EventArgs e)
-        {
-            var gridView = sender as GridView;
-            var value = gridView?.GetRowCellValue(gridView.FocusedRowHandle, gridView.FocusedColumn);
-            SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
-            LoadSelectedProduct();
-
-        }
 
         #endregion
 
