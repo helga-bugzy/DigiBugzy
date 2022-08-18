@@ -106,8 +106,10 @@ namespace DigiBugzy.Desktop.Products
 
             gvProducts.CollapseAllDetails();
             gvProducts.BestFitColumns();
-            
 
+            gvProducts.Columns["Id"].Visible = false;
+            gvProducts.Columns["ParentId"].Visible = false;
+            gvProducts.Columns["ParentName"].Visible = false;
 
 
             LoadSelectedProduct();
