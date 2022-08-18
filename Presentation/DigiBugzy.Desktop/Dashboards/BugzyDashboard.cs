@@ -36,6 +36,7 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void btnProducts_ItemClick(object sender, ItemClickEventArgs e)
         {
+            
             ShowChildForm(new ProductsManager());
         }
 
@@ -74,9 +75,10 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void ShowChildForm(XtraForm childForm)
         {
-            
+            UseWaitCursor = true;
             childForm.MdiParent = this;
             childForm.Show();
+            UseWaitCursor = false;
                 
         }
 

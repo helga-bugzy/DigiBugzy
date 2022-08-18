@@ -21,13 +21,17 @@ namespace DigiBugzy.Desktop.Products
 
         public Product SelectedProduct { get; set; } = new();
 
+        public ProductGridViewModel SelectedProductModel { get; set; } = new();
+
         public List<Product> FilteredProducts { get; set; } = new();
 
         private List<MappingViewModel> LoadingCategories { get; set; } = new();
 
         private List<MappingViewModel> LoadingFields { get; set; } = new();
 
-        private bool _isLoading = false;
+        private bool _isLoading;
+
+        private int _currentProductRowHandle { get; set; }
 
         #endregion
 
@@ -73,7 +77,8 @@ namespace DigiBugzy.Desktop.Products
         {
            // UseWaitCursor = true;
 
-            var filter = new StandardFilter(includeInActive: chkFilterInactive.Checked,
+            var filter = new StandardFilter(
+                includeInActive: chkFilterInactive.Checked,
                 includeDeleted: chkFilterDeleted.Checked);
 
             if(cmbFilterCategories.SelectedIndex > 0)
@@ -82,10 +87,13 @@ namespace DigiBugzy.Desktop.Products
                 filter.CategoryId = cat.Id;
             }
 
-            using var service = new ProductService(Globals.GetConnectionString());
-            var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: false), Globals.GetConnectionString(), true);
+            //Bind the products to the grid
             
-            gridListing.DataSource = viewModels;
+            using var service = new ProductService(Globals.GetConnectionString());
+            var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), true);
+            bsProductsListing.DataSource = viewModels;
+            gvProducts.DataController.AllowIEnumerableDetails = true;
+            gridListing.DataSource = bsProductsListing;
 
             var gridFormatRule = new GridFormatRule();
             var formatConditionRuleValue = new FormatConditionRuleValue();
@@ -97,32 +105,30 @@ namespace DigiBugzy.Desktop.Products
             gvProducts.FormatRules.Add(gridFormatRule);
 
             gvProducts.CollapseAllDetails();
-
             gvProducts.BestFitColumns();
-
-
-            gvProducts.Columns["Id"].Visible = false;
-            gvProducts.Columns["ParentId"].Visible = false;
             
-            LoadSelectedProduct(clearSelectedProduct ? 0 : SelectedProduct.Id);
+
+
+
+            LoadSelectedProduct();
 
             if (!_isLoading) UseWaitCursor = false;
         }
 
-        private void LoadSelectedProduct(int productId)
+        private void LoadSelectedProduct()
         {
             //Do nothing if the same
-            if (productId == SelectedProduct.Id) return;
+            if (SelectedProductModel.Id == SelectedProduct.Id) return;
 
 
-            if (productId == 0)
+            if (SelectedProductModel.Id == 0)
             {
                 SelectedProduct = new Product();
             }
             else
             {
                 using var service = new ProductService(Globals.GetConnectionString());
-                SelectedProduct = service.GetById(productId, true);
+                SelectedProduct = service.GetById(SelectedProductModel.Id, true);
             }
 
             LoadEditor();
@@ -252,7 +258,7 @@ namespace DigiBugzy.Desktop.Products
 
         private void ClearCustomFieldControls()
         {
-            for (int i = 0; i < pnlCustomFieldsList.Controls.Count + 10; i++)
+            for (var i = 0; i < pnlCustomFieldsList.Controls.Count + 10; i++)
             {
                 foreach (UserControl control in pnlCustomFieldsList.Controls)
                 {
@@ -313,8 +319,6 @@ namespace DigiBugzy.Desktop.Products
         #endregion
 
         #endregion
-
-
 
         #region Control Event Procedures
 
@@ -416,7 +420,7 @@ namespace DigiBugzy.Desktop.Products
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
-            LoadSelectedProduct(0);
+            LoadSelectedProduct();
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -443,53 +447,47 @@ namespace DigiBugzy.Desktop.Products
         #region Grid View
 
       
-        private void gridListing_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
+        private void gvProducts_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
         {
             var view = (GridView)e.View;
             view.Columns["Id"].Visible = false;
             view.Columns["ParentId"].Visible = false;
             view.Columns["ParentName"].Visible = false;
+
+            view.FocusedRowChanged += View_FocusedRowChanged;
         }
 
-        private void gvProducts_Click(object sender, EventArgs e)
+        private void View_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-        
+            var gridView = sender as GridView;
+            var value = gridView?.GetRowCellValue(gridView.FocusedRowHandle, gridView.FocusedColumn);
+            SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
+            LoadSelectedProduct();
         }
 
+      
 
-        private void gvProducts_RowClick(object sender, RowClickEventArgs e)
+        private void gvProducts_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
         {
-            try
-            {
-                //if (e.Clicks != 2) return;
-                if (e.RowHandle < 0) return;
-
-                var viewModel = (ProductGridViewModel)gvProducts.GetRow(e.RowHandle);
-                LoadSelectedProduct(viewModel.Id);
-
-               // UseWaitCursor = false;
-
-                if (gvProducts?.GetRowCellValue(e.RowHandle, "Id") == null) return;
-                var ok = int.TryParse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!, out _);
-                if(ok)
-                    LoadSelectedProduct(int.Parse(gvProducts.GetRowCellValue(e.RowHandle, "Id").ToString()!));
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-            }
+            var master = sender as GridView;
+            var detail = master?.GetDetailView(e.RowHandle, e.RelationIndex) as GridView;
+            detail.Click += new EventHandler(detail_Click);
         }
 
-        private void gvProducts_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        /// <summary>
+        /// https://docs.devexpress.com/WindowsForms/732/controls-and-libraries/data-grid/master-detail/working-with-master-detail-relationships-in-code#load-details-dynamically-by-handling-events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void detail_Click(object sender, EventArgs e)
         {
-            if (e.RowHandle < 0) return;
-            var viewModel = (ProductGridViewModel)gvProducts.GetRow(e.RowHandle);
-            LoadSelectedProduct(viewModel.Id);
-            if (viewModel.Id > 0)
-            {
-                LoadSelectedProduct(viewModel.Id);
-            }
+            var gridView = sender as GridView;
+            var value = gridView?.GetRowCellValue(gridView.FocusedRowHandle, gridView.FocusedColumn);
+            SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
+            LoadSelectedProduct();
+
         }
+
         #endregion
 
         #region Treeview
@@ -510,14 +508,12 @@ namespace DigiBugzy.Desktop.Products
         }
 
 
-
-
         #endregion
 
         #endregion
 
         #endregion
 
-       
+        
     }
 }

@@ -3,7 +3,7 @@ using DigiBugzy.Core.Domain.Projects;
 
 namespace DigiBugzy.Services.Projects
 {
-    internal class ProjectSectionService: BaseService, IProjectSectionService
+    public class ProjectSectionService: BaseService, IProjectSectionService
     {
         #region Ctor
 
