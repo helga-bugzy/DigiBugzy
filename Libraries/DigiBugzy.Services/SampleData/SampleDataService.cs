@@ -1,8 +1,10 @@
 ﻿
+using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.Enumerations;
 using DigiBugzy.Services.Administration.Categories;
 using DigiBugzy.Services.Administration.CustomFields;
 using DigiBugzy.Services.Catalog.Products;
+using DigiBugzy.Services.Projects;
 
 namespace DigiBugzy.Services.SampleData
 {
@@ -41,9 +43,13 @@ namespace DigiBugzy.Services.SampleData
                 case SampleDataTypeEnum.Products:
                     CreateProducts();
                     break;
+                case SampleDataTypeEnum.Projects:
+                    CreateProjects();
+                    break;
             }
         }
 
+       
         private void CreateCustomFields()
         {
             using var customFieldService = new CustomFieldService(_connectionString);
@@ -59,7 +65,7 @@ namespace DigiBugzy.Services.SampleData
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
                         DigiAdminId = _digiAdminId,
-                        Name = @$"Sample Field {i} - {Enum.GetName(typeof(CustomFieldTypeEnumeration), item)}",
+                        Name = $"Sample Field {i} - {Enum.GetName(typeof(CustomFieldTypeEnumeration), item)}",
                         Description = "Sample Custom Field",
                         CustomFieldTypeId = (int)item,
                         ClassificationId = _classificationId,
@@ -76,7 +82,7 @@ namespace DigiBugzy.Services.SampleData
                             CreatedOn = DateTime.Now,
                             DigiAdminId = _digiAdminId,
                             CustomFieldId = cfield.Id,
-                            Value = $@"Option {o} for {cfield.Name}"
+                            Value = $"Option {o} for {cfield.Name}"
                         };
 
                         option.Id = customFieldListOptionService.Create(option);
@@ -97,7 +103,7 @@ namespace DigiBugzy.Services.SampleData
                     IsDeleted = false,
                     CreatedOn = DateTime.Now,
                     DigiAdminId = _digiAdminId,
-                    Name = $@"Sample Category {p}",
+                    Name = $"Sample Category {p}",
                     Description = "Sample",
                     ClassificationId = _classificationId,
                     CustomFieldMappings = null
@@ -112,7 +118,7 @@ namespace DigiBugzy.Services.SampleData
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
                         DigiAdminId = _digiAdminId,
-                        Name = $@"Sample Child Category {p}",
+                        Name = $"Sample Child Category {p}",
                         Description = "Sample",
                         ClassificationId = _classificationId,
                         ParentId = parent.Id
@@ -127,7 +133,7 @@ namespace DigiBugzy.Services.SampleData
                             IsDeleted = false,
                             CreatedOn = DateTime.Now,
                             DigiAdminId = _digiAdminId,
-                            Name = $@"Sample Child Sub Category {p}",
+                            Name = $"Sample Child Sub Category {p}",
                             Description = "Sample",
                             ClassificationId = _classificationId,
                             ParentId = child.Id
@@ -152,7 +158,7 @@ namespace DigiBugzy.Services.SampleData
                     IsDeleted = false,
                     CreatedOn = DateTime.Now,
                     DigiAdminId = _digiAdminId,
-                    Name = $@"Sample product {p}",
+                    Name = $"Sample product {p}",
                     Description = "Sample product",
                 };
                 product.Id = productService.Create(product);
@@ -166,7 +172,7 @@ namespace DigiBugzy.Services.SampleData
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
                         DigiAdminId = _digiAdminId,
-                        Name = $@"Sample child {p}-{c}",
+                        Name = $"Sample child {p}-{c}",
                         Description = "Sample child product",
                         ParentId = product.Id
                     };
@@ -177,7 +183,63 @@ namespace DigiBugzy.Services.SampleData
             }
         }
 
-        
+        /// <summary>
+        /// Creates projects with sections and parts in the sections
+        /// </summary>
+        private void CreateProjects()
+        {
+            using var projectService = new ProjectService(_connectionString);
+            using var projectSectionService = new ProjectSectionService(_connectionString);
+            using var projectSectionPartService = new ProjectSectionPartService(_connectionString);
+
+            //Projects
+            for(var p = 1; p <= 10; p++)
+            {
+                var project = new Project
+                {
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    DigiAdminId = _digiAdminId,
+                    Name = $"Sample project {p}",
+                    Description = "Sample project",
+                };
+
+                project.Id = projectService.Create(project);
+
+                for(var s = 1; s <= 5; s++)
+                {
+                    var projectSection = new ProjectSection
+                    {
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedOn = DateTime.Now,
+                        DigiAdminId = _digiAdminId,
+                        Name = $"Sample Project {p} - Section {s}",
+                        Description = "Sample project section",
+                        ProjectId = project.Id
+                    };
+                    projectSection.Id = projectSectionService.Create(projectSection);
+
+                    for (var psp = 1; psp <= 20; psp++)
+                    {
+                        var projectSectionPart = new ProjectSectionPart
+                        {
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreatedOn = DateTime.Now,
+                            DigiAdminId = _digiAdminId,
+                            Name = $"Sample Project {p} - Section {s} - Part {psp}",
+                            Description = "Sample project section part",
+                            ProjectSectionId = projectSection.Id
+                        };
+
+                        projectSectionPartService.Create(projectSectionPart);
+                    }
+
+                }
+            }
+        }
 
         #endregion
 
@@ -201,6 +263,7 @@ namespace DigiBugzy.Services.SampleData
                 case SampleDataTypeEnum.Projects:
                     DeleteProjects();
                     break;
+                
             }
         }
         
@@ -323,7 +386,27 @@ namespace DigiBugzy.Services.SampleData
 
         private void DeleteProjects()
         {
+            using var projectService = new ProjectService(_connectionString);
+            using var projectSectionService = new ProjectSectionService(_connectionString);
+            using var projectSectionPartService = new ProjectSectionPartService(_connectionString);
 
+            var projects = projectService.Get(new StandardFilter { Name = "Sample", LikeSearch = true });
+            foreach (var project in projects)
+            {
+                var sections = projectSectionService.GetByProjectId(project.Id);
+                foreach(var section in sections)
+                {
+                    var parts = projectSectionPartService.GetByProjectSectionId(section.Id);
+                    foreach(var part in parts)
+                    {
+                        projectSectionPartService.Delete(part.Id, true);
+                    }
+
+                    projectSectionService.Delete(section.Id, true);
+                }
+
+                projectService.Delete(project.Id, true);  
+            }
         }
 
 

@@ -167,21 +167,29 @@ namespace DigiBugzy.Desktop.Products
 
         private void gvProjectSectionParts_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            if (_selectedProject.Id <= 0)
+            try
             {
-                _selectedProjectSection = new ProjectSection();
-                _selectedProjectSectionPart = new ProjectSectionPart();
-            }
-            else if (_selectedProjectSection.Id <= 0)
-            {
-                _selectedProjectSectionPart = new ProjectSectionPart();
-            }
-            else
-            {
-                _selectedProjectSection = (ProjectSection)gvProjectSections.GetRow(e.FocusedRowHandle);
-            }
 
-            LoadSelected_ProjectSectionPart();
+                if (_selectedProject.Id <= 0)
+                {
+                    _selectedProjectSection = new ProjectSection();
+                    _selectedProjectSectionPart = new ProjectSectionPart();
+                }
+                else if (_selectedProjectSection.Id <= 0)
+                {
+                    _selectedProjectSectionPart = new ProjectSectionPart();
+                }
+                else
+                {
+                    _selectedProjectSection = (ProjectSection)gvProjectSections.GetRow(e.FocusedRowHandle);
+                }
+
+                LoadSelected_ProjectSectionPart();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
 
