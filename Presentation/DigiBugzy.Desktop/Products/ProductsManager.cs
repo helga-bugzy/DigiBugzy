@@ -15,7 +15,7 @@ using DigiBugzy.Services.SampleData;
 
 namespace DigiBugzy.Desktop.Products
 {
-    public partial class ProductsManager : DevExpress.XtraEditors.XtraForm
+    public partial class ProductsManager : XtraForm
     {
         #region Properties
 
@@ -23,15 +23,11 @@ namespace DigiBugzy.Desktop.Products
 
         public ProductGridViewModel SelectedProductModel { get; set; } = new();
 
-        public List<Product> FilteredProducts { get; set; } = new();
-
         private List<MappingViewModel> LoadingCategories { get; set; } = new();
 
         private List<MappingViewModel> LoadingFields { get; set; } = new();
 
-        private bool _isLoading;
-
-        private int _currentProductRowHandle { get; set; }
+        private readonly bool _isLoading;
 
         #endregion
 
@@ -43,7 +39,7 @@ namespace DigiBugzy.Desktop.Products
 
             LoadFilterCategories();
 
-            LoadFilter(true);
+            LoadFilter();
 
             _isLoading = false;
         }
@@ -73,7 +69,7 @@ namespace DigiBugzy.Desktop.Products
         }
         
 
-        private void LoadFilter(bool clearSelectedProduct)
+        private void LoadFilter()
         {
            // UseWaitCursor = true;
 
@@ -201,7 +197,7 @@ namespace DigiBugzy.Desktop.Products
 
                 LoadCategoryNodes(node, parent.EntityMappedToId);
 
-                node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
+                node.Text = $"{parent.Name} ({node.Nodes.Count} subs)";
                 treeCategories.Nodes.Add(node);
             }
 
@@ -321,7 +317,7 @@ namespace DigiBugzy.Desktop.Products
                 SelectedProduct.Id = service.Create(SelectedProduct);
             }
 
-            LoadFilter(false);
+            LoadFilter();
 
         }
 
@@ -335,39 +331,33 @@ namespace DigiBugzy.Desktop.Products
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            LoadFilter(true);
+            LoadFilter();
         }
 
         private void cmbFilterCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadFilter(true);
+            LoadFilter();
         }
 
         private void chkFilterInactive_CheckedChanged(object sender, EventArgs e)
         {
-            LoadFilter(true);
+            LoadFilter();
         }
 
         private void chkFilterDeleted_CheckedChanged(object sender, EventArgs e)
         {
-            LoadFilter(true);
+            LoadFilter();
         }
 
         private void chkFilterLikeSearch_CheckedChanged(object sender, EventArgs e)
         {
-            LoadFilter(true);
+            LoadFilter();
         }
 
         private void txtFilterName_Leave(object sender, EventArgs e)
         {
-            LoadFilter(true);
+            LoadFilter();
         }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
 
         #endregion
 
@@ -385,7 +375,7 @@ namespace DigiBugzy.Desktop.Products
 
            
 
-            LoadFilter(true);
+            LoadFilter();
 
             Application.DoEvents();
         }
@@ -407,7 +397,7 @@ namespace DigiBugzy.Desktop.Products
                 productService.Delete(item.Id, true);
             }
 
-            LoadFilter(true);
+            LoadFilter();
 
             Application.DoEvents();
         }
@@ -442,7 +432,7 @@ namespace DigiBugzy.Desktop.Products
             using var service = new ProductService(Globals.GetConnectionString());
             service.Update(SelectedProduct);
 
-            LoadFilter(false);
+            LoadFilter();
 
         }
 
@@ -456,7 +446,7 @@ namespace DigiBugzy.Desktop.Products
         #region Grid View
 
       
-        private void gvProducts_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
+        private void gvProducts_ViewRegistered(object sender, ViewOperationEventArgs e)
         {
             var view = (GridView)e.View;
             view.Columns["Id"].Visible = false;
