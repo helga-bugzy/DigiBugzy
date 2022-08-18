@@ -36,23 +36,35 @@
             this.gridProjects = new DevExpress.XtraGrid.GridControl();
             this.gvProjects = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.butProjectsFilter = new DevExpress.XtraEditors.SimpleButton();
+            this.txtFilterProjectName = new DevExpress.XtraEditors.TextEdit();
             this.lblProjects = new System.Windows.Forms.Label();
             this.splitGridsSubs = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.gridProjectSections = new DevExpress.XtraGrid.GridControl();
             this.gvProjectSections = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.btnProjectsSectionsFilter = new DevExpress.XtraEditors.SimpleButton();
+            this.txtFilterProjectSectionName = new DevExpress.XtraEditors.TextEdit();
             this.lblProjectSections = new System.Windows.Forms.Label();
             this.panelControl8 = new DevExpress.XtraEditors.PanelControl();
             this.gridProjectSectionParts = new DevExpress.XtraGrid.GridControl();
             this.gvProjectSectionParts = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
+            this.butProjectsSectionPartsFilter = new DevExpress.XtraEditors.SimpleButton();
+            this.txtFilterProjectSectionPartName = new DevExpress.XtraEditors.TextEdit();
             this.lblProjectSectionParts = new System.Windows.Forms.Label();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.tabControls = new System.Windows.Forms.TabControl();
             this.tabProject = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.panelControl9 = new DevExpress.XtraEditors.PanelControl();
+            this.panelControl11 = new DevExpress.XtraEditors.PanelControl();
+            this.btnSampleDataDelete = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSampleData = new DevExpress.XtraEditors.SimpleButton();
+            this.panelControl10 = new DevExpress.XtraEditors.PanelControl();
+            this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabProjectSection = new System.Windows.Forms.TabPage();
@@ -65,16 +77,7 @@
             this.tabEditor = new System.Windows.Forms.TabPage();
             this.tabDocuments = new System.Windows.Forms.TabPage();
             this.tabProducts = new System.Windows.Forms.TabPage();
-            this.txtFilterProjectName = new DevExpress.XtraEditors.TextEdit();
-            this.txtFilterProjectSectionName = new DevExpress.XtraEditors.TextEdit();
-            this.txtFilterProjectSectionPartName = new DevExpress.XtraEditors.TextEdit();
-            this.butProjectsFilter = new DevExpress.XtraEditors.SimpleButton();
-            this.btnProjectsSectionsFilter = new DevExpress.XtraEditors.SimpleButton();
-            this.butProjectsSectionPartsFilter = new DevExpress.XtraEditors.SimpleButton();
-            this.panelControl9 = new DevExpress.XtraEditors.PanelControl();
-            this.panelControl11 = new DevExpress.XtraEditors.PanelControl();
-            this.panelControl10 = new DevExpress.XtraEditors.PanelControl();
-            this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.tabSampleData = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -91,6 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsSubs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsSubs.Panel1)).BeginInit();
             this.splitGridsSubs.Panel1.SuspendLayout();
@@ -103,31 +107,31 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvProjectSections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl8)).BeginInit();
             this.panelControl8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjectSectionParts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProjectSectionParts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionPartName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             this.tabControls.SuspendLayout();
             this.tabProject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).BeginInit();
+            this.panelControl9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).BeginInit();
+            this.panelControl11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).BeginInit();
+            this.panelControl10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tabProjectSection.SuspendLayout();
             this.tabSections.SuspendLayout();
             this.tabProjectSectionParts.SuspendLayout();
             this.tabControlParts.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionPartName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).BeginInit();
-            this.panelControl9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).BeginInit();
-            this.panelControl10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlManager
@@ -151,7 +155,6 @@
             // 
             // splitGridsMain
             // 
-            this.splitGridsMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitGridsMain.Location = new System.Drawing.Point(2, 2);
             this.splitGridsMain.Name = "splitGridsMain";
             // 
@@ -166,7 +169,7 @@
             this.splitGridsMain.Panel2.Controls.Add(this.splitGridsSubs);
             this.splitGridsMain.Panel2.Text = "Panel2";
             this.splitGridsMain.Size = new System.Drawing.Size(1538, 679);
-            this.splitGridsMain.SplitterPosition = 385;
+            this.splitGridsMain.SplitterPosition = 410;
             this.splitGridsMain.TabIndex = 0;
             // 
             // panelControl6
@@ -175,7 +178,7 @@
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl6.Location = new System.Drawing.Point(0, 37);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(385, 642);
+            this.panelControl6.Size = new System.Drawing.Size(410, 642);
             this.panelControl6.TabIndex = 2;
             // 
             // gridProjects
@@ -184,7 +187,7 @@
             this.gridProjects.Location = new System.Drawing.Point(2, 2);
             this.gridProjects.MainView = this.gvProjects;
             this.gridProjects.Name = "gridProjects";
-            this.gridProjects.Size = new System.Drawing.Size(381, 638);
+            this.gridProjects.Size = new System.Drawing.Size(406, 638);
             this.gridProjects.TabIndex = 0;
             this.gridProjects.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjects});
@@ -193,7 +196,7 @@
             // 
             this.gvProjects.GridControl = this.gridProjects;
             this.gvProjects.Name = "gvProjects";
-            this.gvProjects.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvProjects_RowClick);
+            this.gvProjects.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvProjects_FocusedRowChanged);
             // 
             // panelControl3
             // 
@@ -203,8 +206,24 @@
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl3.Location = new System.Drawing.Point(0, 0);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(385, 37);
+            this.panelControl3.Size = new System.Drawing.Size(410, 37);
             this.panelControl3.TabIndex = 1;
+            // 
+            // butProjectsFilter
+            // 
+            this.butProjectsFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("butProjectsFilter.ImageOptions.Image")));
+            this.butProjectsFilter.Location = new System.Drawing.Point(261, 10);
+            this.butProjectsFilter.Name = "butProjectsFilter";
+            this.butProjectsFilter.Size = new System.Drawing.Size(25, 23);
+            this.butProjectsFilter.TabIndex = 2;
+            this.butProjectsFilter.Click += new System.EventHandler(this.butProjectsFilter_Click);
+            // 
+            // txtFilterProjectName
+            // 
+            this.txtFilterProjectName.Location = new System.Drawing.Point(55, 10);
+            this.txtFilterProjectName.Name = "txtFilterProjectName";
+            this.txtFilterProjectName.Size = new System.Drawing.Size(200, 20);
+            this.txtFilterProjectName.TabIndex = 1;
             // 
             // lblProjects
             // 
@@ -232,7 +251,7 @@
             this.splitGridsSubs.Panel2.Controls.Add(this.panelControl8);
             this.splitGridsSubs.Panel2.Controls.Add(this.panelControl5);
             this.splitGridsSubs.Panel2.Text = "Panel2";
-            this.splitGridsSubs.Size = new System.Drawing.Size(1143, 679);
+            this.splitGridsSubs.Size = new System.Drawing.Size(1118, 679);
             this.splitGridsSubs.SplitterPosition = 547;
             this.splitGridsSubs.TabIndex = 0;
             // 
@@ -260,6 +279,7 @@
             // 
             this.gvProjectSections.GridControl = this.gridProjectSections;
             this.gvProjectSections.Name = "gvProjectSections";
+            this.gvProjectSections.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvProjectSections_FocusedRowChanged);
             // 
             // panelControl4
             // 
@@ -271,6 +291,22 @@
             this.panelControl4.Name = "panelControl4";
             this.panelControl4.Size = new System.Drawing.Size(547, 37);
             this.panelControl4.TabIndex = 1;
+            // 
+            // btnProjectsSectionsFilter
+            // 
+            this.btnProjectsSectionsFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectsSectionsFilter.ImageOptions.Image")));
+            this.btnProjectsSectionsFilter.Location = new System.Drawing.Point(299, 7);
+            this.btnProjectsSectionsFilter.Name = "btnProjectsSectionsFilter";
+            this.btnProjectsSectionsFilter.Size = new System.Drawing.Size(25, 23);
+            this.btnProjectsSectionsFilter.TabIndex = 3;
+            this.btnProjectsSectionsFilter.Click += new System.EventHandler(this.btnProjectsSectionsFilter_Click);
+            // 
+            // txtFilterProjectSectionName
+            // 
+            this.txtFilterProjectSectionName.Location = new System.Drawing.Point(93, 8);
+            this.txtFilterProjectSectionName.Name = "txtFilterProjectSectionName";
+            this.txtFilterProjectSectionName.Size = new System.Drawing.Size(200, 20);
+            this.txtFilterProjectSectionName.TabIndex = 1;
             // 
             // lblProjectSections
             // 
@@ -287,7 +323,7 @@
             this.panelControl8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl8.Location = new System.Drawing.Point(0, 37);
             this.panelControl8.Name = "panelControl8";
-            this.panelControl8.Size = new System.Drawing.Size(586, 642);
+            this.panelControl8.Size = new System.Drawing.Size(561, 642);
             this.panelControl8.TabIndex = 1;
             // 
             // gridProjectSectionParts
@@ -296,7 +332,7 @@
             this.gridProjectSectionParts.Location = new System.Drawing.Point(2, 2);
             this.gridProjectSectionParts.MainView = this.gvProjectSectionParts;
             this.gridProjectSectionParts.Name = "gridProjectSectionParts";
-            this.gridProjectSectionParts.Size = new System.Drawing.Size(582, 638);
+            this.gridProjectSectionParts.Size = new System.Drawing.Size(557, 638);
             this.gridProjectSectionParts.TabIndex = 0;
             this.gridProjectSectionParts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjectSectionParts});
@@ -305,6 +341,7 @@
             // 
             this.gvProjectSectionParts.GridControl = this.gridProjectSectionParts;
             this.gvProjectSectionParts.Name = "gvProjectSectionParts";
+            this.gvProjectSectionParts.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvProjectSectionParts_FocusedRowChanged);
             // 
             // panelControl5
             // 
@@ -314,8 +351,24 @@
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(586, 37);
+            this.panelControl5.Size = new System.Drawing.Size(561, 37);
             this.panelControl5.TabIndex = 0;
+            // 
+            // butProjectsSectionPartsFilter
+            // 
+            this.butProjectsSectionPartsFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("butProjectsSectionPartsFilter.ImageOptions.Image")));
+            this.butProjectsSectionPartsFilter.Location = new System.Drawing.Point(327, 11);
+            this.butProjectsSectionPartsFilter.Name = "butProjectsSectionPartsFilter";
+            this.butProjectsSectionPartsFilter.Size = new System.Drawing.Size(25, 23);
+            this.butProjectsSectionPartsFilter.TabIndex = 3;
+            this.butProjectsSectionPartsFilter.Click += new System.EventHandler(this.butProjectsSectionPartsFilter_Click);
+            // 
+            // txtFilterProjectSectionPartName
+            // 
+            this.txtFilterProjectSectionPartName.Location = new System.Drawing.Point(121, 11);
+            this.txtFilterProjectSectionPartName.Name = "txtFilterProjectSectionPartName";
+            this.txtFilterProjectSectionPartName.Size = new System.Drawing.Size(200, 20);
+            this.txtFilterProjectSectionPartName.TabIndex = 1;
             // 
             // lblProjectSectionParts
             // 
@@ -340,6 +393,7 @@
             this.tabControls.Controls.Add(this.tabProject);
             this.tabControls.Controls.Add(this.tabProjectSection);
             this.tabControls.Controls.Add(this.tabProjectSectionParts);
+            this.tabControls.Controls.Add(this.tabSampleData);
             this.tabControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControls.Location = new System.Drawing.Point(2, 2);
             this.tabControls.Name = "tabControls";
@@ -381,21 +435,83 @@
             this.tabPage1.Text = "Editor";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // panelControl9
+            // 
+            this.panelControl9.Controls.Add(this.panelControl11);
+            this.panelControl9.Controls.Add(this.panelControl10);
+            this.panelControl9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl9.Location = new System.Drawing.Point(3, 3);
+            this.panelControl9.Name = "panelControl9";
+            this.panelControl9.Size = new System.Drawing.Size(1510, 253);
+            this.panelControl9.TabIndex = 0;
+            // 
+            // panelControl11
+            // 
+            this.panelControl11.Controls.Add(this.btnSampleDataDelete);
+            this.panelControl11.Controls.Add(this.btnSampleData);
+            this.panelControl11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelControl11.Location = new System.Drawing.Point(2, 151);
+            this.panelControl11.Name = "panelControl11";
+            this.panelControl11.Size = new System.Drawing.Size(1506, 100);
+            this.panelControl11.TabIndex = 1;
+            // 
+            // btnSampleDataDelete
+            // 
+            this.btnSampleDataDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleDataDelete.ImageOptions.Image")));
+            this.btnSampleDataDelete.Location = new System.Drawing.Point(667, 37);
+            this.btnSampleDataDelete.Name = "btnSampleDataDelete";
+            this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleDataDelete.TabIndex = 21;
+            this.btnSampleDataDelete.Text = "Delete Sample Data";
+            this.btnSampleDataDelete.Click += new System.EventHandler(this.btnSampleDataDelete_Click);
+            // 
+            // btnSampleData
+            // 
+            this.btnSampleData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleData.ImageOptions.Image")));
+            this.btnSampleData.Location = new System.Drawing.Point(532, 37);
+            this.btnSampleData.Name = "btnSampleData";
+            this.btnSampleData.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleData.TabIndex = 20;
+            this.btnSampleData.Text = "Create Sample Data";
+            this.btnSampleData.Click += new System.EventHandler(this.btnSampleData_Click);
+            // 
+            // panelControl10
+            // 
+            this.panelControl10.Controls.Add(this.tablePanel1);
+            this.panelControl10.Location = new System.Drawing.Point(131, 25);
+            this.panelControl10.Name = "panelControl10";
+            this.panelControl10.Size = new System.Drawing.Size(200, 100);
+            this.panelControl10.TabIndex = 0;
+            // 
+            // tablePanel1
+            // 
+            this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F)});
+            this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel1.Location = new System.Drawing.Point(2, 2);
+            this.tablePanel1.Name = "tablePanel1";
+            this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            this.tablePanel1.Size = new System.Drawing.Size(196, 96);
+            this.tablePanel1.TabIndex = 0;
+            // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1516, 259);
+            this.tabPage2.Size = new System.Drawing.Size(1516, 257);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Documents";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Location = new System.Drawing.Point(4, 24);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1516, 259);
+            this.tabPage6.Size = new System.Drawing.Size(1516, 257);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Products";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -503,93 +619,14 @@
             this.tabProducts.Text = "Products";
             this.tabProducts.UseVisualStyleBackColor = true;
             // 
-            // txtFilterProjectName
+            // tabSampleData
             // 
-            this.txtFilterProjectName.Location = new System.Drawing.Point(55, 10);
-            this.txtFilterProjectName.Name = "txtFilterProjectName";
-            this.txtFilterProjectName.Size = new System.Drawing.Size(200, 20);
-            this.txtFilterProjectName.TabIndex = 1;
-            // 
-            // txtFilterProjectSectionName
-            // 
-            this.txtFilterProjectSectionName.Location = new System.Drawing.Point(93, 8);
-            this.txtFilterProjectSectionName.Name = "txtFilterProjectSectionName";
-            this.txtFilterProjectSectionName.Size = new System.Drawing.Size(200, 20);
-            this.txtFilterProjectSectionName.TabIndex = 1;
-            // 
-            // txtFilterProjectSectionPartName
-            // 
-            this.txtFilterProjectSectionPartName.Location = new System.Drawing.Point(121, 11);
-            this.txtFilterProjectSectionPartName.Name = "txtFilterProjectSectionPartName";
-            this.txtFilterProjectSectionPartName.Size = new System.Drawing.Size(200, 20);
-            this.txtFilterProjectSectionPartName.TabIndex = 1;
-            // 
-            // butProjectsFilter
-            // 
-            this.butProjectsFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.butProjectsFilter.Location = new System.Drawing.Point(261, 10);
-            this.butProjectsFilter.Name = "butProjectsFilter";
-            this.butProjectsFilter.Size = new System.Drawing.Size(25, 23);
-            this.butProjectsFilter.TabIndex = 2;
-            this.butProjectsFilter.Click += new System.EventHandler(this.butProjectsFilter_Click);
-            // 
-            // btnProjectsSectionsFilter
-            // 
-            this.btnProjectsSectionsFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
-            this.btnProjectsSectionsFilter.Location = new System.Drawing.Point(299, 7);
-            this.btnProjectsSectionsFilter.Name = "btnProjectsSectionsFilter";
-            this.btnProjectsSectionsFilter.Size = new System.Drawing.Size(25, 23);
-            this.btnProjectsSectionsFilter.TabIndex = 3;
-            this.btnProjectsSectionsFilter.Click += new System.EventHandler(this.btnProjectsSectionsFilter_Click);
-            // 
-            // butProjectsSectionPartsFilter
-            // 
-            this.butProjectsSectionPartsFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
-            this.butProjectsSectionPartsFilter.Location = new System.Drawing.Point(327, 11);
-            this.butProjectsSectionPartsFilter.Name = "butProjectsSectionPartsFilter";
-            this.butProjectsSectionPartsFilter.Size = new System.Drawing.Size(25, 23);
-            this.butProjectsSectionPartsFilter.TabIndex = 3;
-            this.butProjectsSectionPartsFilter.Click += new System.EventHandler(this.butProjectsSectionPartsFilter_Click);
-            // 
-            // panelControl9
-            // 
-            this.panelControl9.Controls.Add(this.panelControl11);
-            this.panelControl9.Controls.Add(this.panelControl10);
-            this.panelControl9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl9.Location = new System.Drawing.Point(3, 3);
-            this.panelControl9.Name = "panelControl9";
-            this.panelControl9.Size = new System.Drawing.Size(1510, 253);
-            this.panelControl9.TabIndex = 0;
-            // 
-            // panelControl11
-            // 
-            this.panelControl11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl11.Location = new System.Drawing.Point(2, 151);
-            this.panelControl11.Name = "panelControl11";
-            this.panelControl11.Size = new System.Drawing.Size(1506, 100);
-            this.panelControl11.TabIndex = 1;
-            // 
-            // panelControl10
-            // 
-            this.panelControl10.Controls.Add(this.tablePanel1);
-            this.panelControl10.Location = new System.Drawing.Point(131, 25);
-            this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(200, 100);
-            this.panelControl10.TabIndex = 0;
-            // 
-            // tablePanel1
-            // 
-            this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F)});
-            this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel1.Location = new System.Drawing.Point(2, 2);
-            this.tablePanel1.Name = "tablePanel1";
-            this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(196, 96);
-            this.tablePanel1.TabIndex = 0;
+            this.tabSampleData.Location = new System.Drawing.Point(4, 22);
+            this.tabSampleData.Name = "tabSampleData";
+            this.tabSampleData.Size = new System.Drawing.Size(1530, 291);
+            this.tabSampleData.TabIndex = 3;
+            this.tabSampleData.Text = "Sample Data";
+            this.tabSampleData.UseVisualStyleBackColor = true;
             // 
             // ProjectsManager
             // 
@@ -618,6 +655,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsSubs.Panel1)).EndInit();
             this.splitGridsSubs.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsSubs.Panel2)).EndInit();
@@ -631,6 +669,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl8)).EndInit();
             this.panelControl8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProjectSectionParts)).EndInit();
@@ -638,25 +677,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
             this.panelControl5.ResumeLayout(false);
             this.panelControl5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionPartName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.tabControls.ResumeLayout(false);
             this.tabProject.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).EndInit();
+            this.panelControl9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).EndInit();
+            this.panelControl11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).EndInit();
+            this.panelControl10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tabProjectSection.ResumeLayout(false);
             this.tabSections.ResumeLayout(false);
             this.tabProjectSectionParts.ResumeLayout(false);
             this.tabControlParts.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionPartName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl9)).EndInit();
-            this.panelControl9.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl10)).EndInit();
-            this.panelControl10.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -709,5 +747,8 @@
         private DevExpress.XtraEditors.PanelControl panelControl11;
         private DevExpress.XtraEditors.PanelControl panelControl10;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
+        private TabPage tabSampleData;
+        private DevExpress.XtraEditors.SimpleButton btnSampleDataDelete;
+        private DevExpress.XtraEditors.SimpleButton btnSampleData;
     }
 }
