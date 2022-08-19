@@ -190,9 +190,9 @@ namespace DigiBugzy.Services.SampleData
                         DigiAdminId = _digiAdminId,
                         Name = "Journal Entry",
                         Description = "Opening stock balance",
-                        QuantityIn = c,
+                        QuantityIn = c+1,
                         ProductId = child.Id,
-                        Price = c
+                        Price = c+100
                     });
                 }
                 
