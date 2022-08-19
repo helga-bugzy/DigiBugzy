@@ -801,7 +801,7 @@
             // 
             // splitStock.splitStock_Panel2
             // 
-            this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl1);
+           // this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl1);
             this.splitContainerControl1.Panel2.Controls.Add(this.tabNavigationPage1);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitStock.Size = new System.Drawing.Size(1934, 466);
