@@ -74,8 +74,15 @@ namespace DigiBugzy.Desktop
 
                 Globals.Settings.Refresh();
 
-                using var dash = new BugzyDashboard();
-                dash.ShowDialog();
+                try
+                {
+                    using var dash = new BugzyDashboard();
+                    dash.ShowDialog();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
             }
         }
 
