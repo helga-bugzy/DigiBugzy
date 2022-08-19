@@ -179,18 +179,23 @@ namespace DigiBugzy.Services.SampleData
                     };
 
                     child.Id = productService.Create(child);
-
+                    var date = new DateTime(year: DateTime.Now.Year, month: DateTime.Now.Month, day: DateTime.Now.Day, hour: DateTime.Now.Hour, minute: DateTime.Now.Minute, second: DateTime.Now.Second, DateTimeKind.Utc);
                     var stockJournalService = new StockJournalService(_connectionString);
                     stockJournalService.Create(new StockJournal
-                    {
+                    { 
                         IsActive = true,
                         IsDeleted = false,
-                        CreatedOn = DateTime.Now,
-                        EntryDate = DateTime.Now,
+                        CreatedOn = date,
+                        EntryDate = date,
                         DigiAdminId = _digiAdminId,
                         Name = "Journal Entry",
                         Description = "Opening stock balance",
                         QuantityIn = c+1,
+                        QuantityOnOrder = 0,
+                        QuantityOut = 0,
+                        QuantityReserved = 0,
+                        TotalInStock = 0,
+                        TotalValue = 0,
                         ProductId = child.Id,
                         Price = c+100
                     });

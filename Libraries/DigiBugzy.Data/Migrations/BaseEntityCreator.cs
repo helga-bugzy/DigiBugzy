@@ -70,7 +70,7 @@ namespace DigiBugzy.Data.Migrations
                 .WithColumn(nameof(BaseEntity.Id)).AsInt32().PrimaryKey().Identity()
                 .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
-                .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime();
+                .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime2();
 
                 AddMapping(MappingTypes.DigiAdmin, toSchemaName: DatabaseConstants.Schemas.Admin);
             }
@@ -110,7 +110,7 @@ namespace DigiBugzy.Data.Migrations
                 .WithColumn(nameof(BaseEntity.Id)).AsInt32().PrimaryKey().Identity()
                 .WithColumn(nameof(BaseEntity.IsActive)).AsBoolean()
                 .WithColumn(nameof(BaseEntity.IsDeleted)).AsBoolean()
-                .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime();
+                .WithColumn(nameof(BaseEntity.CreatedOn)).AsDateTime2();
 
             Migrator.Alter.Table(TableName)
                 .InSchema(SchemaName)
@@ -194,12 +194,12 @@ namespace DigiBugzy.Data.Migrations
                     if (isNullable)
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDateTime().Nullable().WithDefaultValue(DateTime.Now);
+                            .AddColumn(fieldName).AsDateTime2().Nullable();
                     }
                     else
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDateTime().NotNullable().WithDefaultValue(DateTime.Now); ;
+                            .AddColumn(fieldName).AsDateTime2().NotNullable();
                     }
                     
                     break;
@@ -220,24 +220,24 @@ namespace DigiBugzy.Data.Migrations
                     if (isNullable)
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsBoolean().Nullable().WithDefaultValue(false);
+                            .AddColumn(fieldName).AsBoolean().Nullable();
                     }
                     else
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsBoolean().NotNullable().WithDefaultValue(false);
+                            .AddColumn(fieldName).AsBoolean().NotNullable();
                     }
                     break;
                 case FieldTypes.AsDecimal:
                     if (isNullable)
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDecimal().Nullable().WithDefaultValue(0); ;
+                            .AddColumn(fieldName).AsDecimal().Nullable(); ;
                     }
                     else
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDecimal().NotNullable().WithDefaultValue(0); ;
+                            .AddColumn(fieldName).AsDecimal().NotNullable(); ;
                     }
 
                     break;
@@ -245,12 +245,12 @@ namespace DigiBugzy.Data.Migrations
                     if (isNullable)
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDouble().Nullable().WithDefaultValue(0);
+                            .AddColumn(fieldName).AsDouble().Nullable();
                     }
                     else
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDouble().NotNullable().WithDefaultValue(0);
+                            .AddColumn(fieldName).AsDouble().NotNullable();
                     }
 
                     break;
