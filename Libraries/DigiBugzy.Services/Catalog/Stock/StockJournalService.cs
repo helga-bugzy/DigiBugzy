@@ -46,7 +46,7 @@ namespace DigiBugzy.Services.Catalog.Stock
         public int Create(StockJournal entity)
         {
             //Get last entity
-            var lastEntry = dbContext.StockJournals.LastOrDefault(x => x.ProductId == entity.ProductId) ?? new StockJournal();
+            var lastEntry = dbContext.StockJournals.Where(x => x.ProductId == entity.ProductId).OrderByDescending(x => x.EntryDate).FirstOrDefault() ?? new StockJournal();
             
             //Perform calculations
             entity.TotalInStock = lastEntry.TotalInStock + entity.QuantityIn - entity.QuantityOut;
