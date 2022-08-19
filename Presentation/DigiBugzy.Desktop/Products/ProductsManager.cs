@@ -120,9 +120,6 @@ namespace DigiBugzy.Desktop.Products
         {
             try
             {
-                SelectedProduct ??= new Product();
-                SelectedProductModel ??= new ProductGridViewModel();
-
                 if (SelectedProductModel.Id > 0 && SelectedProductModel.Id == SelectedProduct.Id) return;
 
 
@@ -160,8 +157,8 @@ namespace DigiBugzy.Desktop.Products
             {
                 lblEditorPrice.Visible = lblEditorValue.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = true;
                 btnDelete.Visible = btnRestore.Visible = false;
-                chkActive.Checked = true;
-                lblSelectedFileName.Text = txtName.Text = txtDescription.Text = string.Empty;
+                chkEditorActive.Checked = true;
+                lblSelectedFileName.Text = txtEditorName.Text = txtEditorDescription.Text = string.Empty;
                 imgProductPhoto.Visible = false;
 
             }
@@ -171,9 +168,9 @@ namespace DigiBugzy.Desktop.Products
                 btnDelete.Visible = !SelectedProduct.IsDeleted;
                 btnRestore.Visible = SelectedProduct.IsDeleted;
 
-                chkActive.Checked = SelectedProduct.IsActive;
-                txtName.Text = SelectedProduct.Name;
-                txtDescription.Text = SelectedProduct.Description;
+                chkEditorActive.Checked = SelectedProduct.IsActive;
+                txtEditorName.Text = SelectedProduct.Name;
+                txtEditorDescription.Text = SelectedProduct.Description;
 
                 if (SelectedProduct.ProductImage is not { Length: > 0 })
                 {
@@ -302,9 +299,9 @@ namespace DigiBugzy.Desktop.Products
 
         private void SaveProduct()
         {
-            SelectedProduct.Name = txtName.Text;
-            SelectedProduct.Description = txtDescription.Text;
-            SelectedProduct.IsActive = chkActive.Checked;
+            SelectedProduct.Name = txtEditorName.Text;
+            SelectedProduct.Description = txtEditorDescription.Text;
+            SelectedProduct.IsActive = chkEditorActive.Checked;
 
             if (imgProductPhoto.Image != null)
             {
@@ -530,6 +527,11 @@ namespace DigiBugzy.Desktop.Products
             if (SelectedProduct.Id <= 0) return;
             var service = new ProductService(Globals.GetConnectionString());
             service.Delete(SelectedProduct.Id, false);
+        }
+
+        private void gridStock_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
