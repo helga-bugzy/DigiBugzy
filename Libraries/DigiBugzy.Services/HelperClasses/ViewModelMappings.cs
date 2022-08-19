@@ -43,13 +43,11 @@ namespace DigiBugzy.Services.HelperClasses
 
             if (product.ParentId == null) return model;
 
-            if (addParentInfo)
-            {
-                using var productService = new ProductService(connectionString);
-                var parent = productService.GetById(product.ParentId.Value, false);
+            if (!addParentInfo) return model;
+            using var productService = new ProductService(connectionString);
+            var parent = productService.GetById(product.ParentId.Value, false);
 
-                model.ParentName = parent.Name;
-            }
+            model.ParentName = parent.Name;
 
             return model;
         }
@@ -57,12 +55,25 @@ namespace DigiBugzy.Services.HelperClasses
         public static List<ProductGridViewModel> ConvertToHierarchy()
         {
             var results = new List<ProductGridViewModel>();
-            var parents = (from p in _viewModels where p.ParentId == null select p).ToList();
+            var parents = (
+                from p in _viewModels
+                where p.ParentId == null
+                select p).ToList();
 
-            var pp = from model in parents
-                     where model.ParentId == null &&
-                           !(from model2 in _viewModels where model2.ParentId == model.Id select model2).Any()
-                     select model;
+
+            var pp =
+                (from model in parents
+                 where model.ParentId == null &&
+                            !(from model2 in _viewModels where model2.ParentId == model.Id select model2).Any()
+                 select model).ToList();
+            //try
+            //{
+                
+            //}
+            //catch(Exception ex)
+            //{
+            //    Console.WriteLine(ex);
+            //}
 
             parents.AddRange(pp);
 
@@ -73,6 +84,7 @@ namespace DigiBugzy.Services.HelperClasses
             }
 
             return results.OrderBy(p => p.Name).ToList();
+
         }
 
         public static List<ProductGridViewModel> CreateChildProducts(int parentId)
