@@ -345,7 +345,7 @@ namespace DigiBugzy.Data.Migrations
             _currentTableName = nameof(StockJournal);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseAdministrationEntity();
-            creatory.AddColumn(nameof(StockJournal.EntryDate), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDateTime);
+            creatory.AddColumn(nameof(StockJournal.EntryDate), isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsDateTime);
             creatory.AddColumn(nameof(StockJournal.QuantityIn), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
             creatory.AddColumn(nameof(StockJournal.QuantityOut), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
             creatory.AddColumn(nameof(StockJournal.QuantityOnOrder), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);

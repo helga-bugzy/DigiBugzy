@@ -34,8 +34,6 @@
 
   <ItemGroup>
     <Folder Include="Finance\" />
-    <Folder Include="Projects\" />
-    <Folder Include="Projects\" />
   </ItemGroup>
 
   <ItemGroup>
