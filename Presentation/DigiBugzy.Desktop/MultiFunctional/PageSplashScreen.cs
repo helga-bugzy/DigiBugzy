@@ -11,7 +11,7 @@ namespace DigiBugzy.Desktop.MultiFunctional
         public PageSplashScreen()
         {
             InitializeComponent();
-            this.labelCopyright.Text = "Copyright © 2022-" + DateTime.Now.Year;
+            this.labelCopyright.Text = "Copyright © 2000 -" + DateTime.Now.Year;
         }
 
         #region Overrides
