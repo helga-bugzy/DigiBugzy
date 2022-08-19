@@ -4,6 +4,7 @@ using System.Linq;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Base;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Helpers;
@@ -117,7 +118,10 @@ namespace DigiBugzy.Desktop.Products
         {
             try
             {
-                if (SelectedProductModel.Id == SelectedProduct.Id) return;
+                SelectedProduct ??= new Product();
+                SelectedProductModel ??= new ProductGridViewModel();
+
+                if (SelectedProductModel.Id > 0 && SelectedProductModel.Id == SelectedProduct.Id) return;
 
 
                 if (SelectedProductModel.Id == 0)
@@ -152,6 +156,7 @@ namespace DigiBugzy.Desktop.Products
            
             if (SelectedProduct.Id <= 0)
             {
+                lblEditorPrice.Visible = lblEditorValue.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = true;
                 btnDelete.Visible = btnRestore.Visible = false;
                 chkActive.Checked = true;
                 lblSelectedFileName.Text = txtName.Text = txtDescription.Text = string.Empty;
@@ -160,6 +165,7 @@ namespace DigiBugzy.Desktop.Products
             }
             else
             {
+                lblEditorPrice.Visible = lblEditorValue.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = false;
                 btnDelete.Visible = !SelectedProduct.IsDeleted;
                 btnRestore.Visible = SelectedProduct.IsDeleted;
 
@@ -297,7 +303,6 @@ namespace DigiBugzy.Desktop.Products
             SelectedProduct.Name = txtName.Text;
             SelectedProduct.Description = txtDescription.Text;
             SelectedProduct.IsActive = chkActive.Checked;
-            
 
             if (imgProductPhoto.Image != null)
             {
@@ -372,9 +377,6 @@ namespace DigiBugzy.Desktop.Products
                 classificationId: (int)ClassificationsEnum.Product,
                 digiAdminId: Globals.DigiAdministration.Id);
             service.CreateSampleData();
-
-           
-
             LoadFilter();
 
             Application.DoEvents();
@@ -396,6 +398,9 @@ namespace DigiBugzy.Desktop.Products
             {
                 productService.Delete(item.Id, true);
             }
+
+            SelectedProduct = new Product();
+            SelectedProductModel = new ProductGridViewModel();
 
             LoadFilter();
 
@@ -419,7 +424,11 @@ namespace DigiBugzy.Desktop.Products
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
+            SelectedProduct = new Product();
+            SelectedProductModel = new ProductGridViewModel();
             LoadSelectedProduct();
+            
+            Application.DoEvents();
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -456,7 +465,7 @@ namespace DigiBugzy.Desktop.Products
             view.FocusedRowChanged += View_FocusedRowChanged;
         }
 
-        private void View_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void View_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             var gridView = sender as GridView;
             SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;

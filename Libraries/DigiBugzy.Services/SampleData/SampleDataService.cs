@@ -179,25 +179,27 @@ namespace DigiBugzy.Services.SampleData
                     };
 
                     child.Id = productService.Create(child);
-                    var date = new DateTime(year: DateTime.Now.Year, month: DateTime.Now.Month, day: DateTime.Now.Day, hour: DateTime.Now.Hour, minute: DateTime.Now.Minute, second: DateTime.Now.Second, DateTimeKind.Utc);
+                    //var date = new DateTime(year: DateTime.Now.Year, month: DateTime.Now.Month, day: DateTime.Now.Day, hour: DateTime.Now.Hour, minute: DateTime.Now.Minute, second: DateTime.Now.Second, DateTimeKind.Utc);
                     var stockJournalService = new StockJournalService(_connectionString);
-                    stockJournalService.Create(new StockJournal
-                    { 
+                    stockJournalService.Create(new()
+                    {
                         IsActive = true,
                         IsDeleted = false,
-                        CreatedOn = date,
-                        EntryDate = date,
+                        CreatedOn = DateTime.Now,
+                        EntryDate = DateTime.Now,
                         DigiAdminId = _digiAdminId,
                         Name = "Journal Entry",
                         Description = "Opening stock balance",
-                        QuantityIn = c+1,
-                        QuantityOnOrder = 0,
-                        QuantityOut = 0,
-                        QuantityReserved = 0,
-                        TotalInStock = 0,
-                        TotalValue = 0,
+                        QuantityIn = c + 1,
+                        QuantityOnOrder = double.Parse(s: 0.ToString()),
+                        QuantityOut = double.Parse(s: 0.ToString()),
+                        QuantityReserved = double.Parse(s: 0.ToString()),
+                        TotalInStock = double.Parse(s: 0.ToString()),
+                        TotalValue = double.Parse(s: 0.ToString()),
                         ProductId = child.Id,
-                        Price = c+100
+                        Price = double.Parse(s: (c + 100).ToString()),
+                        ProjectSectionPartId = null,
+                        Supplier = null
                     });
                 }
                 

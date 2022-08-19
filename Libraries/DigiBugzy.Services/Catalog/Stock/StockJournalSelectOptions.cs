@@ -6,13 +6,13 @@ namespace DigiBugzy.Services.Catalog.Stock
     {
         public int ProductId { get; set; }
 
-        public int ProjectId { get; set; } = 0;
+        public int? ProjectId { get; set; }
 
-        public int ProjectSectionId { get; set; } = 0;
+        public int? ProjectSectionId { get; set; }
 
-        public int ProjectSectionPartId { get; set; } = 0;
+        public int? ProjectSectionPartId { get; set; }
 
-        public int SupplierId { get; set; } = 0;
+        public int? SupplierId { get; set; } 
 
         public StockJournalSelectOptions(int productId)
         {

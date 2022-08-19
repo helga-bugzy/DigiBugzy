@@ -114,8 +114,8 @@ namespace DigiBugzy.Data.Migrations
 
             Migrator.Alter.Table(TableName)
                 .InSchema(SchemaName)
-                .AddColumn(nameof(BaseAdministrationEntity.Name)).AsString()
-                .AddColumn(nameof(BaseAdministrationEntity.Description)).AsString();
+                .AddColumn(nameof(BaseAdministrationEntity.Name)).AsString().Nullable()
+                .AddColumn(nameof(BaseAdministrationEntity.Description)).AsString().Nullable();
         }
 
         public void CreateBaseAdministrationEntity()
@@ -123,8 +123,8 @@ namespace DigiBugzy.Data.Migrations
             CreateBaseEntity();
             Migrator.Alter.Table(TableName)
                 .InSchema(SchemaName)
-                .AddColumn(nameof(BaseAdministrationEntity.Name)).AsString()
-                .AddColumn(nameof(BaseAdministrationEntity.Description)).AsString();
+                .AddColumn(nameof(BaseAdministrationEntity.Name)).AsString().Nullable()
+                .AddColumn(nameof(BaseAdministrationEntity.Description)).AsString().Nullable();
         }
 
         public void CreateBaseProjectSublementEntity()

@@ -1,4 +1,6 @@
-﻿using DigiBugzy.Core.Domain.Projects;
+﻿#nullable enable
+using DigiBugzy.Core.Domain.BusinessEntities;
+using DigiBugzy.Core.Domain.Projects;
 
 namespace DigiBugzy.Core.Domain.Products
 {
@@ -22,41 +24,44 @@ namespace DigiBugzy.Core.Domain.Products
         /// <summary>
         /// Transaction/Entry Quantity - when stock is added
         /// </summary>
-        public decimal QuantityIn { get; set; } = 0;
+        public double QuantityIn { get; set; } = 0;
 
         /// <summary>
         /// When  stock is taken out i.e. for a project part
         /// </summary>
-        public decimal QuantityOut { get; set; } = 0;
+        public double QuantityOut { get; set; } = 0;
 
         /// <summary>
         /// Total physical in stock
         /// </summary>
-        public decimal TotalInStock { get; set; } = 0;
+        public double TotalInStock { get; set; } = 0;
 
         /// <summary>
         /// When reserving for a project this project part in planning but not executed yet
         /// </summary>
-        public decimal QuantityReserved { get; set; } = 0;
+        public double QuantityReserved { get; set; } = 0;
 
         /// <summary>
         /// When stock is on order but not received yet
         /// </summary>
-        public decimal QuantityOnOrder { get; set; } = 0;
+        public double QuantityOnOrder { get; set; } = 0;
 
-        public decimal Price { get; set; } = 0;
+        public double Price { get; set; } = 0;
 
         /// <summary>
         /// Total in (total price + (price * qty (in or out)))
         /// </summary>
-        public decimal TotalValue { get; set; } = 0;
+        public double TotalValue { get; set; } = 0;
 
 
 
         [ForeignKey(nameof(ProductId))]
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
+
+        [ForeignKey(nameof(SupplierId))]
+        public BusinessEntity? Supplier { get; set; }
 
         [ForeignKey(nameof(ProjectSectionPartId))]
-        public ProjectSectionPart ProjectSectionPart { get; set; } = new();
+        public ProjectSectionPart? ProjectSectionPart { get; set; }
     }
 }
