@@ -4,6 +4,7 @@ using DigiBugzy.Core.Enumerations;
 using DigiBugzy.Services.Administration.Categories;
 using DigiBugzy.Services.Administration.CustomFields;
 using DigiBugzy.Services.Catalog.Products;
+using DigiBugzy.Services.Catalog.Stock;
 using DigiBugzy.Services.Projects;
 
 namespace DigiBugzy.Services.SampleData
@@ -177,7 +178,21 @@ namespace DigiBugzy.Services.SampleData
                         ParentId = product.Id
                     };
 
-                    productService.Create(child);
+                    child.Id = productService.Create(child);
+
+                    var stockJournalService = new StockJournalService(_connectionString);
+                    stockJournalService.Create(new StockJournal
+                    {
+                        IsActive = true,
+                        IsDeleted = false,
+                        CreatedOn = DateTime.Now,
+                        DigiAdminId = _digiAdminId,
+                        Name = "Journal Entry",
+                        Description = "Opening stock balance",
+                        QuantityIn = c,
+                        ProductId = child.Id,
+                        TotalInStock = c,
+                    });
                 }
                 
             }

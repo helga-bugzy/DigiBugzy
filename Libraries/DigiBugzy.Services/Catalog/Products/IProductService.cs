@@ -43,7 +43,6 @@ namespace DigiBugzy.Services.Catalog.Products
         public void Delete(List<Product> entities, bool hardDelete);
 
 
-
         /// <summary>
         /// Updates details of an existing product
         /// </summary>

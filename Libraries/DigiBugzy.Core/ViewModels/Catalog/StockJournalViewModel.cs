@@ -1,22 +1,31 @@
-﻿using DigiBugzy.Core.Domain.Projects;
+﻿
 
-namespace DigiBugzy.Core.Domain.Products
+namespace DigiBugzy.Core.ViewModels.Catalog
 {
-    [Table(name: nameof(StockJournal), Schema = DatabaseConstants.Schemas.Catalog)]
-    public class StockJournal : BaseAdministrationEntity
+    /// <summary>
+    /// View model vor stock journal grid entries
+    /// </summary>
+    public class StockJournalViewModel
     {
         public DateTime EntryDate { get; set; }
+
         /// <summary>
         /// Related product primary key
         /// </summary>
         public int ProductId { get; set; }
+
+        public string ProductName { get; set; }
 
         /// <summary>
         /// If applicable, related project section part id
         /// </summary>
         public int? ProjectSectionPartId { get; set; }
 
+        public string ProjectSectionPartName { get; set; }
+
         public int? SupplierId { get; set; }
+
+        public string SupplierName { get; set; }
 
         /// <summary>
         /// Transaction/Entry Quantity - when stock is added
@@ -42,20 +51,10 @@ namespace DigiBugzy.Core.Domain.Products
         /// When stock is on order but not received yet
         /// </summary>
         public double QuantityOnOrder { get; set; }
-        
-        public decimal Price { get; set; }
 
         /// <summary>
-        /// Total in (total price + (price * qty (in or out)))
+        /// Total physical in stock minus quantity reserviced (in - out - reserved = available)
         /// </summary>
-        public decimal TotalValue { get; set; }
-
-
-        
-        [ForeignKey(nameof(ProductId))]
-        public Product Product { get; set; }
-
-        [ForeignKey(nameof(ProjectSectionPartId))]
-        public ProjectSectionPart ProjectSectionPart { get; set; } = new();
+        public double TotalAvailable { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿
-
 namespace DigiBugzy.Services.Catalog.Stock
 {
     public class StockJournalService:BaseService, IStockJournalService
@@ -19,30 +18,22 @@ namespace DigiBugzy.Services.Catalog.Stock
         public StockJournal GetById(int id) => dbContext.StockJournals.FirstOrDefault(sj => sj.Id == id);
 
         /// <inheritdoc />
-        public List<StockJournal> GetByProductId(int id) => dbContext.StockJournals.Where(sj => sj.ProductId == id).ToList();
-
-        /// <inheritdoc />
-        public List<StockJournal> GetBySupplierId(int id) => dbContext.StockJournals.Where(sj => sj.SupplierId == id).ToList();
-
-        /// <inheritdoc />
-        public List<StockJournal> GetByProjectSectionPartId(int id) => dbContext.StockJournals.Where(sj => sj.ProjectSectionPartId == id).ToList();
-
-        /// <inheritdoc />
-        public List<StockJournal> GetByProjectSectionId(int id)
+        public List<StockJournal> GetStockJournalViewModel(StockJournalSelectOptions options)
         {
-            throw new NotImplementedException();
-        }
+            //var query = dbContext.StockJournals.AsQueryable<StockJournal>().Where(x => x.ProductId == options.ProductId);
+            //if(options.SupplierId > 0)
+            //{
+            //    query = query.Where(x => x.SupplierId == options.SupplierId);
+            //}
 
-        /// <inheritdoc />
-        public List<StockJournal> GetByProjectId(int id)
-        {
-            throw new NotImplementedException();
-        }
+            //if (options.ProjectSectionPartId > 0)
+            //{
+            //    query = query.Where(x => x.ProjectSectionPartId == options.ProjectSectionPartId);
+            //}
 
-        /// <inheritdoc />
-        public List<StockJournal> Get(StandardFilter filter)
-        {
-            throw new NotImplementedException();
+            //return query.Select(StockJournal).ToList();
+
+            return new List<StockJournal>();
         }
 
 

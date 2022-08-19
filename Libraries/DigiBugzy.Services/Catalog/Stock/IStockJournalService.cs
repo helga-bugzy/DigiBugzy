@@ -1,4 +1,6 @@
 ﻿
+using DigiBugzy.Core.ViewModels.Catalog;
+
 namespace DigiBugzy.Services.Catalog.Stock
 {
     public interface  IStockJournalService
@@ -12,33 +14,10 @@ namespace DigiBugzy.Services.Catalog.Stock
         /// <returns></returns>
         public StockJournal GetById(int id);
 
-        /// <summary>
-        /// Retrieves product on hand of it's primary key
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public List<StockJournal> GetByProductId(int id);
 
-        /// <summary>
-        /// Retrieves product on hand of it's primary key
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public List<StockJournal> GetBySupplierId(int id);
+        public List<StockJournal> GetStockJournalViewModel(StockJournalSelectOptions options);
 
-
-        public List<StockJournal> GetByProjectSectionPartId(int id);
-
-        public List<StockJournal> GetByProjectSectionId(int id);
-
-        public List<StockJournal> GetByProjectId(int id);
-
-        /// <summary>
-        /// Gets a list of products on hand of the filter values
-        /// </summary>
-        /// <param name="filter"></param>
-        /// <returns></returns>
-        public List<StockJournal> Get(StandardFilter filter);
+       
 
 
         #endregion
