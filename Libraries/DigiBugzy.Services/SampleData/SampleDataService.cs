@@ -186,6 +186,7 @@ namespace DigiBugzy.Services.SampleData
                         IsActive = true,
                         IsDeleted = false,
                         CreatedOn = DateTime.Now,
+                        EntryDate = DateTime.Now,
                         DigiAdminId = _digiAdminId,
                         Name = "Journal Entry",
                         Description = "Opening stock balance",

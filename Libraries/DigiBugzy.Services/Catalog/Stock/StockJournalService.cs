@@ -1,5 +1,4 @@
 ﻿
-using DigiBugzy.Services.Catalog.Products;
 
 namespace DigiBugzy.Services.Catalog.Stock
 {

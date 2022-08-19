@@ -6,6 +6,7 @@ namespace DigiBugzy.Core.Domain.Products
     public class StockJournal : BaseAdministrationEntity
     {
         public DateTime EntryDate { get; set; }
+
         /// <summary>
         /// Related product primary key
         /// </summary>
@@ -21,37 +22,37 @@ namespace DigiBugzy.Core.Domain.Products
         /// <summary>
         /// Transaction/Entry Quantity - when stock is added
         /// </summary>
-        public double QuantityIn { get; set; }
+        public decimal QuantityIn { get; set; } = 0;
 
         /// <summary>
         /// When  stock is taken out i.e. for a project part
         /// </summary>
-        public double QuantityOut { get; set; }
+        public decimal QuantityOut { get; set; } = 0;
 
         /// <summary>
         /// Total physical in stock
         /// </summary>
-        public double TotalInStock { get; set; }
+        public decimal TotalInStock { get; set; } = 0;
 
         /// <summary>
         /// When reserving for a project this project part in planning but not executed yet
         /// </summary>
-        public double QuantityReserved { get; set; }
+        public decimal QuantityReserved { get; set; } = 0;
 
         /// <summary>
         /// When stock is on order but not received yet
         /// </summary>
-        public double QuantityOnOrder { get; set; }
-        
-        public decimal Price { get; set; }
+        public decimal QuantityOnOrder { get; set; } = 0;
+
+        public decimal Price { get; set; } = 0;
 
         /// <summary>
         /// Total in (total price + (price * qty (in or out)))
         /// </summary>
-        public decimal TotalValue { get; set; }
+        public decimal TotalValue { get; set; } = 0;
 
 
-        
+
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
 
