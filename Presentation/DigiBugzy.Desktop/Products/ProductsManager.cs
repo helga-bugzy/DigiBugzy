@@ -11,8 +11,10 @@ using DigiBugzy.Core.Helpers;
 using DigiBugzy.Core.ViewModels.Administration;
 using DigiBugzy.Core.ViewModels.Catalog;
 using DigiBugzy.Desktop.Administration.CustomFields;
+using DigiBugzy.Services.Catalog.Stock;
 using DigiBugzy.Services.HelperClasses;
 using DigiBugzy.Services.SampleData;
+using static System.Double;
 
 namespace DigiBugzy.Desktop.Products
 {
@@ -320,6 +322,29 @@ namespace DigiBugzy.Desktop.Products
                 SelectedProduct.IsDeleted = false;
                 SelectedProduct.CreatedOn = DateTime.Now;
                 SelectedProduct.Id = service.Create(SelectedProduct);
+
+                //Stock entry
+                var stockJournalService = new StockJournalService(Globals.GetConnectionString());
+                stockJournalService.Create(new StockJournal
+                {
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    EntryDate = DateTime.Now,
+                    DigiAdminId = Globals.DigiAdministration.Id,
+                    Name = "Journal Entry",
+                    Description = "Opening stock balance",
+                    QuantityIn = Parse(txtEditorQuantity.Text),
+                    QuantityOnOrder = Parse(s: 0.ToString()),
+                    QuantityOut = Parse(s: 0.ToString()),
+                    QuantityReserved = Parse(s: 0.ToString()),
+                    TotalInStock = Parse(s: 0.ToString()),
+                    TotalValue = Parse(s: 0.ToString()),
+                    ProductId = SelectedProduct.Id,
+                    Price = Parse(txtEditorQuantity.Text),
+                    ProjectSectionPartId = null,
+                    Supplier = null
+                });
             }
 
             LoadFilter();

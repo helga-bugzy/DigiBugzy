@@ -395,13 +395,21 @@ namespace DigiBugzy.Services.SampleData
 
             foreach (var product in products)
             {
-                //Stock
-                var stock = dbContext.StockJournals.Where(s => s.ProductId == product.Id).ToList();
-                foreach(var item  in stock)
+                try
                 {
-                    dbContext.StockJournals.Remove(item);
-                    dbContext.SaveChanges();
+                    //Stock
+                    var stock = dbContext.StockJournals.Where(s => s.ProductId == product.Id).ToList();
+                    foreach (var item in stock)
+                    {
+                        dbContext.StockJournals.Remove(item);
+                        dbContext.SaveChanges();
+                    }
                 }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
 
                 //Categories
                 productCategoryService.Delete(productCategoryService.GetByProductId(product.Id), true);
