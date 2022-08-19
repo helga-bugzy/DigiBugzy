@@ -43,8 +43,7 @@ namespace DigiBugzy.Desktop.Products
         {
             using var service = new ProjectService(Globals.GetConnectionString());
             gridProjects.DataSource = service.Get(new StandardFilter { Name = txtFilterProjectName.Text.Trim() });
-
-
+            
             LoadGrid_ProjectSections();
 
             Application.DoEvents();
@@ -96,6 +95,8 @@ namespace DigiBugzy.Desktop.Products
         {
             _selectedProjectSection = new ProjectSection(); ;
             _selectedProjectSectionPart = new ProjectSectionPart();
+            
+
 
             //editor,
             txtProjectDescription.Text = _selectedProject.Description;
@@ -340,6 +341,8 @@ namespace DigiBugzy.Desktop.Products
         {
             try
             {
+                if(_selectedProjectSection == null)_selectedProjectSection = new ProjectSection();
+                if(_selectedProjectSectionPart == null) _selectedProjectSectionPart = new ProjectSectionPart();
 
                 if (_selectedProject.Id <= 0)
                 {

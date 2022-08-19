@@ -20,16 +20,22 @@ namespace DigiBugzy.Data.Migrations
 
         public override void Up()
         {
+            //Schemas
             CreateSchemas();
+
+            //Admin-shared
             CreateAdministrationTables(); 
             CreateSettingsTables();
-
             
             CreateContactBaseTables();
 
+            //Objects
             CreateFinanceTables();
             CreateCatalogTables();
             CreateProjectsTables();
+
+            //Journals
+            CreateStockJournal();
 
         }
 
@@ -192,6 +198,23 @@ namespace DigiBugzy.Data.Migrations
 
         }
 
+        private void CreateContactBaseTables()
+        {
+            _currentSchemaName = DatabaseConstants.Schemas.ContactBase;
+            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
+            //BusinessEntity
+            _currentTableName = nameof(BusinessEntity);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseAdministrationEntity();
+
+            //BusinessEntityCategory
+            _currentTableName = nameof(BusinessEntityCategory);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.BusinessEntity);
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
+        }
+
         /// <summary>
         /// Creates all catalog tables
         /// </summary>
@@ -220,7 +243,6 @@ namespace DigiBugzy.Data.Migrations
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
 
-
             // ProductCustomFieldValues
             _currentTableName = nameof(ProductCustomField);
             creatory.StartNewTable(_currentTableName);
@@ -228,16 +250,8 @@ namespace DigiBugzy.Data.Migrations
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
             creatory.AddColumn(nameof(ProductCustomField.Value), isNullable:true, fieldType: BaseEntityCreator.FieldTypes.AsString);
-        }
 
-        private void CreateContactBaseTables()
-        {
-            _currentSchemaName = DatabaseConstants.Schemas.ContactBase;
-            using var creatory = new BaseEntityCreator(_currentSchemaName, this);
-            //BusinessEntityType
-            _currentTableName = nameof(BusinessEntityType);
-            creatory.StartNewTable(_currentTableName);
-           creatory.CreateBaseEntity();
+            
         }
 
         private void CreateProjectsTables()
@@ -245,6 +259,7 @@ namespace DigiBugzy.Data.Migrations
             _currentSchemaName = DatabaseConstants.Schemas.Project;
             using var creatory = new BaseEntityCreator(schemaName: _currentSchemaName, migrator: this);
 
+            //Project
             _currentTableName = nameof(Project);
             creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseAdministrationEntity();
@@ -253,6 +268,7 @@ namespace DigiBugzy.Data.Migrations
                 fieldType: BaseEntityCreator.FieldTypes.AsBinary, 
                 isNullable: true);
 
+            //Project Section
             _currentTableName = nameof(ProjectSection);
             creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseAdministrationEntity();
@@ -271,31 +287,35 @@ namespace DigiBugzy.Data.Migrations
                 fieldType: BaseEntityCreator.FieldTypes.AsBinary, 
                 isNullable: true);
 
+            //Project Section Part
             _currentTableName = nameof(ProjectSectionPart);
             creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseAdministrationEntity();
             creatory.AddColumn(
                 fieldName: nameof(ProjectSectionPart.ProjectSectionId), 
                 isNullable: false, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddColumn(
+                fieldName: nameof(ProjectSectionPart.CoverImage),
+                fieldType: BaseEntityCreator.FieldTypes.AsBinary,
+                isNullable: true);
             creatory.AddForeignKey(
                 fromTable: _currentTableName, 
                 toTable: nameof(ProjectSection), 
                 fromFieldName: nameof(ProjectSectionPart.ProjectSectionId), 
                 fromSchemaName: _currentSchemaName, 
                 toSchemaName: _currentSchemaName);
-            creatory.AddColumn(
-                fieldName: nameof(ProjectSectionPart.CoverImage), 
-                fieldType: BaseEntityCreator.FieldTypes.AsBinary, 
-                isNullable: true);
 
+            //Project Printing
             _currentTableName = nameof(ProjectPrinting);
             creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseProjectSublementEntity();
 
+            //Project Document
             _currentTableName = nameof(ProjectDocument);
             creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseProjectSublementEntity();
 
+            //Project Product
             _currentTableName = nameof(ProjectProduct);
             creatory.StartNewTable(tableName: _currentTableName);
             creatory.CreateBaseProjectSublementEntity();
@@ -309,9 +329,51 @@ namespace DigiBugzy.Data.Migrations
                 fromFieldName: nameof(ProjectProduct.ProjectId), 
                 fromSchemaName: _currentSchemaName,
                 toSchemaName: DatabaseConstants.Schemas.Catalog);
+
+            //Project Category
+            _currentTableName = nameof(ProjectCategory);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Project);
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Category, toSchemaName: DatabaseConstants.Schemas.Admin);
         }
 
-        
+        private void CreateStockJournal()
+        {
+            _currentSchemaName = DatabaseConstants.Schemas.Catalog;
+            using var creatory = new BaseEntityCreator(schemaName: _currentSchemaName, migrator: this);
+            _currentTableName = nameof(StockJournal);
+            creatory.StartNewTable(_currentTableName);
+            creatory.CreateBaseEntity();
+            creatory.AddColumn(nameof(StockJournal.EntryDate), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDateTime);
+            creatory.AddColumn(nameof(StockJournal.QuantityIn), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(StockJournal.QuantityOut), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(StockJournal.QuantityOnOrder), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(StockJournal.TotalInStock), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(StockJournal.QuantityReserved), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            
+            //ProjectSectionPartId
+            creatory.AddColumn(nameof(StockJournal.ProjectSectionPartId), isNullable: true);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName,
+                toTable: nameof(ProjectSectionPart),
+                fromFieldName: nameof(StockJournal.ProjectSectionPartId),
+                fromSchemaName: _currentSchemaName,
+                toSchemaName: DatabaseConstants.Schemas.Project);
+
+            //SupplierId
+            creatory.AddColumn(nameof(StockJournal.SupplierId), isNullable: true);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName,
+                toTable: nameof(BusinessEntity),
+                fromFieldName: nameof(StockJournal.SupplierId),
+                fromSchemaName: _currentSchemaName,
+                toSchemaName: DatabaseConstants.Schemas.ContactBase);
+
+            //ProductId
+            creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
+        }
+
         #endregion
 
 
@@ -434,7 +496,7 @@ namespace DigiBugzy.Data.Migrations
 
         private void CreateData_Classifications()
         {
-           
+           //Projects
             Insert.IntoTable(nameof(Classification))
                 .InSchema(DatabaseConstants.Schemas.Admin)
                 .Row(new
@@ -447,6 +509,7 @@ namespace DigiBugzy.Data.Migrations
                     Description = nameof(Project)
                 });
 
+            //Products
             Insert.IntoTable(nameof(Classification))
                 .InSchema(DatabaseConstants.Schemas.Admin)
                 .Row(new
@@ -457,6 +520,20 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = nameof(Product),
                     Description = nameof(Product)
+
+                });
+
+            //Business Entities
+            Insert.IntoTable(nameof(Classification))
+                .InSchema(DatabaseConstants.Schemas.Admin)
+                .Row(new
+                {
+                    DigiAdminId = 1,
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedOn = DateTime.Now,
+                    Name = nameof(BusinessEntity),
+                    Description = nameof(BusinessEntity)
 
                 });
 
@@ -609,69 +686,6 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "GCode File",
                     Description = "GCode File"
-                });
-        }
-
-        private void CreateData_BusinessEntityTypes()
-        {
-            Insert.IntoTable(nameof(BusinessEntityType))
-                .InSchema(DatabaseConstants.Schemas.ContactBase)
-                .Row(new
-                {
-                    DigiAdminId = 1,
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    Name = "Manufacturer",
-                    Description = "Manufacturer"
-                });
-
-            Insert.IntoTable(nameof(BusinessEntityType))
-                .InSchema(DatabaseConstants.Schemas.ContactBase)
-                .Row(new
-                {
-                    DigiAdminId = 1,
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    Name = "Supplier",
-                    Description = "Supplier"
-                });
-
-            Insert.IntoTable(nameof(BusinessEntityType))
-                .InSchema(DatabaseConstants.Schemas.ContactBase)
-                .Row(new
-                {
-                    DigiAdminId = 1,
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    Name = "Customer",
-                    Description = "Customer"
-                });
-
-            Insert.IntoTable(nameof(BusinessEntityType))
-                .InSchema(DatabaseConstants.Schemas.ContactBase)
-                .Row(new
-                {
-                    DigiAdminId = 1,
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    Name = "Financial Institution",
-                    Description = "Financial Institution"
-                });
-
-            Insert.IntoTable(nameof(BusinessEntityType))
-                .InSchema(DatabaseConstants.Schemas.ContactBase)
-                .Row(new
-                {
-                    DigiAdminId = 1,
-                    IsActive = true,
-                    IsDeleted = false,
-                    CreatedOn = DateTime.Now,
-                    Name = "Other",
-                    Description = "Other"
                 });
         }
 

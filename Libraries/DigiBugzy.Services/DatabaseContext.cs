@@ -34,7 +34,7 @@ namespace DigiBugzy.Services
 
         #region Contact Base
 
-        public DbSet<BusinessEntityType> BusinessEntityTypes { get; set; }
+        public DbSet<BusinessEntity> BusinessEntities { get; set; }
 
         #endregion
 
@@ -46,6 +46,8 @@ namespace DigiBugzy.Services
 
         public DbSet<ProductCustomField> ProductCustomFields { get; set; }
 
+        public DbSet<StockJournal> StockJournals { get; set; }
+
         #endregion
 
         #region Projects
@@ -55,6 +57,8 @@ namespace DigiBugzy.Services
         public DbSet<ProjectSection> ProjectSections { get; set; }
 
         public DbSet<ProjectSectionPart> ProjectSectionParts { get; set; }
+
+        public DbSet<ProjectCategory> ProjectCategories { get; set; }
 
         #endregion
 

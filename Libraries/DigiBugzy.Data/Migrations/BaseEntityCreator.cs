@@ -13,7 +13,8 @@ namespace DigiBugzy.Data.Migrations
             AsString,
             AsDateTime,
             AsBinary,
-            AsBoolean
+            AsBoolean,
+            AsDecimal
         }
 
         public enum MappingTypes {
@@ -224,6 +225,18 @@ namespace DigiBugzy.Data.Migrations
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
                             .AddColumn(fieldName).AsBoolean().NotNullable();
+                    }
+                    break;
+                case FieldTypes.AsDecimal:
+                    if (isNullable)
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsDecimal().Nullable();
+                    }
+                    else
+                    {
+                        Migrator.Alter.Table(TableName).InSchema(SchemaName)
+                            .AddColumn(fieldName).AsDecimal().NotNullable();
                     }
 
                     break;
