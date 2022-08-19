@@ -191,7 +191,7 @@ namespace DigiBugzy.Services.SampleData
                         Description = "Opening stock balance",
                         QuantityIn = c,
                         ProductId = child.Id,
-                        TotalInStock = c,
+                        Price = c
                     });
                 }
                 
@@ -387,6 +387,14 @@ namespace DigiBugzy.Services.SampleData
 
             foreach (var product in products)
             {
+                //Stock
+                var stock = dbContext.StockJournals.Where(s => s.ProductId == product.Id).ToList();
+                foreach(var item  in stock)
+                {
+                    dbContext.StockJournals.Remove(item);
+                    dbContext.SaveChanges();
+                }
+
                 //Categories
                 productCategoryService.Delete(productCategoryService.GetByProductId(product.Id), true);
                 
@@ -394,7 +402,6 @@ namespace DigiBugzy.Services.SampleData
                 productCustomfieldService.Delete(productCustomfieldService.GetByProductId(product.Id), true);
 
                 //Product
-                
                 productService.Delete(product, true);
             }
         }

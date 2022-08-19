@@ -1,5 +1,4 @@
 ﻿
-using DigiBugzy.Core.ViewModels.Catalog;
 
 namespace DigiBugzy.Services.Catalog.Stock
 {
@@ -17,35 +16,14 @@ namespace DigiBugzy.Services.Catalog.Stock
 
         public List<StockJournal> GetStockJournalViewModel(StockJournalSelectOptions options);
 
-       
-
-
         #endregion
 
 
         #region Commands
 
         /// <summary>
-        /// Deletes an existing product (soft/hard)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="hardDelete"></param>
-        public void Delete(int id, bool hardDelete);
-
-        public void Delete(StockJournal entity, bool hardDelete);
-
-        public void Delete(List<StockJournal> entities, bool hardDelete);
-
-
-
-        /// <summary>
-        /// Updates details of an existing product
-        /// </summary>
-        /// <param name="entity"></param>
-        public void Update(StockJournal entity);
-
-        /// <summary>
         /// Creates a new product in the database
+        /// NOTE: Stock item can never delete or update, always contra entry
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>

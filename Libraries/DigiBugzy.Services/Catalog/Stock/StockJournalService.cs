@@ -1,4 +1,6 @@
 ﻿
+using DigiBugzy.Services.Catalog.Products;
+
 namespace DigiBugzy.Services.Catalog.Stock
 {
     public class StockJournalService:BaseService, IStockJournalService
@@ -40,49 +42,18 @@ namespace DigiBugzy.Services.Catalog.Stock
         #endregion
 
         #region Commands
-
-        /// <inheritdoc />
-        public void Delete(int id, bool hardDelete)
-        {
-            Delete(GetById(id), hardDelete);
-        }
-
-        /// <inheritdoc />
-        public void Delete(StockJournal entity, bool hardDelete)
-        {
-            if (hardDelete)
-            {
-                entity.IsDeleted = true;
-                entity.IsActive = false;
-                Update(entity);
-            }
-            else
-            {
-                dbContext.StockJournals.Remove(entity);
-                dbContext.SaveChanges();
-            }
-
-        }
-
-        /// <inheritdoc />
-        public void Delete(List<StockJournal> entities, bool hardDelete)
-        {
-            foreach(var entity in entities)
-            {
-                Delete(entity, hardDelete);
-            }
-        }
-
-        /// <inheritdoc />
-        public void Update(StockJournal entity) 
-        {
-            dbContext.StockJournals.Update(entity);
-            dbContext.SaveChanges();
-        }
-
+        
         /// <inheritdoc />
         public int Create(StockJournal entity)
         {
+            //Get last entity
+            var lastEntry = dbContext.StockJournals.LastOrDefault(x => x.ProductId == entity.ProductId) ?? new StockJournal();
+            
+            //Perform calculations
+            entity.TotalInStock = lastEntry.TotalInStock + entity.QuantityIn - entity.QuantityOut;
+            entity.TotalValue = lastEntry.TotalValue + (entity.QuantityIn - entity.QuantityOut) * entity.Price;
+
+            //Add to database
             dbContext.StockJournals.Add(entity);
             dbContext.SaveChanges();
 

@@ -346,11 +346,11 @@ namespace DigiBugzy.Data.Migrations
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseEntity();
             creatory.AddColumn(nameof(StockJournal.EntryDate), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDateTime);
-            creatory.AddColumn(nameof(StockJournal.QuantityIn), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
-            creatory.AddColumn(nameof(StockJournal.QuantityOut), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
-            creatory.AddColumn(nameof(StockJournal.QuantityOnOrder), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
-            creatory.AddColumn(nameof(StockJournal.TotalInStock), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
-            creatory.AddColumn(nameof(StockJournal.QuantityReserved), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(StockJournal.QuantityIn), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
+            creatory.AddColumn(nameof(StockJournal.QuantityOut), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
+            creatory.AddColumn(nameof(StockJournal.QuantityOnOrder), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
+            creatory.AddColumn(nameof(StockJournal.TotalInStock), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
+            creatory.AddColumn(nameof(StockJournal.QuantityReserved), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
             
             //ProjectSectionPartId
             creatory.AddColumn(nameof(StockJournal.ProjectSectionPartId), isNullable: true);
