@@ -66,14 +66,7 @@ namespace DigiBugzy.Services.HelperClasses
                  where model.ParentId == null &&
                             !(from model2 in _viewModels where model2.ParentId == model.Id select model2).Any()
                  select model).ToList();
-            //try
-            //{
-                
-            //}
-            //catch(Exception ex)
-            //{
-            //    Console.WriteLine(ex);
-            //}
+           
 
             parents.AddRange(pp);
 
