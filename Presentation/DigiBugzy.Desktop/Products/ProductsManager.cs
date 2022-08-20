@@ -533,5 +533,10 @@ namespace DigiBugzy.Desktop.Products
         {
 
         }
+
+        private void cmbStockProjectSectionPart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
