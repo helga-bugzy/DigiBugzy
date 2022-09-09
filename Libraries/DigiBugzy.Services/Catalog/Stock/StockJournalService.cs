@@ -2,6 +2,7 @@
 
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.ViewModels.Catalog;
+using DigiBugzy.Services.Catalog.Products;
 
 namespace DigiBugzy.Services.Catalog.Stock
 {
@@ -81,14 +82,15 @@ namespace DigiBugzy.Services.Catalog.Stock
             dbContext.SaveChanges();
 
             //Update product
-            var product = dbContext.Products.FirstOrDefault(x => x.Id == entity.ProductId);
+            var pservice = new ProductService(_connectionString);
+            var product = pservice.GetById(entity.ProductId);
             if (product == null) return entity.Id;
 
             product.TotalValue = entity.TotalValue;
             product.TotalInStock = entity.TotalInStock;
             product.QuantityOnOrder = lastEntry.QuantityOnOrder + entity.QuantityOnOrder;
             product.QuantityReserved = lastEntry.QuantityReserved + entity.QuantityReserved;
-            dbContext.Update(product);
+            pservice.Update(product);
 
             return entity.Id;
         }

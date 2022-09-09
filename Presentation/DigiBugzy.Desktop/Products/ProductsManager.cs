@@ -78,46 +78,58 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadFilter()
         {
-           // UseWaitCursor = true;
-
-            var filter = new StandardFilter(
-                includeInActive: chkFilterInactive.Checked,
-                includeDeleted: chkFilterDeleted.Checked);
-
-            if(cmbFilterCategories.SelectedIndex > 0)
+            try
             {
-                var cat = (CategoryComboViewModel)cmbFilterCategories.SelectedItem;
-                filter.CategoryId = cat.Id;
+                // UseWaitCursor = true;
+
+                var filter = new StandardFilter(
+                    includeInActive: chkFilterInactive.Checked,
+                    includeDeleted: chkFilterDeleted.Checked);
+
+                if (cmbFilterCategories.SelectedIndex > 0)
+                {
+                    var cat = (CategoryComboViewModel)cmbFilterCategories.SelectedItem;
+                    filter.CategoryId = cat.Id;
+                }
+
+                //Bind the products to the grid
+
+                using var service = new ProductService(Globals.GetConnectionString());
+                var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), true);
+                bsProductsListing.DataSource = viewModels;
+                gvProducts.DataController.AllowIEnumerableDetails = true;
+                gridListing.DataSource = bsProductsListing;
+
+                var gridFormatRule = new GridFormatRule();
+                var formatConditionRuleValue = new FormatConditionRuleValue();
+                gridFormatRule.Column = gvProducts.Columns["IsActive"];
+                formatConditionRuleValue.PredefinedName = "Grey Text";
+                formatConditionRuleValue.Condition = FormatCondition.Equal;
+                formatConditionRuleValue.Value1 = false;
+                gridFormatRule.ApplyToRow = true;
+                gvProducts.FormatRules.Add(gridFormatRule);
+
+                gvProducts.CollapseAllDetails();
+                gvProducts.BestFitColumns();
+
+                gvProducts.Columns["Id"].Visible = false;
+                gvProducts.Columns["ParentId"].Visible = false;
+                gvProducts.Columns["ParentName"].Visible = false;
+
+
+                LoadSelectedProduct();
+
+                
             }
+            catch(Exception ex)
+            {
+                var c = ex.Message;
 
-            //Bind the products to the grid
-            
-            using var service = new ProductService(Globals.GetConnectionString());
-            var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), true);
-            bsProductsListing.DataSource = viewModels;
-            gvProducts.DataController.AllowIEnumerableDetails = true;
-            gridListing.DataSource = bsProductsListing;
-
-            var gridFormatRule = new GridFormatRule();
-            var formatConditionRuleValue = new FormatConditionRuleValue();
-            gridFormatRule.Column = gvProducts.Columns["IsActive"];
-            formatConditionRuleValue.PredefinedName = "Grey Text";
-            formatConditionRuleValue.Condition = FormatCondition.Equal;
-            formatConditionRuleValue.Value1 = false;
-            gridFormatRule.ApplyToRow = true;
-            gvProducts.FormatRules.Add(gridFormatRule);
-
-            gvProducts.CollapseAllDetails();
-            gvProducts.BestFitColumns();
-
-            gvProducts.Columns["Id"].Visible = false;
-            gvProducts.Columns["ParentId"].Visible = false;
-            gvProducts.Columns["ParentName"].Visible = false;
-
-
-            LoadSelectedProduct();
-
-            if (!_isLoading) UseWaitCursor = false;
+            }
+            finally
+            {
+                if (!_isLoading) UseWaitCursor = false;
+            }
         }
 
         private void LoadSelectedProduct()

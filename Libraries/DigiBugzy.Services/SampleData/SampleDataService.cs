@@ -180,7 +180,11 @@ namespace DigiBugzy.Services.SampleData
                         DigiAdminId = _digiAdminId,
                         Name = $"Sample child {p}-{c}",
                         Description = "Sample child product",
-                        ParentId = product.Id
+                        ParentId = product.Id,
+                        QuantityReserved = 0D,
+                        QuantityOnOrder = 0D,
+                        TotalInStock = 0D,
+                        TotalValue = 0D
                     };
 
                     child.Id = productService.Create(child);

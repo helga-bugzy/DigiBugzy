@@ -49,11 +49,12 @@ namespace DigiBugzy.Services.HelperClasses
 
             if (!addParentInfo) return model;
             using var productService = new ProductService(connectionString);
-            var parent = productService.GetById(product.ParentId.Value, false);
+            var parent = productService.GetById(product.ParentId.Value);
 
             model.ParentName = parent.Name;
 
             return model;
+
         }
 
         public static List<ProductGridViewModel> ConvertToHierarchy()

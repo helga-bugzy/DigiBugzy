@@ -64,17 +64,14 @@ namespace DigiBugzy.Services.Catalog.Products
             //ProductComplete
             var collection = query.ToList();
 
-            if (filter.CategoryId is > 0)
-            {
-                var categoryMappings = dbContext.ProductCategories.Where(pc => pc.CategoryId == filter.CategoryId);
+            if (filter.CategoryId is not > 0) return collection.Select(GetProductComplete).ToList();
+            var categoryMappings = dbContext.ProductCategories.Where(pc => pc.CategoryId == filter.CategoryId);
 
-                collection = (
-                    from p in collection 
-                    join cm in categoryMappings
-                        on p.Id equals cm.ProductId
-                              select p).ToList();
-
-            }
+            collection = (
+                from p in collection 
+                join cm in categoryMappings
+                    on p.Id equals cm.ProductId
+                select p).ToList();
 
             return collection.Select(GetProductComplete).ToList();
 
