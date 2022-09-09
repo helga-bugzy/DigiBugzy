@@ -34,6 +34,8 @@ namespace DigiBugzy.Desktop.Products
 
         #endregion
 
+        #region Ctor
+
         public ProductsManager()
         {
             _isLoading = true;
@@ -46,6 +48,8 @@ namespace DigiBugzy.Desktop.Products
 
             _isLoading = false;
         }
+
+        #endregion
 
         #region Helper Methods
 
@@ -120,18 +124,21 @@ namespace DigiBugzy.Desktop.Products
         {
             try
             {
-                if (SelectedProductModel.Id > 0 && SelectedProductModel.Id == SelectedProduct.Id) return;
-
-
-                if (SelectedProductModel.Id == 0)
+                switch (SelectedProductModel.Id)
                 {
-                    SelectedProduct = new Product();
+                    case > 0 when SelectedProductModel.Id == SelectedProduct.Id:
+                        return;
+                    case 0:
+                        SelectedProduct = new Product();
+                        break;
+                    default:
+                    {
+                        using var service = new ProductService(Globals.GetConnectionString());
+                        SelectedProduct = service.GetById(SelectedProductModel.Id, true);
+                        break;
+                    }
                 }
-                else
-                {
-                    using var service = new ProductService(Globals.GetConnectionString());
-                    SelectedProduct = service.GetById(SelectedProductModel.Id, true);
-                }
+
 
                 LoadEditor();
                 LoadCategoriesSelector();
@@ -152,19 +159,22 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadEditor()
         {
-           
+
+            txtEditorQuantity.Enabled = false;
+            txtEditorPrice.Enabled = false;
             if (SelectedProduct.Id <= 0)
             {
-                lblEditorPrice.Visible = lblEditorValue.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = true;
+                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = true;
                 btnDelete.Visible = btnRestore.Visible = false;
                 chkEditorActive.Checked = true;
                 lblSelectedFileName.Text = txtEditorName.Text = txtEditorDescription.Text = string.Empty;
                 imgProductPhoto.Visible = false;
-
+                txtEditorQuantity.Enabled = true;
+                txtEditorPrice.Enabled = true;
             }
             else
             {
-                lblEditorPrice.Visible = lblEditorValue.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = false;
+                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = false;
                 btnDelete.Visible = !SelectedProduct.IsDeleted;
                 btnRestore.Visible = SelectedProduct.IsDeleted;
 
@@ -250,19 +260,17 @@ namespace DigiBugzy.Desktop.Products
 
             var top = 0;
 
-            foreach (var field in LoadingFields)
+            foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType:SampleDataTypeEnum.Products, customField: field)
+                     {
+                         CustomField = field,
+                         Tag = Name = field.Id.ToString(),
+                         Dock = DockStyle.None,
+                         Location = new Point(0, top)
+                     }))
             {
-                var citem = new CustomFieldItem(mappingType:SampleDataTypeEnum.Products, customField: field)
-                {
-                    CustomField = field,
-                    Tag = Name = field.Id.ToString(),
-                    Dock = DockStyle.None,
-                    Location = new Point(0, top)
-            };
-            top += citem.Bounds.Height;
+                top += citem.Bounds.Height;
 
-            pnlCustomFieldsList.Controls.Add(citem);
-                
+                pnlCustomFieldsList.Controls.Add(citem);
             }
         }
 
@@ -322,7 +330,7 @@ namespace DigiBugzy.Desktop.Products
 
                 //Stock entry
                 var stockJournalService = new StockJournalService(Globals.GetConnectionString());
-                stockJournalService.Create(new StockJournal
+                stockJournalService.Create(new()
                 {
                     IsActive = true,
                     IsDeleted = false,
@@ -332,11 +340,11 @@ namespace DigiBugzy.Desktop.Products
                     Name = "Journal Entry",
                     Description = "Opening stock balance",
                     QuantityIn = Parse(txtEditorQuantity.Text),
-                    QuantityOnOrder = Parse(s: 0.ToString()),
-                    QuantityOut = Parse(s: 0.ToString()),
-                    QuantityReserved = Parse(s: 0.ToString()),
-                    TotalInStock = Parse(s: 0.ToString()),
-                    TotalValue = Parse(s: 0.ToString()),
+                    QuantityOnOrder = 0D,
+                    QuantityOut = 0D,
+                    QuantityReserved = 0D,
+                    TotalInStock = 0D,
+                    TotalValue = 0D,
                     ProductId = SelectedProduct.Id,
                     Price = Parse(txtEditorQuantity.Text),
                     ProjectSectionPartId = null,

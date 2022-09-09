@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DigiBugzy.Core.Infrastructure
+﻿namespace DigiBugzy.Core.Infrastructure
 {
     /// <summary>
     /// Provides a singleton list for a certain type.

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DigiBugzy.Core.Infrastructure
+﻿namespace DigiBugzy.Core.Infrastructure
 {
     /// <summary>
     /// Provides access to all "singletons" stored by <see cref="Singleton{T}"/>.

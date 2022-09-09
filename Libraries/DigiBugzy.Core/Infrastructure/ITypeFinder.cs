@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace DigiBugzy.Core.Infrastructure
+﻿namespace DigiBugzy.Core.Infrastructure
 {
     /// <summary>
     /// Classes implementing this interface provide information about types 

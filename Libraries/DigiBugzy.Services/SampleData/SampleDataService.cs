@@ -161,6 +161,11 @@ namespace DigiBugzy.Services.SampleData
                     DigiAdminId = _digiAdminId,
                     Name = $"Sample product {p}",
                     Description = "Sample product",
+                    QuantityReserved = 0D,
+                    QuantityOnOrder = 0D,
+                    TotalInStock = 0D,
+                    TotalValue = 0D
+                    
                 };
                 product.Id = productService.Create(product);
 

@@ -3,7 +3,7 @@
 namespace DigiBugzy.Core.ViewModels.Catalog
 {
     /// <summary>
-    /// View model vor stock journal grid entries
+    /// View model for stock journal grid entries
     /// </summary>
     public class StockJournalViewModel
     {
@@ -56,5 +56,7 @@ namespace DigiBugzy.Core.ViewModels.Catalog
         /// Total physical in stock minus quantity reserviced (in - out - reserved = available)
         /// </summary>
         public double TotalAvailable { get; set; }
+
+        public double TotalValue { get; set; }
     }
 }

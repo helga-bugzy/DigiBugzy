@@ -1,5 +1,7 @@
 ﻿
 
+using DigiBugzy.Core.ViewModels.Catalog;
+
 namespace DigiBugzy.Services.Catalog.Stock
 {
     public interface  IStockJournalService
@@ -14,7 +16,7 @@ namespace DigiBugzy.Services.Catalog.Stock
         public StockJournal GetById(int id);
 
 
-        public List<StockJournal> GetStockJournalViewModel(StockJournalSelectOptions options);
+        public List<StockJournalViewModel> GetStockJournalViewModel(StockJournalSelectOptions options);
 
         #endregion
 

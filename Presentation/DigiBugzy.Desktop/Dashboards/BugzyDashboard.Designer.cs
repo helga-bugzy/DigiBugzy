@@ -173,15 +173,8 @@
                 | System.Windows.Forms.Keys.F));
             this.btnProductsFields.Name = "btnProductsFields";
             this.btnProductsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProductsFields_ItemClick);
-            // 
-            // btnTestForm
-            // 
-            this.btnTestForm.Caption = "Test";
-            this.btnTestForm.Id = 13;
-            this.btnTestForm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnTestForm.ImageOptions.Image")));
-            this.btnTestForm.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnTestForm.ImageOptions.LargeImage")));
-            this.btnTestForm.Name = "btnTestForm";
-            this.btnTestForm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTestForm_ItemClick);
+            
+           
             // 
             // bandCatalog
             // 

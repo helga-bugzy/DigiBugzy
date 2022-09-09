@@ -24,6 +24,8 @@ namespace DigiBugzy.Data.Migrations
             BusinessEntity,
             CustomField,
             Project,
+            ProjectPart,
+            ProjectSection,
             Classification,
             DigiAdmin
         }
@@ -232,12 +234,12 @@ namespace DigiBugzy.Data.Migrations
                     if (isNullable)
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDecimal().Nullable(); ;
+                            .AddColumn(fieldName).AsDecimal().Nullable(); 
                     }
                     else
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDecimal().NotNullable(); ;
+                            .AddColumn(fieldName).AsDecimal().NotNullable().WithDefaultValue(0); 
                     }
 
                     break;
@@ -250,7 +252,7 @@ namespace DigiBugzy.Data.Migrations
                     else
                     {
                         Migrator.Alter.Table(TableName).InSchema(SchemaName)
-                            .AddColumn(fieldName).AsDouble().NotNullable();
+                            .AddColumn(fieldName).AsDouble().NotNullable().WithDefaultValue(0);
                     }
 
                     break;
@@ -283,6 +285,15 @@ namespace DigiBugzy.Data.Migrations
             AddColumn(columnName);
             AddForeignKey(TableName, string.IsNullOrEmpty(mainTableName) ? "" : mainTableName, columnName, fromSchemaName, toSchemaName);
         }
+
+        public void AddMapping(MappingTypes mappingType, string fromColumnName, string fromSchemaName = "", string toSchemaName = "")
+        {
+            var mainTableName = Enum.GetName(typeof(MappingTypes), mappingType);
+            var columnName = fromColumnName;
+            AddColumn(columnName);
+            AddForeignKey(TableName, string.IsNullOrEmpty(mainTableName) ? "" : mainTableName, columnName, fromSchemaName, toSchemaName);
+        }
+
 
 
 

@@ -101,11 +101,7 @@ namespace DigiBugzy.Desktop.Dashboards
             ShowChildForm(new CustomFieldsManager((int)ClassificationsEnum.Project), "Project Management");
         }
 
-        private void btnTestForm_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            ShowChildForm(new XtraForm1(), "Test Form");
-            
-        }
+       
 
         private void timer1_Tick(object sender, EventArgs e)
         {

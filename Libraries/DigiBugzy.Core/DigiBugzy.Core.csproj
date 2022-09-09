@@ -4,12 +4,22 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Caching\" />
+    <Compile Remove="Caching\**" />
+    <Compile Remove="Events\**" />
+    <EmbeddedResource Remove="Caching\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <None Remove="Caching\**" />
+    <None Remove="Events\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Domain\Administration\Media\" />
-    <Folder Include="Events\" />
+    <Folder Include="Domain\Finance\Journals\" />
+    <Folder Include="Domain\Finance\Transactions\" />
   </ItemGroup>
 
   <ItemGroup>

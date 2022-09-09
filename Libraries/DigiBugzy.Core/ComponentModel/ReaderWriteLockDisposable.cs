@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DigiBugzy.Core.ComponentModel
+﻿namespace DigiBugzy.Core.ComponentModel
 {
     /// <summary>
     /// Provides a convenience methodology for implementing locked access to resources. 

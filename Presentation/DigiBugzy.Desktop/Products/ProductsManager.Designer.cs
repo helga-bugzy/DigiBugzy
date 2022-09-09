@@ -58,7 +58,7 @@
             this.tabEditor = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.txtEditorPrice = new System.Windows.Forms.TextBox();
             this.txtEditorQuantity = new DevExpress.XtraEditors.TextEdit();
-            this.lblEditorValue = new DevExpress.XtraEditors.LabelControl();
+            this.lblQuantity = new DevExpress.XtraEditors.LabelControl();
             this.lblEditorPrice = new DevExpress.XtraEditors.LabelControl();
             this.lblSelectedFileName = new System.Windows.Forms.Label();
             this.imgProductPhoto = new System.Windows.Forms.PictureBox();
@@ -86,44 +86,44 @@
             this.tabProjects = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabDocuments = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabStock = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.openFileProductImage = new System.Windows.Forms.OpenFileDialog();
-            this.bsProductsListing = new System.Windows.Forms.BindingSource(this.components);
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnlStockTab = new DevExpress.XtraEditors.PanelControl();
             this.splitStockMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridStock = new DevExpress.XtraGrid.GridControl();
             this.gvStock = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.bsStockListing = new System.Windows.Forms.BindingSource(this.components);
             this.splitStockEditors = new DevExpress.XtraEditors.SplitContainerControl();
             this.grpStockEditor = new DevExpress.XtraEditors.GroupControl();
-            this.grpStockProjectEditor = new DevExpress.XtraEditors.GroupControl();
-            this.lblStockTotal = new DevExpress.XtraEditors.LabelControl();
-            this.lblStockDescription = new DevExpress.XtraEditors.LabelControl();
-            this.lblStockPrice = new System.Windows.Forms.Label();
-            this.lblStockQty = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.radStockIn = new System.Windows.Forms.RadioButton();
-            this.radStockOut = new System.Windows.Forms.RadioButton();
-            this.btnStockAddNew = new DevExpress.XtraEditors.SimpleButton();
-            this.btnStockSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnStockReverse = new DevExpress.XtraEditors.SimpleButton();
-            this.cmbStockProject = new System.Windows.Forms.ComboBox();
-            this.cmbStockProjectSection = new System.Windows.Forms.ComboBox();
-            this.cmbStockProjectSectionPart = new System.Windows.Forms.ComboBox();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lblStockProjectSection = new DevExpress.XtraEditors.LabelControl();
-            this.lblStockProjectSectionPart = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.lblStockProjectPrice = new DevExpress.XtraEditors.LabelControl();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.btnStockSave = new DevExpress.XtraEditors.SimpleButton();
+            this.btnStockAddNew = new DevExpress.XtraEditors.SimpleButton();
+            this.radStockOut = new System.Windows.Forms.RadioButton();
+            this.radStockIn = new System.Windows.Forms.RadioButton();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.lblStockQty = new DevExpress.XtraEditors.LabelControl();
+            this.lblStockPrice = new System.Windows.Forms.Label();
+            this.lblStockDescription = new DevExpress.XtraEditors.LabelControl();
+            this.lblStockTotal = new DevExpress.XtraEditors.LabelControl();
+            this.grpStockProjectEditor = new DevExpress.XtraEditors.GroupControl();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.lblStockProjectPrice = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.lblStockProjectSectionPart = new DevExpress.XtraEditors.LabelControl();
+            this.lblStockProjectSection = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.cmbStockProjectSectionPart = new System.Windows.Forms.ComboBox();
+            this.cmbStockProjectSection = new System.Windows.Forms.ComboBox();
+            this.cmbStockProject = new System.Windows.Forms.ComboBox();
+            this.openFileProductImage = new System.Windows.Forms.OpenFileDialog();
+            this.bsProductsListing = new System.Windows.Forms.BindingSource(this.components);
+            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.bsStockListing = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridListing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productGridViewModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).BeginInit();
@@ -161,11 +161,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).BeginInit();
             this.pnlCategoriesTree.SuspendLayout();
             this.tabStock.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsProductsListing)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlStockTab)).BeginInit();
             this.pnlStockTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitStockMain)).BeginInit();
@@ -176,7 +171,6 @@
             this.splitStockMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStock)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStockListing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitStockEditors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitStockEditors.Panel1)).BeginInit();
             this.splitStockEditors.Panel1.SuspendLayout();
@@ -185,10 +179,16 @@
             this.splitStockEditors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grpStockEditor)).BeginInit();
             this.grpStockEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpStockProjectEditor)).BeginInit();
             this.grpStockProjectEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProductsListing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
+            this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsStockListing)).BeginInit();
             this.SuspendLayout();
             // 
             // gridListing
@@ -198,7 +198,7 @@
             this.gridListing.Location = new System.Drawing.Point(0, 0);
             this.gridListing.MainView = this.gvProducts;
             this.gridListing.Name = "gridListing";
-            this.gridListing.Size = new System.Drawing.Size(1938, 370);
+            this.gridListing.Size = new System.Drawing.Size(1938, 427);
             this.gridListing.TabIndex = 0;
             this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProducts});
@@ -270,7 +270,7 @@
             this.pnlBackground.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBackground.Location = new System.Drawing.Point(0, 0);
             this.pnlBackground.Name = "pnlBackground";
-            this.pnlBackground.Size = new System.Drawing.Size(1938, 1068);
+            this.pnlBackground.Size = new System.Drawing.Size(1938, 868);
             this.pnlBackground.TabIndex = 0;
             // 
             // splitMain
@@ -287,8 +287,8 @@
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.pnlContent);
-            this.splitMain.Size = new System.Drawing.Size(1938, 1068);
-            this.splitMain.SplitterDistance = 91;
+            this.splitMain.Size = new System.Drawing.Size(1938, 868);
+            this.splitMain.SplitterDistance = 78;
             this.splitMain.TabIndex = 0;
             // 
             // pnlFilter
@@ -307,15 +307,15 @@
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFilter.Location = new System.Drawing.Point(0, 0);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1938, 91);
+            this.pnlFilter.Size = new System.Drawing.Size(1938, 78);
             this.pnlFilter.TabIndex = 0;
             // 
             // btnSampleDataDelete
             // 
             this.btnSampleDataDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleDataDelete.ImageOptions.Image")));
-            this.btnSampleDataDelete.Location = new System.Drawing.Point(1761, 36);
+            this.btnSampleDataDelete.Location = new System.Drawing.Point(1014, 17);
             this.btnSampleDataDelete.Name = "btnSampleDataDelete";
-            this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 38);
             this.btnSampleDataDelete.TabIndex = 17;
             this.btnSampleDataDelete.Text = "Delete Sample Data";
             this.btnSampleDataDelete.Click += new System.EventHandler(this.btnSampleDataDelete_Click);
@@ -323,9 +323,9 @@
             // btnSampleData
             // 
             this.btnSampleData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleData.ImageOptions.Image")));
-            this.btnSampleData.Location = new System.Drawing.Point(1626, 36);
+            this.btnSampleData.Location = new System.Drawing.Point(879, 17);
             this.btnSampleData.Name = "btnSampleData";
-            this.btnSampleData.Size = new System.Drawing.Size(129, 34);
+            this.btnSampleData.Size = new System.Drawing.Size(129, 37);
             this.btnSampleData.TabIndex = 16;
             this.btnSampleData.Text = "Create Sample Data";
             this.btnSampleData.Click += new System.EventHandler(this.btnSampleData_Click);
@@ -335,7 +335,7 @@
             this.chkFilterLikeSearch.AutoSize = true;
             this.chkFilterLikeSearch.Checked = true;
             this.chkFilterLikeSearch.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkFilterLikeSearch.Location = new System.Drawing.Point(512, 13);
+            this.chkFilterLikeSearch.Location = new System.Drawing.Point(514, 7);
             this.chkFilterLikeSearch.Name = "chkFilterLikeSearch";
             this.chkFilterLikeSearch.Size = new System.Drawing.Size(102, 17);
             this.chkFilterLikeSearch.TabIndex = 15;
@@ -345,7 +345,7 @@
             // 
             // txtFilterName
             // 
-            this.txtFilterName.Location = new System.Drawing.Point(87, 14);
+            this.txtFilterName.Location = new System.Drawing.Point(89, 8);
             this.txtFilterName.Name = "txtFilterName";
             this.txtFilterName.Size = new System.Drawing.Size(394, 21);
             this.txtFilterName.TabIndex = 14;
@@ -354,7 +354,7 @@
             // lblFilterName
             // 
             this.lblFilterName.AutoSize = true;
-            this.lblFilterName.Location = new System.Drawing.Point(30, 17);
+            this.lblFilterName.Location = new System.Drawing.Point(32, 11);
             this.lblFilterName.Name = "lblFilterName";
             this.lblFilterName.Size = new System.Drawing.Size(34, 13);
             this.lblFilterName.TabIndex = 13;
@@ -363,9 +363,9 @@
             // btnFilter
             // 
             this.btnFilter.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.ImageOptions.Image")));
-            this.btnFilter.Location = new System.Drawing.Point(770, 36);
+            this.btnFilter.Location = new System.Drawing.Point(776, 17);
             this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(97, 38);
+            this.btnFilter.Size = new System.Drawing.Size(97, 36);
             this.btnFilter.TabIndex = 11;
             this.btnFilter.Text = "Filter...";
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
@@ -373,7 +373,7 @@
             // chkFilterDeleted
             // 
             this.chkFilterDeleted.AutoSize = true;
-            this.chkFilterDeleted.Location = new System.Drawing.Point(640, 57);
+            this.chkFilterDeleted.Location = new System.Drawing.Point(642, 38);
             this.chkFilterDeleted.Name = "chkFilterDeleted";
             this.chkFilterDeleted.Size = new System.Drawing.Size(101, 17);
             this.chkFilterDeleted.TabIndex = 10;
@@ -384,7 +384,7 @@
             // chkFilterInactive
             // 
             this.chkFilterInactive.AutoSize = true;
-            this.chkFilterInactive.Location = new System.Drawing.Point(513, 57);
+            this.chkFilterInactive.Location = new System.Drawing.Point(515, 38);
             this.chkFilterInactive.Name = "chkFilterInactive";
             this.chkFilterInactive.Size = new System.Drawing.Size(103, 17);
             this.chkFilterInactive.TabIndex = 9;
@@ -395,7 +395,7 @@
             // cmbFilterCategories
             // 
             this.cmbFilterCategories.FormattingEnabled = true;
-            this.cmbFilterCategories.Location = new System.Drawing.Point(87, 55);
+            this.cmbFilterCategories.Location = new System.Drawing.Point(89, 36);
             this.cmbFilterCategories.Name = "cmbFilterCategories";
             this.cmbFilterCategories.Size = new System.Drawing.Size(396, 21);
             this.cmbFilterCategories.TabIndex = 8;
@@ -403,7 +403,7 @@
             // 
             // lblFilterCategories
             // 
-            this.lblFilterCategories.Location = new System.Drawing.Point(30, 60);
+            this.lblFilterCategories.Location = new System.Drawing.Point(32, 41);
             this.lblFilterCategories.Name = "lblFilterCategories";
             this.lblFilterCategories.Size = new System.Drawing.Size(45, 13);
             this.lblFilterCategories.TabIndex = 7;
@@ -416,7 +416,7 @@
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1938, 973);
+            this.pnlContent.Size = new System.Drawing.Size(1938, 786);
             this.pnlContent.TabIndex = 0;
             // 
             // splitContent
@@ -435,8 +435,8 @@
             // 
             this.splitContent.Panel2.Controls.Add(this.tabPane1);
             this.splitContent.Panel2.Text = "Panel2";
-            this.splitContent.Size = new System.Drawing.Size(1938, 973);
-            this.splitContent.SplitterPosition = 370;
+            this.splitContent.Size = new System.Drawing.Size(1938, 786);
+            this.splitContent.SplitterPosition = 427;
             this.splitContent.TabIndex = 0;
             // 
             // tabPane1
@@ -460,9 +460,9 @@
             this.tabOrders,
             this.tabProjects,
             this.tabDocuments});
-            this.tabPane1.RegularSize = new System.Drawing.Size(1938, 593);
+            this.tabPane1.RegularSize = new System.Drawing.Size(1938, 349);
             this.tabPane1.SelectedPage = this.tabEditor;
-            this.tabPane1.Size = new System.Drawing.Size(1938, 593);
+            this.tabPane1.Size = new System.Drawing.Size(1938, 349);
             this.tabPane1.TabIndex = 0;
             this.tabPane1.Text = "Product Information";
             // 
@@ -471,7 +471,7 @@
             this.tabEditor.Caption = "Editor";
             this.tabEditor.Controls.Add(this.txtEditorPrice);
             this.tabEditor.Controls.Add(this.txtEditorQuantity);
-            this.tabEditor.Controls.Add(this.lblEditorValue);
+            this.tabEditor.Controls.Add(this.lblQuantity);
             this.tabEditor.Controls.Add(this.lblEditorPrice);
             this.tabEditor.Controls.Add(this.lblSelectedFileName);
             this.tabEditor.Controls.Add(this.imgProductPhoto);
@@ -488,43 +488,43 @@
             this.tabEditor.Controls.Add(this.lblEditorName);
             this.tabEditor.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabEditor.ImageOptions.Image")));
             this.tabEditor.Name = "tabEditor";
-            this.tabEditor.Size = new System.Drawing.Size(1938, 446);
+            this.tabEditor.Size = new System.Drawing.Size(1938, 316);
             this.tabEditor.ToolTip = "Editor";
             // 
             // txtEditorPrice
             // 
-            this.txtEditorPrice.Location = new System.Drawing.Point(101, 304);
+            this.txtEditorPrice.Location = new System.Drawing.Point(226, 230);
             this.txtEditorPrice.Name = "txtEditorPrice";
             this.txtEditorPrice.Size = new System.Drawing.Size(100, 21);
             this.txtEditorPrice.TabIndex = 16;
             // 
             // txtEditorQuantity
             // 
-            this.txtEditorQuantity.Location = new System.Drawing.Point(372, 303);
+            this.txtEditorQuantity.Location = new System.Drawing.Point(384, 230);
             this.txtEditorQuantity.Name = "txtEditorQuantity";
-            this.txtEditorQuantity.Size = new System.Drawing.Size(125, 20);
+            this.txtEditorQuantity.Size = new System.Drawing.Size(105, 20);
             this.txtEditorQuantity.TabIndex = 15;
             // 
-            // lblEditorValue
+            // lblQuantity
             // 
-            this.lblEditorValue.Location = new System.Drawing.Point(295, 306);
-            this.lblEditorValue.Name = "lblEditorValue";
-            this.lblEditorValue.Size = new System.Drawing.Size(46, 13);
-            this.lblEditorValue.TabIndex = 14;
-            this.lblEditorValue.Text = "Quantity:";
+            this.lblQuantity.Location = new System.Drawing.Point(332, 234);
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(46, 13);
+            this.lblQuantity.TabIndex = 14;
+            this.lblQuantity.Text = "Quantity:";
             // 
             // lblEditorPrice
             // 
-            this.lblEditorPrice.Location = new System.Drawing.Point(17, 306);
+            this.lblEditorPrice.Location = new System.Drawing.Point(197, 235);
             this.lblEditorPrice.Name = "lblEditorPrice";
-            this.lblEditorPrice.Size = new System.Drawing.Size(23, 13);
+            this.lblEditorPrice.Size = new System.Drawing.Size(27, 13);
             this.lblEditorPrice.TabIndex = 13;
-            this.lblEditorPrice.Text = "Price";
+            this.lblEditorPrice.Text = "Price:";
             // 
             // lblSelectedFileName
             // 
             this.lblSelectedFileName.AutoSize = true;
-            this.lblSelectedFileName.Location = new System.Drawing.Point(511, 338);
+            this.lblSelectedFileName.Location = new System.Drawing.Point(509, 263);
             this.lblSelectedFileName.Name = "lblSelectedFileName";
             this.lblSelectedFileName.Size = new System.Drawing.Size(15, 13);
             this.lblSelectedFileName.TabIndex = 12;
@@ -532,18 +532,18 @@
             // 
             // imgProductPhoto
             // 
-            this.imgProductPhoto.Location = new System.Drawing.Point(510, 66);
+            this.imgProductPhoto.Location = new System.Drawing.Point(509, 15);
             this.imgProductPhoto.Name = "imgProductPhoto";
-            this.imgProductPhoto.Size = new System.Drawing.Size(465, 257);
+            this.imgProductPhoto.Size = new System.Drawing.Size(465, 236);
             this.imgProductPhoto.TabIndex = 11;
             this.imgProductPhoto.TabStop = false;
             // 
             // btnProductImage
             // 
             this.btnProductImage.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProductImage.ImageOptions.Image")));
-            this.btnProductImage.Location = new System.Drawing.Point(391, 333);
+            this.btnProductImage.Location = new System.Drawing.Point(301, 263);
             this.btnProductImage.Name = "btnProductImage";
-            this.btnProductImage.Size = new System.Drawing.Size(104, 23);
+            this.btnProductImage.Size = new System.Drawing.Size(86, 34);
             this.btnProductImage.TabIndex = 10;
             this.btnProductImage.Text = "Select Image";
             this.btnProductImage.Click += new System.EventHandler(this.btnProductImage_Click);
@@ -551,9 +551,9 @@
             // btnRestore
             // 
             this.btnRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.ImageOptions.Image")));
-            this.btnRestore.Location = new System.Drawing.Point(242, 387);
+            this.btnRestore.Location = new System.Drawing.Point(201, 263);
             this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(101, 34);
+            this.btnRestore.Size = new System.Drawing.Size(91, 34);
             this.btnRestore.TabIndex = 9;
             this.btnRestore.Text = "Restore";
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
@@ -561,9 +561,9 @@
             // btnDelete
             // 
             this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(99, 387);
+            this.btnDelete.Location = new System.Drawing.Point(113, 263);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(94, 34);
+            this.btnDelete.Size = new System.Drawing.Size(79, 34);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "Delete";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -571,9 +571,9 @@
             // btnSave
             // 
             this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
-            this.btnSave.Location = new System.Drawing.Point(392, 387);
+            this.btnSave.Location = new System.Drawing.Point(396, 263);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(104, 34);
+            this.btnSave.Size = new System.Drawing.Size(87, 34);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -581,9 +581,9 @@
             // btnAddNew
             // 
             this.btnAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.ImageOptions.Image")));
-            this.btnAddNew.Location = new System.Drawing.Point(12, 12);
+            this.btnAddNew.Location = new System.Drawing.Point(12, 264);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(104, 32);
+            this.btnAddNew.Size = new System.Drawing.Size(92, 32);
             this.btnAddNew.TabIndex = 8;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
@@ -593,7 +593,7 @@
             this.chkEditorActive.AutoSize = true;
             this.chkEditorActive.Checked = true;
             this.chkEditorActive.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkEditorActive.Location = new System.Drawing.Point(99, 338);
+            this.chkEditorActive.Location = new System.Drawing.Point(92, 230);
             this.chkEditorActive.Name = "chkEditorActive";
             this.chkEditorActive.Size = new System.Drawing.Size(15, 14);
             this.chkEditorActive.TabIndex = 5;
@@ -602,7 +602,7 @@
             // lblEditorActive
             // 
             this.lblEditorActive.AutoSize = true;
-            this.lblEditorActive.Location = new System.Drawing.Point(12, 338);
+            this.lblEditorActive.Location = new System.Drawing.Point(5, 230);
             this.lblEditorActive.Name = "lblEditorActive";
             this.lblEditorActive.Size = new System.Drawing.Size(41, 13);
             this.lblEditorActive.TabIndex = 4;
@@ -610,16 +610,16 @@
             // 
             // txtEditorDescription
             // 
-            this.txtEditorDescription.Location = new System.Drawing.Point(99, 97);
+            this.txtEditorDescription.Location = new System.Drawing.Point(91, 41);
             this.txtEditorDescription.MaxLength = 255;
             this.txtEditorDescription.Multiline = true;
             this.txtEditorDescription.Name = "txtEditorDescription";
-            this.txtEditorDescription.Size = new System.Drawing.Size(398, 200);
+            this.txtEditorDescription.Size = new System.Drawing.Size(398, 183);
             this.txtEditorDescription.TabIndex = 3;
             // 
             // txtEditorName
             // 
-            this.txtEditorName.Location = new System.Drawing.Point(99, 63);
+            this.txtEditorName.Location = new System.Drawing.Point(91, 15);
             this.txtEditorName.Name = "txtEditorName";
             this.txtEditorName.Size = new System.Drawing.Size(398, 20);
             this.txtEditorName.TabIndex = 2;
@@ -627,7 +627,7 @@
             // lblEditorDescription
             // 
             this.lblEditorDescription.AutoSize = true;
-            this.lblEditorDescription.Location = new System.Drawing.Point(12, 101);
+            this.lblEditorDescription.Location = new System.Drawing.Point(3, 45);
             this.lblEditorDescription.Name = "lblEditorDescription";
             this.lblEditorDescription.Size = new System.Drawing.Size(64, 13);
             this.lblEditorDescription.TabIndex = 1;
@@ -636,7 +636,7 @@
             // lblEditorName
             // 
             this.lblEditorName.AutoSize = true;
-            this.lblEditorName.Location = new System.Drawing.Point(12, 66);
+            this.lblEditorName.Location = new System.Drawing.Point(2, 18);
             this.lblEditorName.Name = "lblEditorName";
             this.lblEditorName.Size = new System.Drawing.Size(38, 13);
             this.lblEditorName.TabIndex = 0;
@@ -757,7 +757,344 @@
             this.tabStock.Controls.Add(this.pnlStockTab);
             this.tabStock.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabStock.ImageOptions.Image")));
             this.tabStock.Name = "tabStock";
-            this.tabStock.Size = new System.Drawing.Size(1938, 560);
+            this.tabStock.Size = new System.Drawing.Size(1938, 316);
+            // 
+            // pnlStockTab
+            // 
+            this.pnlStockTab.Controls.Add(this.splitStockMain);
+            this.pnlStockTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlStockTab.Location = new System.Drawing.Point(0, 0);
+            this.pnlStockTab.Name = "pnlStockTab";
+            this.pnlStockTab.Size = new System.Drawing.Size(1938, 316);
+            this.pnlStockTab.TabIndex = 0;
+            // 
+            // splitStockMain
+            // 
+            this.splitStockMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitStockMain.Location = new System.Drawing.Point(2, 2);
+            this.splitStockMain.Name = "splitStockMain";
+            // 
+            // splitStockMain.Panel1
+            // 
+            this.splitStockMain.Panel1.Controls.Add(this.gridStock);
+            this.splitStockMain.Panel1.Text = "Panel1";
+            // 
+            // splitStockMain.Panel2
+            // 
+            this.splitStockMain.Panel2.Controls.Add(this.splitStockEditors);
+            this.splitStockMain.Panel2.Text = "Panel2";
+            this.splitStockMain.Size = new System.Drawing.Size(1934, 312);
+            this.splitStockMain.SplitterPosition = 670;
+            this.splitStockMain.TabIndex = 0;
+            // 
+            // gridStock
+            // 
+            this.gridStock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridStock.Location = new System.Drawing.Point(0, 0);
+            this.gridStock.MainView = this.gvStock;
+            this.gridStock.Name = "gridStock";
+            this.gridStock.Size = new System.Drawing.Size(670, 312);
+            this.gridStock.TabIndex = 0;
+            this.gridStock.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvStock});
+            this.gridStock.Click += new System.EventHandler(this.gridStock_Click);
+            // 
+            // gvStock
+            // 
+            this.gvStock.GridControl = this.gridStock;
+            this.gvStock.Name = "gvStock";
+            // 
+            // splitStockEditors
+            // 
+            this.splitStockEditors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitStockEditors.Location = new System.Drawing.Point(0, 0);
+            this.splitStockEditors.Name = "splitStockEditors";
+            // 
+            // splitStockEditors.Panel1
+            // 
+            this.splitStockEditors.Panel1.Controls.Add(this.grpStockEditor);
+            this.splitStockEditors.Panel1.Text = "Panel1";
+            // 
+            // splitStockEditors.Panel2
+            // 
+            this.splitStockEditors.Panel2.Controls.Add(this.grpStockProjectEditor);
+            this.splitStockEditors.Panel2.Text = "Panel2";
+            this.splitStockEditors.Size = new System.Drawing.Size(1254, 312);
+            this.splitStockEditors.SplitterPosition = 531;
+            this.splitStockEditors.TabIndex = 0;
+            // 
+            // grpStockEditor
+            // 
+            this.grpStockEditor.Controls.Add(this.btnStockReverse);
+            this.grpStockEditor.Controls.Add(this.btnStockSave);
+            this.grpStockEditor.Controls.Add(this.btnStockAddNew);
+            this.grpStockEditor.Controls.Add(this.radStockOut);
+            this.grpStockEditor.Controls.Add(this.radStockIn);
+            this.grpStockEditor.Controls.Add(this.textBox3);
+            this.grpStockEditor.Controls.Add(this.textBox2);
+            this.grpStockEditor.Controls.Add(this.textBox1);
+            this.grpStockEditor.Controls.Add(this.textEdit1);
+            this.grpStockEditor.Controls.Add(this.lblStockQty);
+            this.grpStockEditor.Controls.Add(this.lblStockPrice);
+            this.grpStockEditor.Controls.Add(this.lblStockDescription);
+            this.grpStockEditor.Controls.Add(this.lblStockTotal);
+            this.grpStockEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpStockEditor.Location = new System.Drawing.Point(0, 0);
+            this.grpStockEditor.Name = "grpStockEditor";
+            this.grpStockEditor.Size = new System.Drawing.Size(531, 312);
+            this.grpStockEditor.TabIndex = 0;
+            this.grpStockEditor.Text = "Stock Journal Editor";
+            // 
+            // btnStockReverse
+            // 
+            this.btnStockReverse.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStockReverse.ImageOptions.Image")));
+            this.btnStockReverse.Location = new System.Drawing.Point(138, 201);
+            this.btnStockReverse.Name = "btnStockReverse";
+            this.btnStockReverse.Size = new System.Drawing.Size(95, 33);
+            this.btnStockReverse.TabIndex = 12;
+            this.btnStockReverse.Text = "Reverse";
+            // 
+            // btnStockSave
+            // 
+            this.btnStockSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStockSave.ImageOptions.Image")));
+            this.btnStockSave.Location = new System.Drawing.Point(14, 201);
+            this.btnStockSave.Name = "btnStockSave";
+            this.btnStockSave.Size = new System.Drawing.Size(94, 33);
+            this.btnStockSave.TabIndex = 11;
+            this.btnStockSave.Text = "Save";
+            // 
+            // btnStockAddNew
+            // 
+            this.btnStockAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStockAddNew.ImageOptions.Image")));
+            this.btnStockAddNew.Location = new System.Drawing.Point(14, 33);
+            this.btnStockAddNew.Name = "btnStockAddNew";
+            this.btnStockAddNew.Size = new System.Drawing.Size(94, 32);
+            this.btnStockAddNew.TabIndex = 10;
+            this.btnStockAddNew.Text = "Add New";
+            // 
+            // radStockOut
+            // 
+            this.radStockOut.AutoSize = true;
+            this.radStockOut.Location = new System.Drawing.Point(298, 163);
+            this.radStockOut.Name = "radStockOut";
+            this.radStockOut.Size = new System.Drawing.Size(43, 17);
+            this.radStockOut.TabIndex = 9;
+            this.radStockOut.TabStop = true;
+            this.radStockOut.Text = "Out";
+            this.radStockOut.UseVisualStyleBackColor = true;
+            // 
+            // radStockIn
+            // 
+            this.radStockIn.AutoSize = true;
+            this.radStockIn.Checked = true;
+            this.radStockIn.Location = new System.Drawing.Point(253, 163);
+            this.radStockIn.Name = "radStockIn";
+            this.radStockIn.Size = new System.Drawing.Size(35, 17);
+            this.radStockIn.TabIndex = 8;
+            this.radStockIn.TabStop = true;
+            this.radStockIn.Text = "In";
+            this.radStockIn.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(138, 160);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.TabIndex = 7;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(138, 125);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 6;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(138, 96);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(386, 21);
+            this.textBox1.TabIndex = 5;
+            // 
+            // textEdit1
+            // 
+            this.textEdit1.Location = new System.Drawing.Point(138, 65);
+            this.textEdit1.Name = "textEdit1";
+            this.textEdit1.Size = new System.Drawing.Size(386, 20);
+            this.textEdit1.TabIndex = 4;
+            // 
+            // lblStockQty
+            // 
+            this.lblStockQty.Location = new System.Drawing.Point(14, 160);
+            this.lblStockQty.Name = "lblStockQty";
+            this.lblStockQty.Size = new System.Drawing.Size(46, 13);
+            this.lblStockQty.TabIndex = 3;
+            this.lblStockQty.Text = "Quantity:";
+            // 
+            // lblStockPrice
+            // 
+            this.lblStockPrice.AutoSize = true;
+            this.lblStockPrice.Location = new System.Drawing.Point(14, 133);
+            this.lblStockPrice.Name = "lblStockPrice";
+            this.lblStockPrice.Size = new System.Drawing.Size(34, 13);
+            this.lblStockPrice.TabIndex = 2;
+            this.lblStockPrice.Text = "Price:";
+            // 
+            // lblStockDescription
+            // 
+            this.lblStockDescription.Location = new System.Drawing.Point(14, 104);
+            this.lblStockDescription.Name = "lblStockDescription";
+            this.lblStockDescription.Size = new System.Drawing.Size(57, 13);
+            this.lblStockDescription.TabIndex = 1;
+            this.lblStockDescription.Text = "Description:";
+            // 
+            // lblStockTotal
+            // 
+            this.lblStockTotal.Location = new System.Drawing.Point(14, 77);
+            this.lblStockTotal.Name = "lblStockTotal";
+            this.lblStockTotal.Size = new System.Drawing.Size(24, 13);
+            this.lblStockTotal.TabIndex = 0;
+            this.lblStockTotal.Text = "Title:";
+            // 
+            // grpStockProjectEditor
+            // 
+            this.grpStockProjectEditor.Controls.Add(this.textBox4);
+            this.grpStockProjectEditor.Controls.Add(this.textEdit2);
+            this.grpStockProjectEditor.Controls.Add(this.lblStockProjectPrice);
+            this.grpStockProjectEditor.Controls.Add(this.labelControl2);
+            this.grpStockProjectEditor.Controls.Add(this.simpleButton4);
+            this.grpStockProjectEditor.Controls.Add(this.simpleButton3);
+            this.grpStockProjectEditor.Controls.Add(this.simpleButton2);
+            this.grpStockProjectEditor.Controls.Add(this.simpleButton1);
+            this.grpStockProjectEditor.Controls.Add(this.lblStockProjectSectionPart);
+            this.grpStockProjectEditor.Controls.Add(this.lblStockProjectSection);
+            this.grpStockProjectEditor.Controls.Add(this.labelControl1);
+            this.grpStockProjectEditor.Controls.Add(this.cmbStockProjectSectionPart);
+            this.grpStockProjectEditor.Controls.Add(this.cmbStockProjectSection);
+            this.grpStockProjectEditor.Controls.Add(this.cmbStockProject);
+            this.grpStockProjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpStockProjectEditor.Location = new System.Drawing.Point(0, 0);
+            this.grpStockProjectEditor.Name = "grpStockProjectEditor";
+            this.grpStockProjectEditor.Size = new System.Drawing.Size(713, 312);
+            this.grpStockProjectEditor.TabIndex = 0;
+            this.grpStockProjectEditor.Text = "Stock Project Editor";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(378, 155);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.TabIndex = 13;
+            // 
+            // textEdit2
+            // 
+            this.textEdit2.Location = new System.Drawing.Point(138, 155);
+            this.textEdit2.Name = "textEdit2";
+            this.textEdit2.Size = new System.Drawing.Size(100, 20);
+            this.textEdit2.TabIndex = 12;
+            // 
+            // lblStockProjectPrice
+            // 
+            this.lblStockProjectPrice.Location = new System.Drawing.Point(12, 158);
+            this.lblStockProjectPrice.Name = "lblStockProjectPrice";
+            this.lblStockProjectPrice.Size = new System.Drawing.Size(27, 13);
+            this.lblStockProjectPrice.TabIndex = 11;
+            this.lblStockProjectPrice.Text = "Price:";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(326, 159);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(46, 13);
+            this.labelControl2.TabIndex = 10;
+            this.labelControl2.Text = "Quantity:";
+            // 
+            // simpleButton4
+            // 
+            this.simpleButton4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.ImageOptions.Image")));
+            this.simpleButton4.Location = new System.Drawing.Point(242, 206);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(115, 34);
+            this.simpleButton4.TabIndex = 9;
+            this.simpleButton4.Text = "Out of Stock";
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
+            this.simpleButton3.Location = new System.Drawing.Point(122, 206);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(111, 34);
+            this.simpleButton3.TabIndex = 8;
+            this.simpleButton3.Text = "Back to Stock";
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
+            this.simpleButton2.Location = new System.Drawing.Point(11, 206);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(97, 34);
+            this.simpleButton2.TabIndex = 7;
+            this.simpleButton2.Text = "Reserve";
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(10, 30);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(98, 33);
+            this.simpleButton1.TabIndex = 6;
+            this.simpleButton1.Text = "Add New";
+            // 
+            // lblStockProjectSectionPart
+            // 
+            this.lblStockProjectSectionPart.Location = new System.Drawing.Point(13, 130);
+            this.lblStockProjectSectionPart.Name = "lblStockProjectSectionPart";
+            this.lblStockProjectSectionPart.Size = new System.Drawing.Size(99, 13);
+            this.lblStockProjectSectionPart.TabIndex = 5;
+            this.lblStockProjectSectionPart.Text = "Project Section Part:";
+            // 
+            // lblStockProjectSection
+            // 
+            this.lblStockProjectSection.Location = new System.Drawing.Point(13, 101);
+            this.lblStockProjectSection.Name = "lblStockProjectSection";
+            this.lblStockProjectSection.Size = new System.Drawing.Size(76, 13);
+            this.lblStockProjectSection.TabIndex = 4;
+            this.lblStockProjectSection.Text = "Project Section:";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(13, 71);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(38, 13);
+            this.labelControl1.TabIndex = 3;
+            this.labelControl1.Text = "Project:";
+            // 
+            // cmbStockProjectSectionPart
+            // 
+            this.cmbStockProjectSectionPart.Enabled = false;
+            this.cmbStockProjectSectionPart.FormattingEnabled = true;
+            this.cmbStockProjectSectionPart.Location = new System.Drawing.Point(138, 122);
+            this.cmbStockProjectSectionPart.Name = "cmbStockProjectSectionPart";
+            this.cmbStockProjectSectionPart.Size = new System.Drawing.Size(340, 21);
+            this.cmbStockProjectSectionPart.TabIndex = 2;
+            this.cmbStockProjectSectionPart.SelectedIndexChanged += new System.EventHandler(this.cmbStockProjectSectionPart_SelectedIndexChanged);
+            // 
+            // cmbStockProjectSection
+            // 
+            this.cmbStockProjectSection.Enabled = false;
+            this.cmbStockProjectSection.FormattingEnabled = true;
+            this.cmbStockProjectSection.Location = new System.Drawing.Point(138, 93);
+            this.cmbStockProjectSection.Name = "cmbStockProjectSection";
+            this.cmbStockProjectSection.Size = new System.Drawing.Size(340, 21);
+            this.cmbStockProjectSection.TabIndex = 1;
+            // 
+            // cmbStockProject
+            // 
+            this.cmbStockProject.FormattingEnabled = true;
+            this.cmbStockProject.Location = new System.Drawing.Point(138, 64);
+            this.cmbStockProject.Name = "cmbStockProject";
+            this.cmbStockProject.Size = new System.Drawing.Size(340, 21);
+            this.cmbStockProject.TabIndex = 0;
             // 
             // openFileProductImage
             // 
@@ -784,349 +1121,11 @@
             this.splitContainerControl1.SplitterPosition = 166;
             this.splitContainerControl1.TabIndex = 2;
             // 
-            // pnlStockTab
-            // 
-            this.pnlStockTab.Controls.Add(this.splitStockMain);
-            this.pnlStockTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlStockTab.Location = new System.Drawing.Point(0, 0);
-            this.pnlStockTab.Name = "pnlStockTab";
-            this.pnlStockTab.Size = new System.Drawing.Size(1938, 560);
-            this.pnlStockTab.TabIndex = 0;
-            // 
-            // splitStockMain
-            // 
-            this.splitStockMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitStockMain.Location = new System.Drawing.Point(2, 2);
-            this.splitStockMain.Name = "splitStockMain";
-            // 
-            // splitStockMain.splitStockMain_Panel1
-            // 
-            this.splitStockMain.Panel1.Controls.Add(this.gridStock);
-            this.splitStockMain.Panel1.Text = "Panel1";
-            // 
-            // splitStockMain.splitStockMain_Panel2
-            // 
-            this.splitStockMain.Panel2.Controls.Add(this.splitStockEditors);
-            this.splitStockMain.Panel2.Text = "Panel2";
-            this.splitStockMain.Size = new System.Drawing.Size(1934, 556);
-            this.splitStockMain.SplitterPosition = 670;
-            this.splitStockMain.TabIndex = 0;
-            // 
-            // gridStock
-            // 
-            this.gridStock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridStock.Location = new System.Drawing.Point(0, 0);
-            this.gridStock.MainView = this.gvStock;
-            this.gridStock.Name = "gridStock";
-            this.gridStock.Size = new System.Drawing.Size(670, 556);
-            this.gridStock.TabIndex = 0;
-            this.gridStock.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvStock});
-            this.gridStock.Click += new System.EventHandler(this.gridStock_Click);
-            // 
-            // gvStock
-            // 
-            this.gvStock.GridControl = this.gridStock;
-            this.gvStock.Name = "gvStock";
-            // 
-            // splitStockEditors
-            // 
-            this.splitStockEditors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitStockEditors.Horizontal = false;
-            this.splitStockEditors.Location = new System.Drawing.Point(0, 0);
-            this.splitStockEditors.Name = "splitStockEditors";
-            // 
-            // splitStockEditors.splitStockEditors_Panel1
-            // 
-            this.splitStockEditors.Panel1.Controls.Add(this.grpStockEditor);
-            this.splitStockEditors.Panel1.Text = "Panel1";
-            // 
-            // splitStockEditors.splitStockEditors_Panel2
-            // 
-            this.splitStockEditors.Panel2.Controls.Add(this.grpStockProjectEditor);
-            this.splitStockEditors.Panel2.Text = "Panel2";
-            this.splitStockEditors.Size = new System.Drawing.Size(1254, 556);
-            this.splitStockEditors.SplitterPosition = 264;
-            this.splitStockEditors.TabIndex = 0;
-            // 
-            // grpStockEditor
-            // 
-            this.grpStockEditor.Controls.Add(this.btnStockReverse);
-            this.grpStockEditor.Controls.Add(this.btnStockSave);
-            this.grpStockEditor.Controls.Add(this.btnStockAddNew);
-            this.grpStockEditor.Controls.Add(this.radStockOut);
-            this.grpStockEditor.Controls.Add(this.radStockIn);
-            this.grpStockEditor.Controls.Add(this.textBox3);
-            this.grpStockEditor.Controls.Add(this.textBox2);
-            this.grpStockEditor.Controls.Add(this.textBox1);
-            this.grpStockEditor.Controls.Add(this.textEdit1);
-            this.grpStockEditor.Controls.Add(this.lblStockQty);
-            this.grpStockEditor.Controls.Add(this.lblStockPrice);
-            this.grpStockEditor.Controls.Add(this.lblStockDescription);
-            this.grpStockEditor.Controls.Add(this.lblStockTotal);
-            this.grpStockEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpStockEditor.Location = new System.Drawing.Point(0, 0);
-            this.grpStockEditor.Name = "grpStockEditor";
-            this.grpStockEditor.Size = new System.Drawing.Size(1254, 264);
-            this.grpStockEditor.TabIndex = 0;
-            this.grpStockEditor.Text = "Stock Journal Editor";
-            // 
-            // grpStockProjectEditor
-            // 
-            this.grpStockProjectEditor.Controls.Add(this.textBox4);
-            this.grpStockProjectEditor.Controls.Add(this.textEdit2);
-            this.grpStockProjectEditor.Controls.Add(this.lblStockProjectPrice);
-            this.grpStockProjectEditor.Controls.Add(this.labelControl2);
-            this.grpStockProjectEditor.Controls.Add(this.simpleButton4);
-            this.grpStockProjectEditor.Controls.Add(this.simpleButton3);
-            this.grpStockProjectEditor.Controls.Add(this.simpleButton2);
-            this.grpStockProjectEditor.Controls.Add(this.simpleButton1);
-            this.grpStockProjectEditor.Controls.Add(this.lblStockProjectSectionPart);
-            this.grpStockProjectEditor.Controls.Add(this.lblStockProjectSection);
-            this.grpStockProjectEditor.Controls.Add(this.labelControl1);
-            this.grpStockProjectEditor.Controls.Add(this.cmbStockProjectSectionPart);
-            this.grpStockProjectEditor.Controls.Add(this.cmbStockProjectSection);
-            this.grpStockProjectEditor.Controls.Add(this.cmbStockProject);
-            this.grpStockProjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpStockProjectEditor.Location = new System.Drawing.Point(0, 0);
-            this.grpStockProjectEditor.Name = "grpStockProjectEditor";
-            this.grpStockProjectEditor.Size = new System.Drawing.Size(1254, 282);
-            this.grpStockProjectEditor.TabIndex = 0;
-            this.grpStockProjectEditor.Text = "Stock Project Editor";
-            // 
-            // lblStockTotal
-            // 
-            this.lblStockTotal.Location = new System.Drawing.Point(14, 77);
-            this.lblStockTotal.Name = "lblStockTotal";
-            this.lblStockTotal.Size = new System.Drawing.Size(24, 13);
-            this.lblStockTotal.TabIndex = 0;
-            this.lblStockTotal.Text = "Title:";
-            // 
-            // lblStockDescription
-            // 
-            this.lblStockDescription.Location = new System.Drawing.Point(14, 104);
-            this.lblStockDescription.Name = "lblStockDescription";
-            this.lblStockDescription.Size = new System.Drawing.Size(57, 13);
-            this.lblStockDescription.TabIndex = 1;
-            this.lblStockDescription.Text = "Description:";
-            // 
-            // lblStockPrice
-            // 
-            this.lblStockPrice.AutoSize = true;
-            this.lblStockPrice.Location = new System.Drawing.Point(14, 133);
-            this.lblStockPrice.Name = "lblStockPrice";
-            this.lblStockPrice.Size = new System.Drawing.Size(34, 13);
-            this.lblStockPrice.TabIndex = 2;
-            this.lblStockPrice.Text = "Price:";
-            // 
-            // lblStockQty
-            // 
-            this.lblStockQty.Location = new System.Drawing.Point(14, 160);
-            this.lblStockQty.Name = "lblStockQty";
-            this.lblStockQty.Size = new System.Drawing.Size(46, 13);
-            this.lblStockQty.TabIndex = 3;
-            this.lblStockQty.Text = "Quantity:";
-            // 
-            // textEdit1
-            // 
-            this.textEdit1.Location = new System.Drawing.Point(138, 60);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(386, 20);
-            this.textEdit1.TabIndex = 4;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(138, 96);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(386, 21);
-            this.textBox1.TabIndex = 5;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(138, 125);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 6;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(138, 160);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
-            this.textBox3.TabIndex = 7;
-            // 
-            // radStockIn
-            // 
-            this.radStockIn.AutoSize = true;
-            this.radStockIn.Checked = true;
-            this.radStockIn.Location = new System.Drawing.Point(253, 163);
-            this.radStockIn.Name = "radStockIn";
-            this.radStockIn.Size = new System.Drawing.Size(35, 17);
-            this.radStockIn.TabIndex = 8;
-            this.radStockIn.TabStop = true;
-            this.radStockIn.Text = "In";
-            this.radStockIn.UseVisualStyleBackColor = true;
-            // 
-            // radStockOut
-            // 
-            this.radStockOut.AutoSize = true;
-            this.radStockOut.Location = new System.Drawing.Point(298, 163);
-            this.radStockOut.Name = "radStockOut";
-            this.radStockOut.Size = new System.Drawing.Size(43, 17);
-            this.radStockOut.TabIndex = 9;
-            this.radStockOut.TabStop = true;
-            this.radStockOut.Text = "Out";
-            this.radStockOut.UseVisualStyleBackColor = true;
-            // 
-            // btnStockAddNew
-            // 
-            this.btnStockAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.btnStockAddNew.Location = new System.Drawing.Point(14, 33);
-            this.btnStockAddNew.Name = "btnStockAddNew";
-            this.btnStockAddNew.Size = new System.Drawing.Size(94, 32);
-            this.btnStockAddNew.TabIndex = 10;
-            this.btnStockAddNew.Text = "Add New";
-            // 
-            // btnStockSave
-            // 
-            this.btnStockSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStockSave.ImageOptions.Image")));
-            this.btnStockSave.Location = new System.Drawing.Point(14, 201);
-            this.btnStockSave.Name = "btnStockSave";
-            this.btnStockSave.Size = new System.Drawing.Size(94, 33);
-            this.btnStockSave.TabIndex = 11;
-            this.btnStockSave.Text = "Save";
-            // 
-            // btnStockReverse
-            // 
-            this.btnStockReverse.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStockReverse.ImageOptions.Image")));
-            this.btnStockReverse.Location = new System.Drawing.Point(138, 201);
-            this.btnStockReverse.Name = "btnStockReverse";
-            this.btnStockReverse.Size = new System.Drawing.Size(95, 33);
-            this.btnStockReverse.TabIndex = 12;
-            this.btnStockReverse.Text = "Reverse";
-            // 
-            // cmbStockProject
-            // 
-            this.cmbStockProject.FormattingEnabled = true;
-            this.cmbStockProject.Location = new System.Drawing.Point(138, 64);
-            this.cmbStockProject.Name = "cmbStockProject";
-            this.cmbStockProject.Size = new System.Drawing.Size(340, 21);
-            this.cmbStockProject.TabIndex = 0;
-            // 
-            // cmbStockProjectSection
-            // 
-            this.cmbStockProjectSection.Enabled = false;
-            this.cmbStockProjectSection.FormattingEnabled = true;
-            this.cmbStockProjectSection.Location = new System.Drawing.Point(138, 93);
-            this.cmbStockProjectSection.Name = "cmbStockProjectSection";
-            this.cmbStockProjectSection.Size = new System.Drawing.Size(340, 21);
-            this.cmbStockProjectSection.TabIndex = 1;
-            // 
-            // cmbStockProjectSectionPart
-            // 
-            this.cmbStockProjectSectionPart.Enabled = false;
-            this.cmbStockProjectSectionPart.FormattingEnabled = true;
-            this.cmbStockProjectSectionPart.Location = new System.Drawing.Point(138, 122);
-            this.cmbStockProjectSectionPart.Name = "cmbStockProjectSectionPart";
-            this.cmbStockProjectSectionPart.Size = new System.Drawing.Size(340, 21);
-            this.cmbStockProjectSectionPart.TabIndex = 2;
-            this.cmbStockProjectSectionPart.SelectedIndexChanged += new System.EventHandler(this.cmbStockProjectSectionPart_SelectedIndexChanged);
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Location = new System.Drawing.Point(13, 71);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(38, 13);
-            this.labelControl1.TabIndex = 3;
-            this.labelControl1.Text = "Project:";
-            // 
-            // lblStockProjectSection
-            // 
-            this.lblStockProjectSection.Location = new System.Drawing.Point(13, 101);
-            this.lblStockProjectSection.Name = "lblStockProjectSection";
-            this.lblStockProjectSection.Size = new System.Drawing.Size(76, 13);
-            this.lblStockProjectSection.TabIndex = 4;
-            this.lblStockProjectSection.Text = "Project Section:";
-            // 
-            // lblStockProjectSectionPart
-            // 
-            this.lblStockProjectSectionPart.Location = new System.Drawing.Point(13, 130);
-            this.lblStockProjectSectionPart.Name = "lblStockProjectSectionPart";
-            this.lblStockProjectSectionPart.Size = new System.Drawing.Size(99, 13);
-            this.lblStockProjectSectionPart.TabIndex = 5;
-            this.lblStockProjectSectionPart.Text = "Project Section Part:";
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image1")));
-            this.simpleButton1.Location = new System.Drawing.Point(10, 30);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(98, 33);
-            this.simpleButton1.TabIndex = 6;
-            this.simpleButton1.Text = "Add New";
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(11, 206);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(97, 34);
-            this.simpleButton2.TabIndex = 7;
-            this.simpleButton2.Text = "Reserve";
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
-            this.simpleButton3.Location = new System.Drawing.Point(122, 206);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(111, 34);
-            this.simpleButton3.TabIndex = 8;
-            this.simpleButton3.Text = "Back to Stock";
-            // 
-            // simpleButton4
-            // 
-            this.simpleButton4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.ImageOptions.Image")));
-            this.simpleButton4.Location = new System.Drawing.Point(242, 206);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(115, 34);
-            this.simpleButton4.TabIndex = 9;
-            this.simpleButton4.Text = "Out of Stock";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Location = new System.Drawing.Point(326, 159);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(46, 13);
-            this.labelControl2.TabIndex = 10;
-            this.labelControl2.Text = "Quantity:";
-            // 
-            // lblStockProjectPrice
-            // 
-            this.lblStockProjectPrice.Location = new System.Drawing.Point(12, 158);
-            this.lblStockProjectPrice.Name = "lblStockProjectPrice";
-            this.lblStockProjectPrice.Size = new System.Drawing.Size(27, 13);
-            this.lblStockProjectPrice.TabIndex = 11;
-            this.lblStockProjectPrice.Text = "Price:";
-            // 
-            // textEdit2
-            // 
-            this.textEdit2.Location = new System.Drawing.Point(138, 155);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Size = new System.Drawing.Size(100, 20);
-            this.textEdit2.TabIndex = 12;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(378, 155);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
-            this.textBox4.TabIndex = 13;
-            // 
             // ProductsManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1938, 1068);
+            this.ClientSize = new System.Drawing.Size(1938, 868);
             this.Controls.Add(this.pnlBackground);
             this.Name = "ProductsManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1171,11 +1170,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).EndInit();
             this.pnlCategoriesTree.ResumeLayout(false);
             this.tabStock.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bsProductsListing)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlStockTab)).EndInit();
             this.pnlStockTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitStockMain.Panel1)).EndInit();
@@ -1186,7 +1180,6 @@
             this.splitStockMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStock)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsStockListing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitStockEditors.Panel1)).EndInit();
             this.splitStockEditors.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitStockEditors.Panel2)).EndInit();
@@ -1196,11 +1189,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.grpStockEditor)).EndInit();
             this.grpStockEditor.ResumeLayout(false);
             this.grpStockEditor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpStockProjectEditor)).EndInit();
             this.grpStockProjectEditor.ResumeLayout(false);
             this.grpStockProjectEditor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProductsListing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
+            this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsStockListing)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1269,7 +1268,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colParentName;
         private TextBox txtEditorPrice;
         private DevExpress.XtraEditors.TextEdit txtEditorQuantity;
-        private DevExpress.XtraEditors.LabelControl lblEditorValue;
+        private DevExpress.XtraEditors.LabelControl lblQuantity;
         private DevExpress.XtraEditors.LabelControl lblEditorPrice;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabStock;

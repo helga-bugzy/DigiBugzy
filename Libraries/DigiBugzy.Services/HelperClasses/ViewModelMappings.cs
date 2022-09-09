@@ -38,7 +38,11 @@ namespace DigiBugzy.Services.HelperClasses
                 Name = product.Name,
                 IsActive = product.IsActive,
                 Image = product.ProductImage,
-                ParentId = product.ParentId
+                ParentId = product.ParentId,
+                QuantityOnOrder = product.QuantityOnOrder,
+                QuantityReserved = product.QuantityReserved,
+                TotalInStock = product.TotalInStock,
+                TotalValue = product.TotalValue
             };
 
             if (product.ParentId == null) return model;

@@ -228,6 +228,11 @@ namespace DigiBugzy.Data.Migrations
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseAdministrationEntity();
             creatory.AddColumn(fieldName: nameof(Product.ProductImage), fieldType: BaseEntityCreator.FieldTypes.AsBinary, isNullable: true);
+            creatory.AddColumn(nameof(StockJournal.QuantityOnOrder), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(StockJournal.TotalInStock), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(StockJournal.QuantityReserved), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
+            creatory.AddColumn(nameof(ProductCustomField.Value), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsString);
+            creatory.AddColumn(nameof(StockJournal.TotalValue), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDecimal);
             creatory.AddColumn(nameof(Product.ParentId), isNullable: true);
             creatory.AddForeignKey(
                 fromTable: _currentTableName,
@@ -247,11 +252,9 @@ namespace DigiBugzy.Data.Migrations
             _currentTableName = nameof(ProductCustomField);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseEntity();
+
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
-            creatory.AddColumn(nameof(ProductCustomField.Value), isNullable:true, fieldType: BaseEntityCreator.FieldTypes.AsString);
-
-            
         }
 
         private void CreateProjectsTables()

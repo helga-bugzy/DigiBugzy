@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DigiBugzy.Core.Infrastructure
+﻿namespace DigiBugzy.Core.Infrastructure
 {
     /// <summary>
     /// Provides a singleton dictionary for a certain key and vlaue type.

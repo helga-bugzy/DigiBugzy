@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DigiBugzy.Core
+﻿namespace DigiBugzy.Core
 {
     /// <summary>
     /// Paged list interface
