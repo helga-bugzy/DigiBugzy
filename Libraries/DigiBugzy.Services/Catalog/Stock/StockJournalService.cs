@@ -3,6 +3,7 @@
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.ViewModels.Catalog;
 using DigiBugzy.Services.Catalog.Products;
+using DigiBugzy.Services.ContactBase.BusinessEntities;
 
 namespace DigiBugzy.Services.Catalog.Stock
 {
@@ -41,7 +42,7 @@ namespace DigiBugzy.Services.Catalog.Stock
             var results =
                 from journal in journals
                 join product in products on journal.ProductId equals product.Id
-                join part in parts on journal.ProjectSectionPartId equals part.Id
+                //join  part in parts on journal.ProjectSectionPartId equals part.Id  --> not working without project section & outerjoin battling
                 
                 select new StockJournalViewModel
                 {
@@ -54,11 +55,33 @@ namespace DigiBugzy.Services.Catalog.Stock
                     ProductId = journal.ProductId,
                     ProductName = product.Name,
                     EntryDate = journal.EntryDate,
+                    TotalInStock = journal.TotalInStock,
                 };
 
+            //Outerjoin workaround
+            using var pservice = new Projects.ProjectSectionPartService(_connectionString);
+            using var prodservice = new ProductService(_connectionString);
+            using var bservice = new BusinessEntityService(_connectionString);
+
+            foreach (var result in results)
+            {
+                //Project info
+                if (!result.ProjectSectionPartId.HasValue) continue;
+                var pentry = pservice.GetById(result.ProjectSectionPartId.Value);
+                result.ProjectSectionPartName = pentry.Name;
+
+                //Product Info
+                if (!string.IsNullOrEmpty(result.ProductName)) continue;
+                var prod = prodservice.GetById(result.ProductId);
+                result.ProductName = prod.Name;
+
+                //Supplier
+                if (!result.SupplierId.HasValue) continue;
+                var bentry = bservice.GetById(result.SupplierId.Value);
+                result.SupplierName = bentry.Name;
+            }
+
             return results.OrderByDescending(x => x.EntryDate).ToList();
-
-
 
         }
 

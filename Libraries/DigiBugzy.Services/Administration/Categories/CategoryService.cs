@@ -130,8 +130,19 @@ namespace DigiBugzy.Services.Administration.Categories
 
             if (hardDelete)
             {
-                dbContext.Categories.Remove(entity);
-                dbContext.SaveChanges();
+                try
+                {
+                    //Try hard delete
+                    dbContext.Categories.Remove(entity);
+                    dbContext.SaveChanges();
+                }
+                catch
+                {
+                    //Try softdelete
+                    entity.IsDeleted = true;
+                    entity.IsActive = false;
+                    Update(entity);
+                }
             }
             else
             {

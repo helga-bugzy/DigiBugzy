@@ -55,26 +55,7 @@ namespace DigiBugzy.Desktop.Products
 
         #region Loading
 
-        private void LoadFilterCategories()
-        {
-            cmbFilterCategories.DataSource = null;
-            cmbFilterCategories.Items.Clear();
-
-            using var categoryService = new CategoryService(Globals.GetConnectionString());
-            var collection = categoryService.Get(new StandardFilter{ClassificationId = (int)ClassificationsEnum.Product}).OrderBy(c => c.Name).ToList();
-
-            var viewModels = ViewModelMappings.CreateCategoryComboItems(collection);
-            viewModels.Insert(0, new CategoryComboViewModel { Id = 0, Name = "<Select a category>" });
-
-            cmbFilterCategories.DataSource = viewModels;
-            cmbFilterCategories.DisplayMember = "Name";
-            cmbFilterCategories.ValueMember = "Id";
-
-            cmbFilterCategories.SelectedIndex = -1;
-
-            Application.DoEvents();
-        }
-        
+        #region Products
 
         private void LoadFilter()
         {
@@ -96,8 +77,6 @@ namespace DigiBugzy.Desktop.Products
                 bsProductsListing.Clear();
 
                 using var service = new ProductService(Globals.GetConnectionString());
-                var collection = service.Get(filter, loadProductComplete: true);
-
                 var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), false);
                 bsProductsListing.DataSource = viewModels;
                 gvProducts.DataController.AllowIEnumerableDetails = true;
@@ -119,12 +98,12 @@ namespace DigiBugzy.Desktop.Products
                 gvProducts.Columns["ParentId"].Visible = false;
                 gvProducts.Columns["ParentName"].Visible = false;
 
-
+                
                 LoadSelectedProduct();
 
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var c = ex.Message;
 
@@ -147,11 +126,11 @@ namespace DigiBugzy.Desktop.Products
                         SelectedProduct = new Product();
                         break;
                     default:
-                    {
-                        using var service = new ProductService(Globals.GetConnectionString());
-                        SelectedProduct = service.GetById(SelectedProductModel.Id, true);
-                        break;
-                    }
+                        {
+                            using var service = new ProductService(Globals.GetConnectionString());
+                            SelectedProduct = service.GetById(SelectedProductModel.Id, true);
+                            break;
+                        }
                 }
 
 
@@ -169,7 +148,7 @@ namespace DigiBugzy.Desktop.Products
             {
                 Console.WriteLine(ex);
             }
-            
+
         }
 
         private void LoadEditor()
@@ -208,6 +187,30 @@ namespace DigiBugzy.Desktop.Products
             }
         }
 
+        #endregion
+        
+        #region Categories
+
+        private void LoadFilterCategories()
+        {
+            cmbFilterCategories.DataSource = null;
+            cmbFilterCategories.Items.Clear();
+
+            using var categoryService = new CategoryService(Globals.GetConnectionString());
+            var collection = categoryService.Get(new StandardFilter { ClassificationId = (int)ClassificationsEnum.Product }).OrderBy(c => c.Name).ToList();
+
+            var viewModels = ViewModelMappings.CreateCategoryComboItems(collection);
+            viewModels.Insert(0, new CategoryComboViewModel { Id = 0, Name = "<Select a category>" });
+
+            cmbFilterCategories.DataSource = viewModels;
+            cmbFilterCategories.DisplayMember = "Name";
+            cmbFilterCategories.ValueMember = "Id";
+
+            cmbFilterCategories.SelectedIndex = -1;
+
+            Application.DoEvents();
+        }
+
         private void LoadCategoriesSelector()
         {
             using var service = new ProductCategoryService(Globals.GetConnectionString());
@@ -223,7 +226,7 @@ namespace DigiBugzy.Desktop.Products
                     Tag = parent.EntityMappedToId,
                     Checked = parent.IsMapped
                 };
-                
+
 
                 LoadCategoryNodes(node, parent.EntityMappedToId);
 
@@ -243,7 +246,7 @@ namespace DigiBugzy.Desktop.Products
 
             var children = LoadingCategories
                 .Where(c => c.ParentId == parentId)
-               
+
                 .ToList();
 
             if (children.Count > 0)
@@ -262,20 +265,24 @@ namespace DigiBugzy.Desktop.Products
                     //LoadCategoryNodes(node, child.EntityMappedToId);
                 }
             }
-            
-           
+
+
         }
+
+        #endregion
+
+        #region Custom Fields
 
         private void LoadCustomFieldsSelector()
         {
-           ClearCustomFieldControls();
+            ClearCustomFieldControls();
 
-           using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
-           LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
+            using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
+            LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
 
             var top = 0;
 
-            foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType:SampleDataTypeEnum.Products, customField: field)
+            foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field)
                      {
                          CustomField = field,
                          Tag = Name = field.Id.ToString(),
@@ -303,19 +310,52 @@ namespace DigiBugzy.Desktop.Products
                 }
 
             }
-            
+
         }
+
+        #endregion
+
+        #region Documents
 
         private void LoadDocumentsTab()
         {
 
         }
 
+        #endregion
+
+
+        #region Stock
+
+        /// <summary>
+        /// Bind stock to relevant grid control
+        /// </summary>
         private void LoadStockInformation()
+        {
+            if(SelectedProduct.Id <= 0)
+            {
+                bsStockListing.Clear();
+                gridStock.DataSource = bsStockListing;
+            }
+            
+            using var service = new StockJournalService(Globals.GetConnectionString());
+            var collection = service.GetStockJournalViewModel(new StockJournalSelectOptions(SelectedProduct.Id));
+            bsStockListing.Clear();
+            bsStockListing.DataSource = collection;
+            gridStock.DataSource = bsStockListing;
+
+            if (gvStock.Columns["ProductId"] != null) gvStock.Columns["ProductId"].Visible = false;
+            if (gvStock.Columns["ProjectSectionPartId"] != null) gvStock.Columns["ProjectSectionPartId"].Visible = false;
+            if (gvStock.Columns["SupplierId"] != null) gvStock.Columns["SupplierId"].Visible = false;
+        }
+
+        private void LoadSelectedStockItem()
         {
 
         }
 
+        #endregion
+        
         #endregion
 
         #region Saving

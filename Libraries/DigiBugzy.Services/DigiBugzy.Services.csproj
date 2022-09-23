@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ContactBase\BusinessEntities\" />
     <Folder Include="Finance\" />
   </ItemGroup>
 
