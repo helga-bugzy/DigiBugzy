@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Linq;
 using DigiBugzy.Core.Domain.Administration.CustomFields;
-using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Services.SampleData;
 
 namespace DigiBugzy.Desktop.Administration.CustomFields
@@ -23,7 +22,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         public List<Category> Categories { get; set; } = new();
 
-        private List<MappingViewModel> _categories;
+   //     private List<MappingViewModel> _categories;
 
         private List<CustomField> CustomFields { get; set; } = new();
 
@@ -37,7 +36,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         public CustomFieldsManager(int classificationId = 0)
         {
-            _categories = new List<MappingViewModel>();
+            //_categories = new List<MappingViewModel>();
             _classificationId = classificationId;
             _loadingClassificationId = classificationId;
             _isLoading = true;
@@ -61,10 +60,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         #endregion
 
-
         #region Helper Methods
-
-
 
         private void ApplyFilter()
         {
@@ -209,30 +205,23 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             btnSave.Enabled = false;
             btnAddNew.Enabled = false;
 
-            if (_classificationId <= 0)
-            {
-                Application.DoEvents();
-                return;
-            }
-            
-            if (SelectedCustomField.Id <= 0)
+            if (_classificationId <= 0 || SelectedCustomField.Id <= 0)
             {
                 txtDescription.Text = txtName.Text = string.Empty;
                 chkActive.Checked = true;
-                lblHeading.Text = @"New CustomField";
+                lblHeading.Text = "New CustomField";
                 grdOptions.Visible = false;
-                
-
+                btnSave.Enabled = true;
+                Application.DoEvents();
+                return;
             }
-            else
-            {
-                txtName.Text = SelectedCustomField.Name;
-                txtDescription.Text = SelectedCustomField.Description;
-                chkActive.Checked = true;
-                lblHeading.Text = $@"Edit {SelectedCustomField.Name} (ID: {SelectedCustomField.Id})";
 
-                grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==7;
-            }
+            txtName.Text = SelectedCustomField.Name;
+            txtDescription.Text = SelectedCustomField.Description;
+            chkActive.Checked = true;
+            lblHeading.Text = $"Edit {SelectedCustomField.Name} (ID: {SelectedCustomField.Id})";
+
+            grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==7;
 
             if (SelectedCustomField.Id > 0)
             {
@@ -267,7 +256,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             grdOptions.AllowUserToAddRows = true;
             grdOptions.Columns[0].Visible = false;
-            grdOptions.Columns[1].HeaderText = @"Option Name";
+            grdOptions.Columns[1].HeaderText = "Option Name";
             grdOptions.Columns[2].Visible = false;
             grdOptions.Columns[3].Visible = false;
             grdOptions.Columns[4].Visible = false;
@@ -379,13 +368,14 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
                 LoadCategoryNodes(node);
 
-                node.Text = $@"{parent.Name} ({node.Nodes.Count} subs)";
+                node.Text = $"{parent.Name} ({node.Nodes.Count} subs)";
 
                 if (node.Nodes.Count > 0)
                 {
                     node.ImageIndex = 0;
                 }
 
+                node.ExpandAll();
                 twCategories.Nodes.Add(node);
             }
 
@@ -490,14 +480,14 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 //Validations
                 if (cmbTypes.SelectedIndex < 0)
                 {
-                    MessageBox.Show(@"Please select a valid type.",
-                        @"Validation Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Please select a valid type.",
+                        "Validation Error", MessageBoxButtons.OK);
                     return;
                 }
 
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
                 {
-                    MessageBox.Show(@"Please enter a name for the CustomField", @"Validation Error",
+                    MessageBox.Show("Please enter a name for the CustomField", "Validation Error",
                         MessageBoxButtons.OK);
                     return;
                 }
@@ -536,7 +526,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             }
             catch (Exception exception)
             {
-                MessageBox.Show(@$"Error saving CustomField information: {exception.Message}");
+                MessageBox.Show($"Error saving CustomField information: {exception.Message}");
             }
             finally
             {
@@ -587,14 +577,41 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void twCategories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (_isDragging) return;
-            using var service = new CategoryService(Globals.GetConnectionString());
-            SelectedCategory = service.GetById(int.Parse(e.Node.Tag.ToString()!));
-            
+           try
+           {
+               if (_isDragging || SelectedCustomField.Id <= 0) return;
 
-            //TODO LoadCategoryEditor();
+               using var service = new CategoryService(Globals.GetConnectionString());
+               SelectedCategory = service.GetById(int.Parse(e.Node.Tag.ToString()!));
 
-            Application.DoEvents();
+               using var mServices = new CategoryCustomFieldService(Globals.GetConnectionString());
+               var mEntity = new CategoryCustomField
+               {
+                   CategoryId = SelectedCategory.Id,
+                   CustomFieldId = SelectedCustomField.Id,
+                   CreatedOn = DateTime.Now,
+                   DigiAdminId = Globals.DigiAdministration.Id,
+                   IsActive = true,
+                   IsDeleted = false
+               };
+               switch (e.Node.Checked)
+               {
+                   case true:
+                       mServices.Create(mEntity);
+                       break;
+                   default:
+                       mServices.Delete(mEntity, true);
+                       break;
+               }
+
+               //TODO LoadCategoryEditor();
+
+               Application.DoEvents();
+           }
+           catch(Exception)
+           {
+               //do nothing 
+           }
 
         }
 
