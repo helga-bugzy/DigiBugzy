@@ -27,6 +27,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
         public List<Product> Get(StandardFilter filter, bool loadProductComplete = false)
         {
+           
             var query = dbContext.Products.AsQueryable<Product>();
 
             if (filter.Id.HasValue)
@@ -34,14 +35,12 @@ namespace DigiBugzy.Services.Catalog.Products
                 query = query.Where(x => x.Id == filter.Id);
                 return query.ToList();
             }
-
             
 
             if (filter.DigiAdminId.HasValue)
             {
                 query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
             }
-
 
             if (!string.IsNullOrEmpty(filter.Name))
             {
@@ -57,8 +56,7 @@ namespace DigiBugzy.Services.Catalog.Products
             //When there is category mappings, include the category information
             query = query.Include(x => x.Categories)
                 .ThenInclude(xx => xx.Category);
-
-
+            
             if (!loadProductComplete) return query.ToList();
 
             //ProductComplete

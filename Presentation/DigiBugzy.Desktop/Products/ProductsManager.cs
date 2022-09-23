@@ -93,9 +93,12 @@ namespace DigiBugzy.Desktop.Products
                 }
 
                 //Bind the products to the grid
+                bsProductsListing.Clear();
 
                 using var service = new ProductService(Globals.GetConnectionString());
-                var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), true);
+                var collection = service.Get(filter, loadProductComplete: true);
+
+                var viewModels = ViewModelMappings.ConvertProductToView(service.Get(filter, loadProductComplete: true), Globals.GetConnectionString(), false);
                 bsProductsListing.DataSource = viewModels;
                 gvProducts.DataController.AllowIEnumerableDetails = true;
                 gridListing.DataSource = bsProductsListing;
