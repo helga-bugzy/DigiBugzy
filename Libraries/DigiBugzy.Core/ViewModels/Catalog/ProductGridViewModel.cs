@@ -22,26 +22,17 @@ namespace DigiBugzy.Core.ViewModels.Catalog
         [DisplayName("Parent Product")]
         public string ParentName { get; set; }
 
-        /// <summary>
-        /// Total physical in stock
-        /// </summary>
         [DisplayName("Total In Stock")]
         public double TotalInStock { get; set; }
 
-        /// <summary>
-        /// When reserving for a project this project part in planning but not executed yet
-        /// </summary>
-        [DisplayName("Reserved")]
+        [DisplayName("Qty Reserved")]
         public double QuantityReserved { get; set; }
 
-        /// <summary>
-        /// When stock is on order but not received yet
-        /// </summary>
-
-        [DisplayName("On Order")]
+        
+        [DisplayName("Qty On Order")]
         public double QuantityOnOrder { get; set; }
 
-        [DisplayName("Value")]
+        [DisplayName("Total Value")]
         public double TotalValue { get; set; }
 
 

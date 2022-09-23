@@ -15,7 +15,7 @@ namespace DigiBugzy.Desktop
 
 
         private const string DatabaseName_Dev = "DigiBugzyDev";
-        private const string DatabaseName_Prod = "DigiBugzyProd";
+        private const string DatabaseName_Prod = "Schuring1digibugzy";
 
         public static string GetDatabaseName =>
             ConnectionEnvironment == ConnectionEnvironment.Development
@@ -25,10 +25,13 @@ namespace DigiBugzy.Desktop
         public static string GetConnectionString()
         {
             //return System.Configuration.ConfigurationManager.ConnectionStrings[Enum.GetName(typeof(ConnectionEnvironment), environment)].ConnectionString;
-           // return @"Data Source=ARDUIO1;Initial Catalog=DigiBugzyDev;Persist Security Info=True;User ID=sa;Password=Columbus01!";
-           
-           return @$"Data Source=LCVPC5900\SQLEXPRESS;Initial Catalog={GetDatabaseName};Persist Security Info=False;Trusted_Connection=True;";
-           
+            // return @"Data Source=ARDUIO1;Initial Catalog=DigiBugzyDev;Persist Security Info=True;User ID=sa;Password=Columbus01!";
+
+            return GetDatabaseName == DatabaseName_Dev ?
+                @$"Data Source=LCVPC5900\SQLEXPRESS;Initial Catalog={GetDatabaseName};Persist Security Info=False;Trusted_Connection=True;" :
+                $"Data Source=192.168.10.102;Initial Catalog={GetDatabaseName};Persist Security Info=True;User ID=Schuring1sql;Password=Columbus01!";
+
+
         }
 
         public static string GetMasterConnectionString()

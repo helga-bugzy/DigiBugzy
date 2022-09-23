@@ -1,5 +1,4 @@
 ﻿
-
 global using DigiBugzy.Data.Migrations;
 global using DigiBugzy.Services.Administration.DigiAdmins;
 global using DigiBugzy.Services.Administration.Categories;
@@ -27,9 +26,8 @@ namespace DigiBugzy.Desktop
         public static void ConfigureService()
         {
             #region EF Core
-
-            //Create database (https://dotnetcorecentral.com/blog/fluentmigrator/)
-            Database.EnsureDatabase(Globals.GetMasterConnectionString(), Globals.GetDatabaseName);
+            if(Globals.ConnectionEnvironment == ConnectionEnvironment.Development)//Create database (https://dotnetcorecentral.com/blog/fluentmigrator/)
+                Database.EnsureDatabase(Globals.GetMasterConnectionString(), Globals.GetDatabaseName);
 
             //Entity framework (for migrations)
             ServiceProvider = CreateServices();
@@ -45,7 +43,7 @@ namespace DigiBugzy.Desktop
 
             #endregion
 
-            #region Dependency Injectio
+            #region Dependency Injection
 
             services = new ServiceCollection();
 
@@ -87,13 +85,7 @@ namespace DigiBugzy.Desktop
 
         private static void RegisterForms()
         {
-            if (services != null)
-            {
-                services.AddScoped<LoginForm>();
-               
-                
-
-            }
+            services?.AddScoped<LoginForm>();
         }
 
        

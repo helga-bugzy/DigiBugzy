@@ -30,15 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductsManager));
-            this.gridListing = new DevExpress.XtraGrid.GridControl();
             this.productGridViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gvProducts = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colImage = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colIsActive = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colParentId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colParentName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlBackground = new DevExpress.XtraEditors.PanelControl();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
@@ -54,6 +46,8 @@
             this.lblFilterCategories = new DevExpress.XtraEditors.LabelControl();
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
             this.splitContent = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gridListing = new DevExpress.XtraGrid.GridControl();
+            this.gvProducts = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabPane1 = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabEditor = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.txtEditorPrice = new System.Windows.Forms.TextBox();
@@ -124,9 +118,7 @@
             this.bsProductsListing = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.bsStockListing = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.gridListing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productGridViewModelBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBackground)).BeginInit();
             this.pnlBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -143,6 +135,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContent.Panel2)).BeginInit();
             this.splitContent.Panel2.SuspendLayout();
             this.splitContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridListing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).BeginInit();
             this.tabPane1.SuspendLayout();
             this.tabEditor.SuspendLayout();
@@ -191,77 +185,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsStockListing)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridListing
-            // 
-            this.gridListing.DataSource = this.productGridViewModelBindingSource;
-            this.gridListing.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridListing.Location = new System.Drawing.Point(0, 0);
-            this.gridListing.MainView = this.gvProducts;
-            this.gridListing.Name = "gridListing";
-            this.gridListing.Size = new System.Drawing.Size(1938, 427);
-            this.gridListing.TabIndex = 0;
-            this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvProducts});
-            this.gridListing.ViewRegistered += new DevExpress.XtraGrid.ViewOperationEventHandler(this.gvProducts_ViewRegistered);
-            // 
             // productGridViewModelBindingSource
             // 
             this.productGridViewModelBindingSource.DataSource = typeof(DigiBugzy.Core.ViewModels.Catalog.ProductGridViewModel);
-            // 
-            // gvProducts
-            // 
-            this.gvProducts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colId,
-            this.colName,
-            this.colImage,
-            this.colIsActive,
-            this.colParentId,
-            this.colParentName});
-            this.gvProducts.GridControl = this.gridListing;
-            this.gvProducts.Name = "gvProducts";
-            this.gvProducts.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.View_FocusedRowChanged);
-            // 
-            // colId
-            // 
-            this.colId.FieldName = "Id";
-            this.colId.Name = "colId";
-            this.colId.Visible = true;
-            this.colId.VisibleIndex = 0;
-            // 
-            // colName
-            // 
-            this.colName.FieldName = "Name";
-            this.colName.Name = "colName";
-            this.colName.Visible = true;
-            this.colName.VisibleIndex = 1;
-            // 
-            // colImage
-            // 
-            this.colImage.FieldName = "Image";
-            this.colImage.Name = "colImage";
-            this.colImage.Visible = true;
-            this.colImage.VisibleIndex = 2;
-            // 
-            // colIsActive
-            // 
-            this.colIsActive.FieldName = "IsActive";
-            this.colIsActive.Name = "colIsActive";
-            this.colIsActive.Visible = true;
-            this.colIsActive.VisibleIndex = 3;
-            // 
-            // colParentId
-            // 
-            this.colParentId.FieldName = "ParentId";
-            this.colParentId.Name = "colParentId";
-            this.colParentId.Visible = true;
-            this.colParentId.VisibleIndex = 4;
-            // 
-            // colParentName
-            // 
-            this.colParentName.FieldName = "ParentName";
-            this.colParentName.Name = "colParentName";
-            this.colParentName.Visible = true;
-            this.colParentName.VisibleIndex = 5;
             // 
             // pnlBackground
             // 
@@ -436,8 +362,26 @@
             this.splitContent.Panel2.Controls.Add(this.tabPane1);
             this.splitContent.Panel2.Text = "Panel2";
             this.splitContent.Size = new System.Drawing.Size(1938, 786);
-            this.splitContent.SplitterPosition = 427;
+            this.splitContent.SplitterPosition = 426;
             this.splitContent.TabIndex = 0;
+            // 
+            // gridListing
+            // 
+            this.gridListing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridListing.Location = new System.Drawing.Point(0, 0);
+            this.gridListing.MainView = this.gvProducts;
+            this.gridListing.Name = "gridListing";
+            this.gridListing.Size = new System.Drawing.Size(1938, 426);
+            this.gridListing.TabIndex = 0;
+            this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvProducts});
+            this.gridListing.ViewRegistered += new DevExpress.XtraGrid.ViewOperationEventHandler(this.gvProducts_ViewRegistered);
+            // 
+            // gvProducts
+            // 
+            this.gvProducts.GridControl = this.gridListing;
+            this.gvProducts.Name = "gvProducts";
+            this.gvProducts.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvProducts_RowClick);
             // 
             // tabPane1
             // 
@@ -460,9 +404,9 @@
             this.tabOrders,
             this.tabProjects,
             this.tabDocuments});
-            this.tabPane1.RegularSize = new System.Drawing.Size(1938, 349);
+            this.tabPane1.RegularSize = new System.Drawing.Size(1938, 350);
             this.tabPane1.SelectedPage = this.tabEditor;
-            this.tabPane1.Size = new System.Drawing.Size(1938, 349);
+            this.tabPane1.Size = new System.Drawing.Size(1938, 350);
             this.tabPane1.TabIndex = 0;
             this.tabPane1.Text = "Product Information";
             // 
@@ -488,7 +432,7 @@
             this.tabEditor.Controls.Add(this.lblEditorName);
             this.tabEditor.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabEditor.ImageOptions.Image")));
             this.tabEditor.Name = "tabEditor";
-            this.tabEditor.Size = new System.Drawing.Size(1938, 316);
+            this.tabEditor.Size = new System.Drawing.Size(1938, 317);
             this.tabEditor.ToolTip = "Editor";
             // 
             // txtEditorPrice
@@ -685,7 +629,7 @@
             this.tabOrders.Caption = "Orders";
             this.tabOrders.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabOrders.ImageOptions.Image")));
             this.tabOrders.Name = "tabOrders";
-            this.tabOrders.Size = new System.Drawing.Size(1938, 479);
+            this.tabOrders.Size = new System.Drawing.Size(1938, 316);
             // 
             // tabCategories
             // 
@@ -1127,13 +1071,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1938, 868);
             this.Controls.Add(this.pnlBackground);
+            this.IconOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("ProductsManager.IconOptions.LargeImage")));
             this.Name = "ProductsManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Products Manager";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)(this.gridListing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productGridViewModelBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlBackground)).EndInit();
             this.pnlBackground.ResumeLayout(false);
             this.splitMain.Panel1.ResumeLayout(false);
@@ -1151,6 +1094,8 @@
             this.splitContent.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContent)).EndInit();
             this.splitContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridListing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).EndInit();
             this.tabPane1.ResumeLayout(false);
             this.tabEditor.ResumeLayout(false);
@@ -1254,18 +1199,8 @@
         private DevExpress.XtraEditors.PanelControl pnlCustomFieldsList;
         private DevExpress.XtraEditors.SimpleButton btnSampleDataDelete;
         private DevExpress.XtraEditors.SimpleButton btnSampleData;
-
-        private DevExpress.XtraGrid.GridControl gridListing;
-
-        private DevExpress.XtraGrid.Views.Grid.GridView gvProducts;
         private BindingSource bsProductsListing;
         private BindingSource productGridViewModelBindingSource;
-        private DevExpress.XtraGrid.Columns.GridColumn colId;
-        private DevExpress.XtraGrid.Columns.GridColumn colName;
-        private DevExpress.XtraGrid.Columns.GridColumn colImage;
-        private DevExpress.XtraGrid.Columns.GridColumn colIsActive;
-        private DevExpress.XtraGrid.Columns.GridColumn colParentId;
-        private DevExpress.XtraGrid.Columns.GridColumn colParentName;
         private TextBox txtEditorPrice;
         private DevExpress.XtraEditors.TextEdit txtEditorQuantity;
         private DevExpress.XtraEditors.LabelControl lblQuantity;
@@ -1307,5 +1242,7 @@
         private TextBox textBox4;
         private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraEditors.LabelControl lblStockProjectPrice;
+        private DevExpress.XtraGrid.GridControl gridListing;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvProducts;
     }
 }

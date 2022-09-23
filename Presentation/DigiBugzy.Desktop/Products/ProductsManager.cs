@@ -558,5 +558,13 @@ namespace DigiBugzy.Desktop.Products
         {
 
         }
+
+        private void gvProducts_RowClick(object sender, RowClickEventArgs e)
+        {
+            var gridView = sender as GridView;
+            SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
+            LoadSelectedProduct();
+
+        }
     }
 }

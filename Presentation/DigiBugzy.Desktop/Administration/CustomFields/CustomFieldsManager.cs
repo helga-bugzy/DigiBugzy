@@ -590,6 +590,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             if (_isDragging) return;
             using var service = new CategoryService(Globals.GetConnectionString());
             SelectedCategory = service.GetById(int.Parse(e.Node.Tag.ToString()!));
+            
 
             //TODO LoadCategoryEditor();
 

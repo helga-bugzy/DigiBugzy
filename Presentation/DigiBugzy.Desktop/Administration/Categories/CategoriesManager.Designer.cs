@@ -41,10 +41,11 @@
             this.lblClassification = new DevExpress.XtraEditors.LabelControl();
             this.pnlContent = new DevExpress.XtraEditors.PanelControl();
             this.splitContent = new DevExpress.XtraEditors.SplitContainerControl();
+            this.pnlTreeControl = new DevExpress.XtraEditors.PanelControl();
+            this.twCategories = new System.Windows.Forms.TreeView();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.btnNameFilter = new DevExpress.XtraEditors.SimpleButton();
             this.txtFilterName = new System.Windows.Forms.TextBox();
-            this.twCategories = new System.Windows.Forms.TreeView();
             this.splitEditors = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.pnlEditor = new DevExpress.XtraEditors.PanelControl();
@@ -109,6 +110,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContent.Panel2)).BeginInit();
             this.splitContent.Panel2.SuspendLayout();
             this.splitContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlTreeControl)).BeginInit();
+            this.pnlTreeControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
             this.panelControl7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors)).BeginInit();
@@ -286,8 +289,8 @@
             // 
             // splitContent.Panel1
             // 
+            this.splitContent.Panel1.Controls.Add(this.pnlTreeControl);
             this.splitContent.Panel1.Controls.Add(this.panelControl7);
-            this.splitContent.Panel1.Controls.Add(this.twCategories);
             this.splitContent.Panel1.Text = "Panel1";
             // 
             // splitContent.Panel2
@@ -298,14 +301,40 @@
             this.splitContent.SplitterPosition = 313;
             this.splitContent.TabIndex = 0;
             // 
+            // pnlTreeControl
+            // 
+            this.pnlTreeControl.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlTreeControl.Controls.Add(this.twCategories);
+            this.pnlTreeControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTreeControl.Location = new System.Drawing.Point(0, 41);
+            this.pnlTreeControl.Name = "pnlTreeControl";
+            this.pnlTreeControl.Size = new System.Drawing.Size(313, 738);
+            this.pnlTreeControl.TabIndex = 2;
+            // 
+            // twCategories
+            // 
+            this.twCategories.AllowDrop = true;
+            this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.twCategories.Location = new System.Drawing.Point(0, 0);
+            this.twCategories.Name = "twCategories";
+            this.twCategories.Size = new System.Drawing.Size(313, 738);
+            this.twCategories.TabIndex = 0;
+            this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
+            this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCategories_NodeMouseClick);
+            this.twCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.twCategories_DragDrop);
+            this.twCategories.DragEnter += new System.Windows.Forms.DragEventHandler(this.twCategories_DragEnter);
+            this.twCategories.DragOver += new System.Windows.Forms.DragEventHandler(this.twCategories_DragOver);
+            this.twCategories.DragLeave += new System.EventHandler(this.twCategories_DragLeave);
+            // 
             // panelControl7
             // 
+            this.panelControl7.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl7.Controls.Add(this.btnNameFilter);
             this.panelControl7.Controls.Add(this.txtFilterName);
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl7.Location = new System.Drawing.Point(0, 0);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(313, 53);
+            this.panelControl7.Size = new System.Drawing.Size(313, 41);
             this.panelControl7.TabIndex = 1;
             // 
             // btnNameFilter
@@ -323,21 +352,6 @@
             this.txtFilterName.Name = "txtFilterName";
             this.txtFilterName.Size = new System.Drawing.Size(251, 21);
             this.txtFilterName.TabIndex = 10;
-            // 
-            // twCategories
-            // 
-            this.twCategories.AllowDrop = true;
-            this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.twCategories.Location = new System.Drawing.Point(0, 0);
-            this.twCategories.Name = "twCategories";
-            this.twCategories.Size = new System.Drawing.Size(313, 779);
-            this.twCategories.TabIndex = 0;
-            this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
-            this.twCategories.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.twCategories_NodeMouseClick);
-            this.twCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.twCategories_DragDrop);
-            this.twCategories.DragEnter += new System.Windows.Forms.DragEventHandler(this.twCategories_DragEnter);
-            this.twCategories.DragOver += new System.Windows.Forms.DragEventHandler(this.twCategories_DragOver);
-            this.twCategories.DragLeave += new System.EventHandler(this.twCategories_DragLeave);
             // 
             // splitEditors
             // 
@@ -903,6 +917,8 @@
             this.splitContent.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContent)).EndInit();
             this.splitContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlTreeControl)).EndInit();
+            this.pnlTreeControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
             this.panelControl7.ResumeLayout(false);
             this.panelControl7.PerformLayout();
@@ -1032,5 +1048,6 @@
         private TextBox txtFilterName;
         private DevExpress.XtraEditors.PanelControl panelControl7;
         private DevExpress.XtraEditors.SimpleButton btnNameFilter;
+        private DevExpress.XtraEditors.PanelControl pnlTreeControl;
     }
 }
