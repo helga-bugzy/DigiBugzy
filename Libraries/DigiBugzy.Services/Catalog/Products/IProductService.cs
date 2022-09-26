@@ -64,7 +64,7 @@ namespace DigiBugzy.Services.Catalog.Products
         /// <param name="totalInStock"></param>
         /// <param name="qtyOnOrder"></param>
         /// <param name="qtyReserved"></param>
-        public void UpdateStockInfo(int productId, double totalValue, double totalInStock, double qtyOnOrder, double qtyReserved)
+        public void UpdateStockInfo(int productId, double totalValue, double totalInStock, double qtyOnOrder, double qtyReserved);
 
         #endregion
 

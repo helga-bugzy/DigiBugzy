@@ -370,7 +370,7 @@ namespace DigiBugzy.Desktop.Products
             if (gvStock.Columns[nameof(StockJournalViewModel.ProductId)] != null) gvStock.Columns[nameof(StockJournalViewModel.ProjectSectionPartName)].Visible = false;
             if (gvStock.Columns[nameof(StockJournalViewModel.SupplierId)] != null) gvStock.Columns[nameof(StockJournal.SupplierId)].Visible = false;
             if (gvStock.Columns[nameof(StockJournalViewModel.ProductId)] != null) gvStock.Columns[nameof(StockJournalViewModel.SupplierName)].Visible = false;
-            if (gvStock.Columns[nameof(StockJournalViewModel.EntryDate)] != null) gvStock.Columns[nameof(StockJournalViewModel.EntryDate)].Visible = false;
+
         }
 
       
@@ -583,23 +583,9 @@ namespace DigiBugzy.Desktop.Products
         {
             if(SelectedStockJournal.Id <= 0) return;
 
-            var journal = new StockJournal
-            {
-                Name = $"Reversal - {txtStockJournal_Title.EditValue.ToString()}",
-                Description = $"Reversal - {txtStockJournal_Description.EditValue.ToString()} Journal No. {SelectedStockJournal.Id} on {SelectedStockJournal.CreatedOn}",
-                QuantityIn = radStockIn.Checked ? 0 : Parse(txtStockJournal_Quantity.EditValue?.ToString() ?? "0"),
-                QuantityOut = radStockOut.Checked ? 0 : Parse(txtStockJournal_Quantity.EditValue?.ToString() ?? "0"),
-                DigiAdminId = Globals.DigiAdministration.Id,
-                CreatedOn = DateTime.Now,
-                IsActive = true,
-                IsDeleted = false,
-                ProductId = SelectedProduct.Id,
-                IsReversed = false,
-                ReversedFromId = SelectedStockJournal.Id
-            };
 
             var service = new StockJournalService(Globals.GetConnectionString());
-            service.Create(journal);
+            service.ReverseEntry(SelectedStockJournal.Id);
             LoadStockInformation();
             Application.DoEvents();
         }

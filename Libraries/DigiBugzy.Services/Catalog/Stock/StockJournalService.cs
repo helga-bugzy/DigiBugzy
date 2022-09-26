@@ -109,6 +109,7 @@ namespace DigiBugzy.Services.Catalog.Stock
         public int Create(StockJournal entity, StockJournal lastEntry)
         {
             entity.CreatedOn = DateTime.Now;
+            entity.EntryDate = DateTime.Now;
             //Perform calculations
             entity.TotalInStock = lastEntry.TotalInStock + entity.QuantityIn - entity.QuantityOut;
             entity.TotalValue = lastEntry.TotalValue + (entity.QuantityIn - entity.QuantityOut) * entity.Price;
@@ -134,21 +135,29 @@ namespace DigiBugzy.Services.Catalog.Stock
         public void ReverseEntry(int id)
         {
             var currentEntry = GetById(id);
+            currentEntry.IsReversed = true;
+            dbContext.StockJournals.Update(currentEntry);
+            dbContext.SaveChanges();
+
             var newEntry = new StockJournal
             {
                 ProductId = currentEntry.ProductId,
                 QuantityIn = currentEntry.QuantityIn,
                 QuantityOut = currentEntry.QuantityOut,
                 QuantityReserved = currentEntry.QuantityReserved,
+                Price = currentEntry.Price,
                 Name = $"Reversal - {currentEntry.Name}",
                 Description = $"Reversal - {currentEntry.Description} Journal No. {currentEntry.Id} on {currentEntry.CreatedOn}",
                 DigiAdminId = currentEntry.DigiAdminId,
                 CreatedOn = DateTime.Now,
+                EntryDate = DateTime.Now,
                 IsActive = true,
                 IsDeleted = false,
-                IsReversed = true,
+                IsReversed = false,
+                ReversedFromId = id
             };
             Create(newEntry);
+
         }
 
 

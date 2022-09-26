@@ -9,6 +9,7 @@ namespace DigiBugzy.Core.ViewModels.Catalog
     /// </summary>
     public class StockJournalViewModel
     {
+        [DisplayName("#")]
         public int Id { get; set; }
 
         [DisplayName("Date")]
