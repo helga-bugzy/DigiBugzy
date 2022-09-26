@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Base;
 using DigiBugzy.Core.Domain.Products;
 using DigiBugzy.Core.Domain.xBase;
 using DigiBugzy.Core.Helpers;
@@ -26,11 +26,19 @@ namespace DigiBugzy.Desktop.Products
 
         public ProductGridViewModel SelectedProductModel { get; set; } = new();
 
+        public StockJournalViewModel SelectedStockJournalModel { get; set; } = new();
+
+        public StockJournal SelectedStockJournal { get; set; } = new();
+
         private List<MappingViewModel> LoadingCategories { get; set; } = new();
 
         private List<MappingViewModel> LoadingFields { get; set; } = new();
 
         private readonly bool _isLoading;
+
+        private bool _isInStockAddNew = false;
+
+        private bool _isInProductAddNew = false;
 
         #endregion
 
@@ -39,8 +47,10 @@ namespace DigiBugzy.Desktop.Products
         public ProductsManager()
         {
             _isLoading = true;
-
+            
             InitializeComponent();
+
+            ApplySettings();
 
             LoadFilterCategories();
 
@@ -56,6 +66,11 @@ namespace DigiBugzy.Desktop.Products
         #region Loading
 
         #region Products
+
+        private void ApplySettings()
+        {
+            btnSampleData.Visible = btnSampleDataDelete.Visible = Globals.ConnectionEnvironment == ConnectionEnvironment.Development;
+        }
 
         private void LoadFilter()
         {
@@ -94,18 +109,18 @@ namespace DigiBugzy.Desktop.Products
                 gvProducts.CollapseAllDetails();
                 gvProducts.BestFitColumns();
 
-                gvProducts.Columns["Id"].Visible = false;
-                gvProducts.Columns["ParentId"].Visible = false;
-                gvProducts.Columns["ParentName"].Visible = false;
+                gvProducts.Columns[nameof(ProductGridViewModel.Id)].Visible = false;
+                gvProducts.Columns[nameof(ProductGridViewModel.ParentId)].Visible = false;
+                gvProducts.Columns[nameof(ProductGridViewModel.ParentName)].Visible = false;
 
                 
                 LoadSelectedProduct();
 
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                var c = ex.Message;
+                //var c = ex.Message;
 
             }
             finally
@@ -154,21 +169,21 @@ namespace DigiBugzy.Desktop.Products
         private void LoadEditor()
         {
 
-            txtEditorQuantity.Enabled = false;
+            txtProductEditor_Quantity.Enabled = false;
             txtEditorPrice.Enabled = false;
             if (SelectedProduct.Id <= 0)
             {
-                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = true;
+                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtProductEditor_Quantity.Enabled = true;
                 btnDelete.Visible = btnRestore.Visible = false;
                 chkEditorActive.Checked = true;
                 lblSelectedFileName.Text = txtEditorName.Text = txtEditorDescription.Text = string.Empty;
                 imgProductPhoto.Visible = false;
-                txtEditorQuantity.Enabled = true;
+                txtProductEditor_Quantity.Enabled = true;
                 txtEditorPrice.Enabled = true;
             }
             else
             {
-                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtEditorQuantity.Visible = false;
+                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtProductEditor_Quantity.Visible = false;
                 btnDelete.Visible = !SelectedProduct.IsDeleted;
                 btnRestore.Visible = SelectedProduct.IsDeleted;
 
@@ -186,6 +201,8 @@ namespace DigiBugzy.Desktop.Products
                 imgProductPhoto.Image = ImageHelpers.GetImageFromByteArray(SelectedProduct.ProductImage);
             }
         }
+
+       
 
         #endregion
         
@@ -323,8 +340,7 @@ namespace DigiBugzy.Desktop.Products
         }
 
         #endregion
-
-
+        
         #region Stock
 
         /// <summary>
@@ -332,6 +348,7 @@ namespace DigiBugzy.Desktop.Products
         /// </summary>
         private void LoadStockInformation()
         {
+            if (bsStockListing == null) return;
             if(SelectedProduct.Id <= 0)
             {
                 bsStockListing.Clear();
@@ -342,20 +359,69 @@ namespace DigiBugzy.Desktop.Products
             var collection = service.GetStockJournalViewModel(new StockJournalSelectOptions(SelectedProduct.Id));
             bsStockListing.Clear();
             bsStockListing.DataSource = collection;
+            gvStock.DataController.AllowIEnumerableDetails = true;
             gridStock.DataSource = bsStockListing;
+            
 
-            if (gvStock.Columns["ProductId"] != null) gvStock.Columns["ProductId"].Visible = false;
-            if (gvStock.Columns["ProjectSectionPartId"] != null) gvStock.Columns["ProjectSectionPartId"].Visible = false;
-            if (gvStock.Columns["SupplierId"] != null) gvStock.Columns["SupplierId"].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.Id)] != null) gvStock.Columns[nameof(StockJournalViewModel.Id)].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.ProductId)] != null) gvStock.Columns[nameof(StockJournalViewModel.ProductId)].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.ProductId)] != null) gvStock.Columns[nameof(StockJournalViewModel.ProductName)].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.ProjectSectionPartId)] != null) gvStock.Columns[nameof(StockJournal.ProjectSectionPartId)].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.ProductId)] != null) gvStock.Columns[nameof(StockJournalViewModel.ProjectSectionPartName)].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.SupplierId)] != null) gvStock.Columns[nameof(StockJournal.SupplierId)].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.ProductId)] != null) gvStock.Columns[nameof(StockJournalViewModel.SupplierName)].Visible = false;
+            if (gvStock.Columns[nameof(StockJournalViewModel.EntryDate)] != null) gvStock.Columns[nameof(StockJournalViewModel.EntryDate)].Visible = false;
         }
 
-        private void LoadSelectedStockItem()
+      
+        private void LoadStockJournalEditor()
         {
+            txtStockJournal_Title.Enabled = txtStockJournal_Description.Enabled = txtStockJournal_Price.Enabled = txtStockJournal_Quantity.Enabled = txtStockJournal_Price.Enabled = false;
+            radStockIn.Enabled = radStockOut.Enabled = false;
+            txtStockJournal_Description.Text = txtStockJournal_Title.Text = txtStockJournal_Price.Text = txtStockJournal_Quantity.Text = string.Empty;
+            btnStockAddNew.Enabled = btnStockReverse.Enabled = false;
 
+
+            if (SelectedStockJournalModel.Id <= 0 || _isInStockAddNew)
+            {
+                radStockIn.Checked = true;
+                radStockOut.Checked = false;
+                btnStockReverse.Enabled = false;
+                btnStockSave.Enabled = true;
+
+                txtStockJournal_Title.Enabled = txtStockJournal_Description.Enabled = txtStockJournal_Price.Enabled = txtStockJournal_Quantity.Enabled = txtStockJournal_Price.Enabled = true;
+                radStockIn.Enabled = radStockOut.Enabled = true;
+            }
+            else
+            {
+                
+                btnStockAddNew.Enabled = true;
+                btnStockSave.Enabled = false;                                   //can not change existing entry, must do new
+                btnStockReverse.Enabled = CanReverseStockJournalEntry(SelectedStockJournal.Id);     
+                txtStockJournal_Title.Text = SelectedStockJournal.Name;
+                txtStockJournal_Description.Text = SelectedStockJournal.Description;
+                txtStockJournal_Price.Text = SelectedStockJournal.Price.ToString(CultureInfo.InvariantCulture);
+                txtStockJournal_Quantity.Text = SelectedStockJournalModel.QuantityIn > 0 ?
+                    SelectedStockJournalModel.QuantityIn.ToString(CultureInfo.InvariantCulture) :
+                    SelectedStockJournalModel.QuantityOut.ToString(CultureInfo.InvariantCulture);
+                radStockIn.Checked = SelectedStockJournalModel.QuantityIn > 0;
+                radStockOut.Checked = SelectedStockJournalModel.QuantityOut > 0;
+            }
+        }
+
+        /// <summary>
+        /// Validates if the stock journal entry can/may be reversed
+        /// </summary>
+        /// <param name="id">Journal entry to be validated</param>
+        /// <returns></returns>
+        private bool CanReverseStockJournalEntry(int id)
+        {
+            var service = new StockJournalService(Globals.GetConnectionString());
+            return service.CanReverseJournal(id);
         }
 
         #endregion
-        
+
         #endregion
 
         #region Saving
@@ -385,7 +451,7 @@ namespace DigiBugzy.Desktop.Products
 
                 //Stock entry
                 var stockJournalService = new StockJournalService(Globals.GetConnectionString());
-                stockJournalService.Create(new()
+                stockJournalService.Create(new StockJournal
                 {
                     IsActive = true,
                     IsDeleted = false,
@@ -394,21 +460,73 @@ namespace DigiBugzy.Desktop.Products
                     DigiAdminId = Globals.DigiAdministration.Id,
                     Name = "Journal Entry",
                     Description = "Opening stock balance",
-                    QuantityIn = Parse(txtEditorQuantity.Text),
+                    QuantityIn = Parse(txtProductEditor_Quantity.Text),
                     QuantityOnOrder = 0D,
                     QuantityOut = 0D,
                     QuantityReserved = 0D,
                     TotalInStock = 0D,
                     TotalValue = 0D,
                     ProductId = SelectedProduct.Id,
-                    Price = Parse(txtEditorQuantity.Text),
+                    Price = Parse(txtProductEditor_Quantity.Text),
                     ProjectSectionPartId = null,
                     Supplier = null
                 });
             }
 
+            _isInProductAddNew = false;
+
             LoadFilter();
 
+        }
+
+        private void SaveJournalEntry()
+        {
+            //Validate = can not log out more than stock value (use reserve for that)
+            var service = new StockJournalService(Globals.GetConnectionString());
+            var lastEntry = service.GetLastEntry(SelectedProduct.Id);
+            double currentStockInTotal = 0;
+            double currentStockValue = 0;
+            var journalQuantity = Parse(txtStockJournal_Quantity.EditValue?.ToString() ?? "0");
+            var journalPrice = Parse(txtStockJournal_Price.EditValue?.ToString() ?? "0");
+
+            if (lastEntry != null)
+            {
+                currentStockInTotal = lastEntry.TotalInStock;
+                currentStockValue = lastEntry.TotalValue;
+            }
+
+            if (radStockOut.Checked)
+            {
+                if (journalQuantity > currentStockInTotal)
+                {
+                    MessageBox.Show($"Current stock total is {currentStockInTotal}. {Environment.NewLine}You can not book more out than the amount in stock.");
+                    return;
+                }
+
+                if (journalQuantity * journalPrice > currentStockValue)
+                {
+                    MessageBox.Show($"Current stock value is {currentStockValue}. {Environment.NewLine}You can not book more ({journalQuantity * journalPrice}) out than the amount in stock.");
+                    return;
+                }
+            }
+
+            //All fine, now update
+            var journal = new StockJournal
+            {
+                Name = txtStockJournal_Title.EditValue.ToString(),
+                Price = Parse(txtStockJournal_Price.Text),
+                Description = txtStockJournal_Description.EditValue.ToString(),
+                QuantityIn = !radStockIn.Checked ? 0 : Parse(txtStockJournal_Quantity.EditValue?.ToString() ?? "0"),
+                QuantityOut = !radStockOut.Checked ? 0 : Parse(txtStockJournal_Quantity.EditValue?.ToString() ?? "0"),
+                DigiAdminId = Globals.DigiAdministration.Id,
+                CreatedOn = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                ProductId = SelectedProduct.Id,
+                IsReversed = false
+            };
+
+            service.Create(journal, lastEntry);
         }
 
         #endregion
@@ -417,6 +535,82 @@ namespace DigiBugzy.Desktop.Products
 
         #region Control Event Procedures
 
+        #region Stock
+
+        private void bsStockListing_PositionChanged(object sender, EventArgs e)
+        {
+            if (sender is not BindingSource { Position: > -1 }) return;
+            if (bsStockListing.Count <= 0) return;
+            SelectedStockJournalModel = (StockJournalViewModel)bsStockListing.Current;
+            using var service = new StockJournalService(Globals.GetConnectionString());
+            SelectedStockJournal = service.GetById(SelectedStockJournalModel.Id);
+            LoadStockJournalEditor();
+        }
+
+        private void btnStockAddNew_Click(object sender, EventArgs e)
+        {
+            SelectedStockJournal = new StockJournal();
+            _isInStockAddNew = true;
+            LoadStockJournalEditor();
+        }
+
+        private void btnStockSave_Click(object sender, EventArgs e)
+        {
+            //Validate input
+            if (txtStockJournal_Quantity.EditValue == null)
+            {
+                MessageBox.Show("Quantity must be provided");
+                return;
+            }
+
+            //Set default value
+            if (string.IsNullOrEmpty(txtStockJournal_Description.Text)) txtStockJournal_Description.Text = txtStockJournal_Title.Text;
+
+            //Validate and save
+            SaveJournalEntry();
+
+            //Set Interface
+            _isInStockAddNew = false;
+            LoadStockInformation();
+            Application.DoEvents();
+
+
+        }
+
+        
+
+        private void btnStockReverse_Click(object sender, EventArgs e)
+        {
+            if(SelectedStockJournal.Id <= 0) return;
+
+            var journal = new StockJournal
+            {
+                Name = $"Reversal - {txtStockJournal_Title.EditValue.ToString()}",
+                Description = $"Reversal - {txtStockJournal_Description.EditValue.ToString()} Journal No. {SelectedStockJournal.Id} on {SelectedStockJournal.CreatedOn}",
+                QuantityIn = radStockIn.Checked ? 0 : Parse(txtStockJournal_Quantity.EditValue?.ToString() ?? "0"),
+                QuantityOut = radStockOut.Checked ? 0 : Parse(txtStockJournal_Quantity.EditValue?.ToString() ?? "0"),
+                DigiAdminId = Globals.DigiAdministration.Id,
+                CreatedOn = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                ProductId = SelectedProduct.Id,
+                IsReversed = false,
+                ReversedFromId = SelectedStockJournal.Id
+            };
+
+            var service = new StockJournalService(Globals.GetConnectionString());
+            service.Create(journal);
+            LoadStockInformation();
+            Application.DoEvents();
+        }
+        
+        private void txtStockJournal_Description_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtStockJournal_Description.Text)) txtStockJournal_Description.Text = txtStockJournal_Title.Text;
+        }
+
+        #endregion
+        
         #region Filter
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -444,11 +638,7 @@ namespace DigiBugzy.Desktop.Products
             LoadFilter();
         }
 
-        private void txtFilterName_Leave(object sender, EventArgs e)
-        {
-            LoadFilter();
-        }
-
+       
         #endregion
 
         #region Sample Data
@@ -494,8 +684,16 @@ namespace DigiBugzy.Desktop.Products
 
         #endregion
 
-        #region Product Editor
+        #region Product Editor]
 
+        private void bsProductsListing_PositionChanged(object sender, EventArgs e)
+        {
+            if (sender is not BindingSource { Position: > -1 }) return;
+            SelectedProductModel = (ProductGridViewModel)bsProductsListing.Current;
+            LoadSelectedProduct();
+        }
+
+       
         private void btnProductImage_Click(object sender, EventArgs e)
         {
             if (openFileProductImage.ShowDialog() != DialogResult.OK) return;
@@ -509,6 +707,7 @@ namespace DigiBugzy.Desktop.Products
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
+            _isInProductAddNew = true;
             SelectedProduct = new Product();
             SelectedProductModel = new ProductGridViewModel();
             LoadSelectedProduct();
@@ -535,29 +734,33 @@ namespace DigiBugzy.Desktop.Products
             SaveProduct();
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (SelectedProduct.Id <= 0) return;
+            var service = new ProductService(Globals.GetConnectionString());
+            service.Delete(SelectedProduct.Id, false);
+        }
+
+        private void txtEditorName_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEditorName.Text)) txtEditorName.Text = txtEditorName.Text;
+        }
+
+
         #endregion
 
         #region Grid View
 
-      
-        private void gvProducts_ViewRegistered(object sender, ViewOperationEventArgs e)
-        {
-            var view = (GridView)e.View;
-            view.Columns["Id"].Visible = false;
-            view.Columns["ParentId"].Visible = false;
-            view.Columns["ParentName"].Visible = false;
 
-            view.FocusedRowChanged += View_FocusedRowChanged;
-        }
-
-        private void View_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private void gvProducts_RowClick(object sender, RowClickEventArgs e)
         {
             var gridView = sender as GridView;
             SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
             LoadSelectedProduct();
+
         }
 
-
+       
         #endregion
 
         #region Treeview
@@ -585,29 +788,11 @@ namespace DigiBugzy.Desktop.Products
 
         #endregion
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (SelectedProduct.Id <= 0) return;
-            var service = new ProductService(Globals.GetConnectionString());
-            service.Delete(SelectedProduct.Id, false);
-        }
-
-        private void gridStock_Click(object sender, EventArgs e)
+        private void pnlStockTab_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void cmbStockProjectSectionPart_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gvProducts_RowClick(object sender, RowClickEventArgs e)
-        {
-            var gridView = sender as GridView;
-            SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
-            LoadSelectedProduct();
-
-        }
+       
     }
 }

@@ -53,6 +53,15 @@ namespace DigiBugzy.Core.Domain.Products
         /// </summary>
         public double TotalValue { get; set; } = 0;
 
+        /// <summary>
+        /// Indicator if the item is reveresed or not
+        /// </summary>
+        public bool IsReversed { get; set; } = false;
+
+        /// <summary>
+        /// If is reversed, then from which one
+        /// </summary>
+        public int? ReversedFromId { get; set; }
 
 
         [ForeignKey(nameof(ProductId))]
@@ -63,5 +72,8 @@ namespace DigiBugzy.Core.Domain.Products
 
         [ForeignKey(nameof(ProjectSectionPartId))]
         public ProjectSectionPart? ProjectSectionPart { get; set; }
+
+        [ForeignKey(nameof(ReversedFromId))]
+        public StockJournal? ReversedFromJournal { get; set; }
     }
 }

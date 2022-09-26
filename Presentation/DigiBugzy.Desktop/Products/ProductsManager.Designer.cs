@@ -34,10 +34,10 @@
             this.pnlBackground = new DevExpress.XtraEditors.PanelControl();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
+            this.txtFilterName = new System.Windows.Forms.TextBox();
             this.btnSampleDataDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnSampleData = new DevExpress.XtraEditors.SimpleButton();
             this.chkFilterLikeSearch = new System.Windows.Forms.CheckBox();
-            this.txtFilterName = new System.Windows.Forms.TextBox();
             this.lblFilterName = new System.Windows.Forms.Label();
             this.btnFilter = new DevExpress.XtraEditors.SimpleButton();
             this.chkFilterDeleted = new System.Windows.Forms.CheckBox();
@@ -50,8 +50,9 @@
             this.gvProducts = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabPane1 = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabEditor = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.txtEditorPrice = new System.Windows.Forms.TextBox();
-            this.txtEditorQuantity = new DevExpress.XtraEditors.TextEdit();
+            this.txtEditorPrice = new DevExpress.XtraEditors.TextEdit();
+            this.txtEditorDescription = new DevExpress.XtraEditors.MemoEdit();
+            this.txtProductEditor_Quantity = new DevExpress.XtraEditors.TextEdit();
             this.lblQuantity = new DevExpress.XtraEditors.LabelControl();
             this.lblEditorPrice = new DevExpress.XtraEditors.LabelControl();
             this.lblSelectedFileName = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.btnAddNew = new DevExpress.XtraEditors.SimpleButton();
             this.chkEditorActive = new System.Windows.Forms.CheckBox();
             this.lblEditorActive = new System.Windows.Forms.Label();
-            this.txtEditorDescription = new System.Windows.Forms.TextBox();
             this.txtEditorName = new DevExpress.XtraEditors.TextEdit();
             this.lblEditorDescription = new System.Windows.Forms.Label();
             this.lblEditorName = new System.Windows.Forms.Label();
@@ -86,15 +86,15 @@
             this.gvStock = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.splitStockEditors = new DevExpress.XtraEditors.SplitContainerControl();
             this.grpStockEditor = new DevExpress.XtraEditors.GroupControl();
+            this.txtStockJournal_Quantity = new DevExpress.XtraEditors.TextEdit();
+            this.txtStockJournal_Price = new DevExpress.XtraEditors.TextEdit();
+            this.txtStockJournal_Description = new DevExpress.XtraEditors.TextEdit();
             this.btnStockReverse = new DevExpress.XtraEditors.SimpleButton();
             this.btnStockSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnStockAddNew = new DevExpress.XtraEditors.SimpleButton();
             this.radStockOut = new System.Windows.Forms.RadioButton();
             this.radStockIn = new System.Windows.Forms.RadioButton();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.txtStockJournal_Title = new DevExpress.XtraEditors.TextEdit();
             this.lblStockQty = new DevExpress.XtraEditors.LabelControl();
             this.lblStockPrice = new System.Windows.Forms.Label();
             this.lblStockDescription = new DevExpress.XtraEditors.LabelControl();
@@ -140,7 +140,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).BeginInit();
             this.tabPane1.SuspendLayout();
             this.tabEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEditorQuantity.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEditorPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEditorDescription.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductEditor_Quantity.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgProductPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEditorName.Properties)).BeginInit();
             this.tabFields.SuspendLayout();
@@ -173,7 +175,10 @@
             this.splitStockEditors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grpStockEditor)).BeginInit();
             this.grpStockEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Quantity.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Price.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Description.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Title.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpStockProjectEditor)).BeginInit();
             this.grpStockProjectEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
@@ -220,10 +225,10 @@
             // pnlFilter
             // 
             this.pnlFilter.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlFilter.Controls.Add(this.txtFilterName);
             this.pnlFilter.Controls.Add(this.btnSampleDataDelete);
             this.pnlFilter.Controls.Add(this.btnSampleData);
             this.pnlFilter.Controls.Add(this.chkFilterLikeSearch);
-            this.pnlFilter.Controls.Add(this.txtFilterName);
             this.pnlFilter.Controls.Add(this.lblFilterName);
             this.pnlFilter.Controls.Add(this.btnFilter);
             this.pnlFilter.Controls.Add(this.chkFilterDeleted);
@@ -236,12 +241,19 @@
             this.pnlFilter.Size = new System.Drawing.Size(1938, 78);
             this.pnlFilter.TabIndex = 0;
             // 
+            // txtFilterName
+            // 
+            this.txtFilterName.Location = new System.Drawing.Point(89, 9);
+            this.txtFilterName.Name = "txtFilterName";
+            this.txtFilterName.Size = new System.Drawing.Size(396, 21);
+            this.txtFilterName.TabIndex = 18;
+            // 
             // btnSampleDataDelete
             // 
             this.btnSampleDataDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleDataDelete.ImageOptions.Image")));
             this.btnSampleDataDelete.Location = new System.Drawing.Point(1014, 17);
             this.btnSampleDataDelete.Name = "btnSampleDataDelete";
-            this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 38);
+            this.btnSampleDataDelete.Size = new System.Drawing.Size(129, 36);
             this.btnSampleDataDelete.TabIndex = 17;
             this.btnSampleDataDelete.Text = "Delete Sample Data";
             this.btnSampleDataDelete.Click += new System.EventHandler(this.btnSampleDataDelete_Click);
@@ -251,7 +263,7 @@
             this.btnSampleData.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSampleData.ImageOptions.Image")));
             this.btnSampleData.Location = new System.Drawing.Point(879, 17);
             this.btnSampleData.Name = "btnSampleData";
-            this.btnSampleData.Size = new System.Drawing.Size(129, 37);
+            this.btnSampleData.Size = new System.Drawing.Size(129, 36);
             this.btnSampleData.TabIndex = 16;
             this.btnSampleData.Text = "Create Sample Data";
             this.btnSampleData.Click += new System.EventHandler(this.btnSampleData_Click);
@@ -268,14 +280,6 @@
             this.chkFilterLikeSearch.Text = "Like (%) Search";
             this.chkFilterLikeSearch.UseVisualStyleBackColor = true;
             this.chkFilterLikeSearch.CheckedChanged += new System.EventHandler(this.chkFilterLikeSearch_CheckedChanged);
-            // 
-            // txtFilterName
-            // 
-            this.txtFilterName.Location = new System.Drawing.Point(89, 8);
-            this.txtFilterName.Name = "txtFilterName";
-            this.txtFilterName.Size = new System.Drawing.Size(394, 21);
-            this.txtFilterName.TabIndex = 14;
-            this.txtFilterName.Leave += new System.EventHandler(this.txtFilterName_Leave);
             // 
             // lblFilterName
             // 
@@ -375,7 +379,6 @@
             this.gridListing.TabIndex = 0;
             this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProducts});
-            this.gridListing.ViewRegistered += new DevExpress.XtraGrid.ViewOperationEventHandler(this.gvProducts_ViewRegistered);
             // 
             // gvProducts
             // 
@@ -414,7 +417,8 @@
             // 
             this.tabEditor.Caption = "Editor";
             this.tabEditor.Controls.Add(this.txtEditorPrice);
-            this.tabEditor.Controls.Add(this.txtEditorQuantity);
+            this.tabEditor.Controls.Add(this.txtEditorDescription);
+            this.tabEditor.Controls.Add(this.txtProductEditor_Quantity);
             this.tabEditor.Controls.Add(this.lblQuantity);
             this.tabEditor.Controls.Add(this.lblEditorPrice);
             this.tabEditor.Controls.Add(this.lblSelectedFileName);
@@ -426,7 +430,6 @@
             this.tabEditor.Controls.Add(this.btnAddNew);
             this.tabEditor.Controls.Add(this.chkEditorActive);
             this.tabEditor.Controls.Add(this.lblEditorActive);
-            this.tabEditor.Controls.Add(this.txtEditorDescription);
             this.tabEditor.Controls.Add(this.txtEditorName);
             this.tabEditor.Controls.Add(this.lblEditorDescription);
             this.tabEditor.Controls.Add(this.lblEditorName);
@@ -437,17 +440,24 @@
             // 
             // txtEditorPrice
             // 
-            this.txtEditorPrice.Location = new System.Drawing.Point(226, 230);
+            this.txtEditorPrice.Location = new System.Drawing.Point(240, 232);
             this.txtEditorPrice.Name = "txtEditorPrice";
-            this.txtEditorPrice.Size = new System.Drawing.Size(100, 21);
+            this.txtEditorPrice.Size = new System.Drawing.Size(86, 20);
             this.txtEditorPrice.TabIndex = 5;
             // 
-            // txtEditorQuantity
+            // txtEditorDescription
             // 
-            this.txtEditorQuantity.Location = new System.Drawing.Point(384, 230);
-            this.txtEditorQuantity.Name = "txtEditorQuantity";
-            this.txtEditorQuantity.Size = new System.Drawing.Size(105, 20);
-            this.txtEditorQuantity.TabIndex = 6;
+            this.txtEditorDescription.Location = new System.Drawing.Point(91, 45);
+            this.txtEditorDescription.Name = "txtEditorDescription";
+            this.txtEditorDescription.Size = new System.Drawing.Size(394, 179);
+            this.txtEditorDescription.TabIndex = 3;
+            // 
+            // txtProductEditor_Quantity
+            // 
+            this.txtProductEditor_Quantity.Location = new System.Drawing.Point(384, 232);
+            this.txtProductEditor_Quantity.Name = "txtProductEditor_Quantity";
+            this.txtProductEditor_Quantity.Size = new System.Drawing.Size(105, 20);
+            this.txtProductEditor_Quantity.TabIndex = 6;
             // 
             // lblQuantity
             // 
@@ -552,21 +562,13 @@
             this.lblEditorActive.TabIndex = 4;
             this.lblEditorActive.Text = "Active:";
             // 
-            // txtEditorDescription
-            // 
-            this.txtEditorDescription.Location = new System.Drawing.Point(91, 41);
-            this.txtEditorDescription.MaxLength = 255;
-            this.txtEditorDescription.Multiline = true;
-            this.txtEditorDescription.Name = "txtEditorDescription";
-            this.txtEditorDescription.Size = new System.Drawing.Size(398, 183);
-            this.txtEditorDescription.TabIndex = 3;
-            // 
             // txtEditorName
             // 
             this.txtEditorName.Location = new System.Drawing.Point(91, 15);
             this.txtEditorName.Name = "txtEditorName";
             this.txtEditorName.Size = new System.Drawing.Size(398, 20);
             this.txtEditorName.TabIndex = 2;
+            this.txtEditorName.Leave += new System.EventHandler(this.txtEditorName_Leave);
             // 
             // lblEditorDescription
             // 
@@ -711,6 +713,7 @@
             this.pnlStockTab.Name = "pnlStockTab";
             this.pnlStockTab.Size = new System.Drawing.Size(1938, 317);
             this.pnlStockTab.TabIndex = 0;
+            this.pnlStockTab.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStockTab_Paint);
             // 
             // splitStockMain
             // 
@@ -728,7 +731,7 @@
             this.splitStockMain.Panel2.Controls.Add(this.splitStockEditors);
             this.splitStockMain.Panel2.Text = "Panel2";
             this.splitStockMain.Size = new System.Drawing.Size(1934, 313);
-            this.splitStockMain.SplitterPosition = 670;
+            this.splitStockMain.SplitterPosition = 892;
             this.splitStockMain.TabIndex = 0;
             // 
             // gridStock
@@ -737,11 +740,10 @@
             this.gridStock.Location = new System.Drawing.Point(0, 0);
             this.gridStock.MainView = this.gvStock;
             this.gridStock.Name = "gridStock";
-            this.gridStock.Size = new System.Drawing.Size(670, 313);
+            this.gridStock.Size = new System.Drawing.Size(892, 313);
             this.gridStock.TabIndex = 0;
             this.gridStock.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvStock});
-            this.gridStock.Click += new System.EventHandler(this.gridStock_Click);
             // 
             // gvStock
             // 
@@ -763,21 +765,21 @@
             // 
             this.splitStockEditors.Panel2.Controls.Add(this.grpStockProjectEditor);
             this.splitStockEditors.Panel2.Text = "Panel2";
-            this.splitStockEditors.Size = new System.Drawing.Size(1254, 313);
-            this.splitStockEditors.SplitterPosition = 531;
+            this.splitStockEditors.Size = new System.Drawing.Size(1032, 313);
+            this.splitStockEditors.SplitterPosition = 510;
             this.splitStockEditors.TabIndex = 0;
             // 
             // grpStockEditor
             // 
+            this.grpStockEditor.Controls.Add(this.txtStockJournal_Quantity);
+            this.grpStockEditor.Controls.Add(this.txtStockJournal_Price);
+            this.grpStockEditor.Controls.Add(this.txtStockJournal_Description);
             this.grpStockEditor.Controls.Add(this.btnStockReverse);
             this.grpStockEditor.Controls.Add(this.btnStockSave);
             this.grpStockEditor.Controls.Add(this.btnStockAddNew);
             this.grpStockEditor.Controls.Add(this.radStockOut);
             this.grpStockEditor.Controls.Add(this.radStockIn);
-            this.grpStockEditor.Controls.Add(this.textBox3);
-            this.grpStockEditor.Controls.Add(this.textBox2);
-            this.grpStockEditor.Controls.Add(this.textBox1);
-            this.grpStockEditor.Controls.Add(this.textEdit1);
+            this.grpStockEditor.Controls.Add(this.txtStockJournal_Title);
             this.grpStockEditor.Controls.Add(this.lblStockQty);
             this.grpStockEditor.Controls.Add(this.lblStockPrice);
             this.grpStockEditor.Controls.Add(this.lblStockDescription);
@@ -785,9 +787,31 @@
             this.grpStockEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpStockEditor.Location = new System.Drawing.Point(0, 0);
             this.grpStockEditor.Name = "grpStockEditor";
-            this.grpStockEditor.Size = new System.Drawing.Size(531, 313);
+            this.grpStockEditor.Size = new System.Drawing.Size(510, 313);
             this.grpStockEditor.TabIndex = 0;
             this.grpStockEditor.Text = "Stock Journal Editor";
+            // 
+            // txtStockJournal_Quantity
+            // 
+            this.txtStockJournal_Quantity.Location = new System.Drawing.Point(138, 162);
+            this.txtStockJournal_Quantity.Name = "txtStockJournal_Quantity";
+            this.txtStockJournal_Quantity.Size = new System.Drawing.Size(100, 20);
+            this.txtStockJournal_Quantity.TabIndex = 13;
+            // 
+            // txtStockJournal_Price
+            // 
+            this.txtStockJournal_Price.Location = new System.Drawing.Point(138, 131);
+            this.txtStockJournal_Price.Name = "txtStockJournal_Price";
+            this.txtStockJournal_Price.Size = new System.Drawing.Size(100, 20);
+            this.txtStockJournal_Price.TabIndex = 12;
+            // 
+            // txtStockJournal_Description
+            // 
+            this.txtStockJournal_Description.Location = new System.Drawing.Point(138, 96);
+            this.txtStockJournal_Description.Name = "txtStockJournal_Description";
+            this.txtStockJournal_Description.Size = new System.Drawing.Size(342, 20);
+            this.txtStockJournal_Description.TabIndex = 11;
+            this.txtStockJournal_Description.Leave += new System.EventHandler(this.txtStockJournal_Description_Leave);
             // 
             // btnStockReverse
             // 
@@ -797,6 +821,7 @@
             this.btnStockReverse.Size = new System.Drawing.Size(95, 33);
             this.btnStockReverse.TabIndex = 12;
             this.btnStockReverse.Text = "Reverse";
+            this.btnStockReverse.Click += new System.EventHandler(this.btnStockReverse_Click);
             // 
             // btnStockSave
             // 
@@ -806,6 +831,7 @@
             this.btnStockSave.Size = new System.Drawing.Size(94, 33);
             this.btnStockSave.TabIndex = 14;
             this.btnStockSave.Text = "Save";
+            this.btnStockSave.Click += new System.EventHandler(this.btnStockSave_Click);
             // 
             // btnStockAddNew
             // 
@@ -815,6 +841,7 @@
             this.btnStockAddNew.Size = new System.Drawing.Size(94, 32);
             this.btnStockAddNew.TabIndex = 10;
             this.btnStockAddNew.Text = "Add New";
+            this.btnStockAddNew.Click += new System.EventHandler(this.btnStockAddNew_Click);
             // 
             // radStockOut
             // 
@@ -839,33 +866,12 @@
             this.radStockIn.Text = "In";
             this.radStockIn.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // txtStockJournal_Title
             // 
-            this.textBox3.Location = new System.Drawing.Point(138, 160);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
-            this.textBox3.TabIndex = 13;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(138, 125);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 12;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(138, 96);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(386, 21);
-            this.textBox1.TabIndex = 11;
-            // 
-            // textEdit1
-            // 
-            this.textEdit1.Location = new System.Drawing.Point(138, 65);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Size = new System.Drawing.Size(386, 20);
-            this.textEdit1.TabIndex = 10;
+            this.txtStockJournal_Title.Location = new System.Drawing.Point(138, 65);
+            this.txtStockJournal_Title.Name = "txtStockJournal_Title";
+            this.txtStockJournal_Title.Size = new System.Drawing.Size(342, 20);
+            this.txtStockJournal_Title.TabIndex = 10;
             // 
             // lblStockQty
             // 
@@ -919,7 +925,7 @@
             this.grpStockProjectEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpStockProjectEditor.Location = new System.Drawing.Point(0, 0);
             this.grpStockProjectEditor.Name = "grpStockProjectEditor";
-            this.grpStockProjectEditor.Size = new System.Drawing.Size(713, 313);
+            this.grpStockProjectEditor.Size = new System.Drawing.Size(512, 313);
             this.grpStockProjectEditor.TabIndex = 0;
             this.grpStockProjectEditor.Text = "Stock Project Editor";
             // 
@@ -1021,7 +1027,6 @@
             this.cmbStockProjectSectionPart.Name = "cmbStockProjectSectionPart";
             this.cmbStockProjectSectionPart.Size = new System.Drawing.Size(340, 21);
             this.cmbStockProjectSectionPart.TabIndex = 16;
-            this.cmbStockProjectSectionPart.SelectedIndexChanged += new System.EventHandler(this.cmbStockProjectSectionPart_SelectedIndexChanged);
             // 
             // cmbStockProjectSection
             // 
@@ -1047,6 +1052,10 @@
             this.openFileProductImage.Filter = "\"png files (*.png)|*.png|All files (*.*)|*.*\"";
             this.openFileProductImage.Title = "\"Browse image files\"";
             // 
+            // bsProductsListing
+            // 
+            this.bsProductsListing.PositionChanged += new System.EventHandler(this.bsProductsListing_PositionChanged);
+            // 
             // splitContainerControl1
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1064,6 +1073,10 @@
             this.splitContainerControl1.Size = new System.Drawing.Size(576, 466);
             this.splitContainerControl1.SplitterPosition = 166;
             this.splitContainerControl1.TabIndex = 2;
+            // 
+            // bsStockListing
+            // 
+            this.bsStockListing.PositionChanged += new System.EventHandler(this.bsStockListing_PositionChanged);
             // 
             // ProductsManager
             // 
@@ -1100,7 +1113,9 @@
             this.tabPane1.ResumeLayout(false);
             this.tabEditor.ResumeLayout(false);
             this.tabEditor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEditorQuantity.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEditorPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEditorDescription.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtProductEditor_Quantity.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgProductPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEditorName.Properties)).EndInit();
             this.tabFields.ResumeLayout(false);
@@ -1134,7 +1149,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grpStockEditor)).EndInit();
             this.grpStockEditor.ResumeLayout(false);
             this.grpStockEditor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Quantity.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Price.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Description.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtStockJournal_Title.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grpStockProjectEditor)).EndInit();
             this.grpStockProjectEditor.ResumeLayout(false);
             this.grpStockProjectEditor.PerformLayout();
@@ -1165,7 +1183,6 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabOrders;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabCategories;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabProjects;
-        private TextBox txtEditorDescription;
         private DevExpress.XtraEditors.TextEdit txtEditorName;
         private Label lblEditorDescription;
         private Label lblEditorName;
@@ -1186,7 +1203,6 @@
         private PictureBox imgProductPhoto;
         private Label lblSelectedFileName;
         private CheckBox chkFilterLikeSearch;
-        private TextBox txtFilterName;
         private Label lblFilterName;
 
         private DevExpress.XtraEditors.PanelControl pnlCategories;
@@ -1201,8 +1217,7 @@
         private DevExpress.XtraEditors.SimpleButton btnSampleData;
         private BindingSource bsProductsListing;
         private BindingSource productGridViewModelBindingSource;
-        private TextBox txtEditorPrice;
-        private DevExpress.XtraEditors.TextEdit txtEditorQuantity;
+        private DevExpress.XtraEditors.TextEdit txtProductEditor_Quantity;
         private DevExpress.XtraEditors.LabelControl lblQuantity;
         private DevExpress.XtraEditors.LabelControl lblEditorPrice;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
@@ -1219,10 +1234,7 @@
         private Label lblStockPrice;
         private DevExpress.XtraEditors.LabelControl lblStockDescription;
         private DevExpress.XtraEditors.LabelControl lblStockTotal;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit txtStockJournal_Title;
         private RadioButton radStockOut;
         private RadioButton radStockIn;
         private DevExpress.XtraEditors.SimpleButton btnStockReverse;
@@ -1244,5 +1256,11 @@
         private DevExpress.XtraEditors.LabelControl lblStockProjectPrice;
         private DevExpress.XtraGrid.GridControl gridListing;
         private DevExpress.XtraGrid.Views.Grid.GridView gvProducts;
+        private DevExpress.XtraEditors.TextEdit txtStockJournal_Description;
+        private DevExpress.XtraEditors.MemoEdit txtEditorDescription;
+        private DevExpress.XtraEditors.TextEdit txtStockJournal_Quantity;
+        private DevExpress.XtraEditors.TextEdit txtStockJournal_Price;
+        private DevExpress.XtraEditors.TextEdit txtEditorPrice;
+        private TextBox txtFilterName;
     }
 }

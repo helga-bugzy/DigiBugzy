@@ -355,6 +355,8 @@ namespace DigiBugzy.Data.Migrations
             creatory.AddColumn(nameof(StockJournal.QuantityReserved), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
             creatory.AddColumn(nameof(StockJournal.Price), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
             creatory.AddColumn(nameof(StockJournal.TotalValue), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
+            creatory.AddColumn(nameof(StockJournal.IsReversed), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsBoolean);
+            
 
             //ProjectSectionPartId
             creatory.AddColumn(nameof(StockJournal.ProjectSectionPartId), isNullable: true);
@@ -373,6 +375,15 @@ namespace DigiBugzy.Data.Migrations
                 fromFieldName: nameof(StockJournal.SupplierId),
                 fromSchemaName: _currentSchemaName,
                 toSchemaName: DatabaseConstants.Schemas.ContactBase);
+
+            //ReversedFromId
+            creatory.AddColumn(nameof(StockJournal.ReversedFromId), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsInt32);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName,
+                toTable:_currentTableName,
+                fromFieldName: nameof(StockJournal.ReversedFromId),
+                fromSchemaName: _currentSchemaName,
+                toSchemaName: _currentSchemaName);
 
             //ProductId
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);

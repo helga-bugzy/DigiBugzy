@@ -42,6 +42,13 @@ namespace DigiBugzy.Services.Catalog.Products
 
         public void Delete(List<Product> entities, bool hardDelete);
 
+        /// <summary>
+        /// Creates a new product in the database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public int Create(Product entity);
+
 
         /// <summary>
         /// Updates details of an existing product
@@ -50,14 +57,17 @@ namespace DigiBugzy.Services.Catalog.Products
         public void Update(Product entity);
 
         /// <summary>
-        /// Creates a new product in the database
+        /// Updates product totals i.e. after stock journal entry
         /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public int Create(Product entity);
+        /// <param name="productId"></param>
+        /// <param name="totalValue"></param>
+        /// <param name="totalInStock"></param>
+        /// <param name="qtyOnOrder"></param>
+        /// <param name="qtyReserved"></param>
+        public void UpdateStockInfo(int productId, double totalValue, double totalInStock, double qtyOnOrder, double qtyReserved)
 
         #endregion
 
-        
+
     }
 }

@@ -16,6 +16,12 @@ namespace DigiBugzy.Services.Catalog.Stock
         {
         }
 
+        /// <inheritdoc />
+        public StockJournal GetLastEntry(int productId)
+        {
+            return dbContext.StockJournals.Where(x => x.ProductId == productId).OrderByDescending(x => x.Id).FirstOrDefault() ?? new StockJournal();
+        }
+
         #endregion
 
         #region Requests
@@ -46,6 +52,7 @@ namespace DigiBugzy.Services.Catalog.Stock
                 
                 select new StockJournalViewModel
                 {
+                    Id = journal.Id,
                     QuantityIn = journal.QuantityIn,
                     QuantityOnOrder = journal.QuantityOnOrder,
                     QuantityOut = journal.QuantityOut,
@@ -56,6 +63,7 @@ namespace DigiBugzy.Services.Catalog.Stock
                     ProductName = product.Name,
                     EntryDate = journal.EntryDate,
                     TotalInStock = journal.TotalInStock,
+                    Title = journal.Name
                 };
 
             //Outerjoin workaround
@@ -81,7 +89,7 @@ namespace DigiBugzy.Services.Catalog.Stock
                 result.SupplierName = bentry.Name;
             }
 
-            return results.OrderByDescending(x => x.EntryDate).ToList();
+            return results.OrderByDescending(x => x.Id).ToList();
 
         }
 
@@ -93,9 +101,14 @@ namespace DigiBugzy.Services.Catalog.Stock
         /// <inheritdoc />
         public int Create(StockJournal entity)
         {
-            //Get last entity
-            var lastEntry = dbContext.StockJournals.Where(x => x.ProductId == entity.ProductId).OrderByDescending(x => x.Id).FirstOrDefault() ?? new StockJournal();
-            
+            //Get last entity & update
+            return Create(entity, GetLastEntry(entity.ProductId));
+        }
+
+        /// <inheritdoc />
+        public int Create(StockJournal entity, StockJournal lastEntry)
+        {
+            entity.CreatedOn = DateTime.Now;
             //Perform calculations
             entity.TotalInStock = lastEntry.TotalInStock + entity.QuantityIn - entity.QuantityOut;
             entity.TotalValue = lastEntry.TotalValue + (entity.QuantityIn - entity.QuantityOut) * entity.Price;
@@ -104,19 +117,53 @@ namespace DigiBugzy.Services.Catalog.Stock
             dbContext.StockJournals.Add(entity);
             dbContext.SaveChanges();
 
-            //Update product
+            //Update product stock information
             var pservice = new ProductService(_connectionString);
-            var product = pservice.GetById(entity.ProductId);
-            if (product == null) return entity.Id;
-
-            product.TotalValue = entity.TotalValue;
-            product.TotalInStock = entity.TotalInStock;
-            product.QuantityOnOrder = lastEntry.QuantityOnOrder + entity.QuantityOnOrder;
-            product.QuantityReserved = lastEntry.QuantityReserved + entity.QuantityReserved;
-            pservice.Update(product);
+            pservice.UpdateStockInfo(
+                productId: entity.ProductId,
+                totalValue: entity.TotalValue,
+                totalInStock: entity.TotalInStock,
+                qtyOnOrder: lastEntry.QuantityOnOrder + entity.QuantityOnOrder,
+                qtyReserved: lastEntry.QuantityReserved + entity.QuantityReserved
+            );
 
             return entity.Id;
         }
+
+        /// <inheritdoc />
+        public void ReverseEntry(int id)
+        {
+            var currentEntry = GetById(id);
+            var newEntry = new StockJournal
+            {
+                ProductId = currentEntry.ProductId,
+                QuantityIn = currentEntry.QuantityIn,
+                QuantityOut = currentEntry.QuantityOut,
+                QuantityReserved = currentEntry.QuantityReserved,
+                Name = $"Reversal - {currentEntry.Name}",
+                Description = $"Reversal - {currentEntry.Description} Journal No. {currentEntry.Id} on {currentEntry.CreatedOn}",
+                DigiAdminId = currentEntry.DigiAdminId,
+                CreatedOn = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                IsReversed = true,
+            };
+            Create(newEntry);
+        }
+
+
+
+        /// <inheritdoc />
+        public bool CanReverseJournal(int id)
+        {
+            var currentEntry = GetById(id);
+            if (currentEntry.IsReversed) return false;
+            
+            var lastEntry = GetLastEntry(currentEntry.ProductId);
+            return !(currentEntry.TotalInStock - currentEntry.TotalInStock < 0);
+        }
+
+        
 
         #endregion
 

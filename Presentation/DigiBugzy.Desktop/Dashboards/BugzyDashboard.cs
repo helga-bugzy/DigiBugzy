@@ -5,6 +5,7 @@ using DigiBugzy.Desktop.Administration.Categories;
 using DigiBugzy.Desktop.Administration.CustomFields;
 using DigiBugzy.Desktop.MultiFunctional;
 using DigiBugzy.Desktop.Products;
+using DigiBugzy.Desktop.Projects;
 
 namespace DigiBugzy.Desktop.Dashboards
 {

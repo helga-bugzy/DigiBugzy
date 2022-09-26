@@ -1,12 +1,14 @@
-﻿using DevExpress.XtraEditors;using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.Helpers;
 using DigiBugzy.Services.Projects;
 using DigiBugzy.Services.SampleData;
 
-
-namespace DigiBugzy.Desktop.Products
+namespace DigiBugzy.Desktop.Projects
 {
     public partial class ProjectsManager : XtraForm
     {
@@ -42,8 +44,18 @@ namespace DigiBugzy.Desktop.Products
         private void LoadGrid_Projects()
         {
             using var service = new ProjectService(Globals.GetConnectionString());
-            gridProjects.DataSource = service.Get(new StandardFilter { Name = txtFilterProjectName.Text.Trim() });
+            bsProjects.Clear();
+
+            bsProjects.DataSource = service.Get(new StandardFilter { Name = txtFilterProjectName.Text.Trim() });
+            gridProjects.DataSource = bsProjects;
             
+            
+
+            if (gvProjects.Columns[nameof(Project.Id)] != null) gvProjects.Columns[nameof(Project.Id)].Visible = false;
+            if (gvProjects.Columns[nameof(Project.CreatedOn)] != null) gvProjects.Columns[nameof(Project.CreatedOn)].Visible = false;
+            if (gvProjects.Columns[nameof(Project.DigiAdminId)] != null) gvProjects.Columns[nameof(Project.DigiAdminId)].Visible = false;
+            if (gvProjects.Columns[nameof(Project.DigiAdmin)] != null) gvProjects.Columns[nameof(Project.DigiAdmin)].Visible = false;
+
             LoadGrid_ProjectSections();
 
             Application.DoEvents();
@@ -63,6 +75,12 @@ namespace DigiBugzy.Desktop.Products
             {
                 using var service = new ProjectSectionService(Globals.GetConnectionString());
                 gridProjectSections.DataSource = service.GetByProjectId(_selectedProject.Id);
+
+                if (gvProjectSections.Columns[nameof(ProjectSection.Id)] != null) gvProjectSections.Columns[nameof(ProjectSection.Id)].Visible = false;
+                if (gvProjectSections.Columns[nameof(ProjectSection.ProjectId)] != null) gvProjectSections.Columns[nameof(ProjectSection.ProjectId)].Visible = false;
+                if (gvProjectSections.Columns[nameof(ProjectSection.CreatedOn)] != null) gvProjectSections.Columns[nameof(ProjectSection.CreatedOn)].Visible = false;
+                if (gvProjectSections.Columns[nameof(ProjectSection.DigiAdminId)] != null) gvProjectSections.Columns[nameof(ProjectSection.DigiAdminId)].Visible = false;
+                if (gvProjectSections.Columns[nameof(ProjectSection.DigiAdmin)] != null) gvProjectSections.Columns[nameof(ProjectSection.DigiAdmin)].Visible = false;
             }
 
             LoadGrid_ProjectSectionParts();
@@ -81,6 +99,12 @@ namespace DigiBugzy.Desktop.Products
             {
                 using var service = new ProjectSectionPartService(Globals.GetConnectionString());
                 gridProjectSectionParts.DataSource = service.GetByProjectSectionId(_selectedProjectSection.Id);
+
+                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.Id)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.Id)].Visible = false;
+                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.ProjectSectionId)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.ProjectSectionId)].Visible = false;
+                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.CreatedOn)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.CreatedOn)].Visible = false;
+                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdminId)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdminId)].Visible = false;
+                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdmin)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdmin)].Visible = false;
             }
 
 
@@ -140,7 +164,7 @@ namespace DigiBugzy.Desktop.Products
             {
                 imgSectionPhoto.Visible = false;
                 lblSectionSelectedFileName.Text = string.Empty;
-                return;
+                //return;
             }
 
             imgSectionPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProjectSection.CoverImage);
@@ -307,42 +331,70 @@ namespace DigiBugzy.Desktop.Products
 
 
         #endregion
-        
+
         #region Grid Controls
 
-        private void gvProjects_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        #region Grid - Projects
+
+        private void ProjectView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            try
-            {
-                _selectedProject = (Project)gvProjects.GetRow(e.FocusedRowHandle);
-                LoadSelected_Project();
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            if (sender is not GridView view) return;
+            _selectedProject = (Project)view.GetRow(view.FocusedRowHandle)!;
+
+            LoadSelected_Project();
         }
 
-        private void gvProjectSections_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void bsProjects_PositionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (_selectedProject.Id <= 0) _selectedProjectSection = new ProjectSection();
-                else _selectedProjectSection = (ProjectSection)gvProjectSections.GetRow(e.FocusedRowHandle);
-                LoadSelected_ProjectSection();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            if (sender is not BindingSource source) return;
+
+            if (BindingContext[bsProjects].Position <= -1) return;
+            _selectedProject = (Project)bsProjects.Current;
+            LoadSelected_Project();
+
         }
 
-        private void gvProjectSectionParts_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        #endregion
+
+
+
+        #region Grid: Sections
+
+        private void gridProjectSections_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
         {
+            var view = (GridView)e.View;
+
+            view.FocusedRowChanged += ProjectSectionView_FocusedRowChanged;
+        }
+
+        private void ProjectSectionView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            if (sender is not GridView view) return;
+            _selectedProjectSection = (ProjectSection)view.GetRow(view.FocusedRowHandle)!;
+            LoadSelected_ProjectSection();
+        }
+
+        #endregion
+
+
+        #region Grid: Parts
+
+        private void gridProjectSectionParts_ViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
+        {
+            var view = (GridView)e.View;
+            if (view.Columns["Id"] != null) view.Columns["Id"].Visible = false;
+
+            view.FocusedRowChanged += ProjectSectionPartView_FocusedRowChanged;
+        }
+
+        private void ProjectSectionPartView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            if (sender is not GridView view) return;
+
             try
             {
-                if(_selectedProjectSection == null)_selectedProjectSection = new ProjectSection();
-                if(_selectedProjectSectionPart == null) _selectedProjectSectionPart = new ProjectSectionPart();
+                _selectedProjectSection = new ProjectSection();
+                _selectedProjectSectionPart = new ProjectSectionPart();
 
                 if (_selectedProject.Id <= 0)
                 {
@@ -355,16 +407,19 @@ namespace DigiBugzy.Desktop.Products
                 }
                 else
                 {
-                    _selectedProjectSection = (ProjectSection)gvProjectSections.GetRow(e.FocusedRowHandle);
+                    _selectedProjectSection = (ProjectSection)view.GetRow(e.FocusedRowHandle);
                 }
 
                 LoadSelected_ProjectSectionPart();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
         }
+
+        #endregion
+
 
 
         #endregion
@@ -574,12 +629,26 @@ namespace DigiBugzy.Desktop.Products
 
 
 
-        #endregion
+
+
+
+
+
+
+
+
+
+
+
 
         #endregion
 
         #endregion
 
+        #endregion
 
+        
+
+        
     }
 }

@@ -208,7 +208,8 @@ namespace DigiBugzy.Services.SampleData
                         ProductId = child.Id,
                         Price = double.Parse(s: (c + 100).ToString()),
                         ProjectSectionPartId = null,
-                        Supplier = null
+                        Supplier = null,
+                        IsReversed = false
                     });
                 }
                 

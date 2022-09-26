@@ -1,4 +1,4 @@
-﻿namespace DigiBugzy.Desktop.Products
+﻿namespace DigiBugzy.Desktop.Projects
 {
     partial class ProjectsManager
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectsManager));
             this.pnlManager = new DevExpress.XtraEditors.PanelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -119,6 +120,7 @@
             this.dlgProjectImage = new System.Windows.Forms.OpenFileDialog();
             this.dlgProjectSectionPhoto = new System.Windows.Forms.OpenFileDialog();
             this.dlgProjectSectionPartPhoto = new System.Windows.Forms.OpenFileDialog();
+            this.bsProjects = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -180,6 +182,7 @@
             this.pnlPartsEdtior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPartPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPartName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlManager
@@ -245,7 +248,6 @@
             // 
             this.gvProjects.GridControl = this.gridProjects;
             this.gvProjects.Name = "gvProjects";
-            this.gvProjects.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvProjects_FocusedRowChanged);
             // 
             // panelControl3
             // 
@@ -323,12 +325,12 @@
             this.gridProjectSections.TabIndex = 0;
             this.gridProjectSections.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjectSections});
+            this.gridProjectSections.ViewRegistered += new DevExpress.XtraGrid.ViewOperationEventHandler(this.gridProjectSections_ViewRegistered);
             // 
             // gvProjectSections
             // 
             this.gvProjectSections.GridControl = this.gridProjectSections;
             this.gvProjectSections.Name = "gvProjectSections";
-            this.gvProjectSections.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvProjectSections_FocusedRowChanged);
             // 
             // panelControl4
             // 
@@ -385,12 +387,12 @@
             this.gridProjectSectionParts.TabIndex = 0;
             this.gridProjectSectionParts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjectSectionParts});
+            this.gridProjectSectionParts.ViewRegistered += new DevExpress.XtraGrid.ViewOperationEventHandler(this.gridProjectSectionParts_ViewRegistered);
             // 
             // gvProjectSectionParts
             // 
             this.gvProjectSectionParts.GridControl = this.gridProjectSectionParts;
             this.gvProjectSectionParts.Name = "gvProjectSectionParts";
-            this.gvProjectSectionParts.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gvProjectSectionParts_FocusedRowChanged);
             // 
             // panelControl5
             // 
@@ -1071,6 +1073,10 @@
             // 
             this.dlgProjectSectionPartPhoto.FileName = "openFileDialog3";
             // 
+            // bsProjects
+            // 
+            this.bsProjects.PositionChanged += new System.EventHandler(this.bsProjects_PositionChanged);
+            // 
             // ProjectsManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1148,6 +1154,7 @@
             this.pnlPartsEdtior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPartPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPartName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1244,5 +1251,6 @@
         private OpenFileDialog dlgProjectImage;
         private OpenFileDialog dlgProjectSectionPhoto;
         private OpenFileDialog dlgProjectSectionPartPhoto;
+        private BindingSource bsProjects;
     }
 }

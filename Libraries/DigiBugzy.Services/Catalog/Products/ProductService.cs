@@ -167,6 +167,19 @@ namespace DigiBugzy.Services.Catalog.Products
             dbContext.SaveChanges();
         }
 
+        public void UpdateStockInfo(int productId, double totalValue, double totalInStock, double qtyOnOrder, double qtyReserved)
+        {
+            var product = GetById(productId);
+            if (product == null) return;
+
+            product.TotalValue = totalValue;
+            product.TotalInStock = totalInStock;
+            product.QuantityOnOrder = qtyOnOrder;
+            product.QuantityReserved = qtyReserved;
+            Update(product);
+
+        }
+
         #endregion
         
 

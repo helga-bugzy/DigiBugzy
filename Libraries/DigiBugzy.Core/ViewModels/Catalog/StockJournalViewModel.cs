@@ -9,7 +9,13 @@ namespace DigiBugzy.Core.ViewModels.Catalog
     /// </summary>
     public class StockJournalViewModel
     {
+        public int Id { get; set; }
+
+        [DisplayName("Date")]
         public DateTime EntryDate { get; set; }
+
+        [DisplayName("Title")]
+        public string Title { get; set; }
 
         /// <summary>
         /// Related product primary key
@@ -70,5 +76,6 @@ namespace DigiBugzy.Core.ViewModels.Catalog
 
         [DisplayName("Tot. Value")]
         public double TotalValue { get; set; }
+
     }
 }
