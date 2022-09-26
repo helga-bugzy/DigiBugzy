@@ -516,6 +516,7 @@
             this.pnlOptions.Name = "pnlOptions";
             this.pnlOptions.Size = new System.Drawing.Size(620, 578);
             this.pnlOptions.TabIndex = 1;
+            this.pnlOptions.Visible = false;
             // 
             // pnlOptionsEditor
             // 
@@ -759,7 +760,7 @@
             this.tablePanel1.SetColumn(this.cmbTypes, 1);
             this.cmbTypes.FormattingEnabled = true;
             this.cmbTypes.ItemHeight = 13;
-            this.cmbTypes.Location = new System.Drawing.Point(96, 4);
+            this.cmbTypes.Location = new System.Drawing.Point(96, 3);
             this.cmbTypes.Name = "cmbTypes";
             this.tablePanel1.SetRow(this.cmbTypes, 0);
             this.cmbTypes.Size = new System.Drawing.Size(521, 21);

@@ -137,16 +137,23 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void ShowChildForm(XtraForm childForm, string title)
         {
-            UseWaitCursor = true;
+            try
+            {
+                UseWaitCursor = true;
 
-            _childForm = childForm;
+                _childForm = childForm;
 
-            if (_splash.IsDisposed) _splash = new PageSplashScreen();
-            _splash.Title = title;
-            _splash.Show();
-            Application.DoEvents();
+                if (_splash.IsDisposed) _splash = new PageSplashScreen();
+                _splash.Title = title;
+                _splash.Show();
+                Application.DoEvents();
 
-            timer1.Start();
+                timer1.Start();
+            }
+            catch (Exception)
+            {
+                //do nothing
+            }
                 
         }
 
@@ -160,17 +167,24 @@ namespace DigiBugzy.Desktop.Dashboards
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
-            //Load & Show page
-            _childForm.MdiParent = this;
-            _childForm.Show();
 
-            //Hide splasher
-            if(_splash.IsDisposed is false)
-                _splash.Close();
-            Application.DoEvents();
+            try
+            {
+                //Load & Show page
+                _childForm.MdiParent = this;
+                _childForm.Show();
 
-            UseWaitCursor = false;
+                //Hide splasher
+                if (_splash.IsDisposed is false)
+                    _splash.Close();
+                Application.DoEvents();
+
+                UseWaitCursor = false;
+            }
+            catch (Exception)
+            {
+                //do nothing
+            }
         }
     }
 }

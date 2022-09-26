@@ -594,7 +594,7 @@
             this.tabFields.Controls.Add(this.pnlCustomFieldsArea);
             this.tabFields.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabFields.ImageOptions.Image")));
             this.tabFields.Name = "tabFields";
-            this.tabFields.Size = new System.Drawing.Size(1938, 446);
+            this.tabFields.Size = new System.Drawing.Size(1938, 317);
             this.tabFields.ToolTip = "Custom Fields";
             // 
             // pnlCustomFieldsArea
@@ -605,7 +605,7 @@
             this.pnlCustomFieldsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCustomFieldsArea.Location = new System.Drawing.Point(0, 0);
             this.pnlCustomFieldsArea.Name = "pnlCustomFieldsArea";
-            this.pnlCustomFieldsArea.Size = new System.Drawing.Size(1938, 446);
+            this.pnlCustomFieldsArea.Size = new System.Drawing.Size(1938, 317);
             this.pnlCustomFieldsArea.TabIndex = 0;
             // 
             // pnlCustomFieldsEditor
@@ -614,7 +614,7 @@
             this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(737, 0);
             this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
-            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1201, 446);
+            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1201, 317);
             this.pnlCustomFieldsEditor.TabIndex = 1;
             // 
             // pnlCustomFieldsList
@@ -623,7 +623,7 @@
             this.pnlCustomFieldsList.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlCustomFieldsList.Location = new System.Drawing.Point(0, 0);
             this.pnlCustomFieldsList.Name = "pnlCustomFieldsList";
-            this.pnlCustomFieldsList.Size = new System.Drawing.Size(737, 446);
+            this.pnlCustomFieldsList.Size = new System.Drawing.Size(737, 317);
             this.pnlCustomFieldsList.TabIndex = 0;
             // 
             // tabOrders
@@ -639,7 +639,7 @@
             this.tabCategories.Controls.Add(this.pnlCategories);
             this.tabCategories.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabCategories.ImageOptions.Image")));
             this.tabCategories.Name = "tabCategories";
-            this.tabCategories.Size = new System.Drawing.Size(1938, 446);
+            this.tabCategories.Size = new System.Drawing.Size(1938, 317);
             this.tabCategories.ToolTip = "Categories";
             // 
             // pnlCategories
@@ -650,7 +650,7 @@
             this.pnlCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCategories.Location = new System.Drawing.Point(0, 0);
             this.pnlCategories.Name = "pnlCategories";
-            this.pnlCategories.Size = new System.Drawing.Size(1938, 446);
+            this.pnlCategories.Size = new System.Drawing.Size(1938, 317);
             this.pnlCategories.TabIndex = 0;
             // 
             // pnlCategoriesEditor
@@ -659,7 +659,7 @@
             this.pnlCategoriesEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCategoriesEditor.Location = new System.Drawing.Point(612, 0);
             this.pnlCategoriesEditor.Name = "pnlCategoriesEditor";
-            this.pnlCategoriesEditor.Size = new System.Drawing.Size(1326, 446);
+            this.pnlCategoriesEditor.Size = new System.Drawing.Size(1326, 317);
             this.pnlCategoriesEditor.TabIndex = 1;
             // 
             // pnlCategoriesTree
@@ -669,7 +669,7 @@
             this.pnlCategoriesTree.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlCategoriesTree.Location = new System.Drawing.Point(0, 0);
             this.pnlCategoriesTree.Name = "pnlCategoriesTree";
-            this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 446);
+            this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 317);
             this.pnlCategoriesTree.TabIndex = 0;
             // 
             // treeCategories
@@ -678,7 +678,7 @@
             this.treeCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeCategories.Location = new System.Drawing.Point(0, 0);
             this.treeCategories.Name = "treeCategories";
-            this.treeCategories.Size = new System.Drawing.Size(612, 446);
+            this.treeCategories.Size = new System.Drawing.Size(612, 317);
             this.treeCategories.TabIndex = 0;
             this.treeCategories.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeCategories_AfterCheck);
             // 
@@ -713,7 +713,6 @@
             this.pnlStockTab.Name = "pnlStockTab";
             this.pnlStockTab.Size = new System.Drawing.Size(1938, 317);
             this.pnlStockTab.TabIndex = 0;
-            this.pnlStockTab.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStockTab_Paint);
             // 
             // splitStockMain
             // 

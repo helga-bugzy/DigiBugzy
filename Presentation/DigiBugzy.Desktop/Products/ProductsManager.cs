@@ -77,7 +77,7 @@ namespace DigiBugzy.Desktop.Products
             try
             {
                 // UseWaitCursor = true;
-
+                
                 var filter = new StandardFilter(
                     includeInActive: chkFilterInactive.Checked,
                     includeDeleted: chkFilterDeleted.Checked);
@@ -113,6 +113,8 @@ namespace DigiBugzy.Desktop.Products
                 gvProducts.Columns[nameof(ProductGridViewModel.ParentId)].Visible = false;
                 gvProducts.Columns[nameof(ProductGridViewModel.ParentName)].Visible = false;
 
+                gvProducts.Columns[nameof(ProductGridViewModel.Image)].Width = 15;
+                //gvProducts.BestFitColumns();
                 
                 LoadSelectedProduct();
 
@@ -176,7 +178,8 @@ namespace DigiBugzy.Desktop.Products
                 lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtProductEditor_Quantity.Enabled = true;
                 btnDelete.Visible = btnRestore.Visible = false;
                 chkEditorActive.Checked = true;
-                lblSelectedFileName.Text = txtEditorName.Text = txtEditorDescription.Text = string.Empty;
+                lblSelectedFileName.Text = txtEditorName.Text = txtEditorDescription.Text =  txtEditorPrice.Text = txtProductEditor_Quantity.Text = string.Empty;
+                
                 imgProductPhoto.Visible = false;
                 txtProductEditor_Quantity.Enabled = true;
                 txtEditorPrice.Enabled = true;
@@ -755,15 +758,26 @@ namespace DigiBugzy.Desktop.Products
 
         private void treeCategories_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            var service = new ProductCategoryService(Globals.GetConnectionString());
-            service.HandleCategoryMapping(
-                categoryId: int.Parse(e.Node!.Tag.ToString()!), 
-                productId: SelectedProduct.Id, 
-                isMapped: e.Node.Checked,
-                digiAdminId: Globals.DigiAdministration.Id);
+            try
+            {
+                var service = new ProductCategoryService(Globals.GetConnectionString());
+                service.HandleCategoryMapping(
+                    categoryId: int.Parse(e.Node!.Tag.ToString()!),
+                    productId: SelectedProduct.Id,
+                    isMapped: e.Node.Checked,
+                    digiAdminId: Globals.DigiAdministration.Id);
 
-            LoadCustomFieldsSelector();
-            Application.DoEvents();
+                LoadCustomFieldsSelector();
+                Application.DoEvents();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+            finally 
+            {
+                Application.DoEvents();
+            }
         }
 
 
@@ -773,11 +787,6 @@ namespace DigiBugzy.Desktop.Products
         #endregion
 
         #endregion
-
-        private void pnlStockTab_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
        
     }

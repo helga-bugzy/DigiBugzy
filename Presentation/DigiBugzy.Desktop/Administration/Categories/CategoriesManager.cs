@@ -237,6 +237,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 txtDescription.Text = txtName.Text = string.Empty;
                 chkActive.Checked = true;
                 lblHeading.Text = "New Category";
+                btnAddNew.Enabled = false;
+                btnSave.Enabled = true;
 
             }
             else
@@ -245,7 +247,7 @@ namespace DigiBugzy.Desktop.Administration.Categories
                 txtDescription.Text = SelectedCategory.Description;
                 chkActive.Checked = true;
                 lblHeading.Text = $"Edit {SelectedCategory.Name} (ID: {SelectedCategory.Id})";
-
+                btnSave.Enabled = true;
             }
 
             btnRestore.Visible = SelectedCategory.IsDeleted;

@@ -212,6 +212,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 lblHeading.Text = "New CustomField";
                 grdOptions.Visible = false;
                 btnSave.Enabled = true;
+                btnAddNew.Enabled = false;
                 Application.DoEvents();
                 return;
             }
@@ -220,6 +221,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             txtDescription.Text = SelectedCustomField.Description;
             chkActive.Checked = true;
             lblHeading.Text = $"Edit {SelectedCustomField.Name} (ID: {SelectedCustomField.Id})";
+            btnSave.Enabled = true;
 
             grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==7;
 
@@ -229,8 +231,10 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 btnDelete.Enabled = !SelectedCustomField.IsDeleted;
                 btnSave.Enabled = true;
             }
-            
-            btnAddNew.Enabled = _classificationId > 0;
+
+            btnAddNew.Enabled = _classificationId > 0 && SelectedCustomField.Id > 0;
+
+            pnlOptions.Visible = SelectedCustomField.CustomFieldTypeId == (int)CustomFieldTypeEnumeration.ListType;
 
             LoadCustomFieldListOptions();
 
@@ -285,19 +289,18 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 txtOptionName.Text = string.Empty;
                 chkOptionActive.Checked = true;
                 btnOptionRestore.Enabled  = false;
+                btnOptionSave.Enabled = true;
+                btnOptionNew.Enabled = false;
             }
             else
             {
                 txtOptionName.Text = SelectedListOption.Value;
                 chkOptionActive.Checked = SelectedListOption.IsActive;
-                
-            }
-
-            if (SelectedListOption.Id > 0)
-            {
+                btnOptionSave.Enabled = true;
                 btnOptionRestore.Enabled = SelectedListOption.IsDeleted;
                 btnOptionDelete.Enabled = !SelectedListOption.IsDeleted;
                 btnOptionSave.Enabled = true;
+                btnOptionNew.Enabled = true;
             }
 
             btnOptionNew.Enabled = SelectedCustomField.Id > 0 && SelectedCustomField.CustomFieldTypeId == (int)CustomFieldTypeEnumeration.ListType;
