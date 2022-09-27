@@ -44,6 +44,7 @@ namespace DigiBugzy.Services.Catalog.Products
         /// <inheritdoc />
         public List<MappingViewModel> GetMappingViewModels(int productId)
         {
+            //Services
             using var productCategoryFieldService = new ProductCategoryService(_connectionString);
             using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
             using var categoryCustomFieldService = new CategoryCustomFieldService(_connectionString);
@@ -51,9 +52,9 @@ namespace DigiBugzy.Services.Catalog.Products
             using var customFieldTypeService = new CustomFieldTypeService(_connectionString);
             
 
-
             var results = new List<MappingViewModel>();
 
+            //Collections
             var productCategoryMappings = productCategoryFieldService.GetByProductId(productId);
             var productCustomFieldsMappings = productCustomFieldService.GetByProductId(productId);
 

@@ -120,11 +120,6 @@ namespace DigiBugzy.Desktop.Products
 
 
             }
-            catch (Exception)
-            {
-                //var c = ex.Message;
-
-            }
             finally
             {
                 if (!_isLoading) UseWaitCursor = false;
@@ -133,39 +128,31 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadSelectedProduct()
         {
-            try
+            switch (SelectedProductModel.Id)
             {
-                switch (SelectedProductModel.Id)
+                case > 0 when SelectedProductModel.Id == SelectedProduct.Id:
+                    return;
+                case 0:
+                    SelectedProduct = new Product();
+                    break;
+                default:
                 {
-                    case > 0 when SelectedProductModel.Id == SelectedProduct.Id:
-                        return;
-                    case 0:
-                        SelectedProduct = new Product();
-                        break;
-                    default:
-                        {
-                            using var service = new ProductService(Globals.GetConnectionString());
-                            SelectedProduct = service.GetById(SelectedProductModel.Id, true);
-                            break;
-                        }
+                    using var service = new ProductService(Globals.GetConnectionString());
+                    SelectedProduct = service.GetById(SelectedProductModel.Id, true);
+                    break;
                 }
-
-
-                LoadEditor();
-                LoadCategoriesSelector();
-                LoadCustomFieldsSelector();
-
-                LoadDocumentsTab();
-
-                LoadStockInformation();
-
-                Application.DoEvents();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
             }
 
+
+            LoadEditor();
+            LoadCategoriesSelector();
+            LoadCustomFieldsSelector();
+
+            LoadDocumentsTab();
+
+            LoadStockInformation();
+
+            Application.DoEvents();
         }
 
         private void LoadEditor()
@@ -269,21 +256,14 @@ namespace DigiBugzy.Desktop.Products
 
                 .ToList();
 
-            if (children.Count > 0)
+            if (children.Count <= 0) return;
+            foreach (var node in children.Select(child => new TreeNode(text: child.Name)
+                     {
+                         Tag = child.EntityMappedToId,
+                         Checked = child.IsMapped
+                     }))
             {
-
-                foreach (var child in children)
-                {
-                    var node = new TreeNode(text: child.Name)
-                    {
-                        Tag = child.EntityMappedToId,
-                        Checked = child.IsMapped
-                    };
-
-                    parentNode.Nodes.Add(node);
-
-                    //LoadCategoryNodes(node, child.EntityMappedToId);
-                }
+                parentNode.Nodes.Add(node);
             }
 
 
@@ -295,38 +275,27 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCustomFieldsSelector()
         {
-            try
+            ClearCustomFieldControls();
+
+            using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
+            LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
+
+            var top = 0;
+
+
+            foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field)
+                     {
+                         Tag = Name = field.Id.ToString(),
+                         Dock = DockStyle.None,
+                         Location = new Point(0, top)
+                     }))
             {
-                ClearCustomFieldControls();
+                top += citem.Bounds.Height;
 
-                using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
-                LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
+                pnlCustomFieldsList.Controls.Add(citem);
 
-                var top = 0;
-
-                //foreach (var field in LoadingFields)
-                //{
-                //    var item = new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field);
-                //    }
-
-                foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field)
-                         {
-                             Tag = Name = field.Id.ToString(),
-                             Dock = DockStyle.None,
-                             Location = new Point(0, top)
-                         }))
-                {
-                    top += citem.Bounds.Height;
-
-                    pnlCustomFieldsList.Controls.Add(citem);
-
-                    pnlCustomFieldsList.BringToFront();
-                    pnlCustomFieldsList.Visible = true;
-                }
-            }
-            catch (Exception)
-            {
-                // ignore
+                pnlCustomFieldsList.BringToFront();
+                pnlCustomFieldsList.Visible = true;
             }
         }
 
@@ -784,10 +753,6 @@ namespace DigiBugzy.Desktop.Products
 
                 LoadCustomFieldsSelector();
                 Application.DoEvents();
-            }
-            catch (Exception)
-            {
-                // ignored
             }
             finally 
             {

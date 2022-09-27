@@ -195,13 +195,29 @@ namespace DigiBugzy.Services.Catalog.Products
 
         private Product GetProductComplete(Product product)
         {
-            using var productCategoryService = new ProductCategoryService(_connectionString);
-            product.Categories.AddRange(productCategoryService.GetByProductId(product.Id));
-
-            //using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
-            //product.CustomFields.AddRange(productCustomFieldService.GetByProductId(product.Id));
+            
+            product.Categories.AddRange(GetProductCategories(product.Id));
+            product.CustomFields.AddRange(GetProductCustomFields(product.Id));
 
             return product;
+
+        }
+
+        private IEnumerable<ProductCategory> GetProductCategories(int productId)
+        {
+            using var productCategoryService = new ProductCategoryService(_connectionString);
+            return productCategoryService.GetByProductId(productId);
+        }
+
+        private IEnumerable<ProductCustomField> GetProductCustomFields(int productId)
+        {
+            using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
+            //Extra step to ensure all is mapped
+            var ensureMappings = productCustomFieldService.GetMappingViewModels(productId);
+
+            //Now, get the ones for the products
+            var collection = productCustomFieldService.GetByProductId(productId);
+            return collection;
 
         }
 
