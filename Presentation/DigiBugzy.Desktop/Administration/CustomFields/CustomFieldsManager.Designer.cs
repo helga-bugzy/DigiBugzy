@@ -71,6 +71,7 @@
             this.pnlOptEditor = new DevExpress.XtraEditors.PanelControl();
             this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.btnOptionCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnOptionNew = new DevExpress.XtraEditors.SimpleButton();
             this.btnOptionSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnOptionRestore = new DevExpress.XtraEditors.SimpleButton();
@@ -164,7 +165,7 @@
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl6.Location = new System.Drawing.Point(0, 0);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(634, 41);
+            this.panelControl6.Size = new System.Drawing.Size(545, 41);
             this.panelControl6.TabIndex = 0;
             // 
             // chkCustomFieldsToChild
@@ -191,30 +192,30 @@
             // 
             this.tablePanel1.SetColumn(this.txtName, 1);
             this.txtName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtName.Location = new System.Drawing.Point(96, 33);
+            this.txtName.Location = new System.Drawing.Point(109, 33);
             this.txtName.Name = "txtName";
             this.tablePanel1.SetRow(this.txtName, 1);
-            this.txtName.Size = new System.Drawing.Size(521, 20);
+            this.txtName.Size = new System.Drawing.Size(597, 20);
             this.txtName.TabIndex = 3;
             // 
             // chkActive
             // 
             this.tablePanel1.SetColumn(this.chkActive, 1);
-            this.chkActive.Location = new System.Drawing.Point(96, 97);
+            this.chkActive.Location = new System.Drawing.Point(109, 97);
             this.chkActive.Name = "chkActive";
             this.chkActive.Properties.Caption = "";
             this.tablePanel1.SetRow(this.chkActive, 3);
-            this.chkActive.Size = new System.Drawing.Size(521, 20);
+            this.chkActive.Size = new System.Drawing.Size(597, 20);
             this.chkActive.TabIndex = 5;
             // 
             // txtDescription
             // 
             this.tablePanel1.SetColumn(this.txtDescription, 1);
             this.txtDescription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtDescription.Location = new System.Drawing.Point(96, 62);
+            this.txtDescription.Location = new System.Drawing.Point(109, 62);
             this.txtDescription.Name = "txtDescription";
             this.tablePanel1.SetRow(this.txtDescription, 2);
-            this.txtDescription.Size = new System.Drawing.Size(521, 20);
+            this.txtDescription.Size = new System.Drawing.Size(597, 20);
             this.txtDescription.TabIndex = 4;
             // 
             // lblActive
@@ -242,7 +243,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(624, 41);
+            this.panelControl1.Size = new System.Drawing.Size(713, 41);
             this.panelControl1.TabIndex = 0;
             // 
             // pnlHeader
@@ -251,7 +252,7 @@
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(624, 39);
+            this.pnlHeader.Size = new System.Drawing.Size(713, 39);
             this.pnlHeader.TabIndex = 1;
             // 
             // lblHeading
@@ -269,7 +270,7 @@
             this.btnAddNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNew.ImageOptions.Image")));
             this.btnAddNew.Location = new System.Drawing.Point(3, 6);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(104, 37);
+            this.btnAddNew.Size = new System.Drawing.Size(91, 37);
             this.btnAddNew.TabIndex = 1;
             this.btnAddNew.Text = "Add New";
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
@@ -285,9 +286,9 @@
             // btnRestore
             // 
             this.btnRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRestore.ImageOptions.Image")));
-            this.btnRestore.Location = new System.Drawing.Point(223, 6);
+            this.btnRestore.Location = new System.Drawing.Point(197, 6);
             this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(104, 37);
+            this.btnRestore.Size = new System.Drawing.Size(91, 37);
             this.btnRestore.TabIndex = 2;
             this.btnRestore.Text = "Restore";
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
@@ -454,7 +455,7 @@
             this.splitEditors.Panel2.Controls.Add(this.panelControl6);
             this.splitEditors.Panel2.Text = "Panel2";
             this.splitEditors.Size = new System.Drawing.Size(1272, 810);
-            this.splitEditors.SplitterPosition = 624;
+            this.splitEditors.SplitterPosition = 713;
             this.splitEditors.TabIndex = 0;
             // 
             // panelControl2
@@ -464,7 +465,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(0, 41);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(624, 769);
+            this.panelControl2.Size = new System.Drawing.Size(713, 769);
             this.panelControl2.TabIndex = 1;
             // 
             // pnlEditor
@@ -474,7 +475,7 @@
             this.pnlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEditor.Location = new System.Drawing.Point(0, 0);
             this.pnlEditor.Name = "pnlEditor";
-            this.pnlEditor.Size = new System.Drawing.Size(624, 769);
+            this.pnlEditor.Size = new System.Drawing.Size(713, 769);
             this.pnlEditor.TabIndex = 3;
             // 
             // panelControl5
@@ -484,7 +485,7 @@
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(624, 769);
+            this.panelControl5.Size = new System.Drawing.Size(713, 769);
             this.panelControl5.TabIndex = 0;
             // 
             // pnlControls
@@ -494,7 +495,7 @@
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlControls.Location = new System.Drawing.Point(0, 0);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(624, 769);
+            this.pnlControls.Size = new System.Drawing.Size(713, 769);
             this.pnlControls.TabIndex = 1;
             // 
             // pnlEditorContent
@@ -504,7 +505,7 @@
             this.pnlEditorContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlEditorContent.Location = new System.Drawing.Point(0, 0);
             this.pnlEditorContent.Name = "pnlEditorContent";
-            this.pnlEditorContent.Size = new System.Drawing.Size(624, 769);
+            this.pnlEditorContent.Size = new System.Drawing.Size(713, 769);
             this.pnlEditorContent.TabIndex = 1;
             // 
             // pnlOptions
@@ -514,7 +515,7 @@
             this.pnlOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOptions.Location = new System.Drawing.Point(2, 189);
             this.pnlOptions.Name = "pnlOptions";
-            this.pnlOptions.Size = new System.Drawing.Size(620, 578);
+            this.pnlOptions.Size = new System.Drawing.Size(709, 578);
             this.pnlOptions.TabIndex = 1;
             this.pnlOptions.Visible = false;
             // 
@@ -525,7 +526,7 @@
             this.pnlOptionsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOptionsEditor.Location = new System.Drawing.Point(2, 41);
             this.pnlOptionsEditor.Name = "pnlOptionsEditor";
-            this.pnlOptionsEditor.Size = new System.Drawing.Size(616, 535);
+            this.pnlOptionsEditor.Size = new System.Drawing.Size(705, 535);
             this.pnlOptionsEditor.TabIndex = 3;
             // 
             // pnlOptionsGrid
@@ -536,7 +537,7 @@
             this.pnlOptionsGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOptionsGrid.Location = new System.Drawing.Point(0, 0);
             this.pnlOptionsGrid.Name = "pnlOptionsGrid";
-            this.pnlOptionsGrid.Size = new System.Drawing.Size(616, 535);
+            this.pnlOptionsGrid.Size = new System.Drawing.Size(705, 535);
             this.pnlOptionsGrid.TabIndex = 1;
             // 
             // pnlGridHolder
@@ -546,7 +547,7 @@
             this.pnlGridHolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlGridHolder.Location = new System.Drawing.Point(0, 128);
             this.pnlGridHolder.Name = "pnlGridHolder";
-            this.pnlGridHolder.Size = new System.Drawing.Size(616, 407);
+            this.pnlGridHolder.Size = new System.Drawing.Size(705, 407);
             this.pnlGridHolder.TabIndex = 2;
             // 
             // grdOptions
@@ -561,7 +562,7 @@
             this.grdOptions.Location = new System.Drawing.Point(0, 0);
             this.grdOptions.Name = "grdOptions";
             this.grdOptions.RowTemplate.Height = 25;
-            this.grdOptions.Size = new System.Drawing.Size(616, 407);
+            this.grdOptions.Size = new System.Drawing.Size(705, 407);
             this.grdOptions.TabIndex = 0;
             this.grdOptions.Visible = false;
             this.grdOptions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdOptions_CellClick);
@@ -587,7 +588,7 @@
             this.pnlOptEditor.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlOptEditor.Location = new System.Drawing.Point(0, 0);
             this.pnlOptEditor.Name = "pnlOptEditor";
-            this.pnlOptEditor.Size = new System.Drawing.Size(616, 128);
+            this.pnlOptEditor.Size = new System.Drawing.Size(705, 128);
             this.pnlOptEditor.TabIndex = 1;
             // 
             // tablePanel4
@@ -608,30 +609,41 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 61F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel4.Size = new System.Drawing.Size(616, 128);
+            this.tablePanel4.Size = new System.Drawing.Size(705, 128);
             this.tablePanel4.TabIndex = 0;
             // 
             // panelControl4
             // 
             this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.tablePanel4.SetColumn(this.panelControl4, 1);
+            this.panelControl4.Controls.Add(this.btnOptionCancel);
             this.panelControl4.Controls.Add(this.btnOptionNew);
             this.panelControl4.Controls.Add(this.btnOptionSave);
             this.panelControl4.Controls.Add(this.btnOptionRestore);
             this.panelControl4.Controls.Add(this.btnOptionDelete);
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl4.Location = new System.Drawing.Point(93, 55);
+            this.panelControl4.Location = new System.Drawing.Point(106, 55);
             this.panelControl4.Name = "panelControl4";
             this.tablePanel4.SetRow(this.panelControl4, 2);
-            this.panelControl4.Size = new System.Drawing.Size(520, 55);
+            this.panelControl4.Size = new System.Drawing.Size(596, 55);
             this.panelControl4.TabIndex = 6;
+            // 
+            // btnOptionCancel
+            // 
+            this.btnOptionCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionsSave.ImageOptions.Image")));
+            this.btnOptionCancel.Location = new System.Drawing.Point(392, 9);
+            this.btnOptionCancel.Name = "btnOptionCancel";
+            this.btnOptionCancel.Size = new System.Drawing.Size(91, 37);
+            this.btnOptionCancel.TabIndex = 3;
+            this.btnOptionCancel.Text = "Cancel";
+            this.btnOptionCancel.Click += new System.EventHandler(this.btnOptionsSave_Click);
             // 
             // btnOptionNew
             // 
             this.btnOptionNew.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionNew.ImageOptions.Image")));
             this.btnOptionNew.Location = new System.Drawing.Point(4, 9);
             this.btnOptionNew.Name = "btnOptionNew";
-            this.btnOptionNew.Size = new System.Drawing.Size(104, 37);
+            this.btnOptionNew.Size = new System.Drawing.Size(91, 37);
             this.btnOptionNew.TabIndex = 1;
             this.btnOptionNew.Text = "Add New";
             this.btnOptionNew.Click += new System.EventHandler(this.bnOptionNew_Click);
@@ -639,9 +651,9 @@
             // btnOptionSave
             // 
             this.btnOptionSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionSave.ImageOptions.Image")));
-            this.btnOptionSave.Location = new System.Drawing.Point(334, 9);
+            this.btnOptionSave.Location = new System.Drawing.Point(295, 9);
             this.btnOptionSave.Name = "btnOptionSave";
-            this.btnOptionSave.Size = new System.Drawing.Size(103, 37);
+            this.btnOptionSave.Size = new System.Drawing.Size(91, 37);
             this.btnOptionSave.TabIndex = 2;
             this.btnOptionSave.Text = "Save";
             this.btnOptionSave.Click += new System.EventHandler(this.btnOptionSave_Click);
@@ -649,9 +661,9 @@
             // btnOptionRestore
             // 
             this.btnOptionRestore.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionRestore.ImageOptions.Image")));
-            this.btnOptionRestore.Location = new System.Drawing.Point(224, 9);
+            this.btnOptionRestore.Location = new System.Drawing.Point(198, 9);
             this.btnOptionRestore.Name = "btnOptionRestore";
-            this.btnOptionRestore.Size = new System.Drawing.Size(104, 37);
+            this.btnOptionRestore.Size = new System.Drawing.Size(91, 37);
             this.btnOptionRestore.TabIndex = 1;
             this.btnOptionRestore.Text = "Restore";
             this.btnOptionRestore.Click += new System.EventHandler(this.btnOptionRestore_Click);
@@ -659,9 +671,9 @@
             // btnOptionDelete
             // 
             this.btnOptionDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionDelete.ImageOptions.Image")));
-            this.btnOptionDelete.Location = new System.Drawing.Point(114, 9);
+            this.btnOptionDelete.Location = new System.Drawing.Point(101, 9);
             this.btnOptionDelete.Name = "btnOptionDelete";
-            this.btnOptionDelete.Size = new System.Drawing.Size(104, 37);
+            this.btnOptionDelete.Size = new System.Drawing.Size(91, 37);
             this.btnOptionDelete.TabIndex = 0;
             this.btnOptionDelete.Text = "Delete";
             this.btnOptionDelete.Click += new System.EventHandler(this.btnOptionDelete_Click);
@@ -670,7 +682,7 @@
             // 
             this.chkOptionActive.AutoSize = true;
             this.tablePanel4.SetColumn(this.chkOptionActive, 1);
-            this.chkOptionActive.Location = new System.Drawing.Point(93, 32);
+            this.chkOptionActive.Location = new System.Drawing.Point(106, 32);
             this.chkOptionActive.Name = "chkOptionActive";
             this.tablePanel4.SetRow(this.chkOptionActive, 1);
             this.chkOptionActive.Size = new System.Drawing.Size(15, 14);
@@ -691,10 +703,10 @@
             // txtOptionName
             // 
             this.tablePanel4.SetColumn(this.txtOptionName, 1);
-            this.txtOptionName.Location = new System.Drawing.Point(93, 3);
+            this.txtOptionName.Location = new System.Drawing.Point(106, 3);
             this.txtOptionName.Name = "txtOptionName";
             this.tablePanel4.SetRow(this.txtOptionName, 0);
-            this.txtOptionName.Size = new System.Drawing.Size(520, 21);
+            this.txtOptionName.Size = new System.Drawing.Size(596, 21);
             this.txtOptionName.TabIndex = 3;
             // 
             // label1
@@ -715,7 +727,7 @@
             this.pnlOptionsHeading.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlOptionsHeading.Location = new System.Drawing.Point(2, 2);
             this.pnlOptionsHeading.Name = "pnlOptionsHeading";
-            this.pnlOptionsHeading.Size = new System.Drawing.Size(616, 39);
+            this.pnlOptionsHeading.Size = new System.Drawing.Size(705, 39);
             this.pnlOptionsHeading.TabIndex = 2;
             // 
             // labelControl1
@@ -752,7 +764,7 @@
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 18F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 54F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(620, 187);
+            this.tablePanel1.Size = new System.Drawing.Size(709, 187);
             this.tablePanel1.TabIndex = 0;
             // 
             // cmbTypes
@@ -760,10 +772,10 @@
             this.tablePanel1.SetColumn(this.cmbTypes, 1);
             this.cmbTypes.FormattingEnabled = true;
             this.cmbTypes.ItemHeight = 13;
-            this.cmbTypes.Location = new System.Drawing.Point(96, 3);
+            this.cmbTypes.Location = new System.Drawing.Point(109, 3);
             this.cmbTypes.Name = "cmbTypes";
             this.tablePanel1.SetRow(this.cmbTypes, 0);
-            this.cmbTypes.Size = new System.Drawing.Size(521, 21);
+            this.cmbTypes.Size = new System.Drawing.Size(597, 21);
             this.cmbTypes.TabIndex = 2;
             // 
             // panelControl3
@@ -774,18 +786,18 @@
             this.panelControl3.Controls.Add(this.btnRestore);
             this.panelControl3.Controls.Add(this.btnDelete);
             this.panelControl3.Controls.Add(this.btnSave);
-            this.panelControl3.Location = new System.Drawing.Point(96, 117);
+            this.panelControl3.Location = new System.Drawing.Point(109, 117);
             this.panelControl3.Name = "panelControl3";
             this.tablePanel1.SetRow(this.panelControl3, 4);
-            this.panelControl3.Size = new System.Drawing.Size(521, 44);
+            this.panelControl3.Size = new System.Drawing.Size(597, 44);
             this.panelControl3.TabIndex = 13;
             // 
             // btnDelete
             // 
             this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(113, 6);
+            this.btnDelete.Location = new System.Drawing.Point(100, 7);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(104, 37);
+            this.btnDelete.Size = new System.Drawing.Size(91, 37);
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Delete";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -793,9 +805,9 @@
             // btnSave
             // 
             this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
-            this.btnSave.Location = new System.Drawing.Point(333, 6);
+            this.btnSave.Location = new System.Drawing.Point(294, 7);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(103, 37);
+            this.btnSave.Size = new System.Drawing.Size(91, 37);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -815,7 +827,7 @@
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl7.Location = new System.Drawing.Point(0, 41);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(634, 765);
+            this.panelControl7.Size = new System.Drawing.Size(545, 765);
             this.panelControl7.TabIndex = 1;
             // 
             // twCategories
@@ -824,7 +836,7 @@
             this.twCategories.Dock = System.Windows.Forms.DockStyle.Fill;
             this.twCategories.Location = new System.Drawing.Point(0, 0);
             this.twCategories.Name = "twCategories";
-            this.twCategories.Size = new System.Drawing.Size(634, 765);
+            this.twCategories.Size = new System.Drawing.Size(545, 765);
             this.twCategories.TabIndex = 0;
             this.twCategories.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.twCategories_AfterCheck);
             this.twCategories.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.twCategories_ItemDrag);
@@ -978,5 +990,6 @@
         private DevExpress.XtraEditors.SimpleButton btnSampleData;
         private TreeView twCategories;
         private DevExpress.XtraEditors.CheckEdit chkCustomFieldsToChild;
+        private DevExpress.XtraEditors.SimpleButton btnOptionCancel;
     }
 }

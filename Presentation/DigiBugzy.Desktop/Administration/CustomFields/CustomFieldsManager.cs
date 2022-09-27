@@ -277,6 +277,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             btnOptionDelete.Enabled = false;
             btnOptionSave.Enabled = false;
             btnOptionNew.Enabled = false;
+            btnOptionCancel.Enabled = false;
 
             if (_classificationId <= 0)
             {
@@ -291,6 +292,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 btnOptionRestore.Enabled  = false;
                 btnOptionSave.Enabled = true;
                 btnOptionNew.Enabled = false;
+                btnOptionCancel.Enabled = true;
             }
             else
             {
@@ -301,9 +303,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 btnOptionDelete.Enabled = !SelectedListOption.IsDeleted;
                 btnOptionSave.Enabled = true;
                 btnOptionNew.Enabled = true;
+                btnOptionCancel.Enabled = true;
             }
-
-            btnOptionNew.Enabled = SelectedCustomField.Id > 0 && SelectedCustomField.CustomFieldTypeId == (int)CustomFieldTypeEnumeration.ListType;
 
             Application.DoEvents();
             
@@ -757,6 +758,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             SelectedListOption = new CustomFieldListOption();
             LoadCustomFieldListOptionsEditor();
+            
             Application.DoEvents();
 
         }
@@ -786,6 +788,16 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             service.UpdateListOption(SelectedListOption);
 
             LoadCustomFieldListOptions();
+        }
+
+        private void btnOptionsSave_Click(object sender, EventArgs e)
+        {
+            if (SelectedCustomField.Id <= 0) return;
+
+            SelectedListOption = new CustomFieldListOption();
+            LoadCustomFieldListOptionsEditor();
+
+            Application.DoEvents();
         }
 
 
@@ -852,8 +864,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
 
 
+
         #endregion
 
-        
+       
     }
 }
