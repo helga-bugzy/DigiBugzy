@@ -75,7 +75,11 @@
             this.tabCategories = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.pnlCategories = new DevExpress.XtraEditors.PanelControl();
             this.pnlCategoriesEditor = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCategoryAssignOptions = new DevExpress.XtraEditors.PanelControl();
+            this.chkAutoAssignChildCategories = new DevExpress.XtraEditors.CheckEdit();
+            this.lblAutoAssignChildCategories = new DevExpress.XtraEditors.LabelControl();
             this.pnlCategoriesTree = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCategoriesTreeControl = new DevExpress.XtraEditors.PanelControl();
             this.treeCategories = new System.Windows.Forms.TreeView();
             this.tabProjects = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabDocuments = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -154,8 +158,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).BeginInit();
             this.pnlCategories.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesEditor)).BeginInit();
+            this.pnlCategoriesEditor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoryAssignOptions)).BeginInit();
+            this.pnlCategoryAssignOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAutoAssignChildCategories.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).BeginInit();
             this.pnlCategoriesTree.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTreeControl)).BeginInit();
+            this.pnlCategoriesTreeControl.SuspendLayout();
             this.tabStock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlStockTab)).BeginInit();
             this.pnlStockTab.SuspendLayout();
@@ -600,8 +610,8 @@
             // pnlCustomFieldsArea
             // 
             this.pnlCustomFieldsArea.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsEditor);
             this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsList);
+            this.pnlCustomFieldsArea.Controls.Add(this.pnlCustomFieldsEditor);
             this.pnlCustomFieldsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCustomFieldsArea.Location = new System.Drawing.Point(0, 0);
             this.pnlCustomFieldsArea.Name = "pnlCustomFieldsArea";
@@ -612,9 +622,9 @@
             // 
             this.pnlCustomFieldsEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(737, 0);
+            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(0, 0);
             this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
-            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1201, 317);
+            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1938, 317);
             this.pnlCustomFieldsEditor.TabIndex = 1;
             // 
             // pnlCustomFieldsList
@@ -656,21 +666,57 @@
             // pnlCategoriesEditor
             // 
             this.pnlCategoriesEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlCategoriesEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCategoriesEditor.Controls.Add(this.pnlCategoryAssignOptions);
             this.pnlCategoriesEditor.Location = new System.Drawing.Point(612, 0);
             this.pnlCategoriesEditor.Name = "pnlCategoriesEditor";
             this.pnlCategoriesEditor.Size = new System.Drawing.Size(1326, 317);
             this.pnlCategoriesEditor.TabIndex = 1;
             // 
+            // pnlCategoryAssignOptions
+            // 
+            this.pnlCategoryAssignOptions.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlCategoryAssignOptions.Controls.Add(this.chkAutoAssignChildCategories);
+            this.pnlCategoryAssignOptions.Controls.Add(this.lblAutoAssignChildCategories);
+            this.pnlCategoryAssignOptions.Location = new System.Drawing.Point(6, 3);
+            this.pnlCategoryAssignOptions.Name = "pnlCategoryAssignOptions";
+            this.pnlCategoryAssignOptions.Size = new System.Drawing.Size(454, 29);
+            this.pnlCategoryAssignOptions.TabIndex = 1;
+            // 
+            // chkAutoAssignChildCategories
+            // 
+            this.chkAutoAssignChildCategories.EditValue = true;
+            this.chkAutoAssignChildCategories.Location = new System.Drawing.Point(298, 3);
+            this.chkAutoAssignChildCategories.Name = "chkAutoAssignChildCategories";
+            this.chkAutoAssignChildCategories.Properties.Caption = "";
+            this.chkAutoAssignChildCategories.Size = new System.Drawing.Size(75, 20);
+            this.chkAutoAssignChildCategories.TabIndex = 1;
+            // 
+            // lblAutoAssignChildCategories
+            // 
+            this.lblAutoAssignChildCategories.Location = new System.Drawing.Point(3, 6);
+            this.lblAutoAssignChildCategories.Name = "lblAutoAssignChildCategories";
+            this.lblAutoAssignChildCategories.Size = new System.Drawing.Size(289, 13);
+            this.lblAutoAssignChildCategories.TabIndex = 0;
+            this.lblAutoAssignChildCategories.Text = "Automatically assign to sub categories of selected category:";
+            // 
             // pnlCategoriesTree
             // 
             this.pnlCategoriesTree.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlCategoriesTree.Controls.Add(this.treeCategories);
-            this.pnlCategoriesTree.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlCategoriesTree.Controls.Add(this.pnlCategoriesTreeControl);
             this.pnlCategoriesTree.Location = new System.Drawing.Point(0, 0);
             this.pnlCategoriesTree.Name = "pnlCategoriesTree";
             this.pnlCategoriesTree.Size = new System.Drawing.Size(612, 317);
             this.pnlCategoriesTree.TabIndex = 0;
+            // 
+            // pnlCategoriesTreeControl
+            // 
+            this.pnlCategoriesTreeControl.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlCategoriesTreeControl.Controls.Add(this.treeCategories);
+            this.pnlCategoriesTreeControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCategoriesTreeControl.Location = new System.Drawing.Point(0, 0);
+            this.pnlCategoriesTreeControl.Name = "pnlCategoriesTreeControl";
+            this.pnlCategoriesTreeControl.Size = new System.Drawing.Size(612, 317);
+            this.pnlCategoriesTreeControl.TabIndex = 2;
             // 
             // treeCategories
             // 
@@ -1126,8 +1172,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).EndInit();
             this.pnlCategories.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesEditor)).EndInit();
+            this.pnlCategoriesEditor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoryAssignOptions)).EndInit();
+            this.pnlCategoryAssignOptions.ResumeLayout(false);
+            this.pnlCategoryAssignOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAutoAssignChildCategories.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTree)).EndInit();
             this.pnlCategoriesTree.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCategoriesTreeControl)).EndInit();
+            this.pnlCategoriesTreeControl.ResumeLayout(false);
             this.tabStock.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlStockTab)).EndInit();
             this.pnlStockTab.ResumeLayout(false);
@@ -1261,5 +1314,9 @@
         private DevExpress.XtraEditors.TextEdit txtStockJournal_Price;
         private DevExpress.XtraEditors.TextEdit txtEditorPrice;
         private TextBox txtFilterName;
+        private DevExpress.XtraEditors.PanelControl pnlCategoryAssignOptions;
+        private DevExpress.XtraEditors.CheckEdit chkAutoAssignChildCategories;
+        private DevExpress.XtraEditors.LabelControl lblAutoAssignChildCategories;
+        private DevExpress.XtraEditors.PanelControl pnlCategoriesTreeControl;
     }
 }

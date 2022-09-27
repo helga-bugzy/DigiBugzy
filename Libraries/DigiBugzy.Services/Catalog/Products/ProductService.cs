@@ -14,6 +14,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
         #region Ctor
 
+        /// <inheritdoc />
         public ProductService(string connectionString) : base(connectionString)
         {
 
@@ -25,6 +26,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
         #region Requests
 
+        /// <inheritdoc />
         public List<Product> Get(StandardFilter filter, bool loadProductComplete = false)
         {
            
@@ -75,6 +77,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
         }
 
+        /// <inheritdoc />
         public Product GetById(int id, bool loadProductComplete = false)
         {
             var product = dbContext.Products.FirstOrDefault(x => x.Id == id);
@@ -91,6 +94,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
         #region Commands
 
+        /// <inheritdoc />
         public int Create(Product entity)
         {
             var filter = new StandardFilter
@@ -111,6 +115,7 @@ namespace DigiBugzy.Services.Catalog.Products
 
         }
 
+        /// <inheritdoc />
         public void Delete(int id, bool hardDelete)
         {
             var entity = GetById(id);
@@ -150,7 +155,7 @@ namespace DigiBugzy.Services.Catalog.Products
             }
         }
 
-
+        /// <inheritdoc />
         public void Update(Product entity)
         {
             var filter = new StandardFilter
@@ -167,6 +172,7 @@ namespace DigiBugzy.Services.Catalog.Products
             dbContext.SaveChanges();
         }
 
+        /// <inheritdoc />
         public void UpdateStockInfo(int productId, double totalValue, double totalInStock, double qtyOnOrder, double qtyReserved)
         {
             var product = GetById(productId);
@@ -192,8 +198,8 @@ namespace DigiBugzy.Services.Catalog.Products
             using var productCategoryService = new ProductCategoryService(_connectionString);
             product.Categories.AddRange(productCategoryService.GetByProductId(product.Id));
 
-            using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
-            product.CustomFields.AddRange(productCustomFieldService.GetByProductId(product.Id));
+            //using var productCustomFieldService = new ProductCustomFieldService(_connectionString);
+            //product.CustomFields.AddRange(productCustomFieldService.GetByProductId(product.Id));
 
             return product;
 

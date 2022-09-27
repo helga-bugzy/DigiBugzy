@@ -295,24 +295,38 @@ namespace DigiBugzy.Desktop.Products
 
         private void LoadCustomFieldsSelector()
         {
-            ClearCustomFieldControls();
-
-            using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
-            LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
-
-            var top = 0;
-
-            foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field)
-                     {
-                         CustomField = field,
-                         Tag = Name = field.Id.ToString(),
-                         Dock = DockStyle.None,
-                         Location = new Point(0, top)
-                     }))
+            try
             {
-                top += citem.Bounds.Height;
+                ClearCustomFieldControls();
 
-                pnlCustomFieldsList.Controls.Add(citem);
+                using var productCustomFieldService = new ProductCustomFieldService(Globals.GetConnectionString());
+                LoadingFields = productCustomFieldService.GetMappingViewModels(SelectedProduct.Id);
+
+                var top = 0;
+
+                //foreach (var field in LoadingFields)
+                //{
+                //    var item = new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field);
+                //    }
+
+                foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field)
+                         {
+                             Tag = Name = field.Id.ToString(),
+                             Dock = DockStyle.None,
+                             Location = new Point(0, top)
+                         }))
+                {
+                    top += citem.Bounds.Height;
+
+                    pnlCustomFieldsList.Controls.Add(citem);
+
+                    pnlCustomFieldsList.BringToFront();
+                    pnlCustomFieldsList.Visible = true;
+                }
+            }
+            catch (Exception)
+            {
+                // ignore
             }
         }
 
@@ -765,7 +779,8 @@ namespace DigiBugzy.Desktop.Products
                     categoryId: int.Parse(e.Node!.Tag.ToString()!),
                     productId: SelectedProduct.Id,
                     isMapped: e.Node.Checked,
-                    digiAdminId: Globals.DigiAdministration.Id);
+                    digiAdminId: Globals.DigiAdministration.Id,
+                    applyToChildCategories: chkAutoAssignChildCategories.Checked);
 
                 LoadCustomFieldsSelector();
                 Application.DoEvents();

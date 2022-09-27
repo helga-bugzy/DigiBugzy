@@ -95,10 +95,6 @@ namespace DigiBugzy.Services.Catalog.Products
         {
 
             Delete(GetById(id), hardDelete);
-            
-
-            
-
 
         }
 
@@ -143,6 +139,9 @@ namespace DigiBugzy.Services.Catalog.Products
             dbContext.SaveChanges();
         }
 
+
+        private List<int> MappingsToDelete { get; set; } = new();
+
         /// <inheritdoc />
         public void HandleCategoryMapping(int categoryId, int productId, bool isMapped, int digiAdminId, bool applyToChildCategories = true)
         {
@@ -164,11 +163,23 @@ namespace DigiBugzy.Services.Catalog.Products
             {
                 foreach (var item in mapping)
                 {
-                    Delete(item.Id, true);
+                    try
+                    {
+                        Delete(item.Id, true);
+                    }
+                    catch (Exception)
+                    {
+                        MappingsToDelete.Add(item.Id);
+                    }
                 }
             }
 
             if (applyToChildCategories) HandleChildCategoryMapping(categoryId, productId, isMapped, digiAdminId);
+
+            foreach(var item in MappingsToDelete)
+            {
+                Delete(item, true);
+            }
 
         }
         
@@ -204,7 +215,14 @@ namespace DigiBugzy.Services.Catalog.Products
                 {
                     foreach (var item in mapping)
                     {
-                        Delete(item.Id, true);
+                        try
+                        {
+                            Delete(item.Id, true);
+                        }
+                        catch (Exception)
+                        {
+                            MappingsToDelete.Add(item.Id);
+                        }
                     }
                 }
 

@@ -7,9 +7,15 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 {
     public partial class CustomFieldItem : XtraUserControl
     {
+        #region Properties
+
         public SampleDataTypeEnum MappingType { get; set; }
-        
+
         private MappingViewModel? _customFieldModel;
+
+        #endregion
+
+        #region Ctor
 
         public MappingViewModel? CustomField
         {
@@ -31,6 +37,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             if (customField != null) LoadCustomField();
         }
 
+        #endregion
+
         #region Private Methods
 
         private void LoadCustomField()
@@ -43,7 +51,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadOptionsListValues()
         {
-            cmbValue.Items.Clear();
+            //cmbValue.Items.Clear();
             if(CustomField == null) return;
 
             var service = new CustomFieldListOptionService(Globals.GetConnectionString());
