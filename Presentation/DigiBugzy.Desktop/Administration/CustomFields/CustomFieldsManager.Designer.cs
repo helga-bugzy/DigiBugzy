@@ -90,6 +90,7 @@
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.twCategories = new System.Windows.Forms.TreeView();
+            this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkCustomFieldsToChild.Properties)).BeginInit();
@@ -630,7 +631,7 @@
             // 
             // btnOptionCancel
             // 
-            this.btnOptionCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionsSave.ImageOptions.Image")));
+            this.btnOptionCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOptionCancel.ImageOptions.Image")));
             this.btnOptionCancel.Location = new System.Drawing.Point(392, 9);
             this.btnOptionCancel.Name = "btnOptionCancel";
             this.btnOptionCancel.Size = new System.Drawing.Size(91, 37);
@@ -772,7 +773,7 @@
             this.tablePanel1.SetColumn(this.cmbTypes, 1);
             this.cmbTypes.FormattingEnabled = true;
             this.cmbTypes.ItemHeight = 13;
-            this.cmbTypes.Location = new System.Drawing.Point(109, 3);
+            this.cmbTypes.Location = new System.Drawing.Point(109, 4);
             this.cmbTypes.Name = "cmbTypes";
             this.tablePanel1.SetRow(this.cmbTypes, 0);
             this.cmbTypes.Size = new System.Drawing.Size(597, 21);
@@ -782,6 +783,7 @@
             // 
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.tablePanel1.SetColumn(this.panelControl3, 1);
+            this.panelControl3.Controls.Add(this.btnCancel);
             this.panelControl3.Controls.Add(this.btnAddNew);
             this.panelControl3.Controls.Add(this.btnRestore);
             this.panelControl3.Controls.Add(this.btnDelete);
@@ -844,6 +846,16 @@
             this.twCategories.DragDrop += new System.Windows.Forms.DragEventHandler(this.twCategories_DragDrop);
             this.twCategories.DragEnter += new System.Windows.Forms.DragEventHandler(this.twCategories_DragEnter);
             this.twCategories.DragOver += new System.Windows.Forms.DragEventHandler(this.twCategories_DragOver);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnCancel.Location = new System.Drawing.Point(391, 6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(91, 37);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // CustomFieldsManager
             // 
@@ -991,5 +1003,6 @@
         private TreeView twCategories;
         private DevExpress.XtraEditors.CheckEdit chkCustomFieldsToChild;
         private DevExpress.XtraEditors.SimpleButton btnOptionCancel;
+        private DevExpress.XtraEditors.SimpleButton btnCancel;
     }
 }

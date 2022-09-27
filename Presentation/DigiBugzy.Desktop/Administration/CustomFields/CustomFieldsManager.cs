@@ -204,6 +204,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             btnDelete.Enabled = false;
             btnSave.Enabled = false;
             btnAddNew.Enabled = false;
+            btnCancel.Enabled = false;
 
             if (_classificationId <= 0 || SelectedCustomField.Id <= 0)
             {
@@ -212,6 +213,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 lblHeading.Text = "New CustomField";
                 grdOptions.Visible = false;
                 btnSave.Enabled = true;
+                btnCancel.Enabled = true;
                 btnAddNew.Enabled = false;
                 Application.DoEvents();
                 return;
@@ -222,6 +224,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             chkActive.Checked = true;
             lblHeading.Text = $"Edit {SelectedCustomField.Name} (ID: {SelectedCustomField.Id})";
             btnSave.Enabled = true;
+            btnCancel.Enabled = true;
 
             grdOptions.Visible = SelectedCustomField.CustomFieldTypeId ==7;
 
@@ -230,6 +233,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 btnRestore.Enabled = SelectedCustomField.IsDeleted;
                 btnDelete.Enabled = !SelectedCustomField.IsDeleted;
                 btnSave.Enabled = true;
+                btnCancel.Enabled = true;
             }
 
             btnAddNew.Enabled = _classificationId > 0 && SelectedCustomField.Id > 0;
@@ -472,6 +476,12 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
 
         private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            SelectedCustomField = new CustomField();
+            LoadCustomFieldEditor();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             SelectedCustomField = new CustomField();
             LoadCustomFieldEditor();
@@ -861,6 +871,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                 return false;
             }
         }
+
 
 
 
