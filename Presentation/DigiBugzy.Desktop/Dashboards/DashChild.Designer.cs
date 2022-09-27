@@ -615,9 +615,9 @@
             this.Controls.Add(this.grpContactManagement);
             this.Controls.Add(this.grpFinance);
             this.Controls.Add(this.grpGeneral);
+            this.HtmlText = "Dashboard";
             this.IconOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("DashChild.IconOptions.LargeImage")));
             this.Name = "DashChild";
-            this.Text = "DashChild";
             ((System.ComponentModel.ISupportInitialize)(this.grpProducts)).EndInit();
             this.grpProducts.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grpProjects)).EndInit();

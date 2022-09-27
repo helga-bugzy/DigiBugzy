@@ -59,6 +59,7 @@
             // 
             // ribbon
             // 
+            this.ribbon.BackColor = System.Drawing.Color.White;
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
@@ -73,7 +74,7 @@
             this.btnProductsFields,
             this.btnTestForm});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 14;
+            this.ribbon.MaxItemId = 15;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.bandCatalog,
@@ -173,8 +174,11 @@
                 | System.Windows.Forms.Keys.F));
             this.btnProductsFields.Name = "btnProductsFields";
             this.btnProductsFields.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnProductsFields_ItemClick);
-            
-           
+            // 
+            // btnTestForm
+            // 
+            this.btnTestForm.Id = 14;
+            this.btnTestForm.Name = "btnTestForm";
             // 
             // bandCatalog
             // 

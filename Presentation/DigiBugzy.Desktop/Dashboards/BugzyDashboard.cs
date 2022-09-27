@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraBars;
+﻿using System.Drawing;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DigiBugzy.Core.Constants;
 using DigiBugzy.Desktop.Administration.Categories;
@@ -13,10 +14,10 @@ namespace DigiBugzy.Desktop.Dashboards
     {
         #region Properties
 
-        private XtraForm _childForm { get; set; } = new();
-        private PageSplashScreen _splash { get; set; } = new();
+        private XtraForm ChildForm { get; set; } = new();
+        private PageSplashScreen Splash { get; set; } = new();
 
-        private DashChild home = new DashChild();
+        private readonly DashChild _home = new DashChild();
 
         #endregion
 
@@ -25,10 +26,39 @@ namespace DigiBugzy.Desktop.Dashboards
         public BugzyDashboard()
         {
             InitializeComponent();
+
+            ImplementEnvironment();
+
             ShowChildForm(new DashChild(), "Home");
             
-            ShowChildForm(home, "Home");
-            home.passControl = HomeActions;
+            ShowChildForm(_home, "Home");
+            _home.passControl = HomeActions;
+        }
+
+        private void ImplementEnvironment()
+        {
+            if(Globals.ConnectionEnvironment == ConnectionEnvironment.Production)
+            {
+                ribbon.ApplicationCaption = "DigiBugzy Management Application (PRODUCTION)";
+                statusStrip1.BackColor = Color.DarkRed;
+                statusStrip1.ForeColor = Color.White;
+                statusStrip1.Text = "!!!!!PRODUCTION ENVIRONMENT!!!!!";
+                
+            }
+            else
+            {
+                ribbon.ApplicationCaption = "DigiBugzy Management Application (DEVELOPMENT)";
+                
+            }
+
+            Application.DoEvents();
+        }
+
+        /// <inheritdoc />
+        public sealed override string Text
+        {
+            get => base.Text;
+            set => base.Text = value;
         }
 
         private void HomeActions(string? option, string? section)
@@ -141,11 +171,11 @@ namespace DigiBugzy.Desktop.Dashboards
             {
                 UseWaitCursor = true;
 
-                _childForm = childForm;
+                ChildForm = childForm;
 
-                if (_splash.IsDisposed) _splash = new PageSplashScreen();
-                _splash.Title = title;
-                _splash.Show();
+                if (Splash.IsDisposed) Splash = new PageSplashScreen();
+                Splash.Title = title;
+                Splash.Show();
                 Application.DoEvents();
 
                 timer1.Start();
@@ -171,12 +201,12 @@ namespace DigiBugzy.Desktop.Dashboards
             try
             {
                 //Load & Show page
-                _childForm.MdiParent = this;
-                _childForm.Show();
+                ChildForm.MdiParent = this;
+                ChildForm.Show();
 
                 //Hide splasher
-                if (_splash.IsDisposed is false)
-                    _splash.Close();
+                if (Splash.IsDisposed is false)
+                    Splash.Close();
                 Application.DoEvents();
 
                 UseWaitCursor = false;
