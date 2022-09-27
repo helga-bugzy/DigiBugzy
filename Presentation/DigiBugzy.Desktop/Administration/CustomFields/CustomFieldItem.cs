@@ -64,7 +64,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             {
                 foreach (var item in cmbValue.Items)
                 {
-                    if (item is not CustomFieldListOption option || option.Id != CustomField.TypeId) continue;
+                    if (item is not CustomFieldListOption option || option.Id != int.Parse(CustomField.CustomFieldValue)) continue;
                     cmbValue.SelectedItem = item;
                     break;
                 }

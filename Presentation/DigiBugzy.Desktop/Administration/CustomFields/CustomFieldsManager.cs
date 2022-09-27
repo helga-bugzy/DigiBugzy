@@ -180,15 +180,13 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             if (CustomFields.Count <= 0) return;
 
-            foreach (var item in CustomFields)
+            foreach (var node in CustomFields.Select(item => new TreeNode(text: item.Name)
+                     {
+                         Tag = item.Id,
+                         NodeFont = CreateFont(item.IsDeleted, item.IsActive),
+                         Text = item.Name
+                     }))
             {
-                var node = new TreeNode(text: item.Name)
-                {
-                    Tag = item.Id,
-                    NodeFont = CreateFont(item.IsDeleted, item.IsActive),
-                    Text = item.Name
-                };
-
                 twCustomFields.Nodes.Add(node);
             }
 

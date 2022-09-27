@@ -40,6 +40,8 @@ namespace DigiBugzy.Desktop.Products
 
         private bool _isInProductAddNew = false;
 
+        private bool _hasSelectedProductImage = false;
+
         #endregion
 
         #region Ctor
@@ -162,14 +164,18 @@ namespace DigiBugzy.Desktop.Products
             txtEditorPrice.Enabled = false;
             if (SelectedProduct.Id <= 0)
             {
-                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtProductEditor_Quantity.Enabled = true;
+                lblEditorPrice.Visible = lblQuantity.Visible = txtEditorPrice.Visible = txtProductEditor_Quantity.Visible = true;
+                lblEditorPrice.Enabled = lblQuantity.Enabled = txtEditorPrice.Enabled = txtProductEditor_Quantity.Enabled = true;
+                lblSelectedFileName.Text = txtEditorName.Text = txtEditorDescription.Text = txtEditorPrice.Text = txtProductEditor_Quantity.Text = string.Empty;
                 btnDelete.Visible = btnRestore.Visible = false;
                 chkEditorActive.Checked = true;
-                lblSelectedFileName.Text = txtEditorName.Text = txtEditorDescription.Text =  txtEditorPrice.Text = txtProductEditor_Quantity.Text = string.Empty;
-                
+
                 imgProductPhoto.Visible = false;
                 txtProductEditor_Quantity.Enabled = true;
                 txtEditorPrice.Enabled = true;
+
+                openFileProductImage.FileName = null;
+                _hasSelectedProductImage = false;
             }
             else
             {
@@ -415,11 +421,14 @@ namespace DigiBugzy.Desktop.Products
 
         private void SaveProduct()
         {
+            SetDefaultProductValues();
+
+
             SelectedProduct.Name = txtEditorName.Text;
             SelectedProduct.Description = txtEditorDescription.Text;
             SelectedProduct.IsActive = chkEditorActive.Checked;
 
-            if (imgProductPhoto.Image != null)
+            if (_hasSelectedProductImage && imgProductPhoto.Image != null)
             {
                 SelectedProduct.ProductImage = ImageHelpers.CopyImageToByteArray(imgProductPhoto.Image);
             }
@@ -463,6 +472,18 @@ namespace DigiBugzy.Desktop.Products
             _isInProductAddNew = false;
 
             LoadFilter();
+
+        }
+
+        private void SetDefaultProductValues()
+        {
+            if(SelectedProduct.Id <= 0)
+            {
+                if (string.IsNullOrEmpty(txtEditorPrice.Text)) txtEditorPrice.Text = "0";
+                if (string.IsNullOrEmpty(txtProductEditor_Quantity.Text)) txtProductEditor_Quantity.Text = "0";
+            }
+
+            if (string.IsNullOrEmpty(txtEditorDescription.Text)) txtEditorDescription.Text = txtEditorName.Text;
 
         }
 
@@ -669,9 +690,11 @@ namespace DigiBugzy.Desktop.Products
        
         private void btnProductImage_Click(object sender, EventArgs e)
         {
+            _hasSelectedProductImage = false;
             if (openFileProductImage.ShowDialog() != DialogResult.OK) return;
             if (string.IsNullOrEmpty(openFileProductImage.FileName)) return;
 
+            _hasSelectedProductImage = true;
             lblSelectedFileName.Text = openFileProductImage.FileName;
             imgProductPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(openFileProductImage.FileName),
                 Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
@@ -716,7 +739,12 @@ namespace DigiBugzy.Desktop.Products
 
         private void txtEditorName_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtEditorName.Text)) txtEditorName.Text = txtEditorName.Text;
+            SetDefaultProductValues();
+        }
+
+        private void txtEditorDescription_Leave(object sender, EventArgs e)
+        {
+            SetDefaultProductValues();
         }
 
 
@@ -760,6 +788,7 @@ namespace DigiBugzy.Desktop.Products
                 Application.DoEvents();
             }
         }
+
 
 
 

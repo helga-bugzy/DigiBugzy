@@ -69,8 +69,8 @@
             this.lblEditorName = new System.Windows.Forms.Label();
             this.tabFields = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.pnlCustomFieldsArea = new DevExpress.XtraEditors.PanelControl();
-            this.pnlCustomFieldsEditor = new DevExpress.XtraEditors.PanelControl();
             this.pnlCustomFieldsList = new DevExpress.XtraEditors.PanelControl();
+            this.pnlCustomFieldsEditor = new DevExpress.XtraEditors.PanelControl();
             this.tabOrders = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabCategories = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.pnlCategories = new DevExpress.XtraEditors.PanelControl();
@@ -152,8 +152,8 @@
             this.tabFields.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsArea)).BeginInit();
             this.pnlCustomFieldsArea.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).BeginInit();
             this.tabCategories.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).BeginInit();
             this.pnlCategories.SuspendLayout();
@@ -461,6 +461,7 @@
             this.txtEditorDescription.Name = "txtEditorDescription";
             this.txtEditorDescription.Size = new System.Drawing.Size(394, 179);
             this.txtEditorDescription.TabIndex = 3;
+            this.txtEditorDescription.Leave += new System.EventHandler(this.txtEditorDescription_Leave);
             // 
             // txtProductEditor_Quantity
             // 
@@ -618,15 +619,6 @@
             this.pnlCustomFieldsArea.Size = new System.Drawing.Size(1938, 317);
             this.pnlCustomFieldsArea.TabIndex = 0;
             // 
-            // pnlCustomFieldsEditor
-            // 
-            this.pnlCustomFieldsEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(0, 0);
-            this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
-            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1938, 317);
-            this.pnlCustomFieldsEditor.TabIndex = 1;
-            // 
             // pnlCustomFieldsList
             // 
             this.pnlCustomFieldsList.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -635,6 +627,15 @@
             this.pnlCustomFieldsList.Name = "pnlCustomFieldsList";
             this.pnlCustomFieldsList.Size = new System.Drawing.Size(737, 317);
             this.pnlCustomFieldsList.TabIndex = 0;
+            // 
+            // pnlCustomFieldsEditor
+            // 
+            this.pnlCustomFieldsEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlCustomFieldsEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCustomFieldsEditor.Location = new System.Drawing.Point(0, 0);
+            this.pnlCustomFieldsEditor.Name = "pnlCustomFieldsEditor";
+            this.pnlCustomFieldsEditor.Size = new System.Drawing.Size(1938, 317);
+            this.pnlCustomFieldsEditor.TabIndex = 1;
             // 
             // tabOrders
             // 
@@ -1166,8 +1167,8 @@
             this.tabFields.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsArea)).EndInit();
             this.pnlCustomFieldsArea.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCustomFieldsEditor)).EndInit();
             this.tabCategories.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCategories)).EndInit();
             this.pnlCategories.ResumeLayout(false);
