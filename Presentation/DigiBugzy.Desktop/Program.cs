@@ -69,8 +69,11 @@ namespace DigiBugzy.Desktop
         {
             try
             {
-                //MessageBox.Show("Unhandled exception catched.\n Application is going to close now.");
-                MessageBox.Show($"Unhandled exception catched. {Environment.NewLine} {t.Exception.Message}");
+                var stackTrace = t.Exception.StackTrace == null ? "No Stacktrace found" 
+                    : t.Exception.StackTrace.Length > 1000 ? 
+                        $"{t.Exception.StackTrace?.Substring(1, 1000)}..." : 
+                        t.Exception.StackTrace;
+                MessageBox.Show($"Unhandled exception catched. {Environment.NewLine} {t.Exception.Message} {Environment.NewLine} {stackTrace}");
             }
             catch
             {
