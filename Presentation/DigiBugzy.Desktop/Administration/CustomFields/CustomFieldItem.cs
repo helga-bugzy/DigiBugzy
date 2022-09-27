@@ -117,7 +117,7 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             {
                 ProductId = CustomField.EntityMappedFromId,
                 CustomFieldId = CustomField.EntityMappedToId,
-                Value = CustomField.CustomFieldValue
+                ValueString = CustomField.CustomFieldValue
             };
             service.Update(entity);
         }

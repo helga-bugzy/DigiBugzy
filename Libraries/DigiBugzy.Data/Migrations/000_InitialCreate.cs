@@ -251,7 +251,7 @@ namespace DigiBugzy.Data.Migrations
             _currentTableName = nameof(ProductCustomField);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseEntity();
-            creatory.AddColumn(nameof(ProductCustomField.Value), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsDouble);
+            creatory.AddColumn(nameof(ProductCustomField.ValueString), isNullable: true, fieldType: BaseEntityCreator.FieldTypes.AsString);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Product, toSchemaName: DatabaseConstants.Schemas.Catalog);
             creatory.AddMapping(BaseEntityCreator.MappingTypes.CustomField, toSchemaName: DatabaseConstants.Schemas.Admin);
         }

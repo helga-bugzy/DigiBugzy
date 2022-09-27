@@ -238,6 +238,7 @@ namespace DigiBugzy.Desktop.Products
                 LoadCategoryNodes(node, parent.EntityMappedToId);
 
                 node.Text = $"{parent.Name} ({node.Nodes.Count} subs)";
+                node.ExpandAll();
                 treeCategories.Nodes.Add(node);
             }
 
@@ -729,7 +730,6 @@ namespace DigiBugzy.Desktop.Products
             var gridView = sender as GridView;
             SelectedProductModel = (ProductGridViewModel)gridView?.GetRow(gridView.FocusedRowHandle)!;
             LoadSelectedProduct();
-
         }
 
        
@@ -752,6 +752,7 @@ namespace DigiBugzy.Desktop.Products
                     applyToChildCategories: chkAutoAssignChildCategories.Checked);
 
                 LoadCustomFieldsSelector();
+                LoadCategoriesSelector();
                 Application.DoEvents();
             }
             finally 

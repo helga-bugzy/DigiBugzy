@@ -9,7 +9,12 @@ namespace DigiBugzy.Core.Domain.Products
 
         public int CustomFieldId { get; set; }
 
-        public string Value { get; set; }
+        [Column(TypeName = "ntext")]
+        public string ValueString { get; set; }
+
+        //public double ValueDouble { get; set; }
+
+        //public int ValueNumber { get; set; }
 
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }

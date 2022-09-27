@@ -106,7 +106,7 @@ namespace DigiBugzy.Services.Catalog.Products
                     else
                     {
                         viewModel.IsMapped = true;
-                        viewModel.CustomFieldValue = productCustomFieldMapping.Value;
+                        if(productCustomFieldMapping.ValueString != null) viewModel.CustomFieldValue = productCustomFieldMapping.ValueString;
                     }
 
                     results.Add(viewModel);
@@ -182,7 +182,7 @@ namespace DigiBugzy.Services.Catalog.Products
             var item = dbContext.ProductCustomFields.FirstOrDefault(x =>
                 x.ProductId == entity.ProductId && x.CustomFieldId == entity.CustomFieldId);
             if (item == null) return;
-            item.Value = entity.Value;
+            item.ValueString = entity.ValueString;
 
             dbContext.ProductCustomFields.Update(item);
             dbContext.SaveChanges();

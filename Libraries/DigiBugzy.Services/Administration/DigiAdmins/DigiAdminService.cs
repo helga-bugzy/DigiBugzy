@@ -87,16 +87,11 @@ namespace DigiBugzy.Services.Administration.DigiAdmins
 
         public DigiAdmin GetById(int id)
         {
-            return dbContext.DigiAdmins.Where(x => x.Id == id).FirstOrDefault();
+            return dbContext.DigiAdmins.FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(DigiAdmin entity)
         {
-            var filter = new StandardFilter
-            {
-                Name = entity.Name,                
-            };
-
             //TODO check for duplicate
 
 
