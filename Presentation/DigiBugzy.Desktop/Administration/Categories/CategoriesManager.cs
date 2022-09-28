@@ -264,7 +264,8 @@ namespace DigiBugzy.Desktop.Administration.Categories
 
             using var service = new CategoryService(Globals.GetConnectionString());
             var collection = service.Get(new StandardFilter { OnlyParents = true, DigiAdminId = Globals.DigiAdministration.Id});
-            var source = collection.Where(x => x.Id != SelectedCategory.Id).ToList();
+            var source = collection.Where(x => x.Id != SelectedCategory.Id).OrderBy(x => x.Name).ToList();
+            
 
             if (SelectedCategory.Id <= 0)
             {
