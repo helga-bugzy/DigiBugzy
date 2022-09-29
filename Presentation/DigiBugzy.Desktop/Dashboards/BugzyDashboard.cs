@@ -216,5 +216,10 @@ namespace DigiBugzy.Desktop.Dashboards
                 //do nothing
             }
         }
+
+        private void BugzyDashboard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
