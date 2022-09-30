@@ -19,6 +19,7 @@ namespace DigiBugzy.Data.Migrations
         }
 
         public enum MappingTypes {
+            Asset, 
             Product,
             Category,
             BusinessEntity,
@@ -144,7 +145,24 @@ namespace DigiBugzy.Data.Migrations
 
         }
 
+        public void CreateBaseDocumentEntity()
+        {
+            CreateBaseAdministrationEntity();
+            Migrator.Alter.Table(TableName)
+                .InSchema(SchemaName)
+                .AddColumn(nameof(BaseDocumentEntity.DocumentTypeId)).AsInt32().NotNullable()
+                .AddColumn(nameof(BaseDocumentEntity.DocumentData)).AsBinary().NotNullable();
 
+            AddForeignKey(
+                toTable: nameof(DocumentType),
+                toSchemaName: DatabaseConstants.Schemas.Admin,
+                fromTable: TableName,
+                fromFieldName: nameof(BaseDocumentEntity.DocumentTypeId), 
+                fromSchemaName: SchemaName);
+        }
+
+
+        
 
         #region Helper Methods
 
@@ -294,7 +312,10 @@ namespace DigiBugzy.Data.Migrations
             AddForeignKey(TableName, string.IsNullOrEmpty(mainTableName) ? "" : mainTableName, columnName, fromSchemaName, toSchemaName);
         }
 
-
+        public void DeleteTable()
+        {
+            
+        }
 
 
         #endregion

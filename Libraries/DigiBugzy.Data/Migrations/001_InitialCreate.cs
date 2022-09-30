@@ -1,5 +1,4 @@
 ﻿global using DigiBugzy.Core.Domain.BusinessEntities;
-using DigiBugzy.Core.Domain.Administration.Documents;
 using DigiBugzy.Core.Domain.Finance.Assets;
 using DigiBugzy.Core.Domain.Settings;
 using DigiBugzy.Core.Helpers;
@@ -129,17 +128,18 @@ namespace DigiBugzy.Data.Migrations
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
 
             //Documents
+         
             _currentTableName = nameof(DocumentType);
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseAdministrationEntity();
             CreateData_DocumentTypes();
 
-            _currentTableName = nameof(Document);
+            _currentTableName ="Document";
             creatory.StartNewTable(_currentTableName);
             creatory.CreateBaseAdministrationEntity();
             creatory.AddMapping(BaseEntityCreator.MappingTypes.Classification);
-            creatory.AddColumn(nameof(Document.DocumentTypeId), isNullable: false);
-            creatory.AddForeignKey(_currentTableName, nameof(DocumentType), nameof(Document.DocumentTypeId), _currentSchemaName, _currentSchemaName);
+            creatory.AddColumn(nameof(BaseDocumentEntity.DocumentTypeId), isNullable: false);
+            creatory.AddForeignKey(_currentTableName, nameof(DocumentType), nameof(BaseDocumentEntity.DocumentTypeId), _currentSchemaName, _currentSchemaName);
             
 
         }
