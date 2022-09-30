@@ -195,6 +195,7 @@ namespace DigiBugzy.Desktop.Products
                 }
 
                 imgProductPhoto.Image = ImageHelpers.GetImageFromByteArray(SelectedProduct.ProductImage);
+                imgProductPhoto.Visible = true;
             }
         }
 

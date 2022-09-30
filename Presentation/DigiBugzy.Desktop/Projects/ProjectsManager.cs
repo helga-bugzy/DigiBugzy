@@ -14,11 +14,23 @@ namespace DigiBugzy.Desktop.Projects
     {
         #region Properties
 
-        private Project _selectedProject { get; set; } = new();
+        private Project SelectedProject { get; set; } = new();
 
-        private ProjectSection _selectedProjectSection { get; set; } = new();
+        private ProjectSection SelectedProjectSection { get; set; } = new();
 
-        private ProjectSectionPart _selectedProjectSectionPart { get; set; } = new();
+        private ProjectSectionPart SelectedProjectSectionPart { get; set; } = new();
+
+        private bool InProjectSelection { get; set; }
+
+        private bool InProjectSectionSelection { get; set; }
+
+        private bool InProjectSectionPartSelection { get; set; }
+
+        private bool _hasSelectedProjectImage = false;
+
+        private bool _hasSelectedProjectSectionImage = false;
+
+        private bool _hasSelectedProjectSectionPartImage = false;
 
         #endregion
 
@@ -49,10 +61,7 @@ namespace DigiBugzy.Desktop.Projects
             bsProjects.DataSource = service.Get(new StandardFilter { Name = txtFilterProjectName.Text.Trim() });
             gridProjects.DataSource = bsProjects;
 
-            if (gvProjects.Columns[nameof(Project.Id)] != null) gvProjects.Columns[nameof(Project.Id)].Visible = false;
-            if (gvProjects.Columns[nameof(Project.CreatedOn)] != null) gvProjects.Columns[nameof(Project.CreatedOn)].Visible = false;
-            if (gvProjects.Columns[nameof(Project.DigiAdminId)] != null) gvProjects.Columns[nameof(Project.DigiAdminId)].Visible = false;
-            if (gvProjects.Columns[nameof(Project.DigiAdmin)] != null) gvProjects.Columns[nameof(Project.DigiAdmin)].Visible = false;
+            HideStandardGridColumns(gvProjects);
 
             LoadGrid_ProjectSections();
 
@@ -62,30 +71,26 @@ namespace DigiBugzy.Desktop.Projects
 
         private void LoadGrid_ProjectSections()
         {
-            _selectedProjectSection = new ProjectSection();
-            _selectedProjectSectionPart = new ProjectSectionPart();
+            SelectedProjectSection = new ProjectSection();
+            SelectedProjectSectionPart = new ProjectSectionPart();
             bsSections.Clear();
 
-            if (_selectedProject.Id <= 0)
+            if (SelectedProject.Id <= 0)
             {
                 bsSections.DataSource = new List<ProjectSection>();
             }
             else
             {
                 using var service = new ProjectSectionService(Globals.GetConnectionString());
-                bsSections.DataSource = service.GetByProjectId(_selectedProject.Id);
-                
+                bsSections.DataSource = service.GetByProjectId(SelectedProject.Id);
 
-                if (gvProjectSections.Columns[nameof(ProjectSection.Id)] != null) gvProjectSections.Columns[nameof(ProjectSection.Id)].Visible = false;
-                if (gvProjectSections.Columns[nameof(ProjectSection.ProjectId)] != null) gvProjectSections.Columns[nameof(ProjectSection.ProjectId)].Visible = false;
-                if (gvProjectSections.Columns[nameof(ProjectSection.CreatedOn)] != null) gvProjectSections.Columns[nameof(ProjectSection.CreatedOn)].Visible = false;
-                if (gvProjectSections.Columns[nameof(ProjectSection.DigiAdminId)] != null) gvProjectSections.Columns[nameof(ProjectSection.DigiAdminId)].Visible = false;
-                if (gvProjectSections.Columns[nameof(ProjectSection.DigiAdmin)] != null) gvProjectSections.Columns[nameof(ProjectSection.DigiAdmin)].Visible = false;
             }
 
             gridProjectSections.DataSource = bsSections;
 
             LoadGrid_ProjectSectionParts();
+
+            HideStandardGridColumns(gvProjectSections);
 
             Application.DoEvents();
 
@@ -94,23 +99,20 @@ namespace DigiBugzy.Desktop.Projects
         private void LoadGrid_ProjectSectionParts()
         {
             bsParts.Clear();
-            if (_selectedProjectSection.Id <= 0)
+            if (SelectedProjectSection.Id <= 0)
             {
                 bsParts.DataSource = new List<ProjectSectionPart>();
             }
             else
             {
                 using var service = new ProjectSectionPartService(Globals.GetConnectionString());
-                bsParts.DataSource = service.GetByProjectSectionId(_selectedProjectSection.Id);
-
-                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.Id)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.Id)].Visible = false;
-                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.ProjectSectionId)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.ProjectSectionId)].Visible = false;
-                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.CreatedOn)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.CreatedOn)].Visible = false;
-                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdminId)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdminId)].Visible = false;
-                if (gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdmin)] != null) gvProjectSectionParts.Columns[nameof(ProjectSectionPart.DigiAdmin)].Visible = false;
+                bsParts.DataSource = service.GetByProjectSectionId(SelectedProjectSection.Id);
             }
 
             gridProjectSectionParts.DataSource = bsParts;
+
+            HideStandardGridColumns(gvProjectSectionParts);
+
             Application.DoEvents();
         }
 
@@ -120,109 +122,181 @@ namespace DigiBugzy.Desktop.Projects
 
         private void LoadSelected_Project()
         {
-            _selectedProjectSection = new ProjectSection(); ;
-            _selectedProjectSectionPart = new ProjectSectionPart();
 
-            //editor,
-            txtProjectDescription.Text = _selectedProject.Description;
-            txtProject_Name.Text = _selectedProject.Name;
-            chkProjectActive.Checked = _selectedProject.IsActive;
-            btnProjectAddNew.Visible = _selectedProject.Id > 0;
-            btnProjectDelete.Visible = !_selectedProject.IsDeleted;
-            btnProjectRestore.Visible = _selectedProject.IsDeleted;
-            if (_selectedProject.CoverImage is not { Length: > 0 })
+            switch (SelectedProject.Id)
             {
+                //case > 0 when SelectedProject.Id == SelectedProject.Id:
+                //    return;
+                case 0:
+                    SelectedProject = new Project();
+                    break;
+                default:
+                {
+                    using var service = new ProjectService(Globals.GetConnectionString());
+                    SelectedProject = service.GetById(SelectedProject.Id);
+                    break;
+                }
+            }
+
+           LoadEditor_Project();
+        }
+
+        private void LoadEditor_Project()
+        {
+            
+            if (SelectedProject.Id <= 0)
+            {
+                
+                lblProjectSelectedFileName.Text = txtProject_Name.Text = txtProjectDescription.Text = string.Empty;
+                btnProjectDelete.Visible = btnProjectRestore.Visible = false;
+                chkProjectActive.Checked = true;
+
                 imgProjectPhoto.Visible = false;
-                lblProjectSelectedFileName.Text = string.Empty;
-               
+
+                dlgProjectImage.FileName = null;
+                _hasSelectedProjectImage = false;
             }
             else
             {
-                imgProjectPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProject.CoverImage);
+
+                btnProjectDelete.Visible = !SelectedProject.IsDeleted;
+                btnProjectRestore.Visible = SelectedProject.IsDeleted;
+
+                chkProjectActive.Checked = SelectedProject.IsActive;
+                txtProject_Name.Text = SelectedProject.Name;
+                txtProjectDescription.Text = SelectedProject.Description;
+
+                if (SelectedProject.CoverImage is not { Length: > 0 })
+                {
+                    imgProjectPhoto.Visible = false;
+                    lblProjectSelectedFileName.Text = string.Empty;
+                    return;
+                }
+
+                imgProjectPhoto.Image = ImageHelpers.GetImageFromByteArray(SelectedProject.CoverImage);
+                imgProjectPhoto.Visible = true;
             }
             
-            tabProjectEditors.Show();
-            
-
-            //documents
-
-            //products
-
-            LoadGrid_ProjectSections();
-
-            Application.DoEvents();
         }
 
         private void LoadSelected_ProjectSection()
         {
-            _selectedProjectSectionPart = new ProjectSectionPart();
 
-            //editor,
-            txtSectionDescription.Text = _selectedProjectSection.Description;
-            txtSectionName.Text = _selectedProjectSection.Name;
-            chkSectionActive.Checked = _selectedProjectSection.IsActive;
-            btnSectionAddNew.Visible = _selectedProjectSection.Id > 0;
-            btnSectionDelete.Visible = !_selectedProjectSection.IsDeleted;
-            btnSectionRestore.Visible = _selectedProjectSection.IsDeleted;
-            if (_selectedProjectSection.CoverImage is not { Length: > 0 })
+            switch (SelectedProjectSection.Id)
             {
+                //case > 0 when SelectedProjectSection.Id == SelectedProjectSection.Id:
+                //    return;
+                case 0:
+                    SelectedProjectSection = new ProjectSection();
+                    break;
+                default:
+                {
+                    using var service = new ProjectSectionService(Globals.GetConnectionString());
+                    SelectedProjectSection = service.GetById(SelectedProjectSection.Id);
+                    break;
+                }
+            }
+            LoadEditor_ProjectSection();
+
+        }
+
+        private void LoadEditor_ProjectSection()
+        {
+            
+            if (SelectedProjectSection.Id <= 0)
+            {
+
+                lblSectionSelectedFileName.Text = txtSectionName.Text = txtSectionDescription.Text =  string.Empty;
+                btnSectionDelete.Visible = btnSectionRestore.Visible = false;
+                chkSectionActive.Checked = true;
+
                 imgSectionPhoto.Visible = false;
-                lblSectionSelectedFileName.Text = string.Empty;
+
+                dlgProjectSectionPhoto.FileName = null;
+                _hasSelectedProjectSectionImage = false;
             }
             else
             {
-                imgSectionPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProjectSection.CoverImage);
+
+                btnSectionDelete.Visible = !SelectedProjectSection.IsDeleted;
+                btnSectionRestore.Visible = SelectedProjectSection.IsDeleted;
+
+                chkSectionActive.Checked = SelectedProjectSection.IsActive;
+                txtSectionName.Text = SelectedProjectSection.Name;
+                txtSectionDescription.Text = SelectedProjectSection.Description;
+
+                if (SelectedProjectSection.CoverImage is not { Length: > 0 })
+                {
+                    imgSectionPhoto.Visible = false;
+                    lblSectionSelectedFileName.Text = string.Empty;
+                    return;
+                }
+
+                imgSectionPhoto.Image = ImageHelpers.GetImageFromByteArray(SelectedProjectSection.CoverImage);
+                imgSectionPhoto.Visible = true;
             }
-            
-            tabPartsEditors.Show();
-
-            //documents
-
-            //products
-
-            LoadGrid_ProjectSectionParts();
-
-            //docs,
-            //products
-
-            Application.DoEvents();
-
         }
 
         private void LoadSelected_ProjectSectionPart()
         {
-            //editor,
-            txtPartDescription.Text = _selectedProjectSectionPart.Description;
-            txtPartName.Text = _selectedProjectSectionPart.Name;
-            chkPartActive.Checked = _selectedProjectSectionPart.IsActive;
-            btnPartAddNew.Visible = _selectedProjectSectionPart.Id > 0;
-            btnPartDelete.Visible = !_selectedProjectSectionPart.IsDeleted;
-            btnPartRestore.Visible = _selectedProjectSectionPart.IsDeleted;
-            if (_selectedProjectSectionPart.CoverImage is not { Length: > 0 })
+            switch (SelectedProjectSectionPart.Id)
             {
+                //case > 0 when SelectedProjectSectionPart.Id == SelectedProjectSectionPart.Id:
+                //    return;
+                case 0:
+                    SelectedProjectSectionPart = new ProjectSectionPart();
+                    break;
+                default:
+                {
+                    using var service = new ProjectSectionPartService(Globals.GetConnectionString());
+                    SelectedProjectSectionPart = service.GetById(SelectedProjectSectionPart.Id);
+                    break;
+                }
+            }
+
+            LoadEditor_ProjectSectionPart();
+
+        }
+
+        private void LoadEditor_ProjectSectionPart()
+        {
+            if (SelectedProjectSectionPart.Id <= 0)
+            {
+
+                lblPartSelectedFileName.Text = txtPartName.Text = txtPartDescription.Text = string.Empty;
+                btnPartDelete.Visible = btnPartRestore.Visible = false;
+                chkPartActive.Checked = true;
+
                 imgPartPhoto.Visible = false;
-                lblPartSelectedFileName.Text = string.Empty;
+
+                dlgProjectSectionPartPhoto.FileName = null;
+                _hasSelectedProjectSectionPartImage = false;
             }
             else
             {
-                imgPartPhoto.Image = ImageHelpers.GetImageFromByteArray(_selectedProjectSectionPart.CoverImage);
+                btnPartDelete.Visible = !SelectedProjectSectionPart.IsDeleted;
+                btnPartRestore.Visible = SelectedProjectSectionPart.IsDeleted;
+
+                chkPartActive.Checked = SelectedProjectSectionPart.IsActive;
+                txtPartName.Text = SelectedProjectSectionPart.Name;
+                txtPartDescription.Text = SelectedProjectSectionPart.Description;
+
+                if (SelectedProjectSectionPart.CoverImage is not { Length: > 0 })
+                {
+                    imgPartPhoto.Visible = false;
+                    lblPartSelectedFileName.Text = string.Empty;
+                    return;
+                }
+
+                imgPartPhoto.Image = ImageHelpers.GetImageFromByteArray(SelectedProjectSectionPart.CoverImage);
+                imgPartPhoto.Visible = true;
             }
-
-            
-            tabSectionEditors.Show();
-
-            //documents
-
-            //products
 
             LoadGrid_ProjectSectionParts();
 
-            //docs,
-            //products
-
-            Application.DoEvents();
 
         }
+
 
         #endregion
 
@@ -230,27 +304,27 @@ namespace DigiBugzy.Desktop.Projects
 
         private void SaveProject()
         {
-            _selectedProject.Name = txtProject_Name.Text;
-            _selectedProject.Description = txtProjectDescription.Text;
-            _selectedProject.IsActive = chkProjectActive.Checked;
+            SelectedProject.Name = txtProject_Name.Text;
+            SelectedProject.Description = txtProjectDescription.Text;
+            SelectedProject.IsActive = chkProjectActive.Checked;
 
 
             if (imgProjectPhoto.Image != null)
             {
-                _selectedProject.CoverImage = ImageHelpers.CopyImageToByteArray(imgProjectPhoto.Image);
+                SelectedProject.CoverImage = ImageHelpers.CopyImageToByteArray(imgProjectPhoto.Image);
             }
 
             using var service = new ProjectService(Globals.GetConnectionString());
-            if (_selectedProject.Id > 0)
+            if (SelectedProject.Id > 0)
             {
-                service.Update(_selectedProject);
+                service.Update(SelectedProject);
             }
             else
             {
-                _selectedProject.DigiAdminId = Globals.DigiAdministration.Id;
-                _selectedProject.IsDeleted = false;
-                _selectedProject.CreatedOn = DateTime.Now;
-                _selectedProject.Id = service.Create(_selectedProject);
+                SelectedProject.DigiAdminId = Globals.DigiAdministration.Id;
+                SelectedProject.IsDeleted = false;
+                SelectedProject.CreatedOn = DateTime.Now;
+                SelectedProject.Id = service.Create(SelectedProject);
             }
 
             LoadGrid_Projects();
@@ -259,27 +333,27 @@ namespace DigiBugzy.Desktop.Projects
 
         private void SaveProjectSection()
         {
-            _selectedProjectSection.Name = txtSectionName.Text;
-            _selectedProjectSection.Description = txtSectionDescription.Text;
-            _selectedProjectSection.IsActive = chkSectionActive.Checked;
+            SelectedProjectSection.Name = txtSectionName.Text;
+            SelectedProjectSection.Description = txtSectionDescription.Text;
+            SelectedProjectSection.IsActive = chkSectionActive.Checked;
 
 
             if (imgSectionPhoto.Image != null)
             {
-                _selectedProjectSection.CoverImage = ImageHelpers.CopyImageToByteArray(imgSectionPhoto.Image);
+                SelectedProjectSection.CoverImage = ImageHelpers.CopyImageToByteArray(imgSectionPhoto.Image);
             }
 
             using var service = new ProjectSectionService(Globals.GetConnectionString());
-            if (_selectedProjectSection.Id > 0)
+            if (SelectedProjectSection.Id > 0)
             {
-                service.Update(_selectedProjectSection);
+                service.Update(SelectedProjectSection);
             }
             else
             {
-                _selectedProjectSection.DigiAdminId = Globals.DigiAdministration.Id;
-                _selectedProjectSection.IsDeleted = false;
-                _selectedProjectSection.CreatedOn = DateTime.Now;
-                _selectedProjectSection.Id = service.Create(_selectedProjectSection);
+                SelectedProjectSection.DigiAdminId = Globals.DigiAdministration.Id;
+                SelectedProjectSection.IsDeleted = false;
+                SelectedProjectSection.CreatedOn = DateTime.Now;
+                SelectedProjectSection.Id = service.Create(SelectedProjectSection);
             }
 
             LoadGrid_ProjectSections();
@@ -288,27 +362,27 @@ namespace DigiBugzy.Desktop.Projects
 
         private void SaveProjectSectionPart()
         {
-            _selectedProjectSectionPart.Name = txtPartName.Text;
-            _selectedProjectSectionPart.Description = txtPartDescription.Text;
-            _selectedProjectSectionPart.IsActive = chkPartActive.Checked;
+            SelectedProjectSectionPart.Name = txtPartName.Text;
+            SelectedProjectSectionPart.Description = txtPartDescription.Text;
+            SelectedProjectSectionPart.IsActive = chkPartActive.Checked;
 
 
             if (imgPartPhoto.Image != null)
             {
-                _selectedProjectSectionPart.CoverImage = ImageHelpers.CopyImageToByteArray(imgPartPhoto.Image);
+                SelectedProjectSectionPart.CoverImage = ImageHelpers.CopyImageToByteArray(imgPartPhoto.Image);
             }
 
             using var service = new ProjectSectionPartService(Globals.GetConnectionString());
-            if (_selectedProjectSectionPart.Id > 0)
+            if (SelectedProjectSectionPart.Id > 0)
             {
-                service.Update(_selectedProjectSectionPart);
+                service.Update(SelectedProjectSectionPart);
             }
             else
             {
-                _selectedProjectSectionPart.DigiAdminId = Globals.DigiAdministration.Id;
-                _selectedProjectSectionPart.IsDeleted = false;
-                _selectedProjectSectionPart.CreatedOn = DateTime.Now;
-                _selectedProjectSectionPart.Id = service.Create(_selectedProjectSectionPart);
+                SelectedProjectSectionPart.DigiAdminId = Globals.DigiAdministration.Id;
+                SelectedProjectSectionPart.IsDeleted = false;
+                SelectedProjectSectionPart.CreatedOn = DateTime.Now;
+                SelectedProjectSectionPart.Id = service.Create(SelectedProjectSectionPart);
             }
 
             LoadSelected_ProjectSectionPart();
@@ -341,54 +415,71 @@ namespace DigiBugzy.Desktop.Projects
 
         #endregion
 
-        #region Grid Controls
+        #region Grids  & Datasources
 
-        #region Grid - Projects
+        #region Grid & Datasource: Projects
 
-       
+
 
         private void bsProjects_PositionChanged(object sender, EventArgs e)
         {
-            if (sender is not BindingSource) return;
-
+            
+           if (sender is not BindingSource) return;
             if (BindingContext[bsProjects].Position <= -1) return;
-            _selectedProject = (Project)bsProjects.Current;
+
+            InProjectSelection = true;
+            SelectedProject = (Project)bsProjects.Current;
             LoadSelected_Project();
+            if(!InProjectSectionSelection || !InProjectSectionPartSelection)  tabEditors.SelectedPage = tabProjectEditors;
+
+            Application.DoEvents();
+            InProjectSelection = false;
 
         }
 
+        #endregion
+
+
+
+        #region Grid & Datasource: Sections
         private void bsSections_PositionChanged(object sender, EventArgs e)
         {
+            
+
             if (sender is not BindingSource) return;
 
-            if (BindingContext[bsSections].Position <= -1) return;
-            _selectedProjectSection = (ProjectSection)bsSections.Current;
-            LoadSelected_ProjectSection();
+            InProjectSectionSelection = true;
 
+            if (BindingContext[bsSections].Position <= -1) return;
+            SelectedProjectSection = (ProjectSection)bsSections.Current;
+            LoadSelected_ProjectSection();
+            if (!InProjectSelection || !InProjectSectionPartSelection) tabEditors.SelectedPage = tabSectionEditors;
+
+            Application.DoEvents();
+
+            InProjectSectionSelection = false;
         }
+
+
+        #endregion
+
+
+        #region Grid & Datasource: Parts
 
         private void bsParts_PositionChanged(object sender, EventArgs e)
         {
+            if (InProjectSelection || InProjectSectionSelection || InProjectSectionPartSelection) return;
+
             if (sender is not BindingSource) return;
-
+            InProjectSectionPartSelection = true;
             if (BindingContext[bsParts].Position <= -1) return;
-            _selectedProjectSectionPart = (ProjectSectionPart)bsParts.Current;
+            SelectedProjectSectionPart = (ProjectSectionPart)bsParts.Current;
             LoadSelected_ProjectSectionPart();
+            if(!InProjectSectionSelection || !InProjectSelection) tabEditors.SelectedPage = tabPartsEditors;
+            Application.DoEvents();
 
+            InProjectSectionPartSelection = false;
         }
-
-        #endregion
-
-
-
-        #region Grid: Sections
-
-       
-        #endregion
-
-
-        #region Grid: Parts
-
 
         #endregion
 
@@ -402,7 +493,7 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnProjectAddNew_Click(object sender, EventArgs e)
         {
-            _selectedProject = new Project();
+            SelectedProject = new Project();
             LoadSelected_Project();
         }
 
@@ -419,13 +510,13 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnProjectRestore_Click(object sender, EventArgs e)
         {
-            if (_selectedProject.Id <= 0) return;
+            if (SelectedProject.Id <= 0) return;
 
-            _selectedProject.IsDeleted = false;
-            _selectedProject.IsActive = true;
+            SelectedProject.IsDeleted = false;
+            SelectedProject.IsActive = true;
 
             using var service = new ProjectService(Globals.GetConnectionString());
-            service.Update(_selectedProject);
+            service.Update(SelectedProject);
 
             LoadGrid_Projects();
         }
@@ -437,9 +528,9 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnProjectDelete_Click(object sender, EventArgs e)
         {
-            if (_selectedProject.Id <= 0) return;
+            if (SelectedProject.Id <= 0) return;
             var service = new ProjectService(Globals.GetConnectionString());
-            service.Delete(_selectedProject.Id, false);
+            service.Delete(SelectedProject.Id, false);
             LoadGrid_Projects();
             Application.DoEvents();
         }
@@ -460,9 +551,9 @@ namespace DigiBugzy.Desktop.Projects
                 productService.Delete(item.Id, true);
             }
 
-            _selectedProject = new Project();
-            _selectedProjectSection = new ProjectSection();
-            _selectedProjectSectionPart = new ProjectSectionPart();
+            SelectedProject = new Project();
+            SelectedProjectSection = new ProjectSection();
+            SelectedProjectSectionPart = new ProjectSectionPart();
 
             LoadGrid_Projects();
 
@@ -479,9 +570,9 @@ namespace DigiBugzy.Desktop.Projects
                 digiAdminId: Globals.DigiAdministration.Id);
             service.CreateSampleData();
 
-            _selectedProject = new Project();
-            _selectedProjectSection = new ProjectSection();
-            _selectedProjectSectionPart = new ProjectSectionPart();
+            SelectedProject = new Project();
+            SelectedProjectSection = new ProjectSection();
+            SelectedProjectSectionPart = new ProjectSectionPart();
 
             LoadGrid_Projects();
 
@@ -499,7 +590,7 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnSectionAddNew_Click(object sender, EventArgs e)
         {
-            _selectedProjectSection = new ProjectSection();
+            SelectedProjectSection = new ProjectSection();
             LoadSelected_ProjectSection();
         }
 
@@ -522,22 +613,22 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnSectionRestore_Click(object sender, EventArgs e)
         {
-            if (_selectedProjectSection.Id <= 0) return;
+            if (SelectedProjectSection.Id <= 0) return;
 
-            _selectedProjectSection.IsDeleted = false;
-            _selectedProjectSection.IsActive = true;
+            SelectedProjectSection.IsDeleted = false;
+            SelectedProjectSection.IsActive = true;
 
             using var service = new ProjectSectionService(Globals.GetConnectionString());
-            service.Update(_selectedProjectSection);
+            service.Update(SelectedProjectSection);
 
             LoadGrid_ProjectSections();
         }
 
         private void btnSectionDelete_Click(object sender, EventArgs e)
         {
-            if (_selectedProjectSection.Id <= 0) return;
+            if (SelectedProjectSection.Id <= 0) return;
             var service = new ProjectSectionService(Globals.GetConnectionString());
-            service.Delete(_selectedProjectSection.Id, false);
+            service.Delete(SelectedProjectSection.Id, false);
             LoadGrid_ProjectSections();
             Application.DoEvents();
         }
@@ -552,7 +643,7 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnPartAddNew_Click(object sender, EventArgs e)
         {
-            _selectedProjectSectionPart = new ProjectSectionPart();
+            SelectedProjectSectionPart = new ProjectSectionPart();
             LoadSelected_ProjectSectionPart();
         }
 
@@ -569,13 +660,13 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnPartRestore_Click(object sender, EventArgs e)
         {
-            if (_selectedProjectSectionPart.Id <= 0) return;
+            if (SelectedProjectSectionPart.Id <= 0) return;
 
-            _selectedProjectSectionPart.IsDeleted = false;
-            _selectedProjectSectionPart.IsActive = true;
+            SelectedProjectSectionPart.IsDeleted = false;
+            SelectedProjectSectionPart.IsActive = true;
 
             using var service = new ProjectSectionPartService(Globals.GetConnectionString());
-            service.Update(_selectedProjectSectionPart);
+            service.Update(SelectedProjectSectionPart);
 
             LoadGrid_ProjectSectionParts();
         }
@@ -587,9 +678,9 @@ namespace DigiBugzy.Desktop.Projects
 
         private void btnPartDelete_Click(object sender, EventArgs e)
         {
-            if (_selectedProjectSectionPart.Id <= 0) return;
+            if (SelectedProjectSectionPart.Id <= 0) return;
             var service = new ProjectSectionPartService(Globals.GetConnectionString());
-            service.Delete(_selectedProjectSectionPart.Id, false);
+            service.Delete(SelectedProjectSectionPart.Id, false);
             LoadGrid_ProjectSectionParts();
             Application.DoEvents();
         }
@@ -619,8 +710,29 @@ namespace DigiBugzy.Desktop.Projects
 
         #endregion
 
-        
+        #region General Helper Methods
 
         
+        private void HideStandardGridColumns(GridView gridView)
+        {
+            if (gridView.Columns[nameof(Project.Id)] != null) gridView.Columns[nameof(Project.Id)].Visible = false;
+            if (gridView.Columns[nameof(Project.CreatedOn)] != null) gridView.Columns[nameof(Project.CreatedOn)].Visible = false;
+            if (gridView.Columns[nameof(Project.DigiAdminId)] != null) gridView.Columns[nameof(Project.DigiAdminId)].Visible = false;
+            if (gridView.Columns[nameof(Project.DigiAdmin)] != null) gridView.Columns[nameof(Project.DigiAdmin)].Visible = false;
+            if (gridView.Columns[nameof(Project.IsActive)] != null) gridView.Columns[nameof(Project.IsActive)].Visible = false;
+            if (gridView.Columns[nameof(Project.IsDeleted)] != null) gridView.Columns[nameof(Project.IsDeleted)].Visible = false;
+
+
+            if (gridView.Columns[nameof(ProjectSection.Project)] != null) gridView.Columns[nameof(ProjectSection.Project)].Visible = false;
+            if (gridView.Columns[nameof(ProjectSectionPart.ProjectSectionId)] != null) gridView.Columns[nameof(ProjectSectionPart.ProjectSectionId)].Visible = false;
+            if (gridView.Columns[nameof(ProjectSectionPart.ProjectSection)] != null) gridView.Columns[nameof(ProjectSectionPart.ProjectSection)].Visible = false;
+
+        }
+
+
+
+
+        #endregion
+
     }
 }

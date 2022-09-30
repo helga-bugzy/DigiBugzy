@@ -335,6 +335,7 @@
             // 
             this.gvProjectSections.GridControl = this.gridProjectSections;
             this.gvProjectSections.Name = "gvProjectSections";
+            this.gvProjectSections.Click += new System.EventHandler(this.bsProjects_PositionChanged);
             // 
             // panelControl4
             // 
@@ -498,6 +499,9 @@
             // 
             // pnlProject_Editor
             // 
+            this.pnlProject_Editor.Appearance.BackColor = System.Drawing.Color.LightBlue;
+            this.pnlProject_Editor.Appearance.Options.UseBackColor = true;
+            this.pnlProject_Editor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlProject_Editor.Controls.Add(this.lblProjectSelectedFileName);
             this.pnlProject_Editor.Controls.Add(this.imgProjectPhoto);
             this.pnlProject_Editor.Controls.Add(this.btnProjectImage);
@@ -522,7 +526,7 @@
             // lblProjectSelectedFileName
             // 
             this.lblProjectSelectedFileName.AutoSize = true;
-            this.lblProjectSelectedFileName.Location = new System.Drawing.Point(531, 296);
+            this.lblProjectSelectedFileName.Location = new System.Drawing.Point(529, 294);
             this.lblProjectSelectedFileName.Name = "lblProjectSelectedFileName";
             this.lblProjectSelectedFileName.Size = new System.Drawing.Size(15, 13);
             this.lblProjectSelectedFileName.TabIndex = 34;
@@ -589,7 +593,7 @@
             // chkProjectActive
             // 
             this.chkProjectActive.AutoSize = true;
-            this.chkProjectActive.Location = new System.Drawing.Point(97, 296);
+            this.chkProjectActive.Location = new System.Drawing.Point(95, 294);
             this.chkProjectActive.Name = "chkProjectActive";
             this.chkProjectActive.Size = new System.Drawing.Size(15, 14);
             this.chkProjectActive.TabIndex = 27;
@@ -598,7 +602,7 @@
             // lblProjectActive
             // 
             this.lblProjectActive.AutoSize = true;
-            this.lblProjectActive.Location = new System.Drawing.Point(10, 296);
+            this.lblProjectActive.Location = new System.Drawing.Point(8, 294);
             this.lblProjectActive.Name = "lblProjectActive";
             this.lblProjectActive.Size = new System.Drawing.Size(41, 13);
             this.lblProjectActive.TabIndex = 26;
@@ -623,7 +627,7 @@
             // lblProjectDescription
             // 
             this.lblProjectDescription.AutoSize = true;
-            this.lblProjectDescription.Location = new System.Drawing.Point(10, 59);
+            this.lblProjectDescription.Location = new System.Drawing.Point(8, 57);
             this.lblProjectDescription.Name = "lblProjectDescription";
             this.lblProjectDescription.Size = new System.Drawing.Size(64, 13);
             this.lblProjectDescription.TabIndex = 23;
@@ -632,7 +636,7 @@
             // lblProjectName
             // 
             this.lblProjectName.AutoSize = true;
-            this.lblProjectName.Location = new System.Drawing.Point(10, 24);
+            this.lblProjectName.Location = new System.Drawing.Point(8, 22);
             this.lblProjectName.Name = "lblProjectName";
             this.lblProjectName.Size = new System.Drawing.Size(38, 13);
             this.lblProjectName.TabIndex = 22;
@@ -705,6 +709,9 @@
             // 
             // pnlSectionEditor
             // 
+            this.pnlSectionEditor.Appearance.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.pnlSectionEditor.Appearance.Options.UseBackColor = true;
+            this.pnlSectionEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlSectionEditor.Controls.Add(this.lblSectopmActive);
             this.pnlSectionEditor.Controls.Add(this.lblSectionSelectedFileName);
             this.pnlSectionEditor.Controls.Add(this.imgSectionPhoto);
@@ -727,7 +734,7 @@
             // lblSectopmActive
             // 
             this.lblSectopmActive.AutoSize = true;
-            this.lblSectopmActive.Location = new System.Drawing.Point(8, 292);
+            this.lblSectopmActive.Location = new System.Drawing.Point(6, 290);
             this.lblSectopmActive.Name = "lblSectopmActive";
             this.lblSectopmActive.Size = new System.Drawing.Size(41, 13);
             this.lblSectopmActive.TabIndex = 25;
@@ -736,7 +743,7 @@
             // lblSectionSelectedFileName
             // 
             this.lblSectionSelectedFileName.AutoSize = true;
-            this.lblSectionSelectedFileName.Location = new System.Drawing.Point(506, 339);
+            this.lblSectionSelectedFileName.Location = new System.Drawing.Point(504, 337);
             this.lblSectionSelectedFileName.Name = "lblSectionSelectedFileName";
             this.lblSectionSelectedFileName.Size = new System.Drawing.Size(15, 13);
             this.lblSectionSelectedFileName.TabIndex = 24;
@@ -798,7 +805,7 @@
             // chkSectionActive
             // 
             this.chkSectionActive.AutoSize = true;
-            this.chkSectionActive.Location = new System.Drawing.Point(95, 292);
+            this.chkSectionActive.Location = new System.Drawing.Point(93, 290);
             this.chkSectionActive.Name = "chkSectionActive";
             this.chkSectionActive.Size = new System.Drawing.Size(15, 14);
             this.chkSectionActive.TabIndex = 17;
@@ -823,7 +830,7 @@
             // lblSectionDescription
             // 
             this.lblSectionDescription.AutoSize = true;
-            this.lblSectionDescription.Location = new System.Drawing.Point(8, 55);
+            this.lblSectionDescription.Location = new System.Drawing.Point(6, 53);
             this.lblSectionDescription.Name = "lblSectionDescription";
             this.lblSectionDescription.Size = new System.Drawing.Size(64, 13);
             this.lblSectionDescription.TabIndex = 14;
@@ -832,7 +839,7 @@
             // lblSectionName
             // 
             this.lblSectionName.AutoSize = true;
-            this.lblSectionName.Location = new System.Drawing.Point(8, 20);
+            this.lblSectionName.Location = new System.Drawing.Point(6, 18);
             this.lblSectionName.Name = "lblSectionName";
             this.lblSectionName.Size = new System.Drawing.Size(38, 13);
             this.lblSectionName.TabIndex = 13;
@@ -887,6 +894,9 @@
             // 
             // pnlPartsEdtior
             // 
+            this.pnlPartsEdtior.Appearance.BackColor = System.Drawing.Color.Tan;
+            this.pnlPartsEdtior.Appearance.Options.UseBackColor = true;
+            this.pnlPartsEdtior.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlPartsEdtior.Controls.Add(this.lblPartSelectedFileName);
             this.pnlPartsEdtior.Controls.Add(this.imgPartPhoto);
             this.pnlPartsEdtior.Controls.Add(this.btnPartImage);
@@ -909,7 +919,7 @@
             // lblPartSelectedFileName
             // 
             this.lblPartSelectedFileName.AutoSize = true;
-            this.lblPartSelectedFileName.Location = new System.Drawing.Point(507, 291);
+            this.lblPartSelectedFileName.Location = new System.Drawing.Point(505, 289);
             this.lblPartSelectedFileName.Name = "lblPartSelectedFileName";
             this.lblPartSelectedFileName.Size = new System.Drawing.Size(15, 13);
             this.lblPartSelectedFileName.TabIndex = 25;
@@ -971,7 +981,7 @@
             // chkPartActive
             // 
             this.chkPartActive.AutoSize = true;
-            this.chkPartActive.Location = new System.Drawing.Point(95, 291);
+            this.chkPartActive.Location = new System.Drawing.Point(93, 289);
             this.chkPartActive.Name = "chkPartActive";
             this.chkPartActive.Size = new System.Drawing.Size(15, 14);
             this.chkPartActive.TabIndex = 18;
@@ -980,7 +990,7 @@
             // lblPartvActive
             // 
             this.lblPartvActive.AutoSize = true;
-            this.lblPartvActive.Location = new System.Drawing.Point(8, 291);
+            this.lblPartvActive.Location = new System.Drawing.Point(6, 289);
             this.lblPartvActive.Name = "lblPartvActive";
             this.lblPartvActive.Size = new System.Drawing.Size(41, 13);
             this.lblPartvActive.TabIndex = 17;
@@ -1005,7 +1015,7 @@
             // lblPartDescription
             // 
             this.lblPartDescription.AutoSize = true;
-            this.lblPartDescription.Location = new System.Drawing.Point(8, 54);
+            this.lblPartDescription.Location = new System.Drawing.Point(6, 52);
             this.lblPartDescription.Name = "lblPartDescription";
             this.lblPartDescription.Size = new System.Drawing.Size(64, 13);
             this.lblPartDescription.TabIndex = 14;
@@ -1014,7 +1024,7 @@
             // lblPartName
             // 
             this.lblPartName.AutoSize = true;
-            this.lblPartName.Location = new System.Drawing.Point(8, 19);
+            this.lblPartName.Location = new System.Drawing.Point(6, 17);
             this.lblPartName.Name = "lblPartName";
             this.lblPartName.Size = new System.Drawing.Size(38, 13);
             this.lblPartName.TabIndex = 13;
