@@ -18,12 +18,15 @@ namespace DigiBugzy.Desktop.MultiFunctional.DocumentViewers
     public partial class ucPdfViewer : DevExpress.XtraEditors.XtraUserControl
     {
         private byte[] _documentData;
-        public byte[] DocumentData { get => _documentData; 
+        public byte[] DocumentData
+        {
+            get => _documentData;
             set
             {
                 _documentData = value;
                 LoadDocument();
-            }; }
+            }
+        }
 
         public ucPdfViewer()
         {
