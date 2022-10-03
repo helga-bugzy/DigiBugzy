@@ -29,7 +29,7 @@ namespace DigiBugzy.Desktop
 
             return GetDatabaseName == DatabaseName_Dev ?
                 @$"Data Source=LCVPC5900\SQLEXPRESS;Initial Catalog={GetDatabaseName};Persist Security Info=False;Trusted_Connection=True;" :
-                $"Data Source=185.41.126.25,9146;Initial Catalog={GetDatabaseName};Persist Security Info=True;User ID=Schuring1sql;Password=Columbus01!";
+                $"Data Source=185.41.126.25,9146;Initial Catalog={GetDatabaseName};Persist Security Info=True;User ID=...;Password=...";
 
 
         }

@@ -55,7 +55,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
             this.btnDelete.Location = new System.Drawing.Point(221, 299);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(88, 32);
@@ -64,7 +64,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
+            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
             this.btnSave.Location = new System.Drawing.Point(353, 299);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(88, 32);
@@ -74,7 +74,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
+            this.btnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.ImageOptions.Image")));
             this.btnAdd.Location = new System.Drawing.Point(77, 299);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(88, 32);
@@ -150,7 +150,7 @@
             // 
             // btnSelectFile
             // 
-            this.btnSelectFile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnProjectImage.ImageOptions.Image")));
+            this.btnSelectFile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectFile.ImageOptions.Image")));
             this.btnSelectFile.Location = new System.Drawing.Point(475, 19);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(132, 41);
@@ -207,7 +207,7 @@
             this.Controls.Add(this.lblProjectPartsDocumentDescription);
             this.Controls.Add(this.lblProjectPartsDocumentName);
             this.Name = "ucProjectDocumentLoader";
-            this.Size = new System.Drawing.Size(720, 480);
+            this.Size = new System.Drawing.Size(640, 357);
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIs3DPrintingDocument.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsPlans.Properties)).EndInit();
