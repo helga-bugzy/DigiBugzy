@@ -120,6 +120,11 @@
             this.bsProjects = new System.Windows.Forms.BindingSource(this.components);
             this.bsSections = new System.Windows.Forms.BindingSource(this.components);
             this.bsParts = new System.Windows.Forms.BindingSource(this.components);
+            this.splitProjectPartDocuments = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gridProjectPartsDocuments = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.bsProjectPartDocuments = new System.Windows.Forms.BindingSource(this.components);
+            this.pnlProjectPartsDocumentEditor = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -185,9 +190,20 @@
             this.pnlPartsEdtior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPartPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPartName.Properties)).BeginInit();
+            this.tabNavigationPage9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel1)).BeginInit();
+            this.splitProjectPartDocuments.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel2)).BeginInit();
+            this.splitProjectPartDocuments.Panel2.SuspendLayout();
+            this.splitProjectPartDocuments.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProjectPartsDocuments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlProjectPartsDocumentEditor)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlManager
@@ -610,18 +626,18 @@
             // 
             // txtProjectDescription
             // 
-            this.txtProjectDescription.Location = new System.Drawing.Point(97, 47);
+            this.txtProjectDescription.Location = new System.Drawing.Point(115, 47);
             this.txtProjectDescription.MaxLength = 255;
             this.txtProjectDescription.Multiline = true;
             this.txtProjectDescription.Name = "txtProjectDescription";
-            this.txtProjectDescription.Size = new System.Drawing.Size(398, 225);
+            this.txtProjectDescription.Size = new System.Drawing.Size(380, 225);
             this.txtProjectDescription.TabIndex = 25;
             // 
             // txtProject_Name
             // 
-            this.txtProject_Name.Location = new System.Drawing.Point(97, 21);
+            this.txtProject_Name.Location = new System.Drawing.Point(115, 21);
             this.txtProject_Name.Name = "txtProject_Name";
-            this.txtProject_Name.Size = new System.Drawing.Size(398, 20);
+            this.txtProject_Name.Size = new System.Drawing.Size(380, 20);
             this.txtProject_Name.TabIndex = 24;
             // 
             // lblProjectDescription
@@ -629,18 +645,18 @@
             this.lblProjectDescription.AutoSize = true;
             this.lblProjectDescription.Location = new System.Drawing.Point(8, 57);
             this.lblProjectDescription.Name = "lblProjectDescription";
-            this.lblProjectDescription.Size = new System.Drawing.Size(64, 13);
+            this.lblProjectDescription.Size = new System.Drawing.Size(101, 13);
             this.lblProjectDescription.TabIndex = 23;
-            this.lblProjectDescription.Text = "Description:";
+            this.lblProjectDescription.Text = "Project Description:";
             // 
             // lblProjectName
             // 
             this.lblProjectName.AutoSize = true;
             this.lblProjectName.Location = new System.Drawing.Point(8, 22);
             this.lblProjectName.Name = "lblProjectName";
-            this.lblProjectName.Size = new System.Drawing.Size(38, 13);
+            this.lblProjectName.Size = new System.Drawing.Size(75, 13);
             this.lblProjectName.TabIndex = 22;
-            this.lblProjectName.Text = "Name:";
+            this.lblProjectName.Text = "Project Name:";
             // 
             // btnSampleDataDelete
             // 
@@ -669,7 +685,7 @@
             this.tabProjectDocuments.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabProjectDocuments.Name = "tabProjectDocuments";
             this.tabProjectDocuments.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabProjectDocuments.Size = new System.Drawing.Size(2242, 426);
+            this.tabProjectDocuments.Size = new System.Drawing.Size(2242, 436);
             // 
             // tabSectionEditors
             // 
@@ -813,18 +829,18 @@
             // 
             // txtSectionDescription
             // 
-            this.txtSectionDescription.Location = new System.Drawing.Point(95, 51);
+            this.txtSectionDescription.Location = new System.Drawing.Point(114, 51);
             this.txtSectionDescription.MaxLength = 255;
             this.txtSectionDescription.Multiline = true;
             this.txtSectionDescription.Name = "txtSectionDescription";
-            this.txtSectionDescription.Size = new System.Drawing.Size(398, 226);
+            this.txtSectionDescription.Size = new System.Drawing.Size(379, 226);
             this.txtSectionDescription.TabIndex = 16;
             // 
             // txtSectionName
             // 
-            this.txtSectionName.Location = new System.Drawing.Point(95, 17);
+            this.txtSectionName.Location = new System.Drawing.Point(114, 17);
             this.txtSectionName.Name = "txtSectionName";
-            this.txtSectionName.Size = new System.Drawing.Size(398, 20);
+            this.txtSectionName.Size = new System.Drawing.Size(379, 20);
             this.txtSectionName.TabIndex = 15;
             // 
             // lblSectionDescription
@@ -832,18 +848,18 @@
             this.lblSectionDescription.AutoSize = true;
             this.lblSectionDescription.Location = new System.Drawing.Point(6, 53);
             this.lblSectionDescription.Name = "lblSectionDescription";
-            this.lblSectionDescription.Size = new System.Drawing.Size(64, 13);
+            this.lblSectionDescription.Size = new System.Drawing.Size(102, 13);
             this.lblSectionDescription.TabIndex = 14;
-            this.lblSectionDescription.Text = "Description:";
+            this.lblSectionDescription.Text = "Section Description:";
             // 
             // lblSectionName
             // 
             this.lblSectionName.AutoSize = true;
             this.lblSectionName.Location = new System.Drawing.Point(6, 18);
             this.lblSectionName.Name = "lblSectionName";
-            this.lblSectionName.Size = new System.Drawing.Size(38, 13);
+            this.lblSectionName.Size = new System.Drawing.Size(76, 13);
             this.lblSectionName.TabIndex = 13;
-            this.lblSectionName.Text = "Name:";
+            this.lblSectionName.Text = "Section Name:";
             // 
             // tabNavigationPage7
             // 
@@ -1017,27 +1033,28 @@
             this.lblPartDescription.AutoSize = true;
             this.lblPartDescription.Location = new System.Drawing.Point(6, 52);
             this.lblPartDescription.Name = "lblPartDescription";
-            this.lblPartDescription.Size = new System.Drawing.Size(64, 13);
+            this.lblPartDescription.Size = new System.Drawing.Size(83, 13);
             this.lblPartDescription.TabIndex = 14;
-            this.lblPartDescription.Text = "Description:";
+            this.lblPartDescription.Text = "Part Description";
             // 
             // lblPartName
             // 
             this.lblPartName.AutoSize = true;
             this.lblPartName.Location = new System.Drawing.Point(6, 17);
             this.lblPartName.Name = "lblPartName";
-            this.lblPartName.Size = new System.Drawing.Size(38, 13);
+            this.lblPartName.Size = new System.Drawing.Size(61, 13);
             this.lblPartName.TabIndex = 13;
-            this.lblPartName.Text = "Name:";
+            this.lblPartName.Text = "Part Name:";
             // 
             // tabNavigationPage9
             // 
             this.tabNavigationPage9.Caption = "Part Documents";
+            this.tabNavigationPage9.Controls.Add(this.splitProjectPartDocuments);
             this.tabNavigationPage9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabNavigationPage9.ImageOptions.Image")));
             this.tabNavigationPage9.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabNavigationPage9.Name = "tabNavigationPage9";
             this.tabNavigationPage9.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabNavigationPage9.Size = new System.Drawing.Size(2242, 469);
+            this.tabNavigationPage9.Size = new System.Drawing.Size(2242, 436);
             // 
             // tabNavigationPage1
             // 
@@ -1046,7 +1063,7 @@
             this.tabNavigationPage1.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabNavigationPage1.Name = "tabNavigationPage1";
             this.tabNavigationPage1.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabNavigationPage1.Size = new System.Drawing.Size(2242, 469);
+            this.tabNavigationPage1.Size = new System.Drawing.Size(2242, 436);
             // 
             // dlgProjectImage
             // 
@@ -1071,6 +1088,52 @@
             // bsParts
             // 
             this.bsParts.PositionChanged += new System.EventHandler(this.bsParts_PositionChanged);
+            // 
+            // splitProjectPartDocuments
+            // 
+            this.splitProjectPartDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitProjectPartDocuments.Location = new System.Drawing.Point(0, 0);
+            this.splitProjectPartDocuments.Name = "splitProjectPartDocuments";
+            // 
+            // splitProjectPartDocuments.splitProjectPartDocuments_Panel1
+            // 
+            this.splitProjectPartDocuments.Panel1.Controls.Add(this.gridProjectPartsDocuments);
+            this.splitProjectPartDocuments.Panel1.Text = "Panel1";
+            // 
+            // splitProjectPartDocuments.splitProjectPartDocuments_Panel2
+            // 
+            this.splitProjectPartDocuments.Panel2.Controls.Add(this.pnlProjectPartsDocumentEditor);
+            this.splitProjectPartDocuments.Panel2.Text = "Panel2";
+            this.splitProjectPartDocuments.Size = new System.Drawing.Size(2242, 436);
+            this.splitProjectPartDocuments.SplitterPosition = 1027;
+            this.splitProjectPartDocuments.TabIndex = 0;
+            // 
+            // gridProjectPartsDocuments
+            // 
+            this.gridProjectPartsDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridProjectPartsDocuments.Location = new System.Drawing.Point(0, 0);
+            this.gridProjectPartsDocuments.MainView = this.gridView1;
+            this.gridProjectPartsDocuments.Name = "gridProjectPartsDocuments";
+            this.gridProjectPartsDocuments.Size = new System.Drawing.Size(1027, 436);
+            this.gridProjectPartsDocuments.TabIndex = 0;
+            this.gridProjectPartsDocuments.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this.gridProjectPartsDocuments;
+            this.gridView1.Name = "gridView1";
+            // 
+            // pnlProjectPartsDocumentEditor
+            // 
+            this.pnlProjectPartsDocumentEditor.Appearance.BackColor = System.Drawing.Color.Tan;
+            this.pnlProjectPartsDocumentEditor.Appearance.Options.UseBackColor = true;
+            this.pnlProjectPartsDocumentEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlProjectPartsDocumentEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlProjectPartsDocumentEditor.Location = new System.Drawing.Point(0, 0);
+            this.pnlProjectPartsDocumentEditor.Name = "pnlProjectPartsDocumentEditor";
+            this.pnlProjectPartsDocumentEditor.Size = new System.Drawing.Size(1205, 436);
+            this.pnlProjectPartsDocumentEditor.TabIndex = 0;
             // 
             // ProjectsManager
             // 
@@ -1153,9 +1216,20 @@
             this.pnlPartsEdtior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPartPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPartName.Properties)).EndInit();
+            this.tabNavigationPage9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel1)).EndInit();
+            this.splitProjectPartDocuments.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel2)).EndInit();
+            this.splitProjectPartDocuments.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments)).EndInit();
+            this.splitProjectPartDocuments.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridProjectPartsDocuments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlProjectPartsDocumentEditor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1252,5 +1326,10 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage1;
         private BindingSource bsSections;
         private BindingSource bsParts;
+        private DevExpress.XtraEditors.SplitContainerControl splitProjectPartDocuments;
+        private DevExpress.XtraGrid.GridControl gridProjectPartsDocuments;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.PanelControl pnlProjectPartsDocumentEditor;
+        private BindingSource bsProjectPartDocuments;
     }
 }

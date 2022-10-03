@@ -3,7 +3,7 @@ using DigiBugzy.Core.Domain.Projects;
 
 namespace DigiBugzy.Core.Domain.xBase
 {
-    public class BaseProjectSublementEntity: BaseAdministrationEntity
+    public class BaseProjectSublementEntity: BaseDocumentEntity
     {
         public int ProjectId { get; set; }
 

@@ -84,23 +84,21 @@ namespace DigiBugzy.Desktop.MultiFunctional
             
 
             if (SelectedClassificationId > 0)
-            {                
-                using (var service = Startup.GetService<CategoryService>())
+            {
+                using var service = Startup.GetService<CategoryService>();
+                if (service == null) return;
+                cmbCategory.DataSource = service.Get(new StandardFilter()
                 {
-                    if (service == null) return;
-                    cmbCategory.DataSource = service.Get(new StandardFilter()
-                    {
-                        DigiAdminId = Globals.DigiAdministration.Id,
-                        ClassificationId = SelectedClassificationId
-                    });
-                    cmbCategory.ValueMember = nameof(Category.Id);
-                    cmbCategory.DisplayMember = nameof(Category.Name);
+                    DigiAdminId = Globals.DigiAdministration.Id,
+                    ClassificationId = SelectedClassificationId
+                });
+                cmbCategory.ValueMember = nameof(Category.Id);
+                cmbCategory.DisplayMember = nameof(Category.Name);
 
-                    if(cmbCategory.Items.Count > 0)
-                    {
-                        cmbCategory.Visible = true;
-                        lblCategory.Visible = true;
-                    }
+                if(cmbCategory.Items.Count > 0)
+                {
+                    cmbCategory.Visible = true;
+                    lblCategory.Visible = true;
                 }
             }
 
