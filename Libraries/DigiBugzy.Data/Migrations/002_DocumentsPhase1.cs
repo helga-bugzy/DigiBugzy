@@ -98,6 +98,14 @@ namespace DigiBugzy.Data.Migrations
             creatory.AddColumn(nameof(ProjectDocument.IsSpecifications), BaseEntityCreator.FieldTypes.AsBoolean, false);
             creatory.AddColumn(nameof(ProjectDocument.IsPlans), BaseEntityCreator.FieldTypes.AsBoolean, false);
             creatory.AddColumn(nameof(ProjectDocument.IsInstructions), BaseEntityCreator.FieldTypes.AsBoolean, false);
+            creatory.AddColumn(nameof(ProjectDocument.DocumentTypeId), BaseEntityCreator.FieldTypes.AsInt32, false);
+            creatory.AddColumn(nameof(ProjectDocument.DocumentData), BaseEntityCreator.FieldTypes.AsBinary, true);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName,
+                fromSchemaName: _currentSchemaName,
+                fromFieldName: nameof(ProjectDocument.DocumentTypeId),
+                toTable: nameof(DocumentType),
+                toSchemaName: DatabaseConstants.Schemas.Admin);
 
         }
 
