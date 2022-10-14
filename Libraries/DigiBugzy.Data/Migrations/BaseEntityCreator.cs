@@ -151,6 +151,7 @@ namespace DigiBugzy.Data.Migrations
             Migrator.Alter.Table(TableName)
                 .InSchema(SchemaName)
                 .AddColumn(nameof(BaseDocumentEntity.DocumentTypeId)).AsInt32().NotNullable()
+                .AddColumn(nameof(BaseDocumentEntity.DocumentFileTypeId)).AsInt32().NotNullable()
                 .AddColumn(nameof(BaseDocumentEntity.DocumentData)).AsBinary().NotNullable();
 
             AddForeignKey(
@@ -158,6 +159,13 @@ namespace DigiBugzy.Data.Migrations
                 toSchemaName: DatabaseConstants.Schemas.Admin,
                 fromTable: TableName,
                 fromFieldName: nameof(BaseDocumentEntity.DocumentTypeId), 
+                fromSchemaName: SchemaName);
+
+            AddForeignKey(
+                toTable: nameof(DocumentFileType),
+                toSchemaName: DatabaseConstants.Schemas.Admin,
+                fromTable: TableName,
+                fromFieldName: nameof(BaseDocumentEntity.DocumentFileTypeId),
                 fromSchemaName: SchemaName);
         }
 

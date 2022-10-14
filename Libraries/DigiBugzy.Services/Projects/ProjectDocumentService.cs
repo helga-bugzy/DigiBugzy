@@ -81,14 +81,19 @@ namespace DigiBugzy.Services.Projects
         /// <inheritdoc />
         public void Delete(int id, bool hardDelete)
         {
+            Delete(GetById(id), hardDelete);
+        }
+
+        public void Delete(ProjectDocument entity, bool hardDelete)
+        {
             if (hardDelete)
             {
-                dbContext.ProjectDocuments.Remove(GetById(id));
+                dbContext.ProjectDocuments.Remove(entity);
                 dbContext.SaveChanges();
             }
             else
             {
-                var entity = GetById(id);
+                
                 entity.IsDeleted = true;
                 entity.IsActive = false;
                 Update(entity);

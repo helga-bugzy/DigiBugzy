@@ -23,6 +23,8 @@ namespace DigiBugzy.Services.Projects
 
         public void Delete(int id, bool hardDelete);
 
+        public void Delete(ProjectDocument entity, bool hardDelete);
+
         public void Update(ProjectDocument entity);
 
         public int Create(ProjectDocument entity);

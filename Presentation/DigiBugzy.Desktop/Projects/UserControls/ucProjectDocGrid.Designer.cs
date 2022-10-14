@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gridDocuments = new DevExpress.XtraGrid.GridControl();
             this.gvDocuments = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridDocuments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDocuments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridDocuments
@@ -50,6 +53,10 @@
             this.gvDocuments.GridControl = this.gridDocuments;
             this.gvDocuments.Name = "gvDocuments";
             // 
+            // bindingSource1
+            // 
+            this.bindingSource1.PositionChanged += new System.EventHandler(this.bindingSource1_PositionChanged);
+            // 
             // ucProjectDocGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -59,6 +66,7 @@
             this.Size = new System.Drawing.Size(938, 488);
             ((System.ComponentModel.ISupportInitialize)(this.gridDocuments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDocuments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -67,5 +75,6 @@
 
         private DevExpress.XtraGrid.GridControl gridDocuments;
         private DevExpress.XtraGrid.Views.Grid.GridView gvDocuments;
+        private BindingSource bindingSource1;
     }
 }

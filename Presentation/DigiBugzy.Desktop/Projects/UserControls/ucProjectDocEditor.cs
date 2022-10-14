@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 using DevExpress.XtraEditors;
 using DigiBugzy.Core.Domain.Projects;
+using DigiBugzy.Services.Administration.Documents;
 using DigiBugzy.Services.Projects;
 
 namespace DigiBugzy.Desktop.Projects.UserControls
@@ -23,8 +24,11 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         public delegate void OnSaveDelegate(ProjectDocument selectedDocument);
         public event OnSaveDelegate? OnSave;
 
+        public delegate void OnDeleteDelegate();
+        public event OnDeleteDelegate? OnDelete;
+
         #endregion
-        
+
         #region Properties
 
         private ProjectDocument _selectedDocument { get; set; } = new();
@@ -39,9 +43,9 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             }
         }
 
-        private ProjectControlEnum Type { get;set; }
+        private ProjectControlEnum Type { get; set; }
 
-        private ProjectDocumentFilter Filter { get; set; }
+        private ProjectDocumentFilter Filter { get; set; } = new();
 
 
 
@@ -80,6 +84,11 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            DeleteDocument();
+            SelectedDocument = new ProjectDocument();
+            Application.DoEvents();
+
+            OnDelete?.Invoke();
 
         }
 
@@ -224,8 +233,48 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             Application.DoEvents();
         }
 
+        private void LoadCombo_DocumentTypes()
+        {
+            cmbDocumentType.Items.Clear();
+            using var service = new DocumentTypeService(Globals.GetConnectionString());
+            var collection = service.Get(new StandardFilter() { ClassificationId = (int)ClassificationsEnum.Project });
+
+            var index = 1;
+            foreach (var item in collection)
+            {
+                cmbDocumentType.Items.Add(item);
+                if (SelectedDocument.DocumentTypeId == item.Id)
+                {
+                    cmbDocumentType.SelectedIndex = index;
+                }
+
+                index += 1;
+            }
+        }
+
+        private void LoadCombo_DocumentFileTypes()
+        {
+            cmbDocumentType.Items.Clear();
+            using var service = new DocumentFileTypeService(Globals.GetConnectionString());
+            var collection = service.Get(new StandardFilter() { ClassificationId = (int)ClassificationsEnum.Project});
+
+            var index = 1;
+            foreach (var item in collection)
+            {
+                cmbDocumentFileType.Items.Add(item);
+                if (SelectedDocument.DocumentFileTypeId == item.Id)
+                {
+                    cmbDocumentFileType.SelectedIndex = index;
+                }
+
+                index += 1;
+            }
+        }
+
         private void LoadEditor()
         {
+            LoadCombo_DocumentFileTypes();
+            LoadCombo_DocumentTypes();
             txtDescription.Text = txtName.Text = string.Empty;
             chkIs3DPrintingDocument.Checked = chkIsInstructions.Checked = chkIsPlans.Checked = chkIsSpecifications.Checked = false;
             btnSelectFile.Enabled = btnAdd.Enabled = btnDelete.Enabled = btnSave.Enabled = false;
@@ -271,6 +320,12 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             SelectedDocument.IsSpecifications = chkIsSpecifications.Checked;
             SelectedDocument.DocumentData = bytes;
 
+        }
+
+        private void DeleteDocument()
+        {
+            var service = new ProjectDocumentService(Globals.GetConnectionString());
+            service.Delete(SelectedDocument, true);
         }
 
   

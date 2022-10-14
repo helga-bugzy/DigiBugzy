@@ -99,12 +99,19 @@ namespace DigiBugzy.Data.Migrations
             creatory.AddColumn(nameof(ProjectDocument.IsPlans), BaseEntityCreator.FieldTypes.AsBoolean, false);
             creatory.AddColumn(nameof(ProjectDocument.IsInstructions), BaseEntityCreator.FieldTypes.AsBoolean, false);
             creatory.AddColumn(nameof(ProjectDocument.DocumentTypeId), BaseEntityCreator.FieldTypes.AsInt32, false);
+            creatory.AddColumn(nameof(ProjectDocument.DocumentFileTypeId), BaseEntityCreator.FieldTypes.AsInt32, false);
             creatory.AddColumn(nameof(ProjectDocument.DocumentData), BaseEntityCreator.FieldTypes.AsBinary, true);
             creatory.AddForeignKey(
                 fromTable: _currentTableName,
                 fromSchemaName: _currentSchemaName,
                 fromFieldName: nameof(ProjectDocument.DocumentTypeId),
                 toTable: nameof(DocumentType),
+                toSchemaName: DatabaseConstants.Schemas.Admin);
+            creatory.AddForeignKey(
+                fromTable: _currentTableName,
+                fromSchemaName: _currentSchemaName,
+                fromFieldName: nameof(ProjectDocument.DocumentFileTypeId),
+                toTable: nameof(DocumentFileType),
                 toSchemaName: DatabaseConstants.Schemas.Admin);
 
         }
@@ -167,7 +174,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Image",
                     Description = "Image",
-                    ClassificationId = 1
+                    ClassificationId = 1,
+                    DefaultDocumentFileTypeId = 1
                 });
 
             Insert.IntoTable(nameof(DocumentType))
@@ -180,7 +188,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Image",
                     Description = "Image",
-                    ClassificationId = 2
+                    ClassificationId = 2,
+                    DefaultDocumentFileTypeId = 1
                 });
 
             Insert.IntoTable(nameof(DocumentType))
@@ -193,7 +202,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Image",
                     Description = "Image",
-                    ClassificationId = 3
+                    ClassificationId = 3,
+                    DefaultDocumentFileTypeId = 1
                 });
 
 
@@ -209,7 +219,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Schematic Drawing",
                     Description = "Schematic Drawing",
-                    ClassificationId = 1
+                    ClassificationId = 1,
+                    DefaultDocumentFileTypeId = 1
                 });
 
             Insert.IntoTable(nameof(DocumentType))
@@ -222,7 +233,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Schematic Drawing",
                     Description = "Schematic Drawing",
-                    ClassificationId = 2
+                    ClassificationId = 2,
+                    DefaultDocumentFileTypeId = 1
                 });
 
             Insert.IntoTable(nameof(DocumentType))
@@ -235,7 +247,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Specifications",
                     Description = "Specifications",
-                    ClassificationId = 1
+                    ClassificationId = 1,
+                    DefaultDocumentFileTypeId = 1
                 });
 
             Insert.IntoTable(nameof(DocumentType))
@@ -248,7 +261,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Specifications",
                     Description = "Specifications",
-                    ClassificationId = 2
+                    ClassificationId = 2,
+                    DefaultDocumentFileTypeId = 1
                 });
 
             //Projects
@@ -262,7 +276,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "GCode File",
                     Description = "GCode File",
-                    ClassificationId = 1
+                    ClassificationId = 1,
+                    DefaultDocumentFileTypeId = 1
                 });
 
 
@@ -276,7 +291,8 @@ namespace DigiBugzy.Data.Migrations
                     CreatedOn = DateTime.Now,
                     Name = "Stl File",
                     Description = "String",
-                    ClassificationId = 1
+                    ClassificationId = 1,
+                    DefaultDocumentFileTypeId = 1
                 });
 
            
