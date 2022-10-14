@@ -11,10 +11,11 @@ using System.Windows.Forms;
 
 using DevExpress.XtraEditors;
 using DigiBugzy.Core.Domain.Projects;
+using DigiBugzy.Services.Projects;
 
 namespace DigiBugzy.Desktop.Projects.UserControls
 {
-    public partial class ucProjectDocEditor : DevExpress.XtraEditors.XtraUserControl
+    public partial class ucProjectDocEditor : XtraUserControl
     {
 
         #region Delegates & Events
@@ -52,12 +53,16 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         #region Control Event Procedure(s)
 
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             SelectedDocument = new ProjectDocument();
             LoadEditor();
             Application.DoEvents();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -86,6 +91,48 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         #endregion
 
         #region Helper Methods
+
+        private void LoadCombo_Project()
+        {
+            cmbProject.Items.Clear();
+            cmbSection.Items.Clear();
+            cmbPart.Items.Clear();
+
+            cmbSection.Enabled = cmbPart.Enabled = false;
+
+            var service = new ProjectService(Globals.GetConnectionString());
+            var collection = service.Get(new StandardFilter(includeDeleted: false, includeInActive: false));
+
+            
+            cmbProject.Items.Add("<Select a Project>");
+            var index = 1;
+            foreach(var item in collection)
+            {
+                cmbProject.Items.Add(item);
+                if(SelectedDocument.ProjectId == item.Id)
+                {
+                    cmbProject.SelectedIndex = index;
+                }
+
+                index += 1;
+            }
+
+            if(cmbProject.SelectedIndex > 0)
+            {
+                LoadCombo_Section();
+            }
+
+        }
+
+        private void LoadCombo_Section()
+        {
+
+        }
+
+        private void LoadCombo_Parts()
+        {
+
+        }
 
         private void LoadEditor()
         {
@@ -134,5 +181,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         }
 
         #endregion
+
+        
     }
 }

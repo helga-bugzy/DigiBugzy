@@ -46,6 +46,12 @@
             this.cmbDocumentType = new System.Windows.Forms.ComboBox();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.lblSelectedDocumentName = new System.Windows.Forms.Label();
+            this.lblProject = new DevExpress.XtraEditors.LabelControl();
+            this.lblSection = new DevExpress.XtraEditors.LabelControl();
+            this.lblPart = new DevExpress.XtraEditors.LabelControl();
+            this.cmbProject = new System.Windows.Forms.ComboBox();
+            this.cmbSection = new System.Windows.Forms.ComboBox();
+            this.cmbPart = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsInstructions.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsSpecifications.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsPlans.Properties)).BeginInit();
@@ -59,88 +65,92 @@
             this.btnSelectFile.Location = new System.Drawing.Point(483, 21);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(132, 41);
-            this.btnSelectFile.TabIndex = 75;
+            this.btnSelectFile.TabIndex = 13;
             this.btnSelectFile.Text = "Select Document";
+            this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
             // 
             // chkIsInstructions
             // 
-            this.chkIsInstructions.Location = new System.Drawing.Point(182, 249);
+            this.chkIsInstructions.Location = new System.Drawing.Point(176, 360);
             this.chkIsInstructions.Name = "chkIsInstructions";
             this.chkIsInstructions.Properties.Caption = "Instructions";
             this.chkIsInstructions.Size = new System.Drawing.Size(88, 20);
-            this.chkIsInstructions.TabIndex = 74;
+            this.chkIsInstructions.TabIndex = 7;
             // 
             // chkIsSpecifications
             // 
-            this.chkIsSpecifications.Location = new System.Drawing.Point(282, 249);
+            this.chkIsSpecifications.Location = new System.Drawing.Point(276, 360);
             this.chkIsSpecifications.Name = "chkIsSpecifications";
             this.chkIsSpecifications.Properties.Caption = "Specifications";
             this.chkIsSpecifications.Size = new System.Drawing.Size(98, 20);
-            this.chkIsSpecifications.TabIndex = 73;
+            this.chkIsSpecifications.TabIndex = 8;
             // 
             // chkIsPlans
             // 
-            this.chkIsPlans.Location = new System.Drawing.Point(392, 249);
+            this.chkIsPlans.Location = new System.Drawing.Point(386, 360);
             this.chkIsPlans.Name = "chkIsPlans";
             this.chkIsPlans.Properties.Caption = "Plans";
             this.chkIsPlans.Size = new System.Drawing.Size(55, 20);
-            this.chkIsPlans.TabIndex = 72;
+            this.chkIsPlans.TabIndex = 9;
             // 
             // chkIs3DPrintingDocument
             // 
-            this.chkIs3DPrintingDocument.Location = new System.Drawing.Point(85, 249);
+            this.chkIs3DPrintingDocument.Location = new System.Drawing.Point(79, 360);
             this.chkIs3DPrintingDocument.Name = "chkIs3DPrintingDocument";
             this.chkIs3DPrintingDocument.Properties.Caption = "3D Printing";
             this.chkIs3DPrintingDocument.Size = new System.Drawing.Size(85, 20);
-            this.chkIs3DPrintingDocument.TabIndex = 71;
+            this.chkIs3DPrintingDocument.TabIndex = 6;
             // 
             // btnDelete
             // 
             this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(229, 301);
+            this.btnDelete.Location = new System.Drawing.Point(223, 412);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(88, 32);
-            this.btnDelete.TabIndex = 69;
+            this.btnDelete.TabIndex = 11;
             this.btnDelete.Text = "Delete";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSave
             // 
             this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
-            this.btnSave.Location = new System.Drawing.Point(361, 301);
+            this.btnSave.Location = new System.Drawing.Point(355, 412);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(88, 32);
-            this.btnSave.TabIndex = 68;
+            this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnAdd
             // 
             this.btnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.ImageOptions.Image")));
-            this.btnAdd.Location = new System.Drawing.Point(85, 301);
+            this.btnAdd.Location = new System.Drawing.Point(79, 412);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(88, 32);
-            this.btnAdd.TabIndex = 70;
+            this.btnAdd.TabIndex = 10;
             this.btnAdd.Text = "Add New";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(85, 54);
+            this.txtDescription.Location = new System.Drawing.Point(79, 165);
             this.txtDescription.MaxLength = 255;
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(364, 139);
-            this.txtDescription.TabIndex = 67;
+            this.txtDescription.TabIndex = 7;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(85, 20);
+            this.txtName.Location = new System.Drawing.Point(79, 131);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(364, 20);
-            this.txtName.TabIndex = 66;
+            this.txtName.TabIndex = 6;
             // 
             // lblProjectPartsDocumentDescription
             // 
             this.lblProjectPartsDocumentDescription.AutoSize = true;
-            this.lblProjectPartsDocumentDescription.Location = new System.Drawing.Point(19, 56);
+            this.lblProjectPartsDocumentDescription.Location = new System.Drawing.Point(9, 185);
             this.lblProjectPartsDocumentDescription.Name = "lblProjectPartsDocumentDescription";
             this.lblProjectPartsDocumentDescription.Size = new System.Drawing.Size(64, 13);
             this.lblProjectPartsDocumentDescription.TabIndex = 65;
@@ -149,7 +159,7 @@
             // lblProjectPartsDocumentName
             // 
             this.lblProjectPartsDocumentName.AutoSize = true;
-            this.lblProjectPartsDocumentName.Location = new System.Drawing.Point(19, 21);
+            this.lblProjectPartsDocumentName.Location = new System.Drawing.Point(9, 149);
             this.lblProjectPartsDocumentName.Name = "lblProjectPartsDocumentName";
             this.lblProjectPartsDocumentName.Size = new System.Drawing.Size(31, 13);
             this.lblProjectPartsDocumentName.TabIndex = 64;
@@ -161,15 +171,17 @@
             // 
             // cmbDocumentType
             // 
+            this.cmbDocumentType.DisplayMember = "Name";
             this.cmbDocumentType.FormattingEnabled = true;
-            this.cmbDocumentType.Location = new System.Drawing.Point(89, 209);
+            this.cmbDocumentType.Location = new System.Drawing.Point(83, 320);
             this.cmbDocumentType.Name = "cmbDocumentType";
             this.cmbDocumentType.Size = new System.Drawing.Size(358, 21);
-            this.cmbDocumentType.TabIndex = 78;
+            this.cmbDocumentType.TabIndex = 5;
+            this.cmbDocumentType.ValueMember = "d";
             // 
             // lblType
             // 
-            this.lblType.Location = new System.Drawing.Point(21, 204);
+            this.lblType.Location = new System.Drawing.Point(9, 328);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(28, 13);
             this.lblType.TabIndex = 77;
@@ -181,13 +193,73 @@
             this.lblSelectedDocumentName.Location = new System.Drawing.Point(483, 82);
             this.lblSelectedDocumentName.Name = "lblSelectedDocumentName";
             this.lblSelectedDocumentName.Size = new System.Drawing.Size(19, 13);
-            this.lblSelectedDocumentName.TabIndex = 76;
+            this.lblSelectedDocumentName.TabIndex = 0;
             this.lblSelectedDocumentName.Text = "...";
+            // 
+            // lblProject
+            // 
+            this.lblProject.Location = new System.Drawing.Point(9, 21);
+            this.lblProject.Name = "lblProject";
+            this.lblProject.Size = new System.Drawing.Size(34, 13);
+            this.lblProject.TabIndex = 1;
+            this.lblProject.Text = "Project";
+            // 
+            // lblSection
+            // 
+            this.lblSection.Location = new System.Drawing.Point(9, 61);
+            this.lblSection.Name = "lblSection";
+            this.lblSection.Size = new System.Drawing.Size(35, 13);
+            this.lblSection.TabIndex = 2;
+            this.lblSection.Text = "Section";
+            // 
+            // lblPart
+            // 
+            this.lblPart.Location = new System.Drawing.Point(9, 101);
+            this.lblPart.Name = "lblPart";
+            this.lblPart.Size = new System.Drawing.Size(20, 13);
+            this.lblPart.TabIndex = 81;
+            this.lblPart.Text = "Part";
+            // 
+            // cmbProject
+            // 
+            this.cmbProject.DisplayMember = "Name";
+            this.cmbProject.FormattingEnabled = true;
+            this.cmbProject.Location = new System.Drawing.Point(81, 25);
+            this.cmbProject.Name = "cmbProject";
+            this.cmbProject.Size = new System.Drawing.Size(360, 21);
+            this.cmbProject.TabIndex = 3;
+            this.cmbProject.ValueMember = "Id";
+            // 
+            // cmbSection
+            // 
+            this.cmbSection.DisplayMember = "Name";
+            this.cmbSection.FormattingEnabled = true;
+            this.cmbSection.Location = new System.Drawing.Point(81, 61);
+            this.cmbSection.Name = "cmbSection";
+            this.cmbSection.Size = new System.Drawing.Size(360, 21);
+            this.cmbSection.TabIndex = 4;
+            this.cmbSection.ValueMember = "Id";
+            // 
+            // cmbPart
+            // 
+            this.cmbPart.DisplayMember = "Name";
+            this.cmbPart.FormattingEnabled = true;
+            this.cmbPart.Location = new System.Drawing.Point(81, 101);
+            this.cmbPart.Name = "cmbPart";
+            this.cmbPart.Size = new System.Drawing.Size(360, 21);
+            this.cmbPart.TabIndex = 5;
+            this.cmbPart.ValueMember = "Id";
             // 
             // ucProjectDocEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbPart);
+            this.Controls.Add(this.cmbSection);
+            this.Controls.Add(this.cmbProject);
+            this.Controls.Add(this.lblPart);
+            this.Controls.Add(this.lblSection);
+            this.Controls.Add(this.lblProject);
             this.Controls.Add(this.btnSelectFile);
             this.Controls.Add(this.chkIsInstructions);
             this.Controls.Add(this.chkIsSpecifications);
@@ -204,7 +276,7 @@
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.lblSelectedDocumentName);
             this.Name = "ucProjectDocEditor";
-            this.Size = new System.Drawing.Size(651, 373);
+            this.Size = new System.Drawing.Size(649, 489);
             ((System.ComponentModel.ISupportInitialize)(this.chkIsInstructions.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsSpecifications.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsPlans.Properties)).EndInit();
@@ -233,5 +305,11 @@
         private ComboBox cmbDocumentType;
         private DevExpress.XtraEditors.LabelControl lblType;
         private Label lblSelectedDocumentName;
+        private DevExpress.XtraEditors.LabelControl lblProject;
+        private DevExpress.XtraEditors.LabelControl lblSection;
+        private DevExpress.XtraEditors.LabelControl lblPart;
+        private ComboBox cmbProject;
+        private ComboBox cmbSection;
+        private ComboBox cmbPart;
     }
 }

@@ -1,6 +1,6 @@
-﻿
-
+﻿using DigiBugzy.Core.Domain.Administration.Documents;
 using DigiBugzy.Core.Domain.BusinessEntities;
+using DigiBugzy.Core.Domain.Finance.Assets;
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.Domain.Secures;
 using DigiBugzy.Core.Domain.Settings;
@@ -10,6 +10,36 @@ namespace DigiBugzy.Services
 {
     public class DatabaseContext : DbContext
     {
+        #region Ctor
+
+        private readonly string _connectionString;
+
+
+        public DatabaseContext(string connectionString)
+        {
+            _connectionString = connectionString;
+
+        }
+
+        #endregion
+
+        #region Overrides
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            // builder.Entity<CategoryCustomField>();
+
+
+            base.OnModelCreating(builder);
+        }
+
+        #endregion
 
         #region Administrations
 
@@ -30,11 +60,17 @@ namespace DigiBugzy.Services
 
         public DbSet<Note> Notes { get; set; }
 
+        public DbSet<DocumentFileType> DocumentFileTypes { get; set; }
+
+        public DbSet<DocumentType> DocumentTypes { get; set; }
+
         #endregion
 
         #region Contact Base
 
         public DbSet<BusinessEntity> BusinessEntities { get; set; }
+
+        public DbSet<BusinessEntityDocument> BusinessEntityDocuments { get; set; }
 
         #endregion
 
@@ -48,6 +84,18 @@ namespace DigiBugzy.Services
 
         public DbSet<StockJournal> StockJournals { get; set; }
 
+        public DbSet<ProductDocument> ProductDocuments { get; set; }
+
+        #endregion
+
+        #region Finanace
+
+        public DbSet<Asset> Assets { get; set; }
+
+        public DbSet<AssetDocument> AssetDocuments { get; set; }
+
+        public DbSet<AssetType> AssetTypes { get; set; }
+
         #endregion
 
         #region Projects
@@ -60,12 +108,17 @@ namespace DigiBugzy.Services
 
         public DbSet<ProjectCategory> ProjectCategories { get; set; }
 
+        public DbSet<ProjectDocument> ProjectDocuments { get; set; }
+
+        public DbSet<ProjectPrinting> ProjectPrintings { get; set; }
+
+        public DbSet<ProjectProduct> ProjectProducts { get; set; }
+
         #endregion
 
         #region Secure
 
         public DbSet<Bugzer> Bugzers { get; set; }
-
 
         #endregion
 
@@ -78,38 +131,6 @@ namespace DigiBugzy.Services
         public DbSet<ProjectSettings> ProjectSettings { get; set; }
 
         public DbSet<GeneralSettings> GeneralSettings { get; set; }
-
-        #endregion
-
-        #region Ctor
-
-        private readonly string _connectionString;
-
-
-        public DatabaseContext(string connectionString)
-        {
-            _connectionString = connectionString;
-
-        }
-
-        #endregion
-
-
-        #region Overrides
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
-        }
-
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-           // builder.Entity<CategoryCustomField>();
-
-
-            base.OnModelCreating(builder);
-        }
 
         #endregion
 
