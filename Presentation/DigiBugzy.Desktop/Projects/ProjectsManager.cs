@@ -139,6 +139,7 @@ namespace DigiBugzy.Desktop.Projects
             }
 
            LoadEditor_Project();
+            LoadDocManager_Project();
         }
 
         private void LoadEditor_Project()
@@ -179,6 +180,21 @@ namespace DigiBugzy.Desktop.Projects
             
         }
 
+        private void LoadDocManager_Project()
+        {
+            var filter = new ProjectDocumentFilter
+            {
+                Project = SelectedProject,
+                ProjectId = SelectedProject.Id,
+                
+                Section = new ProjectSection(),
+                ProjectSectionId = 0,
+
+                Part = new ProjectSectionPart(),
+                ProjectSectionPartId = 0
+            };
+        }
+
         private void LoadSelected_ProjectSection()
         {
 
@@ -197,6 +213,7 @@ namespace DigiBugzy.Desktop.Projects
                 }
             }
             LoadEditor_ProjectSection();
+            LoadDocManager_ProjectSection();
 
         }
 
@@ -237,6 +254,21 @@ namespace DigiBugzy.Desktop.Projects
             }
         }
 
+        private void LoadDocManager_ProjectSection()
+        {
+            var filter = new ProjectDocumentFilter
+            {
+                Project = SelectedProject,
+                ProjectId = SelectedProject.Id,
+
+                Section = SelectedProjectSection,
+                ProjectSectionId = SelectedProjectSection.Id,
+
+                Part = new ProjectSectionPart(),
+                ProjectSectionPartId = 0
+            };
+        }
+
         private void LoadSelected_ProjectSectionPart()
         {
             switch (SelectedProjectSectionPart.Id)
@@ -255,7 +287,7 @@ namespace DigiBugzy.Desktop.Projects
             }
 
             LoadEditor_ProjectSectionPart();
-
+            LoadDocManager_ProjectSectionPart();
         }
 
         private void LoadEditor_ProjectSectionPart()
@@ -296,6 +328,22 @@ namespace DigiBugzy.Desktop.Projects
 
 
         }
+
+        private void LoadDocManager_ProjectSectionPart()
+        {
+            var filter = new ProjectDocumentFilter
+            {
+                Project = SelectedProject,
+                ProjectId = SelectedProject.Id,
+
+                Section = SelectedProjectSection,
+                ProjectSectionId = SelectedProjectSection.Id,
+
+                Part = SelectedProjectSectionPart,
+                ProjectSectionPartId = SelectedProjectSectionPart.Id
+            };
+        }
+
 
 
         #endregion
@@ -438,7 +486,6 @@ namespace DigiBugzy.Desktop.Projects
         }
 
         #endregion
-
 
 
         #region Grid & Datasource: Sections

@@ -24,6 +24,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         public event OnSaveDelegate? OnSave;
 
         #endregion
+        
         #region Properties
 
         private ProjectDocument _selectedDocument { get; set; } = new();
@@ -38,7 +39,24 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             }
         }
 
+        private ProjectControlEnum Type { get;set; }
 
+        private ProjectDocumentFilter Filter { get; set; }
+
+
+
+        #endregion
+
+        #region Public Methods
+
+        public void InitializeData(ProjectControlEnum type, ProjectDocumentFilter filter)
+        {
+            Type = type;
+            Filter = filter;
+
+            LoadEditor();
+          
+        }
 
         #endregion
 
@@ -79,11 +97,6 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
             lblSelectedDocumentName.Text = xtraOpenFileDialog1.FileName;
 
-            // Read the contents of the file into a stream.
-            //var fileStream = xtraOpenFileDialog1.OpenFile();
-            //using var reader = new StreamReader(fileStream);
-            //using var br = new BinaryReader(reader.BaseStream);
-            //var bytes = br.ReadBytes((int)reader.BaseStream.Length);
 
 
         }
@@ -122,16 +135,93 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 LoadCombo_Section();
             }
 
+            Application.DoEvents();
+
         }
 
         private void LoadCombo_Section()
         {
+            cmbSection.Items.Clear();
+            cmbPart.Items.Clear();
+            cmbPart.Enabled = false;
+
+            if(SelectedDocument.Id <= 0 || cmbProject.SelectedIndex <= 0)
+            {
+                cmbSection.Enabled = false;
+                return;
+            }
+
+            var service = new ProjectSectionService(Globals.GetConnectionString());
+            var collection = service.Get(new StandardFilter(includeDeleted: false, includeInActive: false), SelectedDocument.ProjectId);
+
+            cmbSection.Items.Add("<Select a Section>");
+
+            if (collection.Count <= 0)
+            {
+                cmbSection.Enabled = false;
+                return; 
+            }
+
+
+            var index = 1;
+            foreach (var item in collection)
+            {
+                cmbSection.Items.Add(item);
+                if (SelectedDocument.ProjectSectionId == item.Id)
+                {
+                    cmbSection.SelectedIndex = index;
+                }
+
+                index += 1;
+            }
+
+            if(cmbSection.SelectedIndex > 0)
+            {
+                LoadCombo_Parts();
+            }
+
+            Application.DoEvents();
+
 
         }
 
         private void LoadCombo_Parts()
         {
+            cmbPart.Enabled = true;
+            cmbPart.Items.Clear();
 
+            if (SelectedDocument.Id <= 0 || cmbSection.SelectedIndex <= 0)
+            {
+                cmbPart.Enabled = false;
+                return;
+            }
+
+            var service = new ProjectSectionPartService(Globals.GetConnectionString());
+            var collection = service.Get(
+                new StandardFilter(includeDeleted: false, includeInActive: false), 
+                SelectedDocument.ProjectSectionId ?? 0);
+
+            cmbSection.Items.Add("<Select a Part>");
+
+            if (collection.Count <= 0)
+            {
+                cmbPart.Enabled = false;
+                return;
+            }
+
+            var index = 1;
+            foreach (var item in collection)
+            {
+                cmbPart.Items.Add(item);
+                if (SelectedDocument.ProjectSectionPartId == item.Id)
+                {
+                    cmbPart.SelectedIndex = index;
+                }
+
+                index += 1;
+            }
+
+            Application.DoEvents();
         }
 
         private void LoadEditor()
@@ -157,6 +247,9 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 chkIsSpecifications.Checked = _selectedDocument.IsSpecifications;
                 btnSelectFile.Enabled = btnAdd.Enabled = btnDelete.Enabled = btnSave.Enabled = true;
             }
+
+        
+            LoadCombo_Project();
         }
 
         private void SaveDocument()
@@ -179,6 +272,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             SelectedDocument.DocumentData = bytes;
 
         }
+
+  
 
         #endregion
 

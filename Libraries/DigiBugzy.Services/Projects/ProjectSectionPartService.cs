@@ -29,7 +29,7 @@ namespace DigiBugzy.Services.Projects
         }
 
         /// <inheritdoc />
-        public List<ProjectSectionPart> Get(StandardFilter filter)
+        public List<ProjectSectionPart> Get(StandardFilter filter, int projectSectionId = 0)
         {
             var query = dbContext.ProjectSectionParts.AsQueryable<ProjectSectionPart>();
 
@@ -55,6 +55,9 @@ namespace DigiBugzy.Services.Projects
 
             if (!filter.IncludeInActive)
                 query = query.Where(x => x.IsActive == true);
+
+            if (projectSectionId > 0)
+                query = query.Where(x => x.ProjectSectionId == projectSectionId);
 
             return query.ToList();
 

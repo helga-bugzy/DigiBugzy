@@ -16,7 +16,7 @@ namespace DigiBugzy.Services.Projects
         /// <returns></returns>
         public List<ProjectSection> GetByProjectId(int id);
 
-        public List<ProjectSection> Get(StandardFilter filter);
+        public List<ProjectSection> Get(StandardFilter filter, int projectId = 0);
 
         #endregion
 

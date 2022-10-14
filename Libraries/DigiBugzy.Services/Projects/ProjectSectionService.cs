@@ -29,9 +29,34 @@ namespace DigiBugzy.Services.Projects
         }
 
         /// <inheritdoc />
-        public List<ProjectSection> Get(StandardFilter filter)
+        public List<ProjectSection> Get(StandardFilter filter, int projectId = 0)
         {
-            throw new NotImplementedException();
+            var query = dbContext.ProjectSections.AsQueryable<ProjectSection>();
+
+            if (filter.Id.HasValue)
+            {
+                query = query.Where(x => x.Id == filter.Id);
+                return query.ToList();
+            }
+
+            if (filter.DigiAdminId.HasValue) 
+                query = query.Where(x => x.DigiAdminId == filter.DigiAdminId);
+
+
+            if (!string.IsNullOrEmpty(filter.Name)) 
+                query = filter.LikeSearch ? query.Where(x => x.Name.Contains(filter.Name)) : query.Where(x => x.Name.Equals(filter.Name));
+
+            if (!filter.IncludeDeleted)
+                query = query.Where(x => x.IsDeleted == false);
+
+            if (!filter.IncludeInActive)
+                query = query.Where(x => x.IsActive == true);
+
+            if (projectId > 0)
+                query = query.Where(x => x.ProjectId == projectId);
+
+            return query.ToList();
+
         }
 
 

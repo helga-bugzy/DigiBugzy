@@ -77,6 +77,7 @@
             this.btnSampleDataDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnSampleData = new DevExpress.XtraEditors.SimpleButton();
             this.tabProjectDocuments = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.dmProject = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocManager();
             this.tabSectionEditors = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabPane3 = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabNavigationPage6 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -95,6 +96,7 @@
             this.lblSectionDescription = new System.Windows.Forms.Label();
             this.lblSectionName = new System.Windows.Forms.Label();
             this.tabNavigationPage7 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.dmProjectSection = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocManager();
             this.tabPartsEditors = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabPane4 = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabNavigationPage8 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -113,6 +115,7 @@
             this.lblPartDescription = new System.Windows.Forms.Label();
             this.lblPartName = new System.Windows.Forms.Label();
             this.tabNavigationPage9 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.dmProjectSectionPart = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocManager();
             this.tabNavigationPage1 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.dlgProjectImage = new System.Windows.Forms.OpenFileDialog();
             this.dlgProjectSectionPhoto = new System.Windows.Forms.OpenFileDialog();
@@ -120,11 +123,7 @@
             this.bsProjects = new System.Windows.Forms.BindingSource(this.components);
             this.bsSections = new System.Windows.Forms.BindingSource(this.components);
             this.bsParts = new System.Windows.Forms.BindingSource(this.components);
-            this.splitProjectPartDocuments = new DevExpress.XtraEditors.SplitContainerControl();
-            this.gridProjectPartsDocuments = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bsProjectPartDocuments = new System.Windows.Forms.BindingSource(this.components);
-            this.pnlProjectPartsDocumentEditor = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -174,6 +173,7 @@
             this.pnlProject_Editor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgProjectPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProject_Name.Properties)).BeginInit();
+            this.tabProjectDocuments.SuspendLayout();
             this.tabSectionEditors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane3)).BeginInit();
             this.tabPane3.SuspendLayout();
@@ -182,6 +182,7 @@
             this.pnlSectionEditor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgSectionPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSectionName.Properties)).BeginInit();
+            this.tabNavigationPage7.SuspendLayout();
             this.tabPartsEditors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane4)).BeginInit();
             this.tabPane4.SuspendLayout();
@@ -194,16 +195,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel1)).BeginInit();
-            this.splitProjectPartDocuments.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel2)).BeginInit();
-            this.splitProjectPartDocuments.Panel2.SuspendLayout();
-            this.splitProjectPartDocuments.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridProjectPartsDocuments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlProjectPartsDocumentEditor)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlManager
@@ -242,7 +234,7 @@
             this.splitGridsMain.Panel2.Controls.Add(this.splitGridsSubs);
             this.splitGridsMain.Panel2.Text = "Panel2";
             this.splitGridsMain.Size = new System.Drawing.Size(2242, 630);
-            this.splitGridsMain.SplitterPosition = 560;
+            this.splitGridsMain.SplitterPosition = 637;
             this.splitGridsMain.TabIndex = 0;
             // 
             // panelControl6
@@ -251,7 +243,7 @@
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl6.Location = new System.Drawing.Point(0, 37);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(560, 593);
+            this.panelControl6.Size = new System.Drawing.Size(637, 593);
             this.panelControl6.TabIndex = 2;
             // 
             // gridProjects
@@ -260,7 +252,7 @@
             this.gridProjects.Location = new System.Drawing.Point(2, 2);
             this.gridProjects.MainView = this.gvProjects;
             this.gridProjects.Name = "gridProjects";
-            this.gridProjects.Size = new System.Drawing.Size(556, 589);
+            this.gridProjects.Size = new System.Drawing.Size(633, 589);
             this.gridProjects.TabIndex = 0;
             this.gridProjects.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjects});
@@ -272,13 +264,16 @@
             // 
             // panelControl3
             // 
+            this.panelControl3.Appearance.BackColor = System.Drawing.Color.LightSlateGray;
+            this.panelControl3.Appearance.Options.UseBackColor = true;
+            this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl3.Controls.Add(this.butProjectsFilter);
             this.panelControl3.Controls.Add(this.txtFilterProjectName);
             this.panelControl3.Controls.Add(this.lblProjects);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl3.Location = new System.Drawing.Point(0, 0);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(560, 37);
+            this.panelControl3.Size = new System.Drawing.Size(637, 37);
             this.panelControl3.TabIndex = 1;
             // 
             // butProjectsFilter
@@ -300,7 +295,8 @@
             // lblProjects
             // 
             this.lblProjects.AutoSize = true;
-            this.lblProjects.Location = new System.Drawing.Point(4, 10);
+            this.lblProjects.ForeColor = System.Drawing.Color.White;
+            this.lblProjects.Location = new System.Drawing.Point(2, 8);
             this.lblProjects.Name = "lblProjects";
             this.lblProjects.Size = new System.Drawing.Size(46, 13);
             this.lblProjects.TabIndex = 0;
@@ -323,8 +319,8 @@
             this.splitGridsSubs.Panel2.Controls.Add(this.panelControl8);
             this.splitGridsSubs.Panel2.Controls.Add(this.panelControl5);
             this.splitGridsSubs.Panel2.Text = "Panel2";
-            this.splitGridsSubs.Size = new System.Drawing.Size(1672, 630);
-            this.splitGridsSubs.SplitterPosition = 857;
+            this.splitGridsSubs.Size = new System.Drawing.Size(1595, 630);
+            this.splitGridsSubs.SplitterPosition = 866;
             this.splitGridsSubs.TabIndex = 0;
             // 
             // panelControl7
@@ -333,7 +329,7 @@
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl7.Location = new System.Drawing.Point(0, 37);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(857, 593);
+            this.panelControl7.Size = new System.Drawing.Size(866, 593);
             this.panelControl7.TabIndex = 2;
             // 
             // gridProjectSections
@@ -342,7 +338,7 @@
             this.gridProjectSections.Location = new System.Drawing.Point(2, 2);
             this.gridProjectSections.MainView = this.gvProjectSections;
             this.gridProjectSections.Name = "gridProjectSections";
-            this.gridProjectSections.Size = new System.Drawing.Size(853, 589);
+            this.gridProjectSections.Size = new System.Drawing.Size(862, 589);
             this.gridProjectSections.TabIndex = 0;
             this.gridProjectSections.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjectSections});
@@ -355,13 +351,16 @@
             // 
             // panelControl4
             // 
+            this.panelControl4.Appearance.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panelControl4.Appearance.Options.UseBackColor = true;
+            this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl4.Controls.Add(this.btnProjectsSectionsFilter);
             this.panelControl4.Controls.Add(this.txtFilterProjectSectionName);
             this.panelControl4.Controls.Add(this.lblProjectSections);
             this.panelControl4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl4.Location = new System.Drawing.Point(0, 0);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(857, 37);
+            this.panelControl4.Size = new System.Drawing.Size(866, 37);
             this.panelControl4.TabIndex = 1;
             // 
             // btnProjectsSectionsFilter
@@ -383,7 +382,7 @@
             // lblProjectSections
             // 
             this.lblProjectSections.AutoSize = true;
-            this.lblProjectSections.Location = new System.Drawing.Point(4, 10);
+            this.lblProjectSections.Location = new System.Drawing.Point(2, 8);
             this.lblProjectSections.Name = "lblProjectSections";
             this.lblProjectSections.Size = new System.Drawing.Size(84, 13);
             this.lblProjectSections.TabIndex = 0;
@@ -395,7 +394,7 @@
             this.panelControl8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl8.Location = new System.Drawing.Point(0, 37);
             this.panelControl8.Name = "panelControl8";
-            this.panelControl8.Size = new System.Drawing.Size(805, 593);
+            this.panelControl8.Size = new System.Drawing.Size(719, 593);
             this.panelControl8.TabIndex = 1;
             // 
             // gridProjectSectionParts
@@ -404,7 +403,7 @@
             this.gridProjectSectionParts.Location = new System.Drawing.Point(2, 2);
             this.gridProjectSectionParts.MainView = this.gvProjectSectionParts;
             this.gridProjectSectionParts.Name = "gridProjectSectionParts";
-            this.gridProjectSectionParts.Size = new System.Drawing.Size(801, 589);
+            this.gridProjectSectionParts.Size = new System.Drawing.Size(715, 589);
             this.gridProjectSectionParts.TabIndex = 0;
             this.gridProjectSectionParts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjectSectionParts});
@@ -416,13 +415,16 @@
             // 
             // panelControl5
             // 
+            this.panelControl5.Appearance.BackColor = System.Drawing.Color.AliceBlue;
+            this.panelControl5.Appearance.Options.UseBackColor = true;
+            this.panelControl5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl5.Controls.Add(this.butProjectsSectionPartsFilter);
             this.panelControl5.Controls.Add(this.txtFilterProjectSectionPartName);
             this.panelControl5.Controls.Add(this.lblProjectSectionParts);
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(805, 37);
+            this.panelControl5.Size = new System.Drawing.Size(719, 37);
             this.panelControl5.TabIndex = 0;
             // 
             // butProjectsSectionPartsFilter
@@ -444,7 +446,7 @@
             // lblProjectSectionParts
             // 
             this.lblProjectSectionParts.AutoSize = true;
-            this.lblProjectSectionParts.Location = new System.Drawing.Point(4, 12);
+            this.lblProjectSectionParts.Location = new System.Drawing.Point(2, 10);
             this.lblProjectSectionParts.Name = "lblProjectSectionParts";
             this.lblProjectSectionParts.Size = new System.Drawing.Size(107, 13);
             this.lblProjectSectionParts.TabIndex = 0;
@@ -515,9 +517,8 @@
             // 
             // pnlProject_Editor
             // 
-            this.pnlProject_Editor.Appearance.BackColor = System.Drawing.Color.LightBlue;
+            this.pnlProject_Editor.Appearance.BackColor = System.Drawing.Color.LightSlateGray;
             this.pnlProject_Editor.Appearance.Options.UseBackColor = true;
-            this.pnlProject_Editor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlProject_Editor.Controls.Add(this.lblProjectSelectedFileName);
             this.pnlProject_Editor.Controls.Add(this.imgProjectPhoto);
             this.pnlProject_Editor.Controls.Add(this.btnProjectImage);
@@ -542,6 +543,7 @@
             // lblProjectSelectedFileName
             // 
             this.lblProjectSelectedFileName.AutoSize = true;
+            this.lblProjectSelectedFileName.BackColor = System.Drawing.Color.Transparent;
             this.lblProjectSelectedFileName.Location = new System.Drawing.Point(529, 294);
             this.lblProjectSelectedFileName.Name = "lblProjectSelectedFileName";
             this.lblProjectSelectedFileName.Size = new System.Drawing.Size(15, 13);
@@ -550,6 +552,7 @@
             // 
             // imgProjectPhoto
             // 
+            this.imgProjectPhoto.BackColor = System.Drawing.Color.Transparent;
             this.imgProjectPhoto.Location = new System.Drawing.Point(531, 24);
             this.imgProjectPhoto.Name = "imgProjectPhoto";
             this.imgProjectPhoto.Size = new System.Drawing.Size(465, 256);
@@ -618,6 +621,8 @@
             // lblProjectActive
             // 
             this.lblProjectActive.AutoSize = true;
+            this.lblProjectActive.BackColor = System.Drawing.Color.Transparent;
+            this.lblProjectActive.ForeColor = System.Drawing.Color.Black;
             this.lblProjectActive.Location = new System.Drawing.Point(8, 294);
             this.lblProjectActive.Name = "lblProjectActive";
             this.lblProjectActive.Size = new System.Drawing.Size(41, 13);
@@ -643,6 +648,8 @@
             // lblProjectDescription
             // 
             this.lblProjectDescription.AutoSize = true;
+            this.lblProjectDescription.BackColor = System.Drawing.Color.Transparent;
+            this.lblProjectDescription.ForeColor = System.Drawing.Color.Black;
             this.lblProjectDescription.Location = new System.Drawing.Point(8, 57);
             this.lblProjectDescription.Name = "lblProjectDescription";
             this.lblProjectDescription.Size = new System.Drawing.Size(101, 13);
@@ -652,6 +659,8 @@
             // lblProjectName
             // 
             this.lblProjectName.AutoSize = true;
+            this.lblProjectName.BackColor = System.Drawing.Color.Transparent;
+            this.lblProjectName.ForeColor = System.Drawing.Color.Black;
             this.lblProjectName.Location = new System.Drawing.Point(8, 22);
             this.lblProjectName.Name = "lblProjectName";
             this.lblProjectName.Size = new System.Drawing.Size(75, 13);
@@ -681,11 +690,21 @@
             // tabProjectDocuments
             // 
             this.tabProjectDocuments.Caption = "Project Documents";
+            this.tabProjectDocuments.Controls.Add(this.dmProject);
             this.tabProjectDocuments.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabProjectDocuments.ImageOptions.Image")));
             this.tabProjectDocuments.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabProjectDocuments.Name = "tabProjectDocuments";
             this.tabProjectDocuments.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabProjectDocuments.Size = new System.Drawing.Size(2242, 436);
+            // 
+            // dmProject
+            // 
+            this.dmProject.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dmProject.Location = new System.Drawing.Point(0, 0);
+            this.dmProject.Name = "dmProject";
+            this.dmProject.ProjectControlType = DigiBugzy.Core.Enumerations.ProjectControlEnum.Project;
+            this.dmProject.Size = new System.Drawing.Size(2242, 436);
+            this.dmProject.TabIndex = 0;
             // 
             // tabSectionEditors
             // 
@@ -725,9 +744,8 @@
             // 
             // pnlSectionEditor
             // 
-            this.pnlSectionEditor.Appearance.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.pnlSectionEditor.Appearance.BackColor = System.Drawing.Color.LightBlue;
             this.pnlSectionEditor.Appearance.Options.UseBackColor = true;
-            this.pnlSectionEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlSectionEditor.Controls.Add(this.lblSectopmActive);
             this.pnlSectionEditor.Controls.Add(this.lblSectionSelectedFileName);
             this.pnlSectionEditor.Controls.Add(this.imgSectionPhoto);
@@ -750,6 +768,7 @@
             // lblSectopmActive
             // 
             this.lblSectopmActive.AutoSize = true;
+            this.lblSectopmActive.BackColor = System.Drawing.Color.Transparent;
             this.lblSectopmActive.Location = new System.Drawing.Point(6, 290);
             this.lblSectopmActive.Name = "lblSectopmActive";
             this.lblSectopmActive.Size = new System.Drawing.Size(41, 13);
@@ -759,6 +778,7 @@
             // lblSectionSelectedFileName
             // 
             this.lblSectionSelectedFileName.AutoSize = true;
+            this.lblSectionSelectedFileName.BackColor = System.Drawing.Color.Transparent;
             this.lblSectionSelectedFileName.Location = new System.Drawing.Point(504, 337);
             this.lblSectionSelectedFileName.Name = "lblSectionSelectedFileName";
             this.lblSectionSelectedFileName.Size = new System.Drawing.Size(15, 13);
@@ -767,6 +787,7 @@
             // 
             // imgSectionPhoto
             // 
+            this.imgSectionPhoto.BackColor = System.Drawing.Color.Transparent;
             this.imgSectionPhoto.Location = new System.Drawing.Point(506, 20);
             this.imgSectionPhoto.Name = "imgSectionPhoto";
             this.imgSectionPhoto.Size = new System.Drawing.Size(465, 257);
@@ -846,6 +867,7 @@
             // lblSectionDescription
             // 
             this.lblSectionDescription.AutoSize = true;
+            this.lblSectionDescription.BackColor = System.Drawing.Color.Transparent;
             this.lblSectionDescription.Location = new System.Drawing.Point(6, 53);
             this.lblSectionDescription.Name = "lblSectionDescription";
             this.lblSectionDescription.Size = new System.Drawing.Size(102, 13);
@@ -855,6 +877,7 @@
             // lblSectionName
             // 
             this.lblSectionName.AutoSize = true;
+            this.lblSectionName.BackColor = System.Drawing.Color.Transparent;
             this.lblSectionName.Location = new System.Drawing.Point(6, 18);
             this.lblSectionName.Name = "lblSectionName";
             this.lblSectionName.Size = new System.Drawing.Size(76, 13);
@@ -864,11 +887,21 @@
             // tabNavigationPage7
             // 
             this.tabNavigationPage7.Caption = "Section Documents";
+            this.tabNavigationPage7.Controls.Add(this.dmProjectSection);
             this.tabNavigationPage7.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabNavigationPage7.ImageOptions.Image")));
             this.tabNavigationPage7.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabNavigationPage7.Name = "tabNavigationPage7";
             this.tabNavigationPage7.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabNavigationPage7.Size = new System.Drawing.Size(2242, 469);
+            this.tabNavigationPage7.Size = new System.Drawing.Size(2242, 436);
+            // 
+            // dmProjectSection
+            // 
+            this.dmProjectSection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dmProjectSection.Location = new System.Drawing.Point(0, 0);
+            this.dmProjectSection.Name = "dmProjectSection";
+            this.dmProjectSection.ProjectControlType = DigiBugzy.Core.Enumerations.ProjectControlEnum.ProjectSection;
+            this.dmProjectSection.Size = new System.Drawing.Size(2242, 436);
+            this.dmProjectSection.TabIndex = 0;
             // 
             // tabPartsEditors
             // 
@@ -882,6 +915,8 @@
             // 
             // tabPane4
             // 
+            this.tabPane4.Appearance.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.tabPane4.Appearance.Options.UseBackColor = true;
             this.tabPane4.Controls.Add(this.tabNavigationPage8);
             this.tabPane4.Controls.Add(this.tabNavigationPage9);
             this.tabPane4.Controls.Add(this.tabNavigationPage1);
@@ -910,9 +945,8 @@
             // 
             // pnlPartsEdtior
             // 
-            this.pnlPartsEdtior.Appearance.BackColor = System.Drawing.Color.Tan;
+            this.pnlPartsEdtior.Appearance.BackColor = System.Drawing.Color.LightSteelBlue;
             this.pnlPartsEdtior.Appearance.Options.UseBackColor = true;
-            this.pnlPartsEdtior.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlPartsEdtior.Controls.Add(this.lblPartSelectedFileName);
             this.pnlPartsEdtior.Controls.Add(this.imgPartPhoto);
             this.pnlPartsEdtior.Controls.Add(this.btnPartImage);
@@ -935,6 +969,7 @@
             // lblPartSelectedFileName
             // 
             this.lblPartSelectedFileName.AutoSize = true;
+            this.lblPartSelectedFileName.BackColor = System.Drawing.Color.Transparent;
             this.lblPartSelectedFileName.Location = new System.Drawing.Point(505, 289);
             this.lblPartSelectedFileName.Name = "lblPartSelectedFileName";
             this.lblPartSelectedFileName.Size = new System.Drawing.Size(15, 13);
@@ -943,6 +978,7 @@
             // 
             // imgPartPhoto
             // 
+            this.imgPartPhoto.BackColor = System.Drawing.Color.Transparent;
             this.imgPartPhoto.Location = new System.Drawing.Point(506, 19);
             this.imgPartPhoto.Name = "imgPartPhoto";
             this.imgPartPhoto.Size = new System.Drawing.Size(465, 257);
@@ -1006,6 +1042,7 @@
             // lblPartvActive
             // 
             this.lblPartvActive.AutoSize = true;
+            this.lblPartvActive.BackColor = System.Drawing.Color.Transparent;
             this.lblPartvActive.Location = new System.Drawing.Point(6, 289);
             this.lblPartvActive.Name = "lblPartvActive";
             this.lblPartvActive.Size = new System.Drawing.Size(41, 13);
@@ -1031,6 +1068,7 @@
             // lblPartDescription
             // 
             this.lblPartDescription.AutoSize = true;
+            this.lblPartDescription.BackColor = System.Drawing.Color.Transparent;
             this.lblPartDescription.Location = new System.Drawing.Point(6, 52);
             this.lblPartDescription.Name = "lblPartDescription";
             this.lblPartDescription.Size = new System.Drawing.Size(83, 13);
@@ -1040,6 +1078,7 @@
             // lblPartName
             // 
             this.lblPartName.AutoSize = true;
+            this.lblPartName.BackColor = System.Drawing.Color.Transparent;
             this.lblPartName.Location = new System.Drawing.Point(6, 17);
             this.lblPartName.Name = "lblPartName";
             this.lblPartName.Size = new System.Drawing.Size(61, 13);
@@ -1048,13 +1087,24 @@
             // 
             // tabNavigationPage9
             // 
+            this.tabNavigationPage9.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.tabNavigationPage9.Appearance.Options.UseBackColor = true;
             this.tabNavigationPage9.Caption = "Part Documents";
-            this.tabNavigationPage9.Controls.Add(this.splitProjectPartDocuments);
+            this.tabNavigationPage9.Controls.Add(this.dmProjectSectionPart);
             this.tabNavigationPage9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabNavigationPage9.ImageOptions.Image")));
             this.tabNavigationPage9.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabNavigationPage9.Name = "tabNavigationPage9";
             this.tabNavigationPage9.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabNavigationPage9.Size = new System.Drawing.Size(2242, 436);
+            // 
+            // dmProjectSectionPart
+            // 
+            this.dmProjectSectionPart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dmProjectSectionPart.Location = new System.Drawing.Point(0, 0);
+            this.dmProjectSectionPart.Name = "dmProjectSectionPart";
+            this.dmProjectSectionPart.ProjectControlType = DigiBugzy.Core.Enumerations.ProjectControlEnum.ProjectSectionPart;
+            this.dmProjectSectionPart.Size = new System.Drawing.Size(2242, 436);
+            this.dmProjectSectionPart.TabIndex = 0;
             // 
             // tabNavigationPage1
             // 
@@ -1088,52 +1138,6 @@
             // bsParts
             // 
             this.bsParts.PositionChanged += new System.EventHandler(this.bsParts_PositionChanged);
-            // 
-            // splitProjectPartDocuments
-            // 
-            this.splitProjectPartDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitProjectPartDocuments.Location = new System.Drawing.Point(0, 0);
-            this.splitProjectPartDocuments.Name = "splitProjectPartDocuments";
-            // 
-            // splitProjectPartDocuments.splitProjectPartDocuments_Panel1
-            // 
-            this.splitProjectPartDocuments.Panel1.Controls.Add(this.gridProjectPartsDocuments);
-            this.splitProjectPartDocuments.Panel1.Text = "Panel1";
-            // 
-            // splitProjectPartDocuments.splitProjectPartDocuments_Panel2
-            // 
-            this.splitProjectPartDocuments.Panel2.Controls.Add(this.pnlProjectPartsDocumentEditor);
-            this.splitProjectPartDocuments.Panel2.Text = "Panel2";
-            this.splitProjectPartDocuments.Size = new System.Drawing.Size(2242, 436);
-            this.splitProjectPartDocuments.SplitterPosition = 1027;
-            this.splitProjectPartDocuments.TabIndex = 0;
-            // 
-            // gridProjectPartsDocuments
-            // 
-            this.gridProjectPartsDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridProjectPartsDocuments.Location = new System.Drawing.Point(0, 0);
-            this.gridProjectPartsDocuments.MainView = this.gridView1;
-            this.gridProjectPartsDocuments.Name = "gridProjectPartsDocuments";
-            this.gridProjectPartsDocuments.Size = new System.Drawing.Size(1027, 436);
-            this.gridProjectPartsDocuments.TabIndex = 0;
-            this.gridProjectPartsDocuments.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.GridControl = this.gridProjectPartsDocuments;
-            this.gridView1.Name = "gridView1";
-            // 
-            // pnlProjectPartsDocumentEditor
-            // 
-            this.pnlProjectPartsDocumentEditor.Appearance.BackColor = System.Drawing.Color.Tan;
-            this.pnlProjectPartsDocumentEditor.Appearance.Options.UseBackColor = true;
-            this.pnlProjectPartsDocumentEditor.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlProjectPartsDocumentEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlProjectPartsDocumentEditor.Location = new System.Drawing.Point(0, 0);
-            this.pnlProjectPartsDocumentEditor.Name = "pnlProjectPartsDocumentEditor";
-            this.pnlProjectPartsDocumentEditor.Size = new System.Drawing.Size(1205, 436);
-            this.pnlProjectPartsDocumentEditor.TabIndex = 0;
             // 
             // ProjectsManager
             // 
@@ -1198,6 +1202,7 @@
             this.pnlProject_Editor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgProjectPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtProject_Name.Properties)).EndInit();
+            this.tabProjectDocuments.ResumeLayout(false);
             this.tabSectionEditors.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabPane3)).EndInit();
             this.tabPane3.ResumeLayout(false);
@@ -1207,6 +1212,7 @@
             this.pnlSectionEditor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgSectionPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSectionName.Properties)).EndInit();
+            this.tabNavigationPage7.ResumeLayout(false);
             this.tabPartsEditors.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabPane4)).EndInit();
             this.tabPane4.ResumeLayout(false);
@@ -1220,16 +1226,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel1)).EndInit();
-            this.splitProjectPartDocuments.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments.Panel2)).EndInit();
-            this.splitProjectPartDocuments.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitProjectPartDocuments)).EndInit();
-            this.splitProjectPartDocuments.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridProjectPartsDocuments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlProjectPartsDocumentEditor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1326,10 +1323,9 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage1;
         private BindingSource bsSections;
         private BindingSource bsParts;
-        private DevExpress.XtraEditors.SplitContainerControl splitProjectPartDocuments;
-        private DevExpress.XtraGrid.GridControl gridProjectPartsDocuments;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraEditors.PanelControl pnlProjectPartsDocumentEditor;
         private BindingSource bsProjectPartDocuments;
+        private UserControls.ucProjectDocManager dmProject;
+        private UserControls.ucProjectDocManager dmProjectSection;
+        private UserControls.ucProjectDocManager dmProjectSectionPart;
     }
 }

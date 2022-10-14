@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DigiBugzy.Core.Domain.Projects.ProjectDocument projectDocument1 = new DigiBugzy.Core.Domain.Projects.ProjectDocument();
+            DigiBugzy.Core.Domain.Projects.ProjectDocument projectDocument2 = new DigiBugzy.Core.Domain.Projects.ProjectDocument();
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
-            this.splitViewer = new DevExpress.XtraEditors.SplitContainerControl();
-            this.ucBaseViewer1 = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
+            this.grid = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocGrid();
             this.ucBaseViewer2 = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
-            this.ucProjectDocEditor1 = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocEditor();
-            this.ucProjectDocGrid1 = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocGrid();
-            this.ucBaseViewer3 = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
+            this.ucBaseViewer1 = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
+            this.splitViewer = new DevExpress.XtraEditors.SplitContainerControl();
+            this.editor = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocEditor();
+            this.viewer = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain.Panel1)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -58,7 +58,7 @@
             // 
             // splitMain.Panel1
             // 
-            this.splitMain.Panel1.Controls.Add(this.ucProjectDocGrid1);
+            this.splitMain.Panel1.Controls.Add(this.grid);
             this.splitMain.Panel1.Controls.Add(this.ucBaseViewer2);
             this.splitMain.Panel1.Controls.Add(this.ucBaseViewer1);
             this.splitMain.Panel1.Text = "Panel1";
@@ -71,31 +71,13 @@
             this.splitMain.SplitterPosition = 518;
             this.splitMain.TabIndex = 0;
             // 
-            // splitViewer
+            // grid
             // 
-            this.splitViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitViewer.Location = new System.Drawing.Point(0, 0);
-            this.splitViewer.Name = "splitViewer";
-            // 
-            // splitViewer.Panel1
-            // 
-            this.splitViewer.Panel1.Controls.Add(this.ucProjectDocEditor1);
-            this.splitViewer.Panel1.Text = "Panel1";
-            // 
-            // splitViewer.Panel2
-            // 
-            this.splitViewer.Panel2.Controls.Add(this.ucBaseViewer3);
-            this.splitViewer.Panel2.Text = "Panel2";
-            this.splitViewer.Size = new System.Drawing.Size(1176, 587);
-            this.splitViewer.SplitterPosition = 659;
-            this.splitViewer.TabIndex = 0;
-            // 
-            // ucBaseViewer1
-            // 
-            this.ucBaseViewer1.Location = new System.Drawing.Point(314, 59);
-            this.ucBaseViewer1.Name = "ucBaseViewer1";
-            this.ucBaseViewer1.Size = new System.Drawing.Size(150, 150);
-            this.ucBaseViewer1.TabIndex = 0;
+            this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grid.Location = new System.Drawing.Point(0, 0);
+            this.grid.Name = "grid";
+            this.grid.Size = new System.Drawing.Size(518, 587);
+            this.grid.TabIndex = 2;
             // 
             // ucBaseViewer2
             // 
@@ -104,51 +86,69 @@
             this.ucBaseViewer2.Size = new System.Drawing.Size(150, 150);
             this.ucBaseViewer2.TabIndex = 1;
             // 
-            // ucProjectDocEditor1
+            // ucBaseViewer1
             // 
-            this.ucProjectDocEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucProjectDocEditor1.Location = new System.Drawing.Point(0, 0);
-            this.ucProjectDocEditor1.Name = "ucProjectDocEditor1";
-            projectDocument1.CreatedOn = new System.DateTime(((long)(0)));
-            projectDocument1.Description = null;
-            projectDocument1.DigiAdmin = null;
-            projectDocument1.DigiAdminId = 0;
-            projectDocument1.DocumentData = null;
-            projectDocument1.DocumentType = null;
-            projectDocument1.DocumentTypeId = 0;
-            projectDocument1.Id = 0;
-            projectDocument1.Is3DPrintingDocument = false;
-            projectDocument1.IsActive = false;
-            projectDocument1.IsDeleted = false;
-            projectDocument1.IsInstructions = false;
-            projectDocument1.IsPlans = false;
-            projectDocument1.IsSpecifications = false;
-            projectDocument1.Name = null;
-            projectDocument1.Project = null;
-            projectDocument1.ProjectId = 0;
-            projectDocument1.ProjectSection = null;
-            projectDocument1.ProjectSectionId = null;
-            projectDocument1.ProjectSectionPart = null;
-            projectDocument1.ProjectSectionPartId = null;
-            this.ucProjectDocEditor1.SelectedDocument = projectDocument1;
-            this.ucProjectDocEditor1.Size = new System.Drawing.Size(659, 587);
-            this.ucProjectDocEditor1.TabIndex = 0;
+            this.ucBaseViewer1.Location = new System.Drawing.Point(314, 59);
+            this.ucBaseViewer1.Name = "ucBaseViewer1";
+            this.ucBaseViewer1.Size = new System.Drawing.Size(150, 150);
+            this.ucBaseViewer1.TabIndex = 0;
             // 
-            // ucProjectDocGrid1
+            // splitViewer
             // 
-            this.ucProjectDocGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucProjectDocGrid1.Location = new System.Drawing.Point(0, 0);
-            this.ucProjectDocGrid1.Name = "ucProjectDocGrid1";
-            this.ucProjectDocGrid1.Size = new System.Drawing.Size(518, 587);
-            this.ucProjectDocGrid1.TabIndex = 2;
+            this.splitViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitViewer.Location = new System.Drawing.Point(0, 0);
+            this.splitViewer.Name = "splitViewer";
             // 
-            // ucBaseViewer3
+            // splitViewer.Panel1
             // 
-            this.ucBaseViewer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBaseViewer3.Location = new System.Drawing.Point(0, 0);
-            this.ucBaseViewer3.Name = "ucBaseViewer3";
-            this.ucBaseViewer3.Size = new System.Drawing.Size(507, 587);
-            this.ucBaseViewer3.TabIndex = 0;
+            this.splitViewer.Panel1.Controls.Add(this.editor);
+            this.splitViewer.Panel1.Text = "Panel1";
+            // 
+            // splitViewer.Panel2
+            // 
+            this.splitViewer.Panel2.Controls.Add(this.viewer);
+            this.splitViewer.Panel2.Text = "Panel2";
+            this.splitViewer.Size = new System.Drawing.Size(1176, 587);
+            this.splitViewer.SplitterPosition = 659;
+            this.splitViewer.TabIndex = 0;
+            // 
+            // editor
+            // 
+            this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.editor.Location = new System.Drawing.Point(0, 0);
+            this.editor.Name = "editor";
+            projectDocument2.CreatedOn = new System.DateTime(((long)(0)));
+            projectDocument2.Description = null;
+            projectDocument2.DigiAdmin = null;
+            projectDocument2.DigiAdminId = 0;
+            projectDocument2.DocumentData = null;
+            projectDocument2.DocumentType = null;
+            projectDocument2.DocumentTypeId = 0;
+            projectDocument2.Id = 0;
+            projectDocument2.Is3DPrintingDocument = false;
+            projectDocument2.IsActive = false;
+            projectDocument2.IsDeleted = false;
+            projectDocument2.IsInstructions = false;
+            projectDocument2.IsPlans = false;
+            projectDocument2.IsSpecifications = false;
+            projectDocument2.Name = null;
+            projectDocument2.Project = null;
+            projectDocument2.ProjectId = 0;
+            projectDocument2.ProjectSection = null;
+            projectDocument2.ProjectSectionId = null;
+            projectDocument2.ProjectSectionPart = null;
+            projectDocument2.ProjectSectionPartId = null;
+            this.editor.SelectedDocument = projectDocument2;
+            this.editor.Size = new System.Drawing.Size(659, 587);
+            this.editor.TabIndex = 0;
+            // 
+            // viewer
+            // 
+            this.viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewer.Location = new System.Drawing.Point(0, 0);
+            this.viewer.Name = "viewer";
+            this.viewer.Size = new System.Drawing.Size(507, 587);
+            this.viewer.TabIndex = 0;
             // 
             // ucProjectDocManager
             // 
@@ -177,10 +177,10 @@
 
         private DevExpress.XtraEditors.SplitContainerControl splitMain;
         private DevExpress.XtraEditors.SplitContainerControl splitViewer;
-        private ucProjectDocGrid ucProjectDocGrid1;
+        private ucProjectDocGrid grid;
         private MultiFunctional.DocumentViewers.ucBaseViewer ucBaseViewer2;
         private MultiFunctional.DocumentViewers.ucBaseViewer ucBaseViewer1;
-        private ucProjectDocEditor ucProjectDocEditor1;
-        private MultiFunctional.DocumentViewers.ucBaseViewer ucBaseViewer3;
+        private ucProjectDocEditor editor;
+        private MultiFunctional.DocumentViewers.ucBaseViewer viewer;
     }
 }

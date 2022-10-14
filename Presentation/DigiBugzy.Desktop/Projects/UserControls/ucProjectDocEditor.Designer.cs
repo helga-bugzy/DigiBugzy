@@ -62,7 +62,7 @@
             // btnSelectFile
             // 
             this.btnSelectFile.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSelectFile.ImageOptions.Image")));
-            this.btnSelectFile.Location = new System.Drawing.Point(483, 21);
+            this.btnSelectFile.Location = new System.Drawing.Point(482, 3);
             this.btnSelectFile.Name = "btnSelectFile";
             this.btnSelectFile.Size = new System.Drawing.Size(132, 41);
             this.btnSelectFile.TabIndex = 13;
@@ -71,7 +71,7 @@
             // 
             // chkIsInstructions
             // 
-            this.chkIsInstructions.Location = new System.Drawing.Point(176, 360);
+            this.chkIsInstructions.Location = new System.Drawing.Point(171, 318);
             this.chkIsInstructions.Name = "chkIsInstructions";
             this.chkIsInstructions.Properties.Caption = "Instructions";
             this.chkIsInstructions.Size = new System.Drawing.Size(88, 20);
@@ -79,7 +79,7 @@
             // 
             // chkIsSpecifications
             // 
-            this.chkIsSpecifications.Location = new System.Drawing.Point(276, 360);
+            this.chkIsSpecifications.Location = new System.Drawing.Point(271, 318);
             this.chkIsSpecifications.Name = "chkIsSpecifications";
             this.chkIsSpecifications.Properties.Caption = "Specifications";
             this.chkIsSpecifications.Size = new System.Drawing.Size(98, 20);
@@ -87,7 +87,7 @@
             // 
             // chkIsPlans
             // 
-            this.chkIsPlans.Location = new System.Drawing.Point(386, 360);
+            this.chkIsPlans.Location = new System.Drawing.Point(381, 318);
             this.chkIsPlans.Name = "chkIsPlans";
             this.chkIsPlans.Properties.Caption = "Plans";
             this.chkIsPlans.Size = new System.Drawing.Size(55, 20);
@@ -95,7 +95,7 @@
             // 
             // chkIs3DPrintingDocument
             // 
-            this.chkIs3DPrintingDocument.Location = new System.Drawing.Point(79, 360);
+            this.chkIs3DPrintingDocument.Location = new System.Drawing.Point(80, 318);
             this.chkIs3DPrintingDocument.Name = "chkIs3DPrintingDocument";
             this.chkIs3DPrintingDocument.Properties.Caption = "3D Printing";
             this.chkIs3DPrintingDocument.Size = new System.Drawing.Size(85, 20);
@@ -104,7 +104,7 @@
             // btnDelete
             // 
             this.btnDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.ImageOptions.Image")));
-            this.btnDelete.Location = new System.Drawing.Point(223, 412);
+            this.btnDelete.Location = new System.Drawing.Point(219, 355);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(88, 32);
             this.btnDelete.TabIndex = 11;
@@ -114,7 +114,7 @@
             // btnSave
             // 
             this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
-            this.btnSave.Location = new System.Drawing.Point(355, 412);
+            this.btnSave.Location = new System.Drawing.Point(351, 355);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(88, 32);
             this.btnSave.TabIndex = 12;
@@ -124,7 +124,7 @@
             // btnAdd
             // 
             this.btnAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.ImageOptions.Image")));
-            this.btnAdd.Location = new System.Drawing.Point(79, 412);
+            this.btnAdd.Location = new System.Drawing.Point(75, 355);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(88, 32);
             this.btnAdd.TabIndex = 10;
@@ -133,16 +133,16 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(79, 165);
+            this.txtDescription.Location = new System.Drawing.Point(78, 147);
             this.txtDescription.MaxLength = 255;
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(364, 139);
+            this.txtDescription.Size = new System.Drawing.Size(364, 116);
             this.txtDescription.TabIndex = 7;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(79, 131);
+            this.txtName.Location = new System.Drawing.Point(78, 113);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(364, 20);
             this.txtName.TabIndex = 6;
@@ -150,7 +150,7 @@
             // lblProjectPartsDocumentDescription
             // 
             this.lblProjectPartsDocumentDescription.AutoSize = true;
-            this.lblProjectPartsDocumentDescription.Location = new System.Drawing.Point(9, 185);
+            this.lblProjectPartsDocumentDescription.Location = new System.Drawing.Point(8, 167);
             this.lblProjectPartsDocumentDescription.Name = "lblProjectPartsDocumentDescription";
             this.lblProjectPartsDocumentDescription.Size = new System.Drawing.Size(64, 13);
             this.lblProjectPartsDocumentDescription.TabIndex = 65;
@@ -159,7 +159,7 @@
             // lblProjectPartsDocumentName
             // 
             this.lblProjectPartsDocumentName.AutoSize = true;
-            this.lblProjectPartsDocumentName.Location = new System.Drawing.Point(9, 149);
+            this.lblProjectPartsDocumentName.Location = new System.Drawing.Point(8, 131);
             this.lblProjectPartsDocumentName.Name = "lblProjectPartsDocumentName";
             this.lblProjectPartsDocumentName.Size = new System.Drawing.Size(31, 13);
             this.lblProjectPartsDocumentName.TabIndex = 64;
@@ -173,7 +173,7 @@
             // 
             this.cmbDocumentType.DisplayMember = "Name";
             this.cmbDocumentType.FormattingEnabled = true;
-            this.cmbDocumentType.Location = new System.Drawing.Point(83, 320);
+            this.cmbDocumentType.Location = new System.Drawing.Point(78, 278);
             this.cmbDocumentType.Name = "cmbDocumentType";
             this.cmbDocumentType.Size = new System.Drawing.Size(358, 21);
             this.cmbDocumentType.TabIndex = 5;
@@ -181,7 +181,7 @@
             // 
             // lblType
             // 
-            this.lblType.Location = new System.Drawing.Point(9, 328);
+            this.lblType.Location = new System.Drawing.Point(4, 286);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(28, 13);
             this.lblType.TabIndex = 77;
@@ -190,7 +190,7 @@
             // lblSelectedDocumentName
             // 
             this.lblSelectedDocumentName.AutoSize = true;
-            this.lblSelectedDocumentName.Location = new System.Drawing.Point(483, 82);
+            this.lblSelectedDocumentName.Location = new System.Drawing.Point(482, 64);
             this.lblSelectedDocumentName.Name = "lblSelectedDocumentName";
             this.lblSelectedDocumentName.Size = new System.Drawing.Size(19, 13);
             this.lblSelectedDocumentName.TabIndex = 0;
@@ -198,7 +198,8 @@
             // 
             // lblProject
             // 
-            this.lblProject.Location = new System.Drawing.Point(9, 21);
+            this.lblProject.Enabled = false;
+            this.lblProject.Location = new System.Drawing.Point(8, 3);
             this.lblProject.Name = "lblProject";
             this.lblProject.Size = new System.Drawing.Size(34, 13);
             this.lblProject.TabIndex = 1;
@@ -206,7 +207,8 @@
             // 
             // lblSection
             // 
-            this.lblSection.Location = new System.Drawing.Point(9, 61);
+            this.lblSection.Enabled = false;
+            this.lblSection.Location = new System.Drawing.Point(8, 43);
             this.lblSection.Name = "lblSection";
             this.lblSection.Size = new System.Drawing.Size(35, 13);
             this.lblSection.TabIndex = 2;
@@ -214,7 +216,8 @@
             // 
             // lblPart
             // 
-            this.lblPart.Location = new System.Drawing.Point(9, 101);
+            this.lblPart.Enabled = false;
+            this.lblPart.Location = new System.Drawing.Point(8, 83);
             this.lblPart.Name = "lblPart";
             this.lblPart.Size = new System.Drawing.Size(20, 13);
             this.lblPart.TabIndex = 81;
@@ -224,7 +227,7 @@
             // 
             this.cmbProject.DisplayMember = "Name";
             this.cmbProject.FormattingEnabled = true;
-            this.cmbProject.Location = new System.Drawing.Point(81, 25);
+            this.cmbProject.Location = new System.Drawing.Point(80, 7);
             this.cmbProject.Name = "cmbProject";
             this.cmbProject.Size = new System.Drawing.Size(360, 21);
             this.cmbProject.TabIndex = 3;
@@ -234,7 +237,7 @@
             // 
             this.cmbSection.DisplayMember = "Name";
             this.cmbSection.FormattingEnabled = true;
-            this.cmbSection.Location = new System.Drawing.Point(81, 61);
+            this.cmbSection.Location = new System.Drawing.Point(80, 43);
             this.cmbSection.Name = "cmbSection";
             this.cmbSection.Size = new System.Drawing.Size(360, 21);
             this.cmbSection.TabIndex = 4;
@@ -244,7 +247,7 @@
             // 
             this.cmbPart.DisplayMember = "Name";
             this.cmbPart.FormattingEnabled = true;
-            this.cmbPart.Location = new System.Drawing.Point(81, 101);
+            this.cmbPart.Location = new System.Drawing.Point(80, 83);
             this.cmbPart.Name = "cmbPart";
             this.cmbPart.Size = new System.Drawing.Size(360, 21);
             this.cmbPart.TabIndex = 5;
@@ -276,7 +279,7 @@
             this.Controls.Add(this.lblType);
             this.Controls.Add(this.lblSelectedDocumentName);
             this.Name = "ucProjectDocEditor";
-            this.Size = new System.Drawing.Size(649, 489);
+            this.Size = new System.Drawing.Size(649, 408);
             ((System.ComponentModel.ISupportInitialize)(this.chkIsInstructions.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsSpecifications.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkIsPlans.Properties)).EndInit();
