@@ -148,6 +148,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(364, 20);
             this.txtName.TabIndex = 6;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // lblDescription
             // 
@@ -180,6 +181,7 @@
             this.cmbDocumentType.Size = new System.Drawing.Size(364, 21);
             this.cmbDocumentType.TabIndex = 4;
             this.cmbDocumentType.ValueMember = "d";
+            this.cmbDocumentType.SelectedIndexChanged += new System.EventHandler(this.cmbDocumentType_SelectedIndexChanged);
             // 
             // lblType
             // 
@@ -231,6 +233,7 @@
             this.cmbProject.Size = new System.Drawing.Size(364, 21);
             this.cmbProject.TabIndex = 1;
             this.cmbProject.ValueMember = "Id";
+            this.cmbProject.SelectedIndexChanged += new System.EventHandler(this.cmbProject_SelectedIndexChanged);
             // 
             // cmbSection
             // 
@@ -241,6 +244,7 @@
             this.cmbSection.Size = new System.Drawing.Size(364, 21);
             this.cmbSection.TabIndex = 2;
             this.cmbSection.ValueMember = "Id";
+            this.cmbSection.SelectedIndexChanged += new System.EventHandler(this.cmbSection_SelectedIndexChanged);
             // 
             // cmbPart
             // 
@@ -251,6 +255,7 @@
             this.cmbPart.Size = new System.Drawing.Size(364, 21);
             this.cmbPart.TabIndex = 3;
             this.cmbPart.ValueMember = "Id";
+            this.cmbPart.SelectedIndexChanged += new System.EventHandler(this.cmbPart_SelectedIndexChanged);
             // 
             // cmbDocumentFileType
             // 
@@ -261,6 +266,7 @@
             this.cmbDocumentFileType.Size = new System.Drawing.Size(364, 21);
             this.cmbDocumentFileType.TabIndex = 5;
             this.cmbDocumentFileType.ValueMember = "d";
+            this.cmbDocumentFileType.SelectedIndexChanged += new System.EventHandler(this.cmbDocumentFileType_SelectedIndexChanged);
             // 
             // lblFileType
             // 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using DevExpress.XtraEditors;
+using DigiBugzy.Core.Domain.Administration.Documents;
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Services.Administration.Documents;
 using DigiBugzy.Services.Projects;
@@ -77,8 +78,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            SelectedDocument = new ProjectDocument();
-            LoadEditor();
+            ClearErrorIndicators();
+            ResetEditor(true);
             Application.DoEvents();
         }
 
@@ -106,8 +107,64 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
             lblSelectedDocumentName.Text = xtraOpenFileDialog1.FileName;
 
+        }
 
+        private void cmbProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbProject.SelectedIndex < 0) cmbProject.SelectedIndex = 0;
+            var item = (Project)cmbProject.SelectedItem;
+            SelectedDocument.ProjectId = item.Id;
+            ValidateControl(cmbProject, SelectedDocument.ProjectId);
+            LoadCombo_Section();
+            Application.DoEvents();
+        }
 
+        private void cmbSection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbSection.SelectedIndex < 0) cmbSection.SelectedIndex = 0;
+
+            var item = (ProjectSection)cmbSection.SelectedItem;
+            SelectedDocument.ProjectSectionId = item.Id;
+            LoadCombo_Parts();
+            Application.DoEvents();
+        }
+
+        private void cmbPart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbPart.SelectedIndex < 0) cmbPart.SelectedIndex = 0;
+            var item = (ProjectSectionPart)cmbPart.SelectedItem;
+            SelectedDocument.ProjectSectionPartId = item.Id;
+            Application.DoEvents();
+        }
+
+        private void cmbDocumentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbPart.SelectedIndex < 0) cmbPart.SelectedIndex = 0;
+                var item = (DocumentType)cmbDocumentType.SelectedItem;
+
+                SelectedDocument.DocumentTypeId = item.Id;
+                ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId);
+            }
+            catch
+            {
+                SelectedDocument.DocumentTypeId = 0;
+                ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId);
+            }
+           
+        }
+
+        private void cmbDocumentFileType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var item = (DocumentFileType)cmbDocumentFileType.SelectedItem;
+            SelectedDocument.DocumentFileTypeId = item.Id;
+            ValidateControl(cmbDocumentFileType, SelectedDocument.DocumentFileTypeId);
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            ValidateControl(txtName);
         }
 
         #endregion
@@ -139,10 +196,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 index += 1;
             }
 
-            if(cmbProject.SelectedIndex > 0)
-            {
-                LoadCombo_Section();
-            }
+            LoadCombo_Section();
 
             Application.DoEvents();
 
@@ -150,16 +204,18 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void LoadCombo_Section()
         {
+            cmbSection.Enabled = true;
             cmbSection.Items.Clear();
             cmbPart.Items.Clear();
             cmbPart.Enabled = false;
 
-            if(SelectedDocument.Id <= 0 || cmbProject.SelectedIndex <= 0)
+            if(SelectedDocument.Id < 0 || SelectedDocument.ProjectId <= 0)
             {
                 cmbSection.Enabled = false;
                 return;
             }
 
+            
             var service = new ProjectSectionService(Globals.GetConnectionString());
             var collection = service.Get(new StandardFilter(includeDeleted: false, includeInActive: false), SelectedDocument.ProjectId);
 
@@ -184,10 +240,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 index += 1;
             }
 
-            if(cmbSection.SelectedIndex > 0)
-            {
-                LoadCombo_Parts();
-            }
+            LoadCombo_Parts();
 
             Application.DoEvents();
 
@@ -199,7 +252,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             cmbPart.Enabled = true;
             cmbPart.Items.Clear();
 
-            if (SelectedDocument.Id <= 0 || cmbSection.SelectedIndex <= 0)
+            if (SelectedDocument.Id < 0 || SelectedDocument.ProjectSectionId <= 0)
             {
                 cmbPart.Enabled = false;
                 return;
@@ -273,11 +326,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void LoadEditor()
         {
-            LoadCombo_DocumentFileTypes();
-            LoadCombo_DocumentTypes();
-            txtDescription.Text = txtName.Text = string.Empty;
-            chkIs3DPrintingDocument.Checked = chkIsInstructions.Checked = chkIsPlans.Checked = chkIsSpecifications.Checked = false;
-            btnSelectFile.Enabled = btnAdd.Enabled = btnDelete.Enabled = btnSave.Enabled = false;
+            ResetEditor(false);
+
             if (_selectedDocument.Id != 0)
             {
                 _selectedDocument.CreatedOn = DateTime.Now;
@@ -288,6 +338,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             }
             else
             {
+                
+
                 txtDescription.Text = _selectedDocument.Description;
                 txtName.Text = _selectedDocument.Name;
                 chkIs3DPrintingDocument.Checked = _selectedDocument.Is3DPrintingDocument;
@@ -295,6 +347,9 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 chkIsPlans.Checked = _selectedDocument.IsPlans;
                 chkIsSpecifications.Checked = _selectedDocument.IsSpecifications;
                 btnSelectFile.Enabled = btnAdd.Enabled = btnDelete.Enabled = btnSave.Enabled = true;
+
+                cmbProject.Items.Clear();
+                LoadCombo_Project();
             }
 
         
@@ -303,35 +358,181 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void SaveDocument()
         {
-            // Read the contents of the file into a stream.
-            var fileStream = xtraOpenFileDialog1.OpenFile();
-            using var reader = new StreamReader(fileStream);
-            using var br = new BinaryReader(reader.BaseStream);
-            var bytes = br.ReadBytes((int)reader.BaseStream.Length);
+            try
+            {
+                if (!ValidateSave()) return;
 
-            if (string.IsNullOrEmpty(txtDescription.Text)) txtDescription.Text = txtName.Text;
+                //Set description if not provided
+                if (string.IsNullOrEmpty(txtDescription.Text)) txtDescription.Text = txtName.Text;
+
+                //Update information
+                SelectedDocument.Name = txtName.Text;
+                SelectedDocument.Description = txtDescription.Text;
+                SelectedDocument.Is3DPrintingDocument = chkIs3DPrintingDocument.Checked;
+                SelectedDocument.IsInstructions = chkIsInstructions.Checked;
+                SelectedDocument.IsPlans = chkIsPlans.Checked;
+                SelectedDocument.IsSpecifications = chkIsSpecifications.Checked;
+                SelectedDocument.DocumentData = GetDocument();
 
 
-            SelectedDocument.Name = txtName.Text;
-            SelectedDocument.Description = txtDescription.Text;
-            SelectedDocument.Is3DPrintingDocument = chkIs3DPrintingDocument.Checked;
-            SelectedDocument.IsInstructions = chkIsInstructions.Checked;
-            SelectedDocument.IsPlans = chkIsPlans.Checked;
-            SelectedDocument.IsSpecifications = chkIsSpecifications.Checked;
-            SelectedDocument.DocumentData = bytes;
+                using var service = new ProjectDocumentService(Globals.GetConnectionString());
+                if (SelectedDocument.Id <= 0)
+                {
+                    SelectedDocument.Id = service.Create(SelectedDocument);
+                }
+                else
+                {
+                    service.Update(SelectedDocument);
+                }
 
+                btnAdd.Enabled = btnDelete.Enabled = true;
+                ClearErrorIndicators();
+
+                OnSave?.Invoke(SelectedDocument);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                MessageBox.Show($"Error saving document {e.Message}");
+            }
+        }
+
+        private byte[] GetDocument()
+        {
+            try
+            {
+                // Read the contents of the file into a stream.
+                var fileStream = xtraOpenFileDialog1.OpenFile();
+                using var reader = new StreamReader(fileStream);
+                using var br = new BinaryReader(reader.BaseStream);
+                var bytes = br.ReadBytes((int)reader.BaseStream.Length);
+
+                return bytes;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return SelectedDocument.DocumentData;
+            }
         }
 
         private void DeleteDocument()
         {
             var service = new ProjectDocumentService(Globals.GetConnectionString());
             service.Delete(SelectedDocument, true);
+
+            ResetEditor(true);
+
+            OnDelete?.Invoke();
         }
 
-  
+
+        private bool ValidateSave()
+        {
+            var success = true;
+
+            try
+            {
+                ClearErrorIndicators();
+
+                if(!ValidateControl(cmbDocumentFileType, SelectedDocument.DocumentFileTypeId)) success = false;
+                if (!ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId))  success = false;
+                if (!ValidateControl(cmbProject, SelectedDocument.ProjectId))  success = false;
+                if (!ValidateControl(txtName))  success = false;
+
+
+                if (string.IsNullOrEmpty(xtraOpenFileDialog1.FileName))
+                {
+                    lblSelectedDocumentName.ForeColor = Color.Red;
+                    lblSelectedDocumentName.Text = "No file selected";
+                    success = false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        private void ClearErrorIndicators()
+        {
+            try
+            {
+                cmbDocumentFileType.BackColor = cmbDocumentType.BackColor = cmbProject.BackColor = txtName.BackColor = Color.White;
+                cmbDocumentFileType.ForeColor = cmbDocumentType.ForeColor = cmbProject.ForeColor = txtName.ForeColor = lblSelectedDocumentName.ForeColor = Color.Black;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private bool ValidateControl(Control control)
+        {
+            if (string.IsNullOrEmpty(control.Text))
+            {
+                control.BackColor = Color.Red;
+                control.ForeColor = Color.White;
+                return false;
+            }
+            else
+            {
+                control.BackColor = Color.White;
+                control.ForeColor = Color.Black;
+                return true;
+            }
+        }
+
+       
+
+        private bool ValidateControl(System.Windows.Forms.ComboBox control, int id)
+        {
+            if(id <= 0)
+            {
+                control.BackColor = Color.Red;
+                control.ForeColor = Color.White;
+                return false;
+            }
+
+            control.BackColor = Color.White;
+            control.ForeColor = Color.Black;
+            return true;
+        }
+
+        private void ResetEditor(bool fullReset)
+        {
+            if(fullReset) SelectedDocument = new ProjectDocument();
+
+            cmbProject.Items.Clear();
+            cmbSection.Items.Clear();
+            cmbPart.Items.Clear();
+
+            SelectedDocument.ProjectId = Filter.ProjectId;
+            if (Filter.ProjectSectionId > 0) SelectedDocument.ProjectSectionId = Filter.ProjectSectionId;
+            if (Filter.ProjectSectionPartId > 0) SelectedDocument.ProjectSectionPartId = Filter.ProjectSectionPartId;
+
+            LoadCombo_DocumentFileTypes();
+            LoadCombo_DocumentTypes();
+            LoadCombo_Project();
+
+            txtDescription.Text = txtName.Text = string.Empty;
+            chkIs3DPrintingDocument.Checked = chkIsInstructions.Checked = chkIsPlans.Checked = chkIsSpecifications.Checked = false;
+
+            xtraOpenFileDialog1.Reset();
+
+            btnAdd.Enabled = btnDelete.Enabled = false;
+            btnSave.Enabled = true;
+
+            ClearErrorIndicators();
+        }
+
+
 
         #endregion
 
-        
+       
     }
 }

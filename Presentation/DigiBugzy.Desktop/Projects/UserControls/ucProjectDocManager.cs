@@ -36,5 +36,28 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         }
 
         #endregion
+
+        #region Control Event Procedure(s)
+
+        private void editor_OnSave(ProjectDocument selectedDocument)
+        {
+            grid.LoadData(ProjectControlType, Filter);
+            Application.DoEvents();
+        }
+
+        private void editor_OnDelete()
+        {
+            grid.LoadData(ProjectControlType, Filter);
+            Application.DoEvents();
+        }
+
+        private void grid_SelectedDocumentChanged(object sender, Core.EventHandlers.SelectedProjectDocumentChangedEventArgs e)
+        {
+            editor.SelectedDocument = e.SelectedDocument;
+        }
+
+        #endregion
+
+
     }
 }

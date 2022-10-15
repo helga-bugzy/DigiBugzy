@@ -13,7 +13,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         public event SelectedDocumentChangedEvent? SelectedDocumentChanged;
 
-        public delegate void SelectedDocumentChangedEvent(object sender, SelectedProjectDocumentChangedEventArgs e);
+        public delegate void SelectedDocumentChangedEvent(object? sender, SelectedProjectDocumentChangedEventArgs e);
 
         #endregion
 

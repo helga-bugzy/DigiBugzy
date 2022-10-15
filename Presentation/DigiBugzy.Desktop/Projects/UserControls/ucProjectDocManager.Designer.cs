@@ -78,6 +78,7 @@
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(518, 587);
             this.grid.TabIndex = 2;
+            this.grid.SelectedDocumentChanged += new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocGrid.SelectedDocumentChangedEvent(this.grid_SelectedDocumentChanged);
             // 
             // ucBaseViewer2
             // 
@@ -122,6 +123,8 @@
             projectDocument2.DigiAdmin = null;
             projectDocument2.DigiAdminId = 0;
             projectDocument2.DocumentData = null;
+            projectDocument2.DocumentFileType = null;
+            projectDocument2.DocumentFileTypeId = 0;
             projectDocument2.DocumentType = null;
             projectDocument2.DocumentTypeId = 0;
             projectDocument2.Id = 0;
@@ -141,6 +144,8 @@
             this.editor.SelectedDocument = projectDocument2;
             this.editor.Size = new System.Drawing.Size(659, 587);
             this.editor.TabIndex = 0;
+            this.editor.OnSave += new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocEditor.OnSaveDelegate(this.editor_OnSave);
+            this.editor.OnDelete += new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocEditor.OnDeleteDelegate(this.editor_OnDelete);
             // 
             // viewer
             // 
