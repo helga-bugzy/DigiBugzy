@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -19,6 +20,8 @@ namespace DigiBugzy.Desktop.Projects
         private ProjectSection SelectedProjectSection { get; set; } = new();
 
         private ProjectSectionPart SelectedProjectSectionPart { get; set; } = new();
+
+        private ProjectDocumentFilter Filter { get; set; } = new();
 
         private bool InProjectSelection { get; set; }
 
@@ -139,7 +142,7 @@ namespace DigiBugzy.Desktop.Projects
             }
 
            LoadEditor_Project();
-            LoadDocManager_Project();
+           LoadDocManager_Project();
         }
 
         private void LoadEditor_Project()
@@ -148,7 +151,7 @@ namespace DigiBugzy.Desktop.Projects
             if (SelectedProject.Id <= 0)
             {
                 
-                lblProjectSelectedFileName.Text = txtProject_Name.Text = txtProjectDescription.Text = string.Empty;
+                //lblProjectSelectedFileName.Text = txtProject_Name.Text = txtProjectDescription.Text = string.Empty;
                 btnProjectDelete.Visible = btnProjectRestore.Visible = false;
                 chkProjectActive.Checked = true;
 
@@ -165,7 +168,7 @@ namespace DigiBugzy.Desktop.Projects
 
                 chkProjectActive.Checked = SelectedProject.IsActive;
                 txtProject_Name.Text = SelectedProject.Name;
-                txtProjectDescription.Text = SelectedProject.Description;
+               // txtProjectDescription.Text = SelectedProject.Description;
 
                 if (SelectedProject.CoverImage is not { Length: > 0 })
                 {
@@ -193,6 +196,8 @@ namespace DigiBugzy.Desktop.Projects
                 Part = new ProjectSectionPart(),
                 ProjectSectionPartId = 0
             };
+
+           // dmProject?.LoadData(type: ProjectControlEnum.Project, filter: filter);
         }
 
         private void LoadSelected_ProjectSection()
@@ -200,8 +205,7 @@ namespace DigiBugzy.Desktop.Projects
 
             switch (SelectedProjectSection.Id)
             {
-                //case > 0 when SelectedProjectSection.Id == SelectedProjectSection.Id:
-                //    return;
+                
                 case 0:
                     SelectedProjectSection = new ProjectSection();
                     break;
@@ -219,10 +223,8 @@ namespace DigiBugzy.Desktop.Projects
 
         private void LoadEditor_ProjectSection()
         {
-            
             if (SelectedProjectSection.Id <= 0)
             {
-
                 lblSectionSelectedFileName.Text = txtSectionName.Text = txtSectionDescription.Text =  string.Empty;
                 btnSectionDelete.Visible = btnSectionRestore.Visible = false;
                 chkSectionActive.Checked = true;
@@ -234,7 +236,6 @@ namespace DigiBugzy.Desktop.Projects
             }
             else
             {
-
                 btnSectionDelete.Visible = !SelectedProjectSection.IsDeleted;
                 btnSectionRestore.Visible = SelectedProjectSection.IsDeleted;
 
@@ -267,6 +268,8 @@ namespace DigiBugzy.Desktop.Projects
                 Part = new ProjectSectionPart(),
                 ProjectSectionPartId = 0
             };
+
+          //  dmProjectSection?.LoadData(type: ProjectControlEnum.ProjectSection, filter: filter);
         }
 
         private void LoadSelected_ProjectSectionPart()
@@ -342,9 +345,9 @@ namespace DigiBugzy.Desktop.Projects
                 Part = SelectedProjectSectionPart,
                 ProjectSectionPartId = SelectedProjectSectionPart.Id
             };
+
+          //  dmProjectSectionPart?.LoadData(type: ProjectControlEnum.ProjectSectionPart, filter: filter);
         }
-
-
 
         #endregion
 
@@ -467,19 +470,26 @@ namespace DigiBugzy.Desktop.Projects
 
         #region Grid & Datasource: Projects
 
-
-
         private void bsProjects_PositionChanged(object sender, EventArgs e)
         {
             
            if (sender is not BindingSource) return;
             if (BindingContext[bsProjects].Position <= -1) return;
-
             InProjectSelection = true;
+
+            pgProject.Visible = true;
+            Application.DoEvents();
+
             SelectedProject = (Project)bsProjects.Current;
             LoadSelected_Project();
             if(!InProjectSectionSelection || !InProjectSectionPartSelection)  tabEditors.SelectedPage = tabProjectEditors;
 
+            Filter.ProjectId = SelectedProject.Id;
+            Filter.ProjectSectionId = 0;
+            Filter.ProjectSectionPartId = 0;
+            ucProjectDocs1.InitializeData(ProjectControlEnum.Project, Filter);
+
+            pgProject.Visible = false;
             Application.DoEvents();
             InProjectSelection = false;
 
@@ -491,17 +501,21 @@ namespace DigiBugzy.Desktop.Projects
         #region Grid & Datasource: Sections
         private void bsSections_PositionChanged(object sender, EventArgs e)
         {
-            
-
             if (sender is not BindingSource) return;
-
             InProjectSectionSelection = true;
-
             if (BindingContext[bsSections].Position <= -1) return;
+
+            pgSection.Visible = true;
+            Application.DoEvents();
             SelectedProjectSection = (ProjectSection)bsSections.Current;
             LoadSelected_ProjectSection();
             if (!InProjectSelection || !InProjectSectionPartSelection) tabEditors.SelectedPage = tabSectionEditors;
 
+            Filter.ProjectSectionId = SelectedProjectSection.Id;
+            Filter.ProjectSectionPartId = 0;
+            ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSection, Filter);
+
+            pgSection.Visible = false;
             Application.DoEvents();
 
             InProjectSectionSelection = false;
@@ -520,9 +534,17 @@ namespace DigiBugzy.Desktop.Projects
             if (sender is not BindingSource) return;
             InProjectSectionPartSelection = true;
             if (BindingContext[bsParts].Position <= -1) return;
+
+            pgParts.Visible = true;
+            Application.DoEvents();
             SelectedProjectSectionPart = (ProjectSectionPart)bsParts.Current;
             LoadSelected_ProjectSectionPart();
             if(!InProjectSectionSelection || !InProjectSelection) tabEditors.SelectedPage = tabPartsEditors;
+
+            Filter.ProjectSectionPartId = SelectedProjectSectionPart.Id;
+            ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSectionPart, Filter);
+
+            pgParts.Visible = false;
             Application.DoEvents();
 
             InProjectSectionPartSelection = false;
@@ -684,6 +706,15 @@ namespace DigiBugzy.Desktop.Projects
 
         #endregion
 
+        #region Tabs
+
+        private void tabEditors_SelectedPageChanged(object sender, SelectedPageChangedEventArgs e)
+        {
+
+        }
+
+        #endregion
+
         #region Parts
 
         #region Editor
@@ -779,7 +810,18 @@ namespace DigiBugzy.Desktop.Projects
 
 
 
+
+
         #endregion
 
+        private void projectDocGrid_SelectedDocumentChanged(object sender, Core.EventHandlers.SelectedProjectDocumentChangedEventArgs e)
+        {
+
+        }
+
+        private void projectDocEditor_OnDelete()
+        {
+
+        }
     }
 }

@@ -22,6 +22,16 @@ namespace DigiBugzy.Data.Common.xBaseObjects.FilterObjects
 
         public bool OnlyInstructions { get; set; }
 
+
+        public bool IncludeProjectSearch { get; set; } = true;
+
+        public bool IncludeSectionSearch { get; set; }
+
+        public bool IncludePartSearch { get; set; }
+
+        
+
+
         //For userinterface use
         public Project Project { get; set; }
 

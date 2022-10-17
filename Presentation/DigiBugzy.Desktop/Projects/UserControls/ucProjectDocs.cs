@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using DevExpress.XtraEditors;
 using DigiBugzy.Core.Domain.Administration.Documents;
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Services.Administration.Documents;
@@ -17,19 +7,8 @@ using DigiBugzy.Services.Projects;
 
 namespace DigiBugzy.Desktop.Projects.UserControls
 {
-    public partial class ucProjectDocEditor : XtraUserControl
+    public partial class ucProjectDocs : DevExpress.XtraEditors.XtraUserControl
     {
-
-        #region Delegates & Events
-
-        public delegate void OnSaveDelegate(ProjectDocument selectedDocument);
-        public event OnSaveDelegate? OnSave;
-
-        public delegate void OnDeleteDelegate();
-        public event OnDeleteDelegate? OnDelete;
-
-        #endregion
-
         #region Properties
 
         private ProjectDocument _selectedDocument { get; set; } = new();
@@ -44,37 +23,39 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             }
         }
 
+        public ProjectDocumentFilter Filter { get; set; } = new();
+
         private ProjectControlEnum Type { get; set; }
 
-        private ProjectDocumentFilter Filter { get; set; } = new();
+        private bool isInitializing { get; set; }
 
-
-
+        
+        
         #endregion
 
-        #region Public Methods
-
-        public void InitializeData(ProjectControlEnum type, ProjectDocumentFilter filter)
-        {
-            Type = type;
-            Filter = filter;
-
-            LoadEditor();
-          
-        }
-
-        #endregion
-
-        #region Ctor
-
-        public ucProjectDocEditor()
+        public ucProjectDocs()
         {
             InitializeComponent();
         }
 
+        #region Control Event Procedure(s)
+
+        #region Filter
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            Filter.Only3DPrintingDocument = rd3D.Checked;
+            Filter.OnlyInstructions = rdInstructions.Checked;
+            Filter.OnlyPlans = rdPlans.Checked;
+            Filter.OnlySpecifications = rdSpecs.Checked;
+            Filter.IncludePartSearch = chkFilterPart.Checked;
+            Filter.IncludeProjectSearch = chkFilterProject.Checked;
+            Filter.IncludeSectionSearch = chkFilterSection.Checked;
+        }
+
         #endregion
 
-        #region Control Event Procedure(s)
+        #region Editor
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -89,7 +70,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             SelectedDocument = new ProjectDocument();
             Application.DoEvents();
 
-            OnDelete?.Invoke();
+
 
         }
 
@@ -97,7 +78,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         {
             SaveDocument();
             Application.DoEvents();
-            OnSave?.Invoke(SelectedDocument);
+
         }
 
         private void btnSelectFile_Click(object sender, EventArgs e)
@@ -152,7 +133,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 SelectedDocument.DocumentTypeId = 0;
                 ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId);
             }
-           
+
         }
 
         private void cmbDocumentFileType_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,9 +148,84 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             ValidateControl(txtName);
         }
 
+
+        #endregion
         #endregion
 
+        #region Public Methods
+
+        public void InitializeData(ProjectControlEnum type, ProjectDocumentFilter filter)
+        {
+            Type = type;
+            Filter = filter;
+
+            isInitializing = true;
+
+            progressPanel1.Visible = true;
+            Application.DoEvents();
+
+            Filter = new ProjectDocumentFilter();
+
+            chkFilterProject.Checked = chkFilterSection.Checked = chkFilterPart.Checked = false;
+            switch (type)
+            {
+                case ProjectControlEnum.Project:
+                    chkFilterProject.Checked = true;
+                    break;
+                case ProjectControlEnum.ProjectSection:
+                    chkFilterProject.Checked = true;
+                    chkFilterSection.Checked = true;
+                    break;
+                case ProjectControlEnum.ProjectSectionPart:
+                    chkFilterProject.Checked = true;
+                    chkFilterSection.Checked = true;
+                    chkFilterPart.Checked = true;
+                    break;
+                default:
+                    chkFilterProject.Checked = true;
+                    break;
+            }
+
+            LoadGrid();
+            LoadEditor();
+
+            progressPanel1.Visible = false;
+            isInitializing = false;
+            Application.DoEvents();
+
+        }
+
         #region Helper Methods
+
+        #region Grid
+
+        public void LoadGrid()
+        {
+            var service = new ProjectDocumentService(Globals.GetConnectionString());
+            var collection = service.Get(Filter);
+            bindingSource1.DataSource = collection;
+            gridDocuments.DataSource = bindingSource1;
+        }
+
+        private void bindingSource1_PositionChanged(object sender, EventArgs e)
+        {
+            if (sender is not BindingSource) return;
+
+            if (!isInitializing)
+            {
+                progressPanel1.Visible = true;
+                Application.DoEvents();
+            }
+            if (BindingContext[bindingSource1].Position <= -1) return;
+            SelectedDocument = (ProjectDocument)bindingSource1.Current;
+
+            if (!isInitializing) progressPanel1.Visible = true;
+            Application.DoEvents();
+        }
+
+        #endregion
+
+        #region Editor
 
         private void LoadCombo_Project()
         {
@@ -182,13 +238,13 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             var service = new ProjectService(Globals.GetConnectionString());
             var collection = service.Get(new StandardFilter(includeDeleted: false, includeInActive: false));
 
-            
+
             cmbProject.Items.Add("<Select a Project>");
             var index = 1;
-            foreach(var item in collection)
+            foreach (var item in collection)
             {
                 cmbProject.Items.Add(item);
-                if(SelectedDocument.ProjectId == item.Id)
+                if (SelectedDocument.ProjectId == item.Id)
                 {
                     cmbProject.SelectedIndex = index;
                 }
@@ -209,13 +265,13 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             cmbPart.Items.Clear();
             cmbPart.Enabled = false;
 
-            if(SelectedDocument.Id < 0 || SelectedDocument.ProjectId <= 0)
+            if (SelectedDocument.Id < 0 || SelectedDocument.ProjectId <= 0)
             {
                 cmbSection.Enabled = false;
                 return;
             }
 
-            
+
             var service = new ProjectSectionService(Globals.GetConnectionString());
             var collection = service.Get(new StandardFilter(includeDeleted: false, includeInActive: false), SelectedDocument.ProjectId);
 
@@ -224,7 +280,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             if (collection.Count <= 0)
             {
                 cmbSection.Enabled = false;
-                return; 
+                return;
             }
 
 
@@ -260,7 +316,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
             var service = new ProjectSectionPartService(Globals.GetConnectionString());
             var collection = service.Get(
-                new StandardFilter(includeDeleted: false, includeInActive: false), 
+                new StandardFilter(includeDeleted: false, includeInActive: false),
                 SelectedDocument.ProjectSectionId ?? 0);
 
             cmbSection.Items.Add("<Select a Part>");
@@ -309,7 +365,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         {
             cmbDocumentType.Items.Clear();
             using var service = new DocumentFileTypeService(Globals.GetConnectionString());
-            var collection = service.Get(new StandardFilter() { ClassificationId = (int)ClassificationsEnum.Project});
+            var collection = service.Get(new StandardFilter() { ClassificationId = (int)ClassificationsEnum.Project });
 
             var index = 1;
             foreach (var item in collection)
@@ -338,7 +394,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             }
             else
             {
-                
+
 
                 txtDescription.Text = _selectedDocument.Description;
                 txtName.Text = _selectedDocument.Name;
@@ -352,7 +408,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 LoadCombo_Project();
             }
 
-        
+
             LoadCombo_Project();
         }
 
@@ -378,6 +434,10 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 using var service = new ProjectDocumentService(Globals.GetConnectionString());
                 if (SelectedDocument.Id <= 0)
                 {
+                    SelectedDocument.CreatedOn = DateTime.Now;
+                    SelectedDocument.DigiAdminId = Globals.DigiAdministration.Id;
+                    SelectedDocument.IsActive = true;
+                    SelectedDocument.IsDeleted = false;
                     SelectedDocument.Id = service.Create(SelectedDocument);
                 }
                 else
@@ -388,7 +448,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 btnAdd.Enabled = btnDelete.Enabled = true;
                 ClearErrorIndicators();
 
-                OnSave?.Invoke(SelectedDocument);
+
             }
             catch (Exception e)
             {
@@ -409,7 +469,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
                 return bytes;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 return SelectedDocument.DocumentData;
@@ -423,7 +483,6 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
             ResetEditor(true);
 
-            OnDelete?.Invoke();
         }
 
 
@@ -435,10 +494,10 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             {
                 ClearErrorIndicators();
 
-                if(!ValidateControl(cmbDocumentFileType, SelectedDocument.DocumentFileTypeId)) success = false;
-                if (!ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId))  success = false;
-                if (!ValidateControl(cmbProject, SelectedDocument.ProjectId))  success = false;
-                if (!ValidateControl(txtName))  success = false;
+                if (!ValidateControl(cmbDocumentFileType, SelectedDocument.DocumentFileTypeId)) success = false;
+                if (!ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId)) success = false;
+                if (!ValidateControl(cmbProject, SelectedDocument.ProjectId)) success = false;
+                if (!ValidateControl(txtName)) success = false;
 
 
                 if (string.IsNullOrEmpty(xtraOpenFileDialog1.FileName))
@@ -486,11 +545,9 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             }
         }
 
-       
-
         private bool ValidateControl(System.Windows.Forms.ComboBox control, int id)
         {
-            if(id <= 0)
+            if (id <= 0)
             {
                 control.BackColor = Color.Red;
                 control.ForeColor = Color.White;
@@ -504,7 +561,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void ResetEditor(bool fullReset)
         {
-            if(fullReset) SelectedDocument = new ProjectDocument();
+
+            if (fullReset) SelectedDocument = new ProjectDocument();
 
             cmbProject.Items.Clear();
             cmbSection.Items.Clear();
@@ -529,10 +587,14 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             ClearErrorIndicators();
         }
 
+        #endregion
+
 
 
         #endregion
 
-       
+        #endregion
+
+
     }
 }
