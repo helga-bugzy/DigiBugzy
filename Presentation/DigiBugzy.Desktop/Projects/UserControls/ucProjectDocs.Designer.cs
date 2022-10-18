@@ -72,6 +72,7 @@
             this.chkFilterProject = new DevExpress.XtraEditors.CheckEdit();
             this.xtraOpenFileDialog1 = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.ucBaseViewer1 = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).BeginInit();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -86,6 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel1)).BeginInit();
             this.splitEditors.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel2)).BeginInit();
+            this.splitEditors.Panel2.SuspendLayout();
             this.splitEditors.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlEditor)).BeginInit();
             this.pnlEditor.SuspendLayout();
@@ -173,6 +175,7 @@
             // 
             // splitEditors.Panel2
             // 
+            this.splitEditors.Panel2.Controls.Add(this.ucBaseViewer1);
             this.splitEditors.Panel2.Text = "Panel2";
             this.splitEditors.Size = new System.Drawing.Size(999, 635);
             this.splitEditors.SplitterPosition = 478;
@@ -534,6 +537,14 @@
             // 
             this.bindingSource1.PositionChanged += new System.EventHandler(this.bindingSource1_PositionChanged);
             // 
+            // ucBaseViewer1
+            // 
+            this.ucBaseViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBaseViewer1.Location = new System.Drawing.Point(0, 0);
+            this.ucBaseViewer1.Name = "ucBaseViewer1";
+            this.ucBaseViewer1.Size = new System.Drawing.Size(511, 635);
+            this.ucBaseViewer1.TabIndex = 0;
+            // 
             // ucProjectDocs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -554,6 +565,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel1)).EndInit();
             this.splitEditors.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors.Panel2)).EndInit();
+            this.splitEditors.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitEditors)).EndInit();
             this.splitEditors.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlEditor)).EndInit();
@@ -619,5 +631,6 @@
         private RadioButton rd3D;
         private RadioButton rdAll;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
+        private MultiFunctional.DocumentViewers.ucBaseViewer ucBaseViewer1;
     }
 }

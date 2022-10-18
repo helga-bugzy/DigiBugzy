@@ -478,6 +478,7 @@ namespace DigiBugzy.Desktop.Projects
             InProjectSelection = true;
 
             pgProject.Visible = true;
+            pgSection.Visible = pgParts.Visible = false;
             Application.DoEvents();
 
             SelectedProject = (Project)bsProjects.Current;
@@ -501,11 +502,14 @@ namespace DigiBugzy.Desktop.Projects
         #region Grid & Datasource: Sections
         private void bsSections_PositionChanged(object sender, EventArgs e)
         {
+            
             if (sender is not BindingSource) return;
             InProjectSectionSelection = true;
             if (BindingContext[bsSections].Position <= -1) return;
 
             pgSection.Visible = true;
+            pgProject.Visible = false;
+            pgParts.Visible = false;
             Application.DoEvents();
             SelectedProjectSection = (ProjectSection)bsSections.Current;
             LoadSelected_ProjectSection();
@@ -536,6 +540,7 @@ namespace DigiBugzy.Desktop.Projects
             if (BindingContext[bsParts].Position <= -1) return;
 
             pgParts.Visible = true;
+            pgProject.Visible = pgSection.Visible = false;
             Application.DoEvents();
             SelectedProjectSectionPart = (ProjectSectionPart)bsParts.Current;
             LoadSelected_ProjectSectionPart();
@@ -551,9 +556,7 @@ namespace DigiBugzy.Desktop.Projects
         }
 
         #endregion
-
-
-
+        
         #endregion
 
         #region Projects
@@ -814,14 +817,6 @@ namespace DigiBugzy.Desktop.Projects
 
         #endregion
 
-        private void projectDocGrid_SelectedDocumentChanged(object sender, Core.EventHandlers.SelectedProjectDocumentChangedEventArgs e)
-        {
-
-        }
-
-        private void projectDocEditor_OnDelete()
-        {
-
-        }
+       
     }
 }

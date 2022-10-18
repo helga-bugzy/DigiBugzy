@@ -29,8 +29,6 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private bool isInitializing { get; set; }
 
-        
-        
         #endregion
 
         public ucProjectDocs()
@@ -92,7 +90,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void cmbProject_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbProject.SelectedIndex < 0) cmbProject.SelectedIndex = 0;
+            if (cmbProject.SelectedIndex <= 0) 
+                cmbProject.SelectedIndex = 1;
             var item = (Project)cmbProject.SelectedItem;
             SelectedDocument.ProjectId = item.Id;
             ValidateControl(cmbProject, SelectedDocument.ProjectId);
@@ -102,7 +101,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void cmbSection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbSection.SelectedIndex < 0) cmbSection.SelectedIndex = 0;
+            if (cmbSection.SelectedIndex <= 0)
+                return;
 
             var item = (ProjectSection)cmbSection.SelectedItem;
             SelectedDocument.ProjectSectionId = item.Id;
@@ -112,7 +112,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void cmbPart_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbPart.SelectedIndex < 0) cmbPart.SelectedIndex = 0;
+            if (cmbPart.SelectedIndex <= 0) return;
             var item = (ProjectSectionPart)cmbPart.SelectedItem;
             SelectedDocument.ProjectSectionPartId = item.Id;
             Application.DoEvents();
@@ -122,9 +122,11 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         {
             try
             {
-                if (cmbPart.SelectedIndex < 0) cmbPart.SelectedIndex = 0;
+                if (cmbDocumentType.SelectedIndex < 0) return;
+
                 var item = (DocumentType)cmbDocumentType.SelectedItem;
 
+                if (item == null) return;
                 SelectedDocument.DocumentTypeId = item.Id;
                 ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId);
             }
@@ -138,6 +140,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void cmbDocumentFileType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbDocumentFileType.SelectedIndex < 0) return;
             var item = (DocumentFileType)cmbDocumentFileType.SelectedItem;
             SelectedDocument.DocumentFileTypeId = item.Id;
             ValidateControl(cmbDocumentFileType, SelectedDocument.DocumentFileTypeId);
@@ -147,9 +150,9 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         {
             ValidateControl(txtName);
         }
-
-
+        
         #endregion
+
         #endregion
 
         #region Public Methods
@@ -158,15 +161,12 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         {
             Type = type;
             Filter = filter;
-
+            
             isInitializing = true;
 
             progressPanel1.Visible = true;
             Application.DoEvents();
 
-            Filter = new ProjectDocumentFilter();
-
-            chkFilterProject.Checked = chkFilterSection.Checked = chkFilterPart.Checked = false;
             switch (type)
             {
                 case ProjectControlEnum.Project:
@@ -185,6 +185,12 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                     chkFilterProject.Checked = true;
                     break;
             }
+
+            LoadCombo_DocumentFileTypes();
+            LoadCombo_DocumentTypes();
+            LoadCombo_Project();
+            LoadCombo_Section();
+            LoadCombo_Parts();
 
             LoadGrid();
             LoadEditor();
@@ -205,6 +211,36 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             var collection = service.Get(Filter);
             bindingSource1.DataSource = collection;
             gridDocuments.DataSource = bindingSource1;
+
+
+            if (gvDocuments.Columns[nameof(ProjectDocument.CreatedOn)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.CreatedOn)].Visible = false;
+
+            if (gvDocuments.Columns[nameof(ProjectDocument.DigiAdmin)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)].Visible = false;
+            if (gvDocuments.Columns[nameof(ProjectDocument.DigiAdminId)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)].Visible = false;
+            if (gvDocuments.Columns[nameof(ProjectDocument.IsActive)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)].Visible = false;
+            if (gvDocuments.Columns[nameof(ProjectDocument.IsDeleted)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)].Visible = false;
+
+            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectId)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectId)].Visible = false;
+            if (gvDocuments.Columns[nameof(ProjectDocument.Project)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.Project)].Visible = false;
+
+            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)].Visible = false;
+            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSection)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSection)].Visible = false;
+
+            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)].Visible = false;
+            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPart)] != null) 
+                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPart)].Visible = false;
+
+            Application.DoEvents();
         }
 
         private void bindingSource1_PositionChanged(object sender, EventArgs e)
@@ -359,6 +395,12 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
                 index += 1;
             }
+
+            if (cmbDocumentType.SelectedIndex >= 0) return;
+
+            cmbDocumentType.SelectedIndex = 0;
+            var dt = (DocumentType)cmbDocumentType.SelectedItem;
+            SelectedDocument.DocumentTypeId = dt.Id;
         }
 
         private void LoadCombo_DocumentFileTypes()
@@ -378,6 +420,12 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
                 index += 1;
             }
+
+            if (cmbDocumentFileType.SelectedIndex >= 0) return;
+
+            cmbDocumentFileType.SelectedIndex = 0;
+            var dft = (DocumentFileType)cmbDocumentFileType.SelectedItem;
+            SelectedDocument.DocumentFileTypeId = dft.Id;
         }
 
         private void LoadEditor()
@@ -430,7 +478,6 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 SelectedDocument.IsSpecifications = chkIsSpecifications.Checked;
                 SelectedDocument.DocumentData = GetDocument();
 
-
                 using var service = new ProjectDocumentService(Globals.GetConnectionString());
                 if (SelectedDocument.Id <= 0)
                 {
@@ -447,7 +494,6 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
                 btnAdd.Enabled = btnDelete.Enabled = true;
                 ClearErrorIndicators();
-
 
             }
             catch (Exception e)
@@ -485,7 +531,6 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         }
 
-
         private bool ValidateSave()
         {
             var success = true;
@@ -498,8 +543,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 if (!ValidateControl(cmbDocumentType, SelectedDocument.DocumentTypeId)) success = false;
                 if (!ValidateControl(cmbProject, SelectedDocument.ProjectId)) success = false;
                 if (!ValidateControl(txtName)) success = false;
-
-
+                
                 if (string.IsNullOrEmpty(xtraOpenFileDialog1.FileName))
                 {
                     lblSelectedDocumentName.ForeColor = Color.Red;

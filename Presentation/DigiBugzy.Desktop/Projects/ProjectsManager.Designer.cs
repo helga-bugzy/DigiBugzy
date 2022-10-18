@@ -1518,6 +1518,6 @@
         private DevExpress.XtraWaitForm.ProgressPanel pgProject;
         private DevExpress.XtraWaitForm.ProgressPanel pgSection;
         private DevExpress.XtraWaitForm.ProgressPanel pgParts;
-        private DevExpress.XtraBars.Navigation.TabNavigationPage tabPartsProducts;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabPartsProductss;
     }
 }
