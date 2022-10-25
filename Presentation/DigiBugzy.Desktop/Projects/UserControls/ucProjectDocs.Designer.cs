@@ -60,6 +60,7 @@
             this.cmbDocumentType = new System.Windows.Forms.ComboBox();
             this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.lblSelectedDocumentName = new System.Windows.Forms.Label();
+            this.ucBaseViewer1 = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
             this.pnlFilter = new DevExpress.XtraEditors.PanelControl();
             this.rdAll = new System.Windows.Forms.RadioButton();
             this.rdPlans = new System.Windows.Forms.RadioButton();
@@ -72,7 +73,6 @@
             this.chkFilterProject = new DevExpress.XtraEditors.CheckEdit();
             this.xtraOpenFileDialog1 = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.ucBaseViewer1 = new DigiBugzy.Desktop.MultiFunctional.DocumentViewers.ucBaseViewer();
             ((System.ComponentModel.ISupportInitialize)(this.pnlMain)).BeginInit();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
@@ -423,6 +423,14 @@
             this.lblSelectedDocumentName.TabIndex = 84;
             this.lblSelectedDocumentName.Text = "...";
             // 
+            // ucBaseViewer1
+            // 
+            this.ucBaseViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucBaseViewer1.Location = new System.Drawing.Point(0, 0);
+            this.ucBaseViewer1.Name = "ucBaseViewer1";
+            this.ucBaseViewer1.Size = new System.Drawing.Size(511, 635);
+            this.ucBaseViewer1.TabIndex = 0;
+            // 
             // pnlFilter
             // 
             this.pnlFilter.Controls.Add(this.rdAll);
@@ -536,14 +544,6 @@
             // bindingSource1
             // 
             this.bindingSource1.PositionChanged += new System.EventHandler(this.bindingSource1_PositionChanged);
-            // 
-            // ucBaseViewer1
-            // 
-            this.ucBaseViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucBaseViewer1.Location = new System.Drawing.Point(0, 0);
-            this.ucBaseViewer1.Name = "ucBaseViewer1";
-            this.ucBaseViewer1.Size = new System.Drawing.Size(511, 635);
-            this.ucBaseViewer1.TabIndex = 0;
             // 
             // ucProjectDocs
             // 

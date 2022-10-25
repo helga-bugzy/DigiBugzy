@@ -194,6 +194,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
             LoadGrid();
             LoadEditor();
+            LoadBaseViewer();
 
             progressPanel1.Visible = false;
             isInitializing = false;
@@ -458,6 +459,11 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
 
             LoadCombo_Project();
+        }
+
+        private void LoadBaseViewer()
+        {
+            ucBaseViewer1.LoadDocument(SelectedDocument.DocumentData, SelectedDocument.DocumentFileTypeId);
         }
 
         private void SaveDocument()

@@ -477,8 +477,6 @@ namespace DigiBugzy.Desktop.Projects
             if (BindingContext[bsProjects].Position <= -1) return;
             InProjectSelection = true;
 
-            pgProject.Visible = true;
-            pgSection.Visible = pgParts.Visible = false;
             Application.DoEvents();
 
             SelectedProject = (Project)bsProjects.Current;
@@ -490,7 +488,6 @@ namespace DigiBugzy.Desktop.Projects
             Filter.ProjectSectionPartId = 0;
             ucProjectDocs1.InitializeData(ProjectControlEnum.Project, Filter);
 
-            pgProject.Visible = false;
             Application.DoEvents();
             InProjectSelection = false;
 
@@ -507,9 +504,6 @@ namespace DigiBugzy.Desktop.Projects
             InProjectSectionSelection = true;
             if (BindingContext[bsSections].Position <= -1) return;
 
-            pgSection.Visible = true;
-            pgProject.Visible = false;
-            pgParts.Visible = false;
             Application.DoEvents();
             SelectedProjectSection = (ProjectSection)bsSections.Current;
             LoadSelected_ProjectSection();
@@ -519,7 +513,6 @@ namespace DigiBugzy.Desktop.Projects
             Filter.ProjectSectionPartId = 0;
             ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSection, Filter);
 
-            pgSection.Visible = false;
             Application.DoEvents();
 
             InProjectSectionSelection = false;
@@ -539,8 +532,6 @@ namespace DigiBugzy.Desktop.Projects
             InProjectSectionPartSelection = true;
             if (BindingContext[bsParts].Position <= -1) return;
 
-            pgParts.Visible = true;
-            pgProject.Visible = pgSection.Visible = false;
             Application.DoEvents();
             SelectedProjectSectionPart = (ProjectSectionPart)bsParts.Current;
             LoadSelected_ProjectSectionPart();
@@ -549,7 +540,6 @@ namespace DigiBugzy.Desktop.Projects
             Filter.ProjectSectionPartId = SelectedProjectSectionPart.Id;
             ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSectionPart, Filter);
 
-            pgParts.Visible = false;
             Application.DoEvents();
 
             InProjectSectionPartSelection = false;
