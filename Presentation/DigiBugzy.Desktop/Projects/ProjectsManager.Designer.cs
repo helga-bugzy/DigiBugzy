@@ -33,7 +33,7 @@
             DigiBugzy.Data.Common.xBaseObjects.FilterObjects.ProjectDocumentFilter projectDocumentFilter1 = new DigiBugzy.Data.Common.xBaseObjects.FilterObjects.ProjectDocumentFilter();
             DigiBugzy.Core.Domain.Projects.ProjectDocument projectDocument1 = new DigiBugzy.Core.Domain.Projects.ProjectDocument();
             this.pnlManager = new DevExpress.XtraEditors.PanelControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.pnlGridMain = new DevExpress.XtraEditors.PanelControl();
             this.splitGridsMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.gridProjects = new DevExpress.XtraGrid.GridControl();
@@ -57,7 +57,7 @@
             this.butProjectsSectionPartsFilter = new DevExpress.XtraEditors.SimpleButton();
             this.txtFilterProjectSectionPartName = new DevExpress.XtraEditors.TextEdit();
             this.lblProjectSectionParts = new System.Windows.Forms.Label();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.pnlBottomSections = new DevExpress.XtraEditors.PanelControl();
             this.tabEditors = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabProjectEditors = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.panelControl10 = new DevExpress.XtraEditors.PanelControl();
@@ -131,10 +131,11 @@
             this.bsSections = new System.Windows.Forms.BindingSource(this.components);
             this.bsParts = new System.Windows.Forms.BindingSource(this.components);
             this.bsProjectPartDocuments = new System.Windows.Forms.BindingSource(this.components);
+            this.splitBackground = new DevExpress.XtraEditors.SplitContainerControl();
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlGridMain)).BeginInit();
+            this.pnlGridMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsMain.Panel1)).BeginInit();
             this.splitGridsMain.Panel1.SuspendLayout();
@@ -168,8 +169,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionPartName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlBottomSections)).BeginInit();
+            this.pnlBottomSections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabEditors)).BeginInit();
             this.tabEditors.SuspendLayout();
             this.tabProjectEditors.SuspendLayout();
@@ -213,31 +214,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel1)).BeginInit();
+            this.splitBackground.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).BeginInit();
+            this.splitBackground.Panel2.SuspendLayout();
+            this.splitBackground.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlManager
             // 
-            this.pnlManager.Controls.Add(this.panelControl1);
-            this.pnlManager.Controls.Add(this.panelControl2);
+            this.pnlManager.Controls.Add(this.splitBackground);
             this.pnlManager.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlManager.Location = new System.Drawing.Point(0, 0);
             this.pnlManager.Name = "pnlManager";
             this.pnlManager.Size = new System.Drawing.Size(2250, 1144);
             this.pnlManager.TabIndex = 0;
             // 
-            // panelControl1
+            // pnlGridMain
             // 
-            this.panelControl1.Controls.Add(this.splitGridsMain);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(2, 2);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(2246, 634);
-            this.panelControl1.TabIndex = 2;
+            this.pnlGridMain.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlGridMain.Controls.Add(this.splitGridsMain);
+            this.pnlGridMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlGridMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlGridMain.Name = "pnlGridMain";
+            this.pnlGridMain.Size = new System.Drawing.Size(2246, 624);
+            this.pnlGridMain.TabIndex = 2;
             // 
             // splitGridsMain
             // 
             this.splitGridsMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitGridsMain.Location = new System.Drawing.Point(2, 2);
+            this.splitGridsMain.Location = new System.Drawing.Point(0, 0);
             this.splitGridsMain.Name = "splitGridsMain";
             // 
             // splitGridsMain.Panel1
@@ -250,7 +257,7 @@
             // 
             this.splitGridsMain.Panel2.Controls.Add(this.splitGridsSubs);
             this.splitGridsMain.Panel2.Text = "Panel2";
-            this.splitGridsMain.Size = new System.Drawing.Size(2242, 630);
+            this.splitGridsMain.Size = new System.Drawing.Size(2246, 624);
             this.splitGridsMain.SplitterPosition = 637;
             this.splitGridsMain.TabIndex = 0;
             // 
@@ -260,7 +267,7 @@
             this.panelControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl6.Location = new System.Drawing.Point(0, 37);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(637, 593);
+            this.panelControl6.Size = new System.Drawing.Size(637, 587);
             this.panelControl6.TabIndex = 2;
             // 
             // gridProjects
@@ -269,7 +276,7 @@
             this.gridProjects.Location = new System.Drawing.Point(2, 2);
             this.gridProjects.MainView = this.gvProjects;
             this.gridProjects.Name = "gridProjects";
-            this.gridProjects.Size = new System.Drawing.Size(633, 589);
+            this.gridProjects.Size = new System.Drawing.Size(633, 583);
             this.gridProjects.TabIndex = 0;
             this.gridProjects.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjects});
@@ -336,7 +343,7 @@
             this.splitGridsSubs.Panel2.Controls.Add(this.panelControl8);
             this.splitGridsSubs.Panel2.Controls.Add(this.panelControl5);
             this.splitGridsSubs.Panel2.Text = "Panel2";
-            this.splitGridsSubs.Size = new System.Drawing.Size(1595, 630);
+            this.splitGridsSubs.Size = new System.Drawing.Size(1599, 624);
             this.splitGridsSubs.SplitterPosition = 866;
             this.splitGridsSubs.TabIndex = 0;
             // 
@@ -346,7 +353,7 @@
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl7.Location = new System.Drawing.Point(0, 37);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(866, 593);
+            this.panelControl7.Size = new System.Drawing.Size(866, 587);
             this.panelControl7.TabIndex = 2;
             // 
             // gridProjectSections
@@ -355,7 +362,7 @@
             this.gridProjectSections.Location = new System.Drawing.Point(2, 2);
             this.gridProjectSections.MainView = this.gvProjectSections;
             this.gridProjectSections.Name = "gridProjectSections";
-            this.gridProjectSections.Size = new System.Drawing.Size(862, 589);
+            this.gridProjectSections.Size = new System.Drawing.Size(862, 583);
             this.gridProjectSections.TabIndex = 0;
             this.gridProjectSections.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjectSections});
@@ -413,7 +420,7 @@
             this.panelControl8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl8.Location = new System.Drawing.Point(0, 37);
             this.panelControl8.Name = "panelControl8";
-            this.panelControl8.Size = new System.Drawing.Size(719, 593);
+            this.panelControl8.Size = new System.Drawing.Size(723, 587);
             this.panelControl8.TabIndex = 1;
             // 
             // gridProjectSectionParts
@@ -422,7 +429,7 @@
             this.gridProjectSectionParts.Location = new System.Drawing.Point(2, 2);
             this.gridProjectSectionParts.MainView = this.gvProjectSectionParts;
             this.gridProjectSectionParts.Name = "gridProjectSectionParts";
-            this.gridProjectSectionParts.Size = new System.Drawing.Size(715, 589);
+            this.gridProjectSectionParts.Size = new System.Drawing.Size(719, 583);
             this.gridProjectSectionParts.TabIndex = 0;
             this.gridProjectSectionParts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProjectSectionParts});
@@ -444,7 +451,7 @@
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(719, 37);
+            this.panelControl5.Size = new System.Drawing.Size(723, 37);
             this.panelControl5.TabIndex = 0;
             // 
             // butProjectsSectionPartsFilter
@@ -473,14 +480,15 @@
             this.lblProjectSectionParts.TabIndex = 0;
             this.lblProjectSectionParts.Text = "Project Section Parts";
             // 
-            // panelControl2
+            // pnlBottomSections
             // 
-            this.panelControl2.Controls.Add(this.tabEditors);
-            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(2, 636);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(2246, 506);
-            this.panelControl2.TabIndex = 1;
+            this.pnlBottomSections.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlBottomSections.Controls.Add(this.tabEditors);
+            this.pnlBottomSections.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBottomSections.Location = new System.Drawing.Point(0, 0);
+            this.pnlBottomSections.Name = "pnlBottomSections";
+            this.pnlBottomSections.Size = new System.Drawing.Size(2246, 506);
+            this.pnlBottomSections.TabIndex = 1;
             // 
             // tabEditors
             // 
@@ -489,16 +497,16 @@
             this.tabEditors.Controls.Add(this.tabPartsEditors);
             this.tabEditors.Controls.Add(this.tabDocumentsManager);
             this.tabEditors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabEditors.Location = new System.Drawing.Point(2, 2);
+            this.tabEditors.Location = new System.Drawing.Point(0, 0);
             this.tabEditors.Name = "tabEditors";
             this.tabEditors.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabProjectEditors,
             this.tabSectionEditors,
             this.tabPartsEditors,
             this.tabDocumentsManager});
-            this.tabEditors.RegularSize = new System.Drawing.Size(2242, 502);
+            this.tabEditors.RegularSize = new System.Drawing.Size(2246, 506);
             this.tabEditors.SelectedPage = this.tabProjectEditors;
-            this.tabEditors.Size = new System.Drawing.Size(2242, 502);
+            this.tabEditors.Size = new System.Drawing.Size(2246, 506);
             this.tabEditors.TabIndex = 2;
             this.tabEditors.Text = "tabPane1";
             // 
@@ -514,7 +522,7 @@
             this.tabProjectEditors.Properties.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.tabProjectEditors.Properties.AppearanceCaption.Options.UseFont = true;
             this.tabProjectEditors.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabProjectEditors.Size = new System.Drawing.Size(2242, 469);
+            this.tabProjectEditors.Size = new System.Drawing.Size(2242, 499);
             // 
             // panelControl10
             // 
@@ -522,7 +530,7 @@
             this.panelControl10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl10.Location = new System.Drawing.Point(0, 38);
             this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(2242, 431);
+            this.panelControl10.Size = new System.Drawing.Size(2242, 461);
             this.panelControl10.TabIndex = 2;
             // 
             // tabPane2
@@ -1187,7 +1195,7 @@
             this.tabDocumentsManager.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabDocumentsManager.Name = "tabDocumentsManager";
             this.tabDocumentsManager.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabDocumentsManager.Size = new System.Drawing.Size(2242, 469);
+            this.tabDocumentsManager.Size = new System.Drawing.Size(2246, 473);
             // 
             // ucProjectDocs1
             // 
@@ -1245,7 +1253,7 @@
             projectDocument1.ProjectSectionPart = null;
             projectDocument1.ProjectSectionPartId = null;
             this.ucProjectDocs1.SelectedDocument = projectDocument1;
-            this.ucProjectDocs1.Size = new System.Drawing.Size(2242, 469);
+            this.ucProjectDocs1.Size = new System.Drawing.Size(2246, 473);
             this.ucProjectDocs1.TabIndex = 0;
             // 
             // dlgProjectImage
@@ -1272,6 +1280,26 @@
             // 
             this.bsParts.PositionChanged += new System.EventHandler(this.bsParts_PositionChanged);
             // 
+            // splitBackground
+            // 
+            this.splitBackground.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitBackground.Horizontal = false;
+            this.splitBackground.Location = new System.Drawing.Point(2, 2);
+            this.splitBackground.Name = "splitBackground";
+            // 
+            // splitBackground.splitBackground_Panel1
+            // 
+            this.splitBackground.Panel1.Controls.Add(this.pnlGridMain);
+            this.splitBackground.Panel1.Text = "Panel1";
+            // 
+            // splitBackground.splitBackground_Panel2
+            // 
+            this.splitBackground.Panel2.Controls.Add(this.pnlBottomSections);
+            this.splitBackground.Panel2.Text = "Panel2";
+            this.splitBackground.Size = new System.Drawing.Size(2246, 1140);
+            this.splitBackground.SplitterPosition = 624;
+            this.splitBackground.TabIndex = 3;
+            // 
             // ProjectsManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1284,8 +1312,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).EndInit();
             this.pnlManager.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlGridMain)).EndInit();
+            this.pnlGridMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsMain.Panel1)).EndInit();
             this.splitGridsMain.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsMain.Panel2)).EndInit();
@@ -1322,8 +1350,8 @@
             this.panelControl5.ResumeLayout(false);
             this.panelControl5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilterProjectSectionPartName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlBottomSections)).EndInit();
+            this.pnlBottomSections.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabEditors)).EndInit();
             this.tabEditors.ResumeLayout(false);
             this.tabProjectEditors.ResumeLayout(false);
@@ -1373,6 +1401,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel1)).EndInit();
+            this.splitBackground.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).EndInit();
+            this.splitBackground.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).EndInit();
+            this.splitBackground.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1380,7 +1414,7 @@
         #endregion
 
         private DevExpress.XtraEditors.PanelControl pnlManager;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private DevExpress.XtraEditors.PanelControl pnlGridMain;
         private DevExpress.XtraEditors.SplitContainerControl splitGridsMain;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private Label lblProjects;
@@ -1393,7 +1427,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvProjectSections;
         private DevExpress.XtraEditors.PanelControl panelControl5;
         private Label lblProjectSectionParts;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
+        private DevExpress.XtraEditors.PanelControl pnlBottomSections;
         private DevExpress.XtraEditors.PanelControl panelControl6;
         private DevExpress.XtraEditors.PanelControl panelControl7;
         private DevExpress.XtraEditors.PanelControl panelControl8;
@@ -1479,5 +1513,6 @@
         private TextBox txtProjectDescription;
         private UserControls.ucProjectDocs ucProjectDocs1;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabPartsProductss;
+        private DevExpress.XtraEditors.SplitContainerControl splitBackground;
     }
 }
