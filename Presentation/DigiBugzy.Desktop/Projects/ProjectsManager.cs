@@ -47,6 +47,8 @@ namespace DigiBugzy.Desktop.Projects
             //Sample data only when in development mode
             btnSampleData.Visible = btnSampleDataDelete.Visible = Globals.ConnectionEnvironment == ConnectionEnvironment.Development;
 
+            
+
             Application.DoEvents();
         }
 
@@ -168,7 +170,7 @@ namespace DigiBugzy.Desktop.Projects
 
                 chkProjectActive.Checked = SelectedProject.IsActive;
                 txtProject_Name.Text = SelectedProject.Name;
-               // txtProjectDescription.Text = SelectedProject.Description;
+                txtProjectDescription.Text = SelectedProject.Description;
 
                 if (SelectedProject.CoverImage is not { Length: > 0 })
                 {
@@ -495,8 +497,8 @@ namespace DigiBugzy.Desktop.Projects
 
         #endregion
 
-
         #region Grid & Datasource: Sections
+
         private void bsSections_PositionChanged(object sender, EventArgs e)
         {
             
@@ -518,15 +520,24 @@ namespace DigiBugzy.Desktop.Projects
             InProjectSectionSelection = false;
         }
 
+        private void gvProjectSections_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            if (sender is not GridView view) return;
+
+            if (e.Column == view.Columns[nameof(ProjectSection.ProjectName)])
+            {
+                e.Appearance.BackColor = Color.LightGray;
+            }
+        }
+
 
         #endregion
-
 
         #region Grid & Datasource: Parts
 
         private void bsParts_PositionChanged(object sender, EventArgs e)
         {
-            if (InProjectSelection || InProjectSectionSelection || InProjectSectionPartSelection) return;
+           // if (InProjectSelection || InProjectSectionSelection || InProjectSectionPartSelection) return;
 
             if (sender is not BindingSource) return;
             InProjectSectionPartSelection = true;
@@ -545,8 +556,18 @@ namespace DigiBugzy.Desktop.Projects
             InProjectSectionPartSelection = false;
         }
 
+        private void gvProjectSectionParts_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            if (sender is not GridView view) return;
+
+            if (e.Column == view.Columns[nameof(ProjectSectionPart.ProjectName)] || e.Column == view.Columns[nameof(ProjectSectionPart.ProjectSectionName)])
+            {
+                e.Appearance.BackColor = Color.LightGray;
+            }
+        }
+
         #endregion
-        
+
         #endregion
 
         #region Projects
@@ -810,24 +831,6 @@ namespace DigiBugzy.Desktop.Projects
 
         #endregion
 
-        private void gvProjectSections_RowCellStyle(object sender, RowCellStyleEventArgs e)
-        {
-            if (sender is not GridView view) return;
-
-            if(e.Column == view.Columns[nameof(ProjectSection.ProjectName)])
-            {
-                e.Appearance.BackColor = Color.LightGray;
-            }
-        }
-
-        private void gvProjectSectionParts_RowCellStyle(object sender, RowCellStyleEventArgs e)
-        {
-            if (sender is not GridView view) return;
-
-            if (e.Column == view.Columns[nameof(ProjectSectionPart.ProjectName)] || e.Column == view.Columns[nameof(ProjectSectionPart.ProjectSectionName)])
-            {
-                e.Appearance.BackColor = Color.LightGray;
-            }
-        }
+        
     }
 }
