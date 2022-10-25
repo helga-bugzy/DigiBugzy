@@ -364,6 +364,7 @@
             // 
             this.gvProjectSections.GridControl = this.gridProjectSections;
             this.gvProjectSections.Name = "gvProjectSections";
+            this.gvProjectSections.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvProjectSections_RowCellStyle);
             this.gvProjectSections.Click += new System.EventHandler(this.bsProjects_PositionChanged);
             // 
             // panelControl4
@@ -430,6 +431,7 @@
             // 
             this.gvProjectSectionParts.GridControl = this.gridProjectSectionParts;
             this.gvProjectSectionParts.Name = "gvProjectSectionParts";
+            this.gvProjectSectionParts.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvProjectSectionParts_RowCellStyle);
             // 
             // panelControl5
             // 

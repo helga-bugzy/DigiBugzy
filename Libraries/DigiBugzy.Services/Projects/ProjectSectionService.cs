@@ -25,13 +25,18 @@ namespace DigiBugzy.Services.Projects
         /// <inheritdoc />
         public List<ProjectSection> GetByProjectId(int id)
         {
-            return dbContext.ProjectSections.Where(p => p.ProjectId == id).ToList();
+
+            var result = Get(new StandardFilter());
+            result = result.Where(p => p.ProjectId == id).ToList();
+            return result;
         }
 
         /// <inheritdoc />
         public List<ProjectSection> Get(StandardFilter filter, int projectId = 0)
         {
-            var query = dbContext.ProjectSections.AsQueryable<ProjectSection>();
+            var query = dbContext.ProjectSections
+                
+                .AsQueryable<ProjectSection>();
 
             if (filter.Id.HasValue)
             {
@@ -55,7 +60,21 @@ namespace DigiBugzy.Services.Projects
             if (projectId > 0)
                 query = query.Where(x => x.ProjectId == projectId);
 
-            return query.ToList();
+            
+
+            var result = query.ToList();
+
+            //Get related projects
+            foreach(var item in result)
+            {
+                var p = dbContext.Projects.FirstOrDefault(x => x.Id == item.ProjectId);
+                if (p == null) continue;
+                item.Project = p;
+                item.ProjectName = p.Name;
+            }
+
+            return result.OrderBy(x => x.Name).ToList();
+            
 
         }
 

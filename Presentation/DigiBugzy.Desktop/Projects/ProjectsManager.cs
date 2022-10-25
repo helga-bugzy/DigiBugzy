@@ -795,6 +795,8 @@ namespace DigiBugzy.Desktop.Projects
 
 
             if (gridView.Columns[nameof(ProjectSection.Project)] != null) gridView.Columns[nameof(ProjectSection.Project)].Visible = false;
+            if (gridView.Columns[nameof(ProjectSection.ProjectId)] != null) gridView.Columns[nameof(ProjectSection.ProjectId)].Visible = false;
+
             if (gridView.Columns[nameof(ProjectSectionPart.ProjectSectionId)] != null) gridView.Columns[nameof(ProjectSectionPart.ProjectSectionId)].Visible = false;
             if (gridView.Columns[nameof(ProjectSectionPart.ProjectSection)] != null) gridView.Columns[nameof(ProjectSectionPart.ProjectSection)].Visible = false;
 
@@ -805,8 +807,27 @@ namespace DigiBugzy.Desktop.Projects
 
 
 
+
         #endregion
 
-       
+        private void gvProjectSections_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            if (sender is not GridView view) return;
+
+            if(e.Column == view.Columns[nameof(ProjectSection.ProjectName)])
+            {
+                e.Appearance.BackColor = Color.LightGray;
+            }
+        }
+
+        private void gvProjectSectionParts_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            if (sender is not GridView view) return;
+
+            if (e.Column == view.Columns[nameof(ProjectSectionPart.ProjectName)] || e.Column == view.Columns[nameof(ProjectSectionPart.ProjectSectionName)])
+            {
+                e.Appearance.BackColor = Color.LightGray;
+            }
+        }
     }
 }
