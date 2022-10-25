@@ -1,6 +1,4 @@
-﻿
-
-using DigiBugzy.Core.Domain.Administration.Printing;
+﻿using DigiBugzy.Core.Domain.Administration.ThreeDPrinting;
 
 namespace DigiBugzy.Core.Domain.Projects
 {

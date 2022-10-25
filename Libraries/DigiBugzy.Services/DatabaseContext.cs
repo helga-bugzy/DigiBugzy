@@ -1,4 +1,5 @@
 ﻿using DigiBugzy.Core.Domain.Administration.Documents;
+using DigiBugzy.Core.Domain.Administration.ThreeDPrinting;
 using DigiBugzy.Core.Domain.BusinessEntities;
 using DigiBugzy.Core.Domain.Finance.Assets;
 using DigiBugzy.Core.Domain.Projects;
@@ -63,6 +64,14 @@ namespace DigiBugzy.Services
         public DbSet<DocumentFileType> DocumentFileTypes { get; set; }
 
         public DbSet<DocumentType> DocumentTypes { get; set; }
+
+        public DbSet<ThreeDPrinter> ThreeDPrinters { get; set; }
+
+        public DbSet<ThreeDFilamentColor> ThreeDFilamentColors { get; set; }
+
+        public DbSet<ThreeDFilamentType> ThreeDFilamentTypes { get; set; }
+
+        public DbSet<ThreeDResolution> ThreeDResolutions { get; set; }
 
         #endregion
 
