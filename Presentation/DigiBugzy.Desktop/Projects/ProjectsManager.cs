@@ -61,6 +61,15 @@ namespace DigiBugzy.Desktop.Projects
 
         private void LoadGrid_Projects()
         {
+            SelectedProject = new Project();
+            LoadEditor_Project();
+
+            SelectedProjectSection = new ProjectSection();
+            LoadEditor_ProjectSection();
+
+            SelectedProjectSectionPart = new ProjectSectionPart();
+            LoadEditor_ProjectSectionPart();
+
             using var service = new ProjectService(Globals.GetConnectionString());
             bsProjects.Clear();
 
@@ -78,7 +87,11 @@ namespace DigiBugzy.Desktop.Projects
         private void LoadGrid_ProjectSections()
         {
             SelectedProjectSection = new ProjectSection();
+            LoadEditor_ProjectSection();
+
             SelectedProjectSectionPart = new ProjectSectionPart();
+            LoadDocManager_ProjectSectionPart();
+
             bsSections.Clear();
 
             if (SelectedProject.Id <= 0)
@@ -146,7 +159,7 @@ namespace DigiBugzy.Desktop.Projects
 
            LoadEditor_Project();
            LoadDocManager_Project();
-            Load3DPrinting_Project();
+           Load3DPrinting_Project();
         }
 
         private void LoadEditor_Project()
@@ -155,7 +168,6 @@ namespace DigiBugzy.Desktop.Projects
             if (SelectedProject.Id <= 0)
             {
                 
-                //lblProjectSelectedFileName.Text = txtProject_Name.Text = txtProjectDescription.Text = string.Empty;
                 btnProjectDelete.Visible = btnProjectRestore.Visible = false;
                 chkProjectActive.Checked = true;
 
@@ -220,7 +232,6 @@ namespace DigiBugzy.Desktop.Projects
 
         private void LoadSelected_ProjectSection()
         {
-           
             switch (SelectedProjectSection.Id)
             {
                 
@@ -345,7 +356,7 @@ namespace DigiBugzy.Desktop.Projects
                 imgPartPhoto.Visible = true;
             }
 
-            LoadGrid_ProjectSectionParts();
+            //LoadGrid_ProjectSectionParts();
 
 
         }
@@ -377,8 +388,7 @@ namespace DigiBugzy.Desktop.Projects
             SelectedProject.Description = txtProjectDescription.Text;
             SelectedProject.IsActive = chkProjectActive.Checked;
 
-
-            if (imgProjectPhoto.Image != null)
+            if (imgProjectPhoto.Image != null && _hasSelectedProjectImage)
             {
                 SelectedProject.CoverImage = ImageHelpers.CopyImageToByteArray(imgProjectPhoto.Image);
             }
@@ -396,6 +406,9 @@ namespace DigiBugzy.Desktop.Projects
                 SelectedProject.Id = service.Create(SelectedProject);
             }
 
+            SelectedProject = new Project();
+            LoadEditor_Project();
+
             LoadGrid_Projects();
 
         }
@@ -407,8 +420,7 @@ namespace DigiBugzy.Desktop.Projects
             SelectedProjectSection.IsActive = chkSectionActive.Checked;
             SelectedProjectSection.ProjectId = Filter.ProjectId;
 
-
-            if (imgSectionPhoto.Image != null)
+            if (imgSectionPhoto.Image != null && _hasSelectedProjectSectionImage)
             {
                 SelectedProjectSection.CoverImage = ImageHelpers.CopyImageToByteArray(imgSectionPhoto.Image);
             }
@@ -426,19 +438,20 @@ namespace DigiBugzy.Desktop.Projects
                 SelectedProjectSection.Id = service.Create(SelectedProjectSection);
             }
 
-            LoadGrid_ProjectSections();
+            SelectedProjectSection = new ProjectSection();
+            LoadEditor_ProjectSection();
 
+            LoadGrid_ProjectSections();
+            Application.DoEvents();
         }
 
         private void SaveProjectSectionPart()
         {
             SelectedProjectSectionPart.Name = txtPartName.Text;
-            SelectedProjectSectionPart.Description = txtPartDescription.Text;
+            SelectedProjectSectionPart.Description = string.IsNullOrEmpty(txtPartDescription.Text) ? txtPartName.Text : txtPartDescription.Text;
             SelectedProjectSectionPart.IsActive = chkPartActive.Checked;
             SelectedProjectSectionPart.ProjectSectionId = Filter.ProjectSectionId;
-
-
-            if (imgPartPhoto.Image != null)
+            if (imgPartPhoto.Image != null && _hasSelectedProjectSectionPartImage)
             {
                 SelectedProjectSectionPart.CoverImage = ImageHelpers.CopyImageToByteArray(imgPartPhoto.Image);
             }
@@ -455,8 +468,11 @@ namespace DigiBugzy.Desktop.Projects
                 SelectedProjectSectionPart.CreatedOn = DateTime.Now;
                 SelectedProjectSectionPart.Id = service.Create(SelectedProjectSectionPart);
             }
+            SelectedProjectSectionPart = new ProjectSectionPart();
+            LoadEditor_ProjectSectionPart();
 
             LoadGrid_ProjectSectionParts();
+            
             Application.DoEvents();
 
         }
@@ -526,7 +542,13 @@ namespace DigiBugzy.Desktop.Projects
             
             if (sender is not BindingSource) return;
             InProjectSectionSelection = true;
-            if (BindingContext[bsSections].Position <= -1) return;
+            InProjectSelection = false;
+            InProjectSectionPartSelection = false;
+            if (BindingContext[bsSections].Position <= -1)
+            {
+                InProjectSectionSelection = false;
+                return;
+            }
 
             Application.DoEvents();
             SelectedProjectSection = (ProjectSection)bsSections.Current;
@@ -541,11 +563,7 @@ namespace DigiBugzy.Desktop.Projects
             LoadGrid_ProjectSectionParts();
             InProjectSectionSelection = false;
 
-            
-
             Application.DoEvents();
-
-            
         }
 
         private void gvProjectSections_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -558,7 +576,6 @@ namespace DigiBugzy.Desktop.Projects
             }
         }
 
-
         #endregion
 
         #region Grid & Datasource: Parts
@@ -569,7 +586,11 @@ namespace DigiBugzy.Desktop.Projects
 
             if (sender is not BindingSource) return;
             InProjectSectionPartSelection = true;
-            if (BindingContext[bsParts].Position <= -1) return;
+            if (BindingContext[bsParts].Position <= -1)
+            {
+                InProjectSectionPartSelection = false;
+                return;
+            }
 
             Application.DoEvents();
             SelectedProjectSectionPart = (ProjectSectionPart)bsParts.Current;
@@ -577,7 +598,7 @@ namespace DigiBugzy.Desktop.Projects
             if(!InProjectSectionSelection || !InProjectSelection) tabEditors.SelectedPage = tabPartsEditors;
 
             Filter.ProjectSectionPartId = SelectedProjectSectionPart.Id;
-            ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSectionPart, Filter);
+            //ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSectionPart, Filter);
 
             InProjectSectionPartSelection = false;
 
@@ -617,6 +638,7 @@ namespace DigiBugzy.Desktop.Projects
             imgProjectPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(dlgProjectImage.FileName),
                 Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
             imgProjectPhoto.Visible = true;
+            _hasSelectedProjectImage = true;
         }
 
         private void btnProjectRestore_Click(object sender, EventArgs e)
@@ -670,8 +692,7 @@ namespace DigiBugzy.Desktop.Projects
 
             Application.DoEvents();
         }
-
-
+        
         private void btnSampleData_Click(object sender, EventArgs e)
         {
             using var service = new SampleDataService(
@@ -715,6 +736,7 @@ namespace DigiBugzy.Desktop.Projects
             imgSectionPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(dlgProjectSectionPhoto.FileName),
                 Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
             imgSectionPhoto.Visible = true;
+            _hasSelectedProjectSectionImage = true;
         }
 
         private void btnSectionSave_Click(object sender, EventArgs e)
@@ -776,6 +798,7 @@ namespace DigiBugzy.Desktop.Projects
             imgPartPhoto.Image = ImageHelpers.ResizeImage(new Bitmap(dlgProjectSectionPartPhoto.FileName),
                 Globals.Settings.ProductSettings!.ImageWidth, Globals.Settings.ProductSettings.ImageHeight);
             imgPartPhoto.Visible = true;
+            _hasSelectedProjectSectionPartImage = true;
         }
 
         private void btnPartRestore_Click(object sender, EventArgs e)

@@ -111,7 +111,6 @@ namespace DigiBugzy.Services.Projects
         /// <inheritdoc />
         public int Create(ProjectSection entity)
         {
-
             try
             {
                 var eentity = dbContext.ProjectSections.FirstOrDefault(p => p.ProjectId == entity.ProjectId && p.Name == entity.Name);
@@ -121,7 +120,6 @@ namespace DigiBugzy.Services.Projects
                 }
                 else
                 {
-
                     dbContext.ProjectSections.AddAsync(entity);
                     dbContext.SaveChanges();
                 }
@@ -140,7 +138,6 @@ namespace DigiBugzy.Services.Projects
                 throw;
             }
         }
-
 
         #endregion
     }
