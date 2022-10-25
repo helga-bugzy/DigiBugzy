@@ -32,7 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectsManager));
             DigiBugzy.Data.Common.xBaseObjects.FilterObjects.ProjectDocumentFilter projectDocumentFilter1 = new DigiBugzy.Data.Common.xBaseObjects.FilterObjects.ProjectDocumentFilter();
             DigiBugzy.Core.Domain.Projects.ProjectDocument projectDocument1 = new DigiBugzy.Core.Domain.Projects.ProjectDocument();
+            DigiBugzy.Data.Common.xBaseObjects.ProjectPrintingFilter projectPrintingFilter1 = new DigiBugzy.Data.Common.xBaseObjects.ProjectPrintingFilter();
+            DigiBugzy.Core.Domain.Projects.ProjectPrinting projectPrinting1 = new DigiBugzy.Core.Domain.Projects.ProjectPrinting();
+            DigiBugzy.Core.Domain.Administration.ThreeDPrinting.ThreeDPrinter threedPrinter1 = new DigiBugzy.Core.Domain.Administration.ThreeDPrinting.ThreeDPrinter();
+            DigiBugzy.Core.Domain.Administration.ThreeDPrinting.ThreeDResolution threedResolution1 = new DigiBugzy.Core.Domain.Administration.ThreeDPrinting.ThreeDResolution();
             this.pnlManager = new DevExpress.XtraEditors.PanelControl();
+            this.splitBackground = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnlGridMain = new DevExpress.XtraEditors.PanelControl();
             this.splitGridsMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
@@ -131,9 +136,16 @@
             this.bsSections = new System.Windows.Forms.BindingSource(this.components);
             this.bsParts = new System.Windows.Forms.BindingSource(this.components);
             this.bsProjectPartDocuments = new System.Windows.Forms.BindingSource(this.components);
-            this.splitBackground = new DevExpress.XtraEditors.SplitContainerControl();
+            this.tabThreeDPrinting = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.ucProjectPrinting1 = new DigiBugzy.Desktop.Projects.UserControls.ucProjectPrinting();
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel1)).BeginInit();
+            this.splitBackground.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).BeginInit();
+            this.splitBackground.Panel2.SuspendLayout();
+            this.splitBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlGridMain)).BeginInit();
             this.pnlGridMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsMain)).BeginInit();
@@ -214,12 +226,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel1)).BeginInit();
-            this.splitBackground.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).BeginInit();
-            this.splitBackground.Panel2.SuspendLayout();
-            this.splitBackground.SuspendLayout();
+            this.tabThreeDPrinting.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlManager
@@ -230,6 +237,26 @@
             this.pnlManager.Name = "pnlManager";
             this.pnlManager.Size = new System.Drawing.Size(2250, 1144);
             this.pnlManager.TabIndex = 0;
+            // 
+            // splitBackground
+            // 
+            this.splitBackground.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitBackground.Horizontal = false;
+            this.splitBackground.Location = new System.Drawing.Point(2, 2);
+            this.splitBackground.Name = "splitBackground";
+            // 
+            // splitBackground.Panel1
+            // 
+            this.splitBackground.Panel1.Controls.Add(this.pnlGridMain);
+            this.splitBackground.Panel1.Text = "Panel1";
+            // 
+            // splitBackground.Panel2
+            // 
+            this.splitBackground.Panel2.Controls.Add(this.pnlBottomSections);
+            this.splitBackground.Panel2.Text = "Panel2";
+            this.splitBackground.Size = new System.Drawing.Size(2246, 1140);
+            this.splitBackground.SplitterPosition = 624;
+            this.splitBackground.TabIndex = 3;
             // 
             // pnlGridMain
             // 
@@ -496,6 +523,7 @@
             this.tabEditors.Controls.Add(this.tabSectionEditors);
             this.tabEditors.Controls.Add(this.tabPartsEditors);
             this.tabEditors.Controls.Add(this.tabDocumentsManager);
+            this.tabEditors.Controls.Add(this.tabThreeDPrinting);
             this.tabEditors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabEditors.Location = new System.Drawing.Point(0, 0);
             this.tabEditors.Name = "tabEditors";
@@ -503,7 +531,8 @@
             this.tabProjectEditors,
             this.tabSectionEditors,
             this.tabPartsEditors,
-            this.tabDocumentsManager});
+            this.tabDocumentsManager,
+            this.tabThreeDPrinting});
             this.tabEditors.RegularSize = new System.Drawing.Size(2246, 506);
             this.tabEditors.SelectedPage = this.tabProjectEditors;
             this.tabEditors.Size = new System.Drawing.Size(2246, 506);
@@ -522,7 +551,7 @@
             this.tabProjectEditors.Properties.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.tabProjectEditors.Properties.AppearanceCaption.Options.UseFont = true;
             this.tabProjectEditors.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabProjectEditors.Size = new System.Drawing.Size(2242, 499);
+            this.tabProjectEditors.Size = new System.Drawing.Size(2246, 473);
             // 
             // panelControl10
             // 
@@ -530,7 +559,7 @@
             this.panelControl10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl10.Location = new System.Drawing.Point(0, 38);
             this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(2242, 461);
+            this.panelControl10.Size = new System.Drawing.Size(2246, 435);
             this.panelControl10.TabIndex = 2;
             // 
             // tabPane2
@@ -739,7 +768,7 @@
             this.panelControl9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl9.Location = new System.Drawing.Point(0, 0);
             this.panelControl9.Name = "panelControl9";
-            this.panelControl9.Size = new System.Drawing.Size(2242, 38);
+            this.panelControl9.Size = new System.Drawing.Size(2246, 38);
             this.panelControl9.TabIndex = 1;
             // 
             // labelControl1
@@ -763,7 +792,7 @@
             this.tabSectionEditors.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabSectionEditors.Name = "tabSectionEditors";
             this.tabSectionEditors.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabSectionEditors.Size = new System.Drawing.Size(2242, 469);
+            this.tabSectionEditors.Size = new System.Drawing.Size(2246, 506);
             // 
             // panelControl12
             // 
@@ -771,7 +800,7 @@
             this.panelControl12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl12.Location = new System.Drawing.Point(0, 38);
             this.panelControl12.Name = "panelControl12";
-            this.panelControl12.Size = new System.Drawing.Size(2242, 431);
+            this.panelControl12.Size = new System.Drawing.Size(2246, 468);
             this.panelControl12.TabIndex = 3;
             // 
             // tabPane3
@@ -782,9 +811,9 @@
             this.tabPane3.Name = "tabPane3";
             this.tabPane3.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabSectionEditor});
-            this.tabPane3.RegularSize = new System.Drawing.Size(2238, 427);
+            this.tabPane3.RegularSize = new System.Drawing.Size(2242, 464);
             this.tabPane3.SelectedPage = this.tabSectionEditor;
-            this.tabPane3.Size = new System.Drawing.Size(2238, 427);
+            this.tabPane3.Size = new System.Drawing.Size(2242, 464);
             this.tabPane3.TabIndex = 0;
             this.tabPane3.Text = "tabPane3";
             // 
@@ -949,7 +978,7 @@
             this.panelControl11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl11.Location = new System.Drawing.Point(0, 0);
             this.panelControl11.Name = "panelControl11";
-            this.panelControl11.Size = new System.Drawing.Size(2242, 38);
+            this.panelControl11.Size = new System.Drawing.Size(2246, 38);
             this.panelControl11.TabIndex = 2;
             // 
             // labelControl2
@@ -973,7 +1002,7 @@
             this.tabPartsEditors.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPartsEditors.Name = "tabPartsEditors";
             this.tabPartsEditors.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPartsEditors.Size = new System.Drawing.Size(2242, 469);
+            this.tabPartsEditors.Size = new System.Drawing.Size(2246, 473);
             // 
             // panelControl14
             // 
@@ -981,7 +1010,7 @@
             this.panelControl14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl14.Location = new System.Drawing.Point(0, 38);
             this.panelControl14.Name = "panelControl14";
-            this.panelControl14.Size = new System.Drawing.Size(2242, 431);
+            this.panelControl14.Size = new System.Drawing.Size(2246, 435);
             this.panelControl14.TabIndex = 4;
             // 
             // tabPane4
@@ -996,9 +1025,9 @@
             this.tabPane4.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabPartsEditor,
             this.tabPartsProducts});
-            this.tabPane4.RegularSize = new System.Drawing.Size(2238, 427);
+            this.tabPane4.RegularSize = new System.Drawing.Size(2242, 431);
             this.tabPane4.SelectedPage = this.tabPartsEditor;
-            this.tabPane4.Size = new System.Drawing.Size(2238, 427);
+            this.tabPane4.Size = new System.Drawing.Size(2242, 431);
             this.tabPane4.TabIndex = 0;
             this.tabPane4.Text = "tabPane4";
             // 
@@ -1010,7 +1039,7 @@
             this.tabPartsEditor.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPartsEditor.Name = "tabPartsEditor";
             this.tabPartsEditor.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPartsEditor.Size = new System.Drawing.Size(2238, 394);
+            this.tabPartsEditor.Size = new System.Drawing.Size(2242, 398);
             // 
             // pnlPartsEdtior
             // 
@@ -1032,7 +1061,7 @@
             this.pnlPartsEdtior.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPartsEdtior.Location = new System.Drawing.Point(0, 0);
             this.pnlPartsEdtior.Name = "pnlPartsEdtior";
-            this.pnlPartsEdtior.Size = new System.Drawing.Size(2238, 394);
+            this.pnlPartsEdtior.Size = new System.Drawing.Size(2242, 398);
             this.pnlPartsEdtior.TabIndex = 2;
             // 
             // lblPartSelectedFileName
@@ -1172,7 +1201,7 @@
             this.panelControl13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl13.Location = new System.Drawing.Point(0, 0);
             this.panelControl13.Name = "panelControl13";
-            this.panelControl13.Size = new System.Drawing.Size(2242, 38);
+            this.panelControl13.Size = new System.Drawing.Size(2246, 38);
             this.panelControl13.TabIndex = 3;
             // 
             // labelControl3
@@ -1280,25 +1309,116 @@
             // 
             this.bsParts.PositionChanged += new System.EventHandler(this.bsParts_PositionChanged);
             // 
-            // splitBackground
+            // tabThreeDPrinting
             // 
-            this.splitBackground.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitBackground.Horizontal = false;
-            this.splitBackground.Location = new System.Drawing.Point(2, 2);
-            this.splitBackground.Name = "splitBackground";
+            this.tabThreeDPrinting.Caption = "3D Printing";
+            this.tabThreeDPrinting.Controls.Add(this.ucProjectPrinting1);
+            this.tabThreeDPrinting.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabThreeDPrinting.ImageOptions.Image")));
+            this.tabThreeDPrinting.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
+            this.tabThreeDPrinting.Name = "tabThreeDPrinting";
+            this.tabThreeDPrinting.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
+            this.tabThreeDPrinting.Size = new System.Drawing.Size(2246, 473);
             // 
-            // splitBackground.splitBackground_Panel1
+            // ucProjectPrinting1
             // 
-            this.splitBackground.Panel1.Controls.Add(this.pnlGridMain);
-            this.splitBackground.Panel1.Text = "Panel1";
-            // 
-            // splitBackground.splitBackground_Panel2
-            // 
-            this.splitBackground.Panel2.Controls.Add(this.pnlBottomSections);
-            this.splitBackground.Panel2.Text = "Panel2";
-            this.splitBackground.Size = new System.Drawing.Size(2246, 1140);
-            this.splitBackground.SplitterPosition = 624;
-            this.splitBackground.TabIndex = 3;
+            this.ucProjectPrinting1.Dock = System.Windows.Forms.DockStyle.Fill;
+            projectPrintingFilter1.CategoryId = null;
+            projectPrintingFilter1.ClassificationId = null;
+            projectPrintingFilter1.CustomFieldId = null;
+            projectPrintingFilter1.Description = null;
+            projectPrintingFilter1.DigiAdminId = null;
+            projectPrintingFilter1.Id = null;
+            projectPrintingFilter1.IncludeDeleted = false;
+            projectPrintingFilter1.IncludeInActive = false;
+            projectPrintingFilter1.LikeSearch = false;
+            projectPrintingFilter1.Name = null;
+            projectPrintingFilter1.OnlyParents = false;
+            projectPrintingFilter1.ParentId = null;
+            projectPrintingFilter1.ParentName = null;
+            projectPrintingFilter1.Part = null;
+            projectPrintingFilter1.Project = null;
+            projectPrintingFilter1.ProjectId = 0;
+            projectPrintingFilter1.ProjectSectionId = 0;
+            projectPrintingFilter1.ProjectSectionPartId = 0;
+            projectPrintingFilter1.Section = null;
+            this.ucProjectPrinting1.Filter = projectPrintingFilter1;
+            this.ucProjectPrinting1.Location = new System.Drawing.Point(0, 0);
+            this.ucProjectPrinting1.Name = "ucProjectPrinting1";
+            projectPrinting1.ActualFilamentColor = null;
+            projectPrinting1.ActualFilamentColorId = 0;
+            projectPrinting1.ActualFilamentType = null;
+            projectPrinting1.ActualFilamentTypeId = null;
+            projectPrinting1.ActualPrintTime = null;
+            projectPrinting1.ActualQuantity = null;
+            projectPrinting1.CadFile = null;
+            projectPrinting1.CreatedOn = new System.DateTime(((long)(0)));
+            projectPrinting1.Description = null;
+            projectPrinting1.DigiAdmin = null;
+            projectPrinting1.DigiAdminId = 0;
+            projectPrinting1.EstimatedPrintTime = null;
+            projectPrinting1.FilamentUsedGram = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            projectPrinting1.FilamentUsedMeter = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            projectPrinting1.GCodeFile = null;
+            projectPrinting1.Id = 0;
+            projectPrinting1.Infil = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            projectPrinting1.IsActive = false;
+            projectPrinting1.IsDeleted = false;
+            projectPrinting1.IsGCodeMade = false;
+            projectPrinting1.Name = null;
+            projectPrinting1.Picture = null;
+            threedPrinter1.CreatedOn = new System.DateTime(((long)(0)));
+            threedPrinter1.Description = null;
+            threedPrinter1.DigiAdmin = null;
+            threedPrinter1.DigiAdminId = 0;
+            threedPrinter1.Id = 0;
+            threedPrinter1.IsActive = false;
+            threedPrinter1.IsDeleted = false;
+            threedPrinter1.Name = null;
+            projectPrinting1.Printer = threedPrinter1;
+            projectPrinting1.PrinterId = 0;
+            projectPrinting1.Project = null;
+            projectPrinting1.ProjectId = 0;
+            projectPrinting1.ProjectSection = null;
+            projectPrinting1.ProjectSectionId = null;
+            projectPrinting1.ProjectSectionPart = null;
+            projectPrinting1.ProjectSectionPartId = null;
+            projectPrinting1.RequiredFilamentColor = null;
+            projectPrinting1.RequiredFilamentColorId = 0;
+            projectPrinting1.RequiredFilamentType = null;
+            projectPrinting1.RequiredFilamentTypeId = 0;
+            projectPrinting1.RequiredQuantity = 0;
+            threedResolution1.CreatedOn = new System.DateTime(((long)(0)));
+            threedResolution1.Description = null;
+            threedResolution1.DigiAdmin = null;
+            threedResolution1.DigiAdminId = 0;
+            threedResolution1.Id = 0;
+            threedResolution1.IsActive = false;
+            threedResolution1.IsDeleted = false;
+            threedResolution1.Name = null;
+            projectPrinting1.Resolution = threedResolution1;
+            projectPrinting1.ResolutionId = 0;
+            projectPrinting1.StlFile = null;
+            projectPrinting1.StlFileName = null;
+            projectPrinting1.WallThickness = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.ucProjectPrinting1.SelectedPrinting = projectPrinting1;
+            this.ucProjectPrinting1.Size = new System.Drawing.Size(2246, 473);
+            this.ucProjectPrinting1.TabIndex = 0;
             // 
             // ProjectsManager
             // 
@@ -1312,6 +1432,12 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).EndInit();
             this.pnlManager.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel1)).EndInit();
+            this.splitBackground.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).EndInit();
+            this.splitBackground.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).EndInit();
+            this.splitBackground.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlGridMain)).EndInit();
             this.pnlGridMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitGridsMain.Panel1)).EndInit();
@@ -1401,12 +1527,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel1)).EndInit();
-            this.splitBackground.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).EndInit();
-            this.splitBackground.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).EndInit();
-            this.splitBackground.ResumeLayout(false);
+            this.tabThreeDPrinting.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1514,5 +1635,7 @@
         private UserControls.ucProjectDocs ucProjectDocs1;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabPartsProductss;
         private DevExpress.XtraEditors.SplitContainerControl splitBackground;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabThreeDPrinting;
+        private UserControls.ucProjectPrinting ucProjectPrinting1;
     }
 }

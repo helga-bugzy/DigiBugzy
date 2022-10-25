@@ -27,14 +27,18 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private ProjectControlEnum Type { get; set; }
 
-        private bool isInitializing { get; set; }
+        private bool IsInitializing { get; set; }
 
         #endregion
+
+        #region Ctor
 
         public ucProjectDocs()
         {
             InitializeComponent();
         }
+
+        #endregion
 
         #region Control Event Procedure(s)
 
@@ -162,7 +166,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             Type = type;
             Filter = filter;
             
-            isInitializing = true;
+            IsInitializing = true;
 
             progressPanel1.Visible = true;
             Application.DoEvents();
@@ -197,7 +201,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             LoadBaseViewer();
 
             progressPanel1.Visible = false;
-            isInitializing = false;
+            IsInitializing = false;
             Application.DoEvents();
 
         }
@@ -248,7 +252,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
         {
             if (sender is not BindingSource) return;
 
-            if (!isInitializing)
+            if (!IsInitializing)
             {
                 progressPanel1.Visible = true;
                 Application.DoEvents();
@@ -256,7 +260,7 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             if (BindingContext[bindingSource1].Position <= -1) return;
             SelectedDocument = (ProjectDocument)bindingSource1.Current;
 
-            if (!isInitializing) progressPanel1.Visible = true;
+            if (!IsInitializing) progressPanel1.Visible = true;
             Application.DoEvents();
         }
 

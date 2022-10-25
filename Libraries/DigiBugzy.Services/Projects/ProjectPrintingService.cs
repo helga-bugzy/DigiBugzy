@@ -3,7 +3,7 @@ using DigiBugzy.Data.Common.xBaseObjects;
 
 namespace DigiBugzy.Services.Projects
 {
-    internal class ProjectPrintingService : BaseService, IProjectPrintingService
+    public class ProjectPrintingService : BaseService, IProjectPrintingService
     {
         #region Ctor
 

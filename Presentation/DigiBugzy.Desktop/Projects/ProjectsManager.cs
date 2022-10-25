@@ -6,6 +6,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DigiBugzy.Core.Domain.Projects;
 using DigiBugzy.Core.Helpers;
+using DigiBugzy.Data.Common.xBaseObjects;
 using DigiBugzy.Services.Projects;
 using DigiBugzy.Services.SampleData;
 
@@ -145,6 +146,7 @@ namespace DigiBugzy.Desktop.Projects
 
            LoadEditor_Project();
            LoadDocManager_Project();
+            Load3DPrinting_Project();
         }
 
         private void LoadEditor_Project()
@@ -200,6 +202,22 @@ namespace DigiBugzy.Desktop.Projects
             };
 
            // dmProject?.LoadData(type: ProjectControlEnum.Project, filter: filter);
+        }
+
+        private void Load3DPrinting_Project()
+        {
+            var filter = new ProjectPrintingFilter
+            {
+                Project = SelectedProject,
+                ProjectId = SelectedProject.Id,
+
+                Section = new ProjectSection(),
+                ProjectSectionId = 0,
+
+                Part = new ProjectSectionPart(),
+                ProjectSectionPartId = 0
+            };
+            ucProjectPrinting1.InitializeData(ProjectControlEnum.Project, filter);
         }
 
         private void LoadSelected_ProjectSection()

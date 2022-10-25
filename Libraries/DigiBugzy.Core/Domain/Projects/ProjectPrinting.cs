@@ -6,8 +6,14 @@ namespace DigiBugzy.Core.Domain.Projects
     /// Class for 3D printing informmation
     /// </summary>
     [Table(name: nameof(ProjectPrinting), Schema = DatabaseConstants.Schemas.Project)]
-    public class ProjectPrinting: BaseProjectSublementEntity
+    public class ProjectPrinting: BaseAdministrationEntity
     {
+        public int ProjectId { get; set; }
+
+        public int? ProjectSectionId { get; set; }
+
+        public int? ProjectSectionPartId { get; set; }
+
         
 
         public int PrinterId { get; set; }
@@ -92,6 +98,15 @@ namespace DigiBugzy.Core.Domain.Projects
 
         [ForeignKey(nameof(ActualFilamentColorId))]
         public ThreeDFilamentColor ActualFilamentColor { get; set; }
+
+        [ForeignKey(nameof(ProjectId))]
+        public Project Project { get; set; }
+
+        [ForeignKey(nameof(ProjectSectionId))]
+        public ProjectSection ProjectSection { get; set; }
+
+        [ForeignKey(nameof(ProjectSectionPartId))]
+        public ProjectSectionPart ProjectSectionPart { get; set; }
 
         #endregion
     }
