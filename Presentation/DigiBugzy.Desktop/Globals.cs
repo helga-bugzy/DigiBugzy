@@ -10,10 +10,8 @@ namespace DigiBugzy.Desktop
     public static class Globals
     {
 
-    public static ConnectionEnvironment ConnectionEnvironment = ConnectionEnvironment.Development;
-
-
-
+        public static ConnectionEnvironment ConnectionEnvironment = ConnectionEnvironment.Development;
+        
         private const string DatabaseName_Dev = "DigiBugzyDev";
         private const string DatabaseName_Prod = "Schuring1digibugzy";
 
@@ -48,7 +46,7 @@ namespace DigiBugzy.Desktop
 
         public static class Settings
         {
-#region Properties
+            #region Properties
 
             
             private static AdministrationSettings? _administrationSettings;
@@ -69,7 +67,6 @@ namespace DigiBugzy.Desktop
             public static GeneralSettings? GeneralSettings
             {
                 get
-
                 {
                     if (_generalSettings is { Id: <= 0 }) Refresh();
                     return _generalSettings;
@@ -102,9 +99,9 @@ namespace DigiBugzy.Desktop
 
             
 
-#endregion
+            #endregion
 
-#region Methods
+            #region Methods
 
             public static void Refresh()
             {
@@ -140,14 +137,8 @@ namespace DigiBugzy.Desktop
                 ProjectSettings = service.Get(DigiAdministration.Id).FirstOrDefault()!;
             }
 
-#endregion
-
-
+            #endregion
 
         }
-
-        
-
-        
     }
 }

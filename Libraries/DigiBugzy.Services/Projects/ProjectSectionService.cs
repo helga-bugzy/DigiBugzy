@@ -111,18 +111,34 @@ namespace DigiBugzy.Services.Projects
         /// <inheritdoc />
         public int Create(ProjectSection entity)
         {
-            var eentity = dbContext.ProjectSections.FirstOrDefault(p => p.ProjectId == entity.ProjectId && p.Name == entity.Name);
-            if (eentity != null && eentity.Id == entity.Id)
-            {
-                Update(entity);
-            }
-            else
-            {
-                dbContext.Add(entity);
-                dbContext.SaveChanges();
-            }
 
-            return entity.Id;
+            try
+            {
+                var eentity = dbContext.ProjectSections.FirstOrDefault(p => p.ProjectId == entity.ProjectId && p.Name == entity.Name);
+                if (eentity != null && eentity.Id == entity.Id)
+                {
+                    Update(entity);
+                }
+                else
+                {
+
+                    dbContext.ProjectSections.AddAsync(entity);
+                    dbContext.SaveChanges();
+                }
+
+                return entity.Id;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+                if (e.InnerException != null)
+                {
+                    var c = e.InnerException.Message;
+                }
+
+                throw;
+            }
         }
 
 

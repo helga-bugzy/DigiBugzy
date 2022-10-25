@@ -200,8 +200,6 @@ namespace DigiBugzy.Desktop.Projects
                 Part = new ProjectSectionPart(),
                 ProjectSectionPartId = 0
             };
-
-           // dmProject?.LoadData(type: ProjectControlEnum.Project, filter: filter);
         }
 
         private void Load3DPrinting_Project()
@@ -222,7 +220,7 @@ namespace DigiBugzy.Desktop.Projects
 
         private void LoadSelected_ProjectSection()
         {
-
+           
             switch (SelectedProjectSection.Id)
             {
                 
@@ -407,6 +405,7 @@ namespace DigiBugzy.Desktop.Projects
             SelectedProjectSection.Name = txtSectionName.Text;
             SelectedProjectSection.Description = txtSectionDescription.Text;
             SelectedProjectSection.IsActive = chkSectionActive.Checked;
+            SelectedProjectSection.ProjectId = Filter.ProjectId;
 
 
             if (imgSectionPhoto.Image != null)
@@ -436,6 +435,7 @@ namespace DigiBugzy.Desktop.Projects
             SelectedProjectSectionPart.Name = txtPartName.Text;
             SelectedProjectSectionPart.Description = txtPartDescription.Text;
             SelectedProjectSectionPart.IsActive = chkPartActive.Checked;
+            SelectedProjectSectionPart.ProjectSectionId = Filter.ProjectSectionId;
 
 
             if (imgPartPhoto.Image != null)
@@ -456,7 +456,8 @@ namespace DigiBugzy.Desktop.Projects
                 SelectedProjectSectionPart.Id = service.Create(SelectedProjectSectionPart);
             }
 
-            LoadSelected_ProjectSectionPart();
+            LoadGrid_ProjectSectionParts();
+            Application.DoEvents();
 
         }
 
@@ -492,8 +493,9 @@ namespace DigiBugzy.Desktop.Projects
 
         private void bsProjects_PositionChanged(object sender, EventArgs e)
         {
-            
-           if (sender is not BindingSource) return;
+            if (InProjectSelection) return;
+
+            if (sender is not BindingSource) return;
             if (BindingContext[bsProjects].Position <= -1) return;
             InProjectSelection = true;
 
@@ -501,7 +503,8 @@ namespace DigiBugzy.Desktop.Projects
 
             SelectedProject = (Project)bsProjects.Current;
             LoadSelected_Project();
-            if(!InProjectSectionSelection || !InProjectSectionPartSelection)  tabEditors.SelectedPage = tabProjectEditors;
+            if(!InProjectSectionSelection || !InProjectSectionPartSelection)  
+                tabEditors.SelectedPage = tabProjectEditors;
 
             Filter.ProjectId = SelectedProject.Id;
             Filter.ProjectSectionId = 0;
@@ -519,6 +522,7 @@ namespace DigiBugzy.Desktop.Projects
 
         private void bsSections_PositionChanged(object sender, EventArgs e)
         {
+            if (InProjectSectionSelection) return;
             
             if (sender is not BindingSource) return;
             InProjectSectionSelection = true;
@@ -526,16 +530,22 @@ namespace DigiBugzy.Desktop.Projects
 
             Application.DoEvents();
             SelectedProjectSection = (ProjectSection)bsSections.Current;
-            LoadSelected_ProjectSection();
+            
             if (!InProjectSelection || !InProjectSectionPartSelection) tabEditors.SelectedPage = tabSectionEditors;
 
             Filter.ProjectSectionId = SelectedProjectSection.Id;
             Filter.ProjectSectionPartId = 0;
-            ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSection, Filter);
+            //ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSection, Filter);
+            //TODO: ucProjectPrinting1.InitializeData(ProjectControlEnum.ProjectSection, )
+            LoadSelected_ProjectSection();
+            LoadGrid_ProjectSectionParts();
+            InProjectSectionSelection = false;
+
+            
 
             Application.DoEvents();
 
-            InProjectSectionSelection = false;
+            
         }
 
         private void gvProjectSections_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -555,7 +565,7 @@ namespace DigiBugzy.Desktop.Projects
 
         private void bsParts_PositionChanged(object sender, EventArgs e)
         {
-           // if (InProjectSelection || InProjectSectionSelection || InProjectSectionPartSelection) return;
+            if (InProjectSectionPartSelection) return;
 
             if (sender is not BindingSource) return;
             InProjectSectionPartSelection = true;
@@ -569,9 +579,9 @@ namespace DigiBugzy.Desktop.Projects
             Filter.ProjectSectionPartId = SelectedProjectSectionPart.Id;
             ucProjectDocs1.InitializeData(ProjectControlEnum.ProjectSectionPart, Filter);
 
-            Application.DoEvents();
-
             InProjectSectionPartSelection = false;
+
+            Application.DoEvents();
         }
 
         private void gvProjectSectionParts_RowCellStyle(object sender, RowCellStyleEventArgs e)

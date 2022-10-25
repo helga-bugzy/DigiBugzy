@@ -88,8 +88,6 @@ namespace DigiBugzy.Desktop
             services?.AddScoped<LoginForm>();
         }
 
-       
-
         private static void RegisterServices()
         {
             if (services != null)

@@ -129,6 +129,8 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.tabDocumentsManager = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.ucProjectDocs1 = new DigiBugzy.Desktop.Projects.UserControls.ucProjectDocs();
+            this.tabThreeDPrinting = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.ucProjectPrinting1 = new DigiBugzy.Desktop.Projects.UserControls.ucProjectPrinting();
             this.dlgProjectImage = new System.Windows.Forms.OpenFileDialog();
             this.dlgProjectSectionPhoto = new System.Windows.Forms.OpenFileDialog();
             this.dlgProjectSectionPartPhoto = new System.Windows.Forms.OpenFileDialog();
@@ -136,8 +138,6 @@
             this.bsSections = new System.Windows.Forms.BindingSource(this.components);
             this.bsParts = new System.Windows.Forms.BindingSource(this.components);
             this.bsProjectPartDocuments = new System.Windows.Forms.BindingSource(this.components);
-            this.tabThreeDPrinting = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.ucProjectPrinting1 = new DigiBugzy.Desktop.Projects.UserControls.ucProjectPrinting();
             ((System.ComponentModel.ISupportInitialize)(this.pnlManager)).BeginInit();
             this.pnlManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).BeginInit();
@@ -222,11 +222,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl13)).BeginInit();
             this.panelControl13.SuspendLayout();
             this.tabDocumentsManager.SuspendLayout();
+            this.tabThreeDPrinting.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).BeginInit();
-            this.tabThreeDPrinting.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlManager
@@ -310,6 +310,9 @@
             // 
             // gvProjects
             // 
+            this.gvProjects.Appearance.FocusedRow.BackColor = System.Drawing.Color.Yellow;
+            this.gvProjects.Appearance.FocusedRow.BackColor2 = System.Drawing.Color.Yellow;
+            this.gvProjects.Appearance.FocusedRow.Options.UseBackColor = true;
             this.gvProjects.GridControl = this.gridProjects;
             this.gvProjects.Name = "gvProjects";
             // 
@@ -396,6 +399,9 @@
             // 
             // gvProjectSections
             // 
+            this.gvProjectSections.Appearance.FocusedRow.BackColor = System.Drawing.Color.Yellow;
+            this.gvProjectSections.Appearance.FocusedRow.BackColor2 = System.Drawing.Color.Yellow;
+            this.gvProjectSections.Appearance.FocusedRow.Options.UseBackColor = true;
             this.gvProjectSections.GridControl = this.gridProjectSections;
             this.gvProjectSections.Name = "gvProjectSections";
             this.gvProjectSections.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvProjectSections_RowCellStyle);
@@ -463,6 +469,9 @@
             // 
             // gvProjectSectionParts
             // 
+            this.gvProjectSectionParts.Appearance.SelectedRow.BackColor = System.Drawing.Color.Yellow;
+            this.gvProjectSectionParts.Appearance.SelectedRow.BackColor2 = System.Drawing.Color.Yellow;
+            this.gvProjectSectionParts.Appearance.SelectedRow.Options.UseBackColor = true;
             this.gvProjectSectionParts.GridControl = this.gridProjectSectionParts;
             this.gvProjectSectionParts.Name = "gvProjectSectionParts";
             this.gvProjectSectionParts.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvProjectSectionParts_RowCellStyle);
@@ -693,7 +702,9 @@
             // chkProjectActive
             // 
             this.chkProjectActive.AutoSize = true;
-            this.chkProjectActive.Location = new System.Drawing.Point(95, 294);
+            this.chkProjectActive.Checked = true;
+            this.chkProjectActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkProjectActive.Location = new System.Drawing.Point(115, 293);
             this.chkProjectActive.Name = "chkProjectActive";
             this.chkProjectActive.Size = new System.Drawing.Size(15, 14);
             this.chkProjectActive.TabIndex = 27;
@@ -792,7 +803,7 @@
             this.tabSectionEditors.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabSectionEditors.Name = "tabSectionEditors";
             this.tabSectionEditors.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabSectionEditors.Size = new System.Drawing.Size(2246, 506);
+            this.tabSectionEditors.Size = new System.Drawing.Size(2246, 473);
             // 
             // panelControl12
             // 
@@ -800,7 +811,7 @@
             this.panelControl12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl12.Location = new System.Drawing.Point(0, 38);
             this.panelControl12.Name = "panelControl12";
-            this.panelControl12.Size = new System.Drawing.Size(2246, 468);
+            this.panelControl12.Size = new System.Drawing.Size(2246, 435);
             this.panelControl12.TabIndex = 3;
             // 
             // tabPane3
@@ -811,9 +822,9 @@
             this.tabPane3.Name = "tabPane3";
             this.tabPane3.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabSectionEditor});
-            this.tabPane3.RegularSize = new System.Drawing.Size(2242, 464);
+            this.tabPane3.RegularSize = new System.Drawing.Size(2242, 431);
             this.tabPane3.SelectedPage = this.tabSectionEditor;
-            this.tabPane3.Size = new System.Drawing.Size(2242, 464);
+            this.tabPane3.Size = new System.Drawing.Size(2242, 431);
             this.tabPane3.TabIndex = 0;
             this.tabPane3.Text = "tabPane3";
             // 
@@ -825,7 +836,7 @@
             this.tabSectionEditor.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabSectionEditor.Name = "tabSectionEditor";
             this.tabSectionEditor.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabSectionEditor.Size = new System.Drawing.Size(2238, 394);
+            this.tabSectionEditor.Size = new System.Drawing.Size(2242, 398);
             // 
             // pnlSectionEditor
             // 
@@ -847,7 +858,7 @@
             this.pnlSectionEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSectionEditor.Location = new System.Drawing.Point(0, 0);
             this.pnlSectionEditor.Name = "pnlSectionEditor";
-            this.pnlSectionEditor.Size = new System.Drawing.Size(2238, 394);
+            this.pnlSectionEditor.Size = new System.Drawing.Size(2242, 398);
             this.pnlSectionEditor.TabIndex = 2;
             // 
             // lblSectopmActive
@@ -884,9 +895,10 @@
             this.btnSectionvImage.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSectionvImage.ImageOptions.Image")));
             this.btnSectionvImage.Location = new System.Drawing.Point(387, 287);
             this.btnSectionvImage.Name = "btnSectionvImage";
-            this.btnSectionvImage.Size = new System.Drawing.Size(104, 23);
+            this.btnSectionvImage.Size = new System.Drawing.Size(104, 28);
             this.btnSectionvImage.TabIndex = 22;
             this.btnSectionvImage.Text = "Select Image";
+            this.btnSectionvImage.Click += new System.EventHandler(this.btnSectionvImage_Click);
             // 
             // btnSectionRestore
             // 
@@ -896,6 +908,7 @@
             this.btnSectionRestore.Size = new System.Drawing.Size(94, 34);
             this.btnSectionRestore.TabIndex = 21;
             this.btnSectionRestore.Text = "Restore";
+            this.btnSectionRestore.Click += new System.EventHandler(this.btnSectionRestore_Click);
             // 
             // btnSectionDelete
             // 
@@ -905,6 +918,7 @@
             this.btnSectionDelete.Size = new System.Drawing.Size(94, 34);
             this.btnSectionDelete.TabIndex = 19;
             this.btnSectionDelete.Text = "Delete";
+            this.btnSectionDelete.Click += new System.EventHandler(this.btnSectionDelete_Click);
             // 
             // btnSectionSave
             // 
@@ -914,6 +928,7 @@
             this.btnSectionSave.Size = new System.Drawing.Size(94, 34);
             this.btnSectionSave.TabIndex = 18;
             this.btnSectionSave.Text = "Save";
+            this.btnSectionSave.Click += new System.EventHandler(this.btnSectionSave_Click);
             // 
             // btnSectionAddNew
             // 
@@ -923,11 +938,14 @@
             this.btnSectionAddNew.Size = new System.Drawing.Size(94, 34);
             this.btnSectionAddNew.TabIndex = 20;
             this.btnSectionAddNew.Text = "Add New";
+            this.btnSectionAddNew.Click += new System.EventHandler(this.btnSectionAddNew_Click);
             // 
             // chkSectionActive
             // 
             this.chkSectionActive.AutoSize = true;
-            this.chkSectionActive.Location = new System.Drawing.Point(93, 290);
+            this.chkSectionActive.Checked = true;
+            this.chkSectionActive.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSectionActive.Location = new System.Drawing.Point(114, 290);
             this.chkSectionActive.Name = "chkSectionActive";
             this.chkSectionActive.Size = new System.Drawing.Size(15, 14);
             this.chkSectionActive.TabIndex = 17;
@@ -1091,6 +1109,7 @@
             this.btnPartImage.Size = new System.Drawing.Size(104, 23);
             this.btnPartImage.TabIndex = 23;
             this.btnPartImage.Text = "Select Image";
+            this.btnPartImage.Click += new System.EventHandler(this.btnPartImage_Click);
             // 
             // btnPartRestore
             // 
@@ -1100,6 +1119,7 @@
             this.btnPartRestore.Size = new System.Drawing.Size(84, 34);
             this.btnPartRestore.TabIndex = 22;
             this.btnPartRestore.Text = "Restore";
+            this.btnPartRestore.Click += new System.EventHandler(this.btnPartRestore_Click);
             // 
             // btnPartDelete
             // 
@@ -1109,6 +1129,7 @@
             this.btnPartDelete.Size = new System.Drawing.Size(84, 34);
             this.btnPartDelete.TabIndex = 20;
             this.btnPartDelete.Text = "Delete";
+            this.btnPartDelete.Click += new System.EventHandler(this.btnPartDelete_Click);
             // 
             // btnPartSave
             // 
@@ -1118,6 +1139,7 @@
             this.btnPartSave.Size = new System.Drawing.Size(84, 34);
             this.btnPartSave.TabIndex = 19;
             this.btnPartSave.Text = "Save";
+            this.btnPartSave.Click += new System.EventHandler(this.btnPartSave_Click);
             // 
             // btnPartAddNew
             // 
@@ -1127,10 +1149,13 @@
             this.btnPartAddNew.Size = new System.Drawing.Size(84, 34);
             this.btnPartAddNew.TabIndex = 21;
             this.btnPartAddNew.Text = "Add New";
+            this.btnPartAddNew.Click += new System.EventHandler(this.btnPartAddNew_Click);
             // 
             // chkPartActive
             // 
             this.chkPartActive.AutoSize = true;
+            this.chkPartActive.Checked = true;
+            this.chkPartActive.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPartActive.Location = new System.Drawing.Point(93, 289);
             this.chkPartActive.Name = "chkPartActive";
             this.chkPartActive.Size = new System.Drawing.Size(15, 14);
@@ -1285,30 +1310,6 @@
             this.ucProjectDocs1.Size = new System.Drawing.Size(2246, 473);
             this.ucProjectDocs1.TabIndex = 0;
             // 
-            // dlgProjectImage
-            // 
-            this.dlgProjectImage.FileName = "openFileDialog1";
-            // 
-            // dlgProjectSectionPhoto
-            // 
-            this.dlgProjectSectionPhoto.FileName = "openFileDialog2";
-            // 
-            // dlgProjectSectionPartPhoto
-            // 
-            this.dlgProjectSectionPartPhoto.FileName = "openFileDialog3";
-            // 
-            // bsProjects
-            // 
-            this.bsProjects.PositionChanged += new System.EventHandler(this.bsProjects_PositionChanged);
-            // 
-            // bsSections
-            // 
-            this.bsSections.PositionChanged += new System.EventHandler(this.bsSections_PositionChanged);
-            // 
-            // bsParts
-            // 
-            this.bsParts.PositionChanged += new System.EventHandler(this.bsParts_PositionChanged);
-            // 
             // tabThreeDPrinting
             // 
             this.tabThreeDPrinting.Caption = "3D Printing";
@@ -1420,6 +1421,30 @@
             this.ucProjectPrinting1.Size = new System.Drawing.Size(2246, 473);
             this.ucProjectPrinting1.TabIndex = 0;
             // 
+            // dlgProjectImage
+            // 
+            this.dlgProjectImage.FileName = "openFileDialog1";
+            // 
+            // dlgProjectSectionPhoto
+            // 
+            this.dlgProjectSectionPhoto.FileName = "openFileDialog2";
+            // 
+            // dlgProjectSectionPartPhoto
+            // 
+            this.dlgProjectSectionPartPhoto.FileName = "openFileDialog3";
+            // 
+            // bsProjects
+            // 
+            this.bsProjects.PositionChanged += new System.EventHandler(this.bsProjects_PositionChanged);
+            // 
+            // bsSections
+            // 
+            this.bsSections.PositionChanged += new System.EventHandler(this.bsSections_PositionChanged);
+            // 
+            // bsParts
+            // 
+            this.bsParts.PositionChanged += new System.EventHandler(this.bsParts_PositionChanged);
+            // 
             // ProjectsManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1523,11 +1548,11 @@
             this.panelControl13.ResumeLayout(false);
             this.panelControl13.PerformLayout();
             this.tabDocumentsManager.ResumeLayout(false);
+            this.tabThreeDPrinting.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSections)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsParts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsProjectPartDocuments)).EndInit();
-            this.tabThreeDPrinting.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
