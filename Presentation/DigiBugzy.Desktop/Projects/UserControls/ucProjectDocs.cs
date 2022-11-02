@@ -2,6 +2,7 @@
 using System.IO;
 using DigiBugzy.Core.Domain.Administration.Documents;
 using DigiBugzy.Core.Domain.Projects;
+using DigiBugzy.Core.Extensions;
 using DigiBugzy.Services.Administration.Documents;
 using DigiBugzy.Services.Projects;
 
@@ -46,13 +47,16 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            Filter.Only3DPrintingDocument = rd3D.Checked;
-            Filter.OnlyInstructions = rdInstructions.Checked;
-            Filter.OnlyPlans = rdPlans.Checked;
-            Filter.OnlySpecifications = rdSpecs.Checked;
-            Filter.IncludePartSearch = chkFilterPart.Checked;
-            Filter.IncludeProjectSearch = chkFilterProject.Checked;
-            Filter.IncludeSectionSearch = chkFilterSection.Checked;
+            progressPanel1.Visible = true;
+            Application.DoEvents();
+
+            BuildFilter();
+
+            //Load Grid
+            LoadGrid();
+
+            progressPanel1.Visible = false;
+            Application.DoEvents();
         }
 
         #endregion
@@ -78,7 +82,15 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
+            progressPanel1.Visible = true;
+            Application.DoEvents();
+            
             SaveDocument();
+            BuildFilter();
+            LoadGrid();
+
+            progressPanel1.Visible = false;
             Application.DoEvents();
 
         }
@@ -94,31 +106,60 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void cmbProject_SelectedIndexChanged(object sender, EventArgs e)
         {
+            progressPanel1.Visible = true;
+            Application.DoEvents();
+            
             if (cmbProject.SelectedIndex <= 0) 
                 cmbProject.SelectedIndex = 1;
             var item = (Project)cmbProject.SelectedItem;
             SelectedDocument.ProjectId = item.Id;
             ValidateControl(cmbProject, SelectedDocument.ProjectId);
             LoadCombo_Section();
+
+            progressPanel1.Visible = false;
             Application.DoEvents();
         }
 
         private void cmbSection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbSection.SelectedIndex <= 0)
-                return;
+            progressPanel1.Visible = true;
+            Application.DoEvents();
 
+            if (cmbSection.SelectedIndex <= 0)
+            {
+                SelectedDocument.ProjectSectionId = null;
+                SelectedDocument.ProjectSectionPartId = null;
+                cmbPart.Items.Clear();
+                cmbPart.Enabled = false;
+
+                progressPanel1.Visible = false;
+                Application.DoEvents();
+
+                return;
+            }
             var item = (ProjectSection)cmbSection.SelectedItem;
             SelectedDocument.ProjectSectionId = item.Id;
             LoadCombo_Parts();
+            progressPanel1.Visible = false;
             Application.DoEvents();
         }
 
         private void cmbPart_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbPart.SelectedIndex <= 0) return;
+            progressPanel1.Visible = true;
+            Application.DoEvents();
+
+            if (cmbPart.SelectedIndex <= 0)
+            {
+                SelectedDocument.ProjectSectionPartId = null;
+                progressPanel1.Visible = false;
+                Application.DoEvents();
+
+                return;
+            }
             var item = (ProjectSectionPart)cmbPart.SelectedItem;
             SelectedDocument.ProjectSectionPartId = item.Id;
+            progressPanel1.Visible = false;
             Application.DoEvents();
         }
 
@@ -163,46 +204,56 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         public void InitializeData(ProjectControlEnum type, ProjectDocumentFilter filter)
         {
-            Type = type;
-            Filter = filter;
-            
-            IsInitializing = true;
-
-            progressPanel1.Visible = true;
-            Application.DoEvents();
-
-            switch (type)
+            try
             {
-                case ProjectControlEnum.Project:
-                    chkFilterProject.Checked = true;
-                    break;
-                case ProjectControlEnum.ProjectSection:
-                    chkFilterProject.Checked = true;
-                    chkFilterSection.Checked = true;
-                    break;
-                case ProjectControlEnum.ProjectSectionPart:
-                    chkFilterProject.Checked = true;
-                    chkFilterSection.Checked = true;
-                    chkFilterPart.Checked = true;
-                    break;
-                default:
-                    chkFilterProject.Checked = true;
-                    break;
+                Type = type;
+                Filter = filter;
+
+                IsInitializing = true;
+
+                progressPanel1.Visible = true;
+                Application.DoEvents();
+
+                switch (type)
+                {
+                    case ProjectControlEnum.Project:
+                        chkFilterProject.Checked = true;
+                        break;
+                    case ProjectControlEnum.ProjectSection:
+                        chkFilterProject.Checked = true;
+                        chkFilterSection.Checked = true;
+                        break;
+                    case ProjectControlEnum.ProjectSectionPart:
+                        chkFilterProject.Checked = true;
+                        chkFilterSection.Checked = true;
+                        chkFilterPart.Checked = true;
+                        break;
+                    default:
+                        chkFilterProject.Checked = true;
+                        break;
+                }
+
+                LoadCombo_DocumentFileTypes();
+                LoadCombo_DocumentTypes();
+                LoadCombo_Project();
+                LoadCombo_Section();
+                LoadCombo_Parts();
+
+                LoadGrid();
+                LoadEditor();
+                LoadBaseViewer();
             }
-
-            LoadCombo_DocumentFileTypes();
-            LoadCombo_DocumentTypes();
-            LoadCombo_Project();
-            LoadCombo_Section();
-            LoadCombo_Parts();
-
-            LoadGrid();
-            LoadEditor();
-            LoadBaseViewer();
-
-            progressPanel1.Visible = false;
-            IsInitializing = false;
-            Application.DoEvents();
+            catch (Exception ez)
+            {
+                Console.WriteLine(ez.Message);   
+            }
+            finally
+            {
+                progressPanel1.Visible = false;
+                IsInitializing = false;
+                Application.DoEvents();
+            }
+            
 
         }
 
@@ -217,33 +268,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             bindingSource1.DataSource = collection;
             gridDocuments.DataSource = bindingSource1;
 
-
-            if (gvDocuments.Columns[nameof(ProjectDocument.CreatedOn)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.CreatedOn)].Visible = false;
-
-            if (gvDocuments.Columns[nameof(ProjectDocument.DigiAdmin)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)].Visible = false;
-            if (gvDocuments.Columns[nameof(ProjectDocument.DigiAdminId)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)].Visible = false;
-            if (gvDocuments.Columns[nameof(ProjectDocument.IsActive)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)].Visible = false;
-            if (gvDocuments.Columns[nameof(ProjectDocument.IsDeleted)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)].Visible = false;
-
-            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectId)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectId)].Visible = false;
-            if (gvDocuments.Columns[nameof(ProjectDocument.Project)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.Project)].Visible = false;
-
-            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionId)].Visible = false;
-            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSection)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSection)].Visible = false;
-
-            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPartId)].Visible = false;
-            if (gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPart)] != null) 
-                gvDocuments.Columns[nameof(ProjectDocument.ProjectSectionPart)].Visible = false;
+            gvDocuments.HideAdminColumns();
+            gvDocuments.HideProjectIdColumns();
 
             Application.DoEvents();
         }
@@ -488,6 +514,14 @@ namespace DigiBugzy.Desktop.Projects.UserControls
                 SelectedDocument.IsSpecifications = chkIsSpecifications.Checked;
                 SelectedDocument.DocumentData = GetDocument();
 
+                if(cmbPart.SelectedIndex > 0)
+                {
+                    var item = (ProjectSectionPart)cmbPart.SelectedItem;
+                    SelectedDocument.ProjectSectionPartId = item.Id;
+                }
+                
+
+
                 using var service = new ProjectDocumentService(Globals.GetConnectionString());
                 if (SelectedDocument.Id <= 0)
                 {
@@ -641,14 +675,29 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             ClearErrorIndicators();
         }
 
+        private void BuildFilter()
+        {
+            //Load filter info
+            Filter.Only3DPrintingDocument = rd3D.Checked;
+            Filter.OnlyInstructions = rdInstructions.Checked;
+            Filter.OnlyPlans = rdPlans.Checked;
+            Filter.OnlySpecifications = rdSpecs.Checked;
+            Filter.IncludePartSearch = chkFilterPart.Checked;
+            Filter.IncludeProjectSearch = chkFilterProject.Checked;
+            Filter.IncludeSectionSearch = chkFilterSection.Checked;
+
+            Filter.ProjectId = SelectedDocument.ProjectId;
+            Filter.ProjectSectionId = SelectedDocument.ProjectSectionId ?? 0;
+            Filter.ProjectSectionPartId = SelectedDocument.ProjectSectionPartId ?? 0;
+        }
+
+
         #endregion
 
-
-
         #endregion
 
         #endregion
 
-
+       
     }
 }

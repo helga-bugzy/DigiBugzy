@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitBackground = new DevExpress.XtraEditors.SplitContainerControl();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridListing = new DevExpress.XtraGrid.GridControl();
             this.gvListing = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gbProjectInfo = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -39,15 +39,21 @@
             this.gbFilamentInfo = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gbPrintingSettings = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gbTimeINfo = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.bsListing = new System.Windows.Forms.BindingSource(this.components);
+            this.bsProjects = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel1)).BeginInit();
             this.splitBackground.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).BeginInit();
             this.splitBackground.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvListing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsListing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
             this.SuspendLayout();
             // 
             // splitBackground
@@ -56,18 +62,29 @@
             this.splitBackground.Location = new System.Drawing.Point(0, 0);
             this.splitBackground.Name = "splitBackground";
             // 
-            // splitBackground.splitBackground_Panel1
+            // splitBackground.Panel1
             // 
             this.splitBackground.Panel1.Controls.Add(this.progressPanel1);
             this.splitBackground.Panel1.Controls.Add(this.gridListing);
             this.splitBackground.Panel1.Text = "Panel1";
             // 
-            // splitBackground.splitBackground_Panel2
+            // splitBackground.Panel2
             // 
             this.splitBackground.Panel2.Text = "Panel2";
             this.splitBackground.Size = new System.Drawing.Size(1902, 1096);
             this.splitBackground.SplitterPosition = 1431;
             this.splitBackground.TabIndex = 0;
+            // 
+            // progressPanel1
+            // 
+            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanel1.Appearance.Options.UseBackColor = true;
+            this.progressPanel1.Location = new System.Drawing.Point(584, 369);
+            this.progressPanel1.Name = "progressPanel1";
+            this.progressPanel1.Size = new System.Drawing.Size(246, 66);
+            this.progressPanel1.TabIndex = 0;
+            this.progressPanel1.Text = "progressPanel1";
+            this.progressPanel1.Visible = false;
             // 
             // gridListing
             // 
@@ -77,6 +94,7 @@
             this.gridListing.Name = "gridListing";
             this.gridListing.Size = new System.Drawing.Size(1431, 1096);
             this.gridListing.TabIndex = 0;
+            this.gridListing.UseEmbeddedNavigator = true;
             this.gridListing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvListing});
             // 
@@ -91,6 +109,11 @@
             this.gbTimeINfo});
             this.gvListing.GridControl = this.gridListing;
             this.gvListing.Name = "gvListing";
+            this.gvListing.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvListing.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvListing.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gvListing.OptionsView.AllowHtmlDrawHeaders = true;
+            this.gvListing.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gvListing_RowUpdated);
             // 
             // gbProjectInfo
             // 
@@ -128,17 +151,6 @@
             this.gbTimeINfo.Name = "gbTimeINfo";
             this.gbTimeINfo.VisibleIndex = 5;
             // 
-            // progressPanel1
-            // 
-            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanel1.Appearance.Options.UseBackColor = true;
-            this.progressPanel1.Location = new System.Drawing.Point(584, 369);
-            this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(246, 66);
-            this.progressPanel1.TabIndex = 0;
-            this.progressPanel1.Text = "progressPanel1";
-            this.progressPanel1.Visible = false;
-            // 
             // ucProjectPrinting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,9 +163,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitBackground.Panel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitBackground)).EndInit();
             this.splitBackground.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridListing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvListing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsListing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProjects)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -169,7 +184,10 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbFilamentInfo;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbPrintingSettings;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gbTimeINfo;
-        private BindingSource bindingSource1;
+        private BindingSource bsListing;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
+        private BindingSource bsProjects;
+        private BindingSource bindingSource2;
+        private BindingSource bindingSource3;
     }
 }

@@ -858,20 +858,8 @@ namespace DigiBugzy.Desktop.Projects
         
         private void HideStandardGridColumns(GridView gridView)
         {
-            if (gridView.Columns[nameof(Project.Id)] != null) gridView.Columns[nameof(Project.Id)].Visible = false;
-            if (gridView.Columns[nameof(Project.CreatedOn)] != null) gridView.Columns[nameof(Project.CreatedOn)].Visible = false;
-            if (gridView.Columns[nameof(Project.DigiAdminId)] != null) gridView.Columns[nameof(Project.DigiAdminId)].Visible = false;
-            if (gridView.Columns[nameof(Project.DigiAdmin)] != null) gridView.Columns[nameof(Project.DigiAdmin)].Visible = false;
-            if (gridView.Columns[nameof(Project.IsActive)] != null) gridView.Columns[nameof(Project.IsActive)].Visible = false;
-            if (gridView.Columns[nameof(Project.IsDeleted)] != null) gridView.Columns[nameof(Project.IsDeleted)].Visible = false;
-
-
-            if (gridView.Columns[nameof(ProjectSection.Project)] != null) gridView.Columns[nameof(ProjectSection.Project)].Visible = false;
-            if (gridView.Columns[nameof(ProjectSection.ProjectId)] != null) gridView.Columns[nameof(ProjectSection.ProjectId)].Visible = false;
-
-            if (gridView.Columns[nameof(ProjectSectionPart.ProjectSectionId)] != null) gridView.Columns[nameof(ProjectSectionPart.ProjectSectionId)].Visible = false;
-            if (gridView.Columns[nameof(ProjectSectionPart.ProjectSection)] != null) gridView.Columns[nameof(ProjectSectionPart.ProjectSection)].Visible = false;
-
+            gridView.HideAdminColumns();
+            gridView.HideProjectIdColumns();
         }
 
 

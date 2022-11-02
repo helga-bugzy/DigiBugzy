@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using DevExpress.XtraEditors;
 using DigiBugzy.Core.Domain.Projects;
+using DigiBugzy.Core.Extensions;
 using DigiBugzy.Data.Common.xBaseObjects;
 using DigiBugzy.Services.Projects;
 
@@ -70,8 +71,8 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             {
                 using var service = new ProjectPrintingService(Globals.GetConnectionString());
                 var collection = service.Get(Filter);
-                bindingSource1.DataSource = collection;
-                gridListing.DataSource = bindingSource1;
+                bsListing.DataSource = collection;
+                gridListing.DataSource = bsListing;
 
                 HideGridColumns();
                 GenerateGridBands();
@@ -154,14 +155,9 @@ namespace DigiBugzy.Desktop.Projects.UserControls
 
         private void HideGridColumns()
         {
-            //Base Columns
-            if (gvListing.Columns[nameof(ProjectPrinting.Id)] != null) gvListing.Columns[nameof(ProjectPrinting.Id)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.DigiAdmin)] != null) gvListing.Columns[nameof(ProjectPrinting.DigiAdmin)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.DigiAdminId)] != null) gvListing.Columns[nameof(ProjectPrinting.DigiAdminId)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.CreatedOn)] != null) gvListing.Columns[nameof(ProjectPrinting.CreatedOn)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.IsActive)] != null) gvListing.Columns[nameof(ProjectPrinting.IsActive)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.IsDeleted)] != null) gvListing.Columns[nameof(ProjectPrinting.IsDeleted)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.Description)] != null) gvListing.Columns[nameof(ProjectPrinting.Description)].Visible = false;
+            //Basic columns
+            gvListing.HideAdminColumns();
+            gvListing.HideProjectIdColumns();
 
             //Files
             if (gvListing.Columns[nameof(ProjectPrinting.GCodeFile)] != null) gvListing.Columns[nameof(ProjectPrinting.GCodeFile)].Visible = false;
@@ -171,7 +167,6 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             if (gvListing.Columns[nameof(ProjectPrinting.StlFile)] != null) gvListing.Columns[nameof(ProjectPrinting.IsGCodeMade)].Visible = false;
             if (gvListing.Columns[nameof(ProjectPrinting.CadFile)] != null) gvListing.Columns[nameof(ProjectPrinting.CadFile)].Visible = false;
 
-
             //Objects
             if (gvListing.Columns[nameof(ProjectPrinting.Resolution)] != null) gvListing.Columns[nameof(ProjectPrinting.Resolution)].Visible = false;
             if (gvListing.Columns[nameof(ProjectPrinting.ActualFilamentColor)] != null) gvListing.Columns[nameof(ProjectPrinting.ActualFilamentColor)].Visible = false;
@@ -180,9 +175,12 @@ namespace DigiBugzy.Desktop.Projects.UserControls
             if (gvListing.Columns[nameof(ProjectPrinting.RequiredFilamentType)] != null) gvListing.Columns[nameof(ProjectPrinting.RequiredFilamentType)].Visible = false;
             if (gvListing.Columns[nameof(ProjectPrinting.Printer)] != null) gvListing.Columns[nameof(ProjectPrinting.Printer)].Visible = false;
 
-            if (gvListing.Columns[nameof(ProjectPrinting.Project)] != null) gvListing.Columns[nameof(ProjectPrinting.Project)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.ProjectSection)] != null) gvListing.Columns[nameof(ProjectPrinting.ProjectSection)].Visible = false;
-            if (gvListing.Columns[nameof(ProjectPrinting.ProjectSectionPart)] != null) gvListing.Columns[nameof(ProjectPrinting.ProjectSectionPart)].Visible = false;
+           
+        }
+
+        private void gvListing_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        {
+            
         }
     }
     #endregion

@@ -229,6 +229,7 @@
             this.cmbPart.Size = new System.Drawing.Size(364, 21);
             this.cmbPart.TabIndex = 88;
             this.cmbPart.ValueMember = "Id";
+            this.cmbPart.SelectedIndexChanged += new System.EventHandler(this.cmbPart_SelectedIndexChanged);
             this.cmbPart.Click += new System.EventHandler(this.cmbPart_SelectedIndexChanged);
             // 
             // cmbSection
@@ -240,6 +241,7 @@
             this.cmbSection.Size = new System.Drawing.Size(364, 21);
             this.cmbSection.TabIndex = 86;
             this.cmbSection.ValueMember = "Id";
+            this.cmbSection.SelectedIndexChanged += new System.EventHandler(this.cmbSection_SelectedIndexChanged);
             this.cmbSection.Click += new System.EventHandler(this.cmbSection_SelectedIndexChanged);
             // 
             // cmbProject
@@ -251,6 +253,7 @@
             this.cmbProject.Size = new System.Drawing.Size(364, 21);
             this.cmbProject.TabIndex = 85;
             this.cmbProject.ValueMember = "Id";
+            this.cmbProject.SelectedIndexChanged += new System.EventHandler(this.cmbProject_SelectedIndexChanged);
             this.cmbProject.Click += new System.EventHandler(this.cmbProject_SelectedIndexChanged);
             // 
             // lblPart

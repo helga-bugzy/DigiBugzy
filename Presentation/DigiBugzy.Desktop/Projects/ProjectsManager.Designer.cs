@@ -560,7 +560,7 @@
             this.tabProjectEditors.Properties.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.tabProjectEditors.Properties.AppearanceCaption.Options.UseFont = true;
             this.tabProjectEditors.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabProjectEditors.Size = new System.Drawing.Size(2246, 473);
+            this.tabProjectEditors.Size = new System.Drawing.Size(2246, 479);
             // 
             // panelControl10
             // 
@@ -568,7 +568,7 @@
             this.panelControl10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl10.Location = new System.Drawing.Point(0, 38);
             this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(2246, 435);
+            this.panelControl10.Size = new System.Drawing.Size(2246, 441);
             this.panelControl10.TabIndex = 2;
             // 
             // tabPane2
@@ -594,7 +594,7 @@
             this.tabProjectEditor.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabProjectEditor.Name = "tabProjectEditor";
             this.tabProjectEditor.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabProjectEditor.Size = new System.Drawing.Size(2238, 394);
+            this.tabProjectEditor.Size = new System.Drawing.Size(2238, 400);
             // 
             // pnlProject_Editor
             // 
@@ -618,7 +618,7 @@
             this.pnlProject_Editor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlProject_Editor.Location = new System.Drawing.Point(0, 0);
             this.pnlProject_Editor.Name = "pnlProject_Editor";
-            this.pnlProject_Editor.Size = new System.Drawing.Size(2238, 394);
+            this.pnlProject_Editor.Size = new System.Drawing.Size(2238, 400);
             this.pnlProject_Editor.TabIndex = 2;
             // 
             // txtProjectDescription
@@ -836,7 +836,7 @@
             this.tabSectionEditor.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabSectionEditor.Name = "tabSectionEditor";
             this.tabSectionEditor.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabSectionEditor.Size = new System.Drawing.Size(2242, 398);
+            this.tabSectionEditor.Size = new System.Drawing.Size(2242, 404);
             // 
             // pnlSectionEditor
             // 
@@ -858,7 +858,7 @@
             this.pnlSectionEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlSectionEditor.Location = new System.Drawing.Point(0, 0);
             this.pnlSectionEditor.Name = "pnlSectionEditor";
-            this.pnlSectionEditor.Size = new System.Drawing.Size(2242, 398);
+            this.pnlSectionEditor.Size = new System.Drawing.Size(2242, 404);
             this.pnlSectionEditor.TabIndex = 2;
             // 
             // lblSectopmActive
@@ -1057,7 +1057,7 @@
             this.tabPartsEditor.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPartsEditor.Name = "tabPartsEditor";
             this.tabPartsEditor.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPartsEditor.Size = new System.Drawing.Size(2242, 398);
+            this.tabPartsEditor.Size = new System.Drawing.Size(2242, 404);
             // 
             // pnlPartsEdtior
             // 
@@ -1079,7 +1079,7 @@
             this.pnlPartsEdtior.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPartsEdtior.Location = new System.Drawing.Point(0, 0);
             this.pnlPartsEdtior.Name = "pnlPartsEdtior";
-            this.pnlPartsEdtior.Size = new System.Drawing.Size(2242, 398);
+            this.pnlPartsEdtior.Size = new System.Drawing.Size(2242, 404);
             this.pnlPartsEdtior.TabIndex = 2;
             // 
             // lblPartSelectedFileName
@@ -1249,7 +1249,7 @@
             this.tabDocumentsManager.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabDocumentsManager.Name = "tabDocumentsManager";
             this.tabDocumentsManager.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabDocumentsManager.Size = new System.Drawing.Size(2246, 473);
+            this.tabDocumentsManager.Size = new System.Drawing.Size(2246, 479);
             // 
             // ucProjectDocs1
             // 
@@ -1307,7 +1307,7 @@
             projectDocument1.ProjectSectionPart = null;
             projectDocument1.ProjectSectionPartId = null;
             this.ucProjectDocs1.SelectedDocument = projectDocument1;
-            this.ucProjectDocs1.Size = new System.Drawing.Size(2246, 473);
+            this.ucProjectDocs1.Size = new System.Drawing.Size(2246, 479);
             this.ucProjectDocs1.TabIndex = 0;
             // 
             // tabThreeDPrinting

@@ -110,10 +110,7 @@ namespace DigiBugzy.Desktop.Products
 
                 gvProducts.CollapseAllDetails();
                 gvProducts.BestFitColumns();
-
-                gvProducts.Columns[nameof(ProductGridViewModel.Id)].Visible = false;
-                gvProducts.Columns[nameof(ProductGridViewModel.ParentId)].Visible = false;
-                gvProducts.Columns[nameof(ProductGridViewModel.ParentName)].Visible = false;
+                gvProducts.HideAdminColumns();
 
                 gvProducts.Columns[nameof(ProductGridViewModel.Image)].Width = 15;
                 //gvProducts.BestFitColumns();

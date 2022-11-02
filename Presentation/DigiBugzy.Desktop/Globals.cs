@@ -1,6 +1,7 @@
 ﻿global using FluentMigrator.Runner;
 global using Microsoft.Extensions.DependencyInjection;
 global using DigiBugzy.Core.Enumerations;
+global using DigiBugzy.Core.Extensions;
 using System.Linq;
 using DigiBugzy.Core.Domain.Settings;
 using DigiBugzy.Services.Settings;
