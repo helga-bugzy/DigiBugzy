@@ -41,6 +41,8 @@ namespace DigiBugzy.Core.Extensions
             if (gridView.Columns[nameof(BaseEntity.Id)] != null)
                 gridView.Columns[nameof(BaseEntity.Id)].Visible = false;
 
+            gridView.BestFitColumns();
+
 
 
         }
@@ -51,6 +53,8 @@ namespace DigiBugzy.Core.Extensions
         /// <param name="gridView"></param>
         public static void HideProjectIdColumns(this GridView gridView)
         {
+            gridView.HideAdminColumns();
+
             if (gridView.Columns[nameof(ProjectDocument.ProjectId)] != null)
                 gridView.Columns[nameof(ProjectDocument.ProjectId)].Visible = false;
             if (gridView.Columns[nameof(ProjectDocument.Project)] != null)
@@ -67,7 +71,22 @@ namespace DigiBugzy.Core.Extensions
                 gridView.Columns[nameof(ProjectDocument.ProjectSectionPart)].Visible = false;
         }
 
-       
+        public static void HideDocumentColumns(this GridView gridView)
+        {
+            gridView.HideAdminColumns();
+
+            if (gridView.Columns[nameof(BaseDocumentEntity.DocumentTypeId)] != null)
+                gridView.Columns[nameof(BaseDocumentEntity.DocumentTypeId)].Visible = false;
+
+            if (gridView.Columns[nameof(BaseDocumentEntity.DocumentType)] != null)
+                gridView.Columns[nameof(BaseDocumentEntity.DocumentType)].Visible = false;
+
+            if (gridView.Columns[nameof(BaseDocumentEntity.DocumentFileTypeId)] != null)
+                gridView.Columns[nameof(BaseDocumentEntity.DocumentFileTypeId)].Visible = false;
+
+            if (gridView.Columns[nameof(BaseDocumentEntity.DocumentFileType)] != null)
+                gridView.Columns[nameof(BaseDocumentEntity.DocumentFileType)].Visible = false;
+        }
 
         
 

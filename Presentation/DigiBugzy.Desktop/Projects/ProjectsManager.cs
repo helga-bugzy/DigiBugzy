@@ -298,7 +298,7 @@ namespace DigiBugzy.Desktop.Projects
                 ProjectSectionPartId = 0
             };
 
-          //  dmProjectSection?.LoadData(type: ProjectControlEnum.ProjectSection, filter: filter);
+            ucProjectDocs1.InitializeData(type: ProjectControlEnum.ProjectSection, filter: filter);
         }
 
         private void LoadSelected_ProjectSectionPart()
@@ -375,7 +375,7 @@ namespace DigiBugzy.Desktop.Projects
                 ProjectSectionPartId = SelectedProjectSectionPart.Id
             };
 
-          //  dmProjectSectionPart?.LoadData(type: ProjectControlEnum.ProjectSectionPart, filter: filter);
+            ucProjectDocs1.InitializeData(type: ProjectControlEnum.ProjectSectionPart, filter: filter);
         }
 
         #endregion

@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucProjectDocs));
             this.pnlMain = new DevExpress.XtraEditors.PanelControl();
             this.splitMain = new DevExpress.XtraEditors.SplitContainerControl();
-            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridDocuments = new DevExpress.XtraGrid.GridControl();
             this.gvDocuments = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.splitEditors = new DevExpress.XtraEditors.SplitContainerControl();
@@ -123,7 +122,6 @@
             // 
             // splitMain.Panel1
             // 
-            this.splitMain.Panel1.Controls.Add(this.progressPanel1);
             this.splitMain.Panel1.Controls.Add(this.gridDocuments);
             this.splitMain.Panel1.Text = "Panel1";
             // 
@@ -134,17 +132,6 @@
             this.splitMain.Size = new System.Drawing.Size(1616, 635);
             this.splitMain.SplitterPosition = 607;
             this.splitMain.TabIndex = 1;
-            // 
-            // progressPanel1
-            // 
-            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanel1.Appearance.Options.UseBackColor = true;
-            this.progressPanel1.Location = new System.Drawing.Point(246, 143);
-            this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(246, 66);
-            this.progressPanel1.TabIndex = 2;
-            this.progressPanel1.Text = "progressPanel1";
-            this.progressPanel1.Visible = false;
             // 
             // gridDocuments
             // 
@@ -633,7 +620,6 @@
         private RadioButton rdInstructions;
         private RadioButton rd3D;
         private RadioButton rdAll;
-        private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
         private MultiFunctional.DocumentViewers.ucBaseViewer ucBaseViewer1;
     }
 }

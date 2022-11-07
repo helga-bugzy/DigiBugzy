@@ -100,8 +100,7 @@ namespace DigiBugzy.Desktop.Dashboards
 
 
         #endregion
-
-
+        
         #region Control Event Produdure(s)
 
         #region Administration
@@ -161,8 +160,7 @@ namespace DigiBugzy.Desktop.Dashboards
 
 
         #endregion
-
-
+        
         #region Helper Forms
 
         private void ShowChildForm(XtraForm childForm, string title)
@@ -189,11 +187,6 @@ namespace DigiBugzy.Desktop.Dashboards
 
 
         #endregion
-
-
-       
-
-       
 
         private void timer1_Tick(object sender, EventArgs e)
         {
