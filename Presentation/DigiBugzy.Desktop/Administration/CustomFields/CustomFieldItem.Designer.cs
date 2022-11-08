@@ -36,6 +36,8 @@
             this.rbFalse = new System.Windows.Forms.RadioButton();
             this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.lblSaved = new DevExpress.XtraEditors.LabelControl();
+            this.lblType = new DevExpress.XtraEditors.LabelControl();
             this.SuspendLayout();
             // 
             // lblName
@@ -53,6 +55,7 @@
             this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(346, 21);
             this.txtValue.TabIndex = 1;
+            this.txtValue.TextChanged += new System.EventHandler(this.ControlValueChanged);
             // 
             // cmbValue
             // 
@@ -61,6 +64,7 @@
             this.cmbValue.Name = "cmbValue";
             this.cmbValue.Size = new System.Drawing.Size(319, 21);
             this.cmbValue.TabIndex = 2;
+            this.cmbValue.SelectedIndexChanged += new System.EventHandler(this.ControlValueChanged);
             // 
             // rbTrue
             // 
@@ -72,6 +76,7 @@
             this.rbTrue.TabStop = true;
             this.rbTrue.Text = "True/Yes";
             this.rbTrue.UseVisualStyleBackColor = true;
+            this.rbTrue.CheckedChanged += new System.EventHandler(this.ControlValueChanged);
             // 
             // rbFalse
             // 
@@ -83,6 +88,7 @@
             this.rbFalse.TabStop = true;
             this.rbFalse.Text = "False/Now";
             this.rbFalse.UseVisualStyleBackColor = true;
+            this.rbFalse.CheckedChanged += new System.EventHandler(this.ControlValueChanged);
             // 
             // btnRefresh
             // 
@@ -96,7 +102,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
             this.btnSave.Location = new System.Drawing.Point(505, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(22, 22);
@@ -104,10 +110,34 @@
             this.btnSave.ToolTip = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lblSaved
+            // 
+            this.lblSaved.Appearance.ForeColor = System.Drawing.Color.Green;
+            this.lblSaved.Appearance.Options.UseForeColor = true;
+            this.lblSaved.Location = new System.Drawing.Point(596, 9);
+            this.lblSaved.Name = "lblSaved";
+            this.lblSaved.Size = new System.Drawing.Size(59, 13);
+            this.lblSaved.TabIndex = 7;
+            this.lblSaved.Text = "Value Saved";
+            // 
+            // lblType
+            // 
+            this.lblType.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.lblType.Appearance.ForeColor = System.Drawing.Color.SlateGray;
+            this.lblType.Appearance.Options.UseFont = true;
+            this.lblType.Appearance.Options.UseForeColor = true;
+            this.lblType.Location = new System.Drawing.Point(533, 7);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(45, 13);
+            this.lblType.TabIndex = 8;
+            this.lblType.Text = "Type(...)";
+            // 
             // CustomFieldItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblType);
+            this.Controls.Add(this.lblSaved);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.rbFalse);
@@ -116,7 +146,7 @@
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.lblName);
             this.Name = "CustomFieldItem";
-            this.Size = new System.Drawing.Size(533, 35);
+            this.Size = new System.Drawing.Size(670, 29);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,5 +161,7 @@
         private RadioButton rbFalse;
         private DevExpress.XtraEditors.SimpleButton btnRefresh;
         private DevExpress.XtraEditors.SimpleButton btnSave;
+        private DevExpress.XtraEditors.LabelControl lblSaved;
+        private DevExpress.XtraEditors.LabelControl lblType;
     }
 }

@@ -45,11 +45,12 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         {
             HandleTypeControls();
             lblName.Text = CustomField?.Name;
+
+            lblSaved.Visible = true;
         }
 
         private void LoadOptionsListValues()
         {
-            //cmbValue.Items.Clear();
             if(CustomField == null) return;
 
             var service = new CustomFieldListOptionService(Globals.GetConnectionString());
@@ -128,7 +129,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void HandleTypeControls()
         {
-            
             txtValue.Visible = cmbValue.Visible = rbFalse.Visible = rbTrue.Visible = false;
 
             if (CustomField == null) return;
@@ -151,7 +151,6 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
                             rbFalse.Checked = true;
                             break;
                     }
-
                     break;
                 case (int)CustomFieldTypeEnumeration.Memo:
                     txtValue.Visible = true;
@@ -164,8 +163,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
             }
 
+            lblType.Text = ((CustomFieldTypeEnumeration)CustomField.TypeId).ToString();
         }
-        
 
         #endregion
 
@@ -180,6 +179,13 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveCustomField();
+            lblSaved.Visible = true;
+            Application.DoEvents();
+        }
+        
+        private void ControlValueChanged(object sender, EventArgs e)
+        {
+            lblSaved.Visible = false;
         }
 
         #endregion

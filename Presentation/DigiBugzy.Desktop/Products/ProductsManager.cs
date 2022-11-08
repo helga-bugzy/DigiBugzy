@@ -78,8 +78,6 @@ namespace DigiBugzy.Desktop.Products
         {
             try
             {
-                // UseWaitCursor = true;
-                
                 var filter = new StandardFilter(
                     includeInActive: chkFilterInactive.Checked,
                     includeDeleted: chkFilterDeleted.Checked);
@@ -113,11 +111,8 @@ namespace DigiBugzy.Desktop.Products
                 gvProducts.HideAdminColumns();
 
                 gvProducts.Columns[nameof(ProductGridViewModel.Image)].Width = 15;
-                //gvProducts.BestFitColumns();
-                
+
                 LoadSelectedProduct();
-
-
             }
             finally
             {
@@ -195,8 +190,6 @@ namespace DigiBugzy.Desktop.Products
                 imgProductPhoto.Visible = true;
             }
         }
-
-       
 
         #endregion
         
@@ -287,7 +280,6 @@ namespace DigiBugzy.Desktop.Products
 
             var top = 0;
 
-
             foreach (var citem in LoadingFields.Select(field => new CustomFieldItem(mappingType: SampleDataTypeEnum.Products, customField: field)
                      {
                          Tag = Name = field.Id.ToString(),
@@ -314,11 +306,8 @@ namespace DigiBugzy.Desktop.Products
                     {
                         pnlCustomFieldsList.Controls.Remove(control);
                     }
-
                 }
-
             }
-
         }
 
         #endregion
@@ -786,9 +775,6 @@ namespace DigiBugzy.Desktop.Products
                 Application.DoEvents();
             }
         }
-
-
-
 
         #endregion
 
