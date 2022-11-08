@@ -68,7 +68,7 @@ namespace DigiBugzy.Desktop.Projects
             LoadEditor_ProjectSection();
 
             SelectedProjectSectionPart = new ProjectSectionPart();
-            LoadEditor_ProjectSectionPart();
+            LoadEditor_ProjectSectionPart(); 
 
             using var service = new ProjectService(Globals.GetConnectionString());
             bsProjects.Clear();

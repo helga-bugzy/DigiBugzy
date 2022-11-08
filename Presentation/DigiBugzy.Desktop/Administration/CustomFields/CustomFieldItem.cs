@@ -43,10 +43,8 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
 
         private void LoadCustomField()
         {
-            
             HandleTypeControls();
             lblName.Text = CustomField?.Name;
-            
         }
 
         private void LoadOptionsListValues()
@@ -64,7 +62,9 @@ namespace DigiBugzy.Desktop.Administration.CustomFields
             {
                 foreach (var item in cmbValue.Items)
                 {
-                    if (item is not CustomFieldListOption option || option.Id != int.Parse(CustomField.CustomFieldValue)) continue;
+                    var option = (CustomFieldListOption)item;
+                    if (option == null ||  CustomField.CustomFieldValue == null || option.Id != int.Parse(CustomField.CustomFieldValue)) break;
+
                     cmbValue.SelectedItem = item;
                     break;
                 }
